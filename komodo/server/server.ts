@@ -3,12 +3,14 @@ const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const awsRouter = require('./routes/awsRouter.ts');
-const userRouter = reqiure('./routes/userRouter.ts')
+const userRouter = require('./routes/userRouter.ts')
+const path = require('path');
 
-import type { handler } from 'vite-plugin-mix';
+// add the beginning of your app entry
+// import 'vite/modulepreload-polyfill'
 
 const PORT = 3000;
-
+console.log('In server.ts before mongoDB connection')
 mongoose.connect(`${process.env.ACCESS_KEY}`, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
@@ -28,8 +30,8 @@ app.use('*', (req, res) => {
 
 //connect with index.html
 app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../src/index.html'))
-})
+  return res.status(200).sendFile(path.join(__dirname, '../index.html'))
+});
 
 //global error handler
 app.use((err, req, res, next) => {
@@ -47,4 +49,5 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => `listening on port ${PORT}`);
 
-export const handler = app;
+// export const handler = app;
+module.exports = app;
