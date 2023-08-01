@@ -24,6 +24,7 @@ userController.login = async (req, res, next) => {
   try{
     //desconstruct req body
     const { username, password } = req.body;
+    console.log('inlogincontroller')
     //find by username
     const userResult = await User.findOne({ username: username });
     //if userResult return nothing, throw err
