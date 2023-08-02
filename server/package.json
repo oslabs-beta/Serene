@@ -2,10 +2,9 @@
   "name": "komodo",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "node .",
+    "start": "nodemon ./server/server.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
