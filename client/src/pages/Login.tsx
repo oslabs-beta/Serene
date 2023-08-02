@@ -1,6 +1,6 @@
 import React, {useState, useEffect}  from 'react'
 import { Link } from "react-router-dom"
-import '../styles.scss'
+
 
 
 type Props = {}
@@ -25,11 +25,14 @@ const Login = (props: Props) => {
 
   return (
     <div className="loginDiv">
+      {/* <h1 className="text-3xl font-bold underline text-center">Hello world!</h1>  */}
       <form className="loginForm"
         onSubmit={handleSubmit}
       >
         <div>
-          <label>
+        <div className="bg-blue-500 text-white p-4">This is a styled box using Tailwind CSS!</div>
+
+          <label className="bg-red-500 text-red">
             Username
             <input 
             type="text" 
@@ -54,7 +57,7 @@ const Login = (props: Props) => {
           LOGIN
         </button>
         {/* <p >Don't have an account? <a href="#signup">Sign up</a> here</p> */}
-        <p >Don't have an account? <Link to="/signup"><a>Sign up</a></Link> here</p>
+        {/* <p >Don't have an account? <Link to="/signup"><a>Sign up</a></Link> here</p> */}
         
       </form>
     </div>

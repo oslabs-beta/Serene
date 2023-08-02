@@ -52,7 +52,7 @@ const Signup = (props: Props) => {
           SIGNUP
         </button>
       </form>
-      <p >Already have an account? <Link to="/"><a>Login</a></Link> here</p>
+      {/* <p >Already have an account? <Link to="/"><a>Login</a></Link> here</p> */}
     </div>
   )
 }
