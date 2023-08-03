@@ -12,7 +12,7 @@
               "Sid": "Statement1",
               "Effect": "Allow",
               "Principal": {
-                "AWS": ""
+                "AWS": "arn:aws:iam::287836476382:user/komodoUser1"
               },
               "Action": "sts:AssumeRole"
             }
@@ -30,7 +30,8 @@
                   "Action": [
                     "logs:DescribeLogGroups",
                     "logs:FilterLogEvents",
-                    "cloudwatch:GetMetricData"
+                    "cloudwatch:GetMetricData",
+                    "lambda:listFunctions"
                   ],
                   "Resource": "*"
                 }

@@ -17,8 +17,7 @@ stsController.getCredentials = async (req, res, next) => {
   // arn:aws:cloudformation:us-east-1:097265058099:stack/komodoStack/02fcee50-3196-11ee-8e69-12ff026c8c53
   // arn:aws:iam::097265058099:role/komodoStack-KomodoRole-1SUYS4WE06EP8
   const params = {
-    RoleArn:
-      'arn:aws:iam::097265058099:role/komodoStack-KomodoRole-1SUYS4WE06EP8', //this is IAM role arn
+    RoleArn: process.env.tempUserArn, //this is IAM role arn that we get from frontend
     RoleSessionName: 'Komodo_Session',
   };
   try {
@@ -33,7 +32,11 @@ stsController.getCredentials = async (req, res, next) => {
     res.locals.creds = roleCreds;
     return next();
   } catch (err) {
-    console.log(err);
+    return next({
+      log: `The following error occured: ${err}`,
+      status: 400,
+      message: { err: 'An error occured while trying to get user credentials' }
+    });
   }
 };
 
