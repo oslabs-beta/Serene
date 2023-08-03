@@ -10,13 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "autoprefixer": "^10.4.14",
     "module": "^1.2.5",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "tw-elements": "^1.0.0-beta3"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

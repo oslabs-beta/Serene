@@ -6,7 +6,14 @@ module.exports = {
       colors: {
       
       },
+      // width: {
+      //   '1096': '1096px',
+      // },
+      // height: {
+      //   '1096': '1096px',
+      // },
     },
   },
+  
   plugins: [],
 };
