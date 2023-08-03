@@ -3,14 +3,14 @@ const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const awsRouter = require('./routes/awsRouter.js');
-const userRouter = require('./routes/userRouter.js')
+const userRouter = require('./routes/userRouter.js');
 const path = require('path');
 
 // add the beginning of your app entry
 // import 'vite/modulepreload-polyfill'
 
 const PORT = 3000;
-
+console.log('In server.js before mongoDB connection')
 mongoose.connect(`${process.env.ACCESS_KEY}`, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
@@ -23,15 +23,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/aws', awsRouter);
 app.use('/user', userRouter);
 
+
+app.use(express.static('../client'))
+
 //404 handler
 app.use('*', (req, res) => {
   res.status(404).send('Not Found')
 })
-
-//connect with index.html
-app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../index.html'))
-});
 
 //global error handler
 app.use((err, req, res, next) => {
