@@ -16,7 +16,7 @@ const LeftSideBar = (props: Props) => {
 ]
 
   return (
-    <div>
+    <aside>
 
 
     
@@ -66,7 +66,7 @@ const LeftSideBar = (props: Props) => {
   </div>
 
     </div>
-  </div>
+  </aside>
 
 
   )
