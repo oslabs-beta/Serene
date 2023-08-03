@@ -6,6 +6,8 @@ import LeftSideBar from './LeftSideBar'
 import RightSideBar from './RightSidebar'
 
 
+
+
 type Props = {
   metric: string;
 }
@@ -59,4 +61,3 @@ const Home = ({metric}: Props) => {
 }
 
 export default Home
-

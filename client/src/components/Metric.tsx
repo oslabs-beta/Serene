@@ -53,8 +53,6 @@ const Metric: React.FC<Props> = ({ metric }) => {
 
   return (
     <div>
-      <button className="border-4 border-black my-4">Metric is {metric}</button>
-      <br />
       <canvas ref={chartContainerRef} />
     </div>
   );

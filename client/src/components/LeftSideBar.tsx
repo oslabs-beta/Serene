@@ -36,36 +36,44 @@ const LeftSideBar = (props: Props) => {
         </svg>
       )}
 
+      <div //entire sidebar div // sidebar does not fully extend to the bottom, research 
+        className={`flex flex-col items-center -left-2 -top-1 -mb-4 w-[25vw] min-w-min bg-gray-300  pl-10 pr-10 text-black fixed h-full z-40  ease-in-out duration-300 border-2 border-black ${
+        showSidebar ? "translate-x-0 " : "-translate-x-full"
+        }`}
+      >
+      <h3 className="mt-20 text-2xl min-w-min font-semibold text-white mb-5">F U N C T I O N S</h3>
+        <div // function data table in sidebar
+        className="border-8 border-black overflow-y-auto h-[75%] w-[110%]"
+        > 
+          {/* <div> */}
+     { mockFuncDetails.map( (item) => (
+              <FunctionDetails 
+              detailID={item.id}
+              name={item.name}
+              description={item.description}
+              versHist={item.versHist}
+              metric={item.metric}
+              warmData={item.warmData}
+              />
+          )
+          )}
+                    { mockFuncDetails.map( (item) => (
+              <FunctionDetails 
+              detailID={item.id}
+              name={item.name}
+              description={item.description}
+              versHist={item.versHist}
+              metric={item.metric}
+              warmData={item.warmData}
+              />
+          )
+          )}
 
-  {/* <div className="top-0 left-0 w-[35vw] bg-green-500  p-10 pl-20 text-white fixed h-full z-30">
-    <h3 className="mt-20 text-4xl font-semibold text-white">Functions</h3>
-  </div> */}
-
-  <div //entire sidebar div
-  className={`top-0 left-0 w-[25vw] bg-blue-600  p-10 pl-20 text-white fixed h-full z-40  ease-in-out duration-300 border-8 border-yellow-500 ${
-    showSidebar ? "translate-x-0 " : "-translate-x-full"
-  }`}
->
-  <h3 className="mt-20 text-4xl font-semibold text-white">I am a sidebar</h3>
-  <div> 
-    FUNCTIONS GO HERE
-    { mockFuncDetails.map( (item) => (
-            <FunctionDetails 
-            detailID={item.id}
-            name={item.name}
-            description={item.description}
-            versHist={item.versHist}
-            metric={item.metric}
-            warmData={item.warmData}
-            />
-        )
-   )}
-  </div>
-
+          {/* </div> */}
+     
+        </div>
+      </div>
     </div>
-  </div>
-
-
   )
 }
 
