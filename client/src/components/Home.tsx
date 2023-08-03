@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
 import { Dropdown } from 'tw-elements'
-import Metric from '../components/Metric'
+import Metric from './Metric'
 import Functions from './Functions'
 import LeftSideBar from './LeftSideBar'
 import RightSideBar from './RightSidebar'
 
 
-type Props = {}
+type Props = {
+  metric: string;
+}
 
-const Home = (props: Props) => {
+const Home = ({metric}: Props) => {
   const [isRightMenuToggled, setIsRightMenuToggled] = useState<boolean>(false);
 
 
 
   return (
-    <div >
-      <div className="flex justify-between bg-gray-400 h-24">
+    <div className='bg-gray-200 h-screen'>
+      <div className="flex justify-between items-center bg-gray-300 h-24">
         {/* LEFT SIDE MENU */}
 
         {/* <button>
@@ -41,14 +43,15 @@ const Home = (props: Props) => {
         </div> */}
     
 
-        <h1> KOMODO </h1>
+        <h1 className='font-extrabold text-4xl font-mono'> KOMODO </h1>
         
  
         {/* <button>MENU BUTTON HERE</button> */}
         <RightSideBar /> 
         </div>
         <div className="">MainSection
-      <Functions/>
+      {/* <Functions/> */}
+        <Metric metric={metric}/>
       </div>
 
     </div>
