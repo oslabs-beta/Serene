@@ -1,14 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react'
 import {Chart, BarElement,
-CategoryScale,
-LinearScale,
-Tooltip} from 'chart.js';
-
+  CategoryScale,
+  LinearScale,
+  Tooltip} from 'chart.js';
+  
 import { Bar } from 'react-chartjs-2';
-
-
 type Props = {
-  metric: string;
 };
 
 Chart.register(
@@ -18,7 +15,7 @@ Chart.register(
   Tooltip
 )
 
-const Metric = ( {metric}: Props)=> {
+const BarGraph = ( props : Props)=> {
   
   const data = [
     { year: 2010, count: 10 },
@@ -29,6 +26,7 @@ const Metric = ( {metric}: Props)=> {
     { year: 2015, count: 30 },
     { year: 2016, count: 28 },
   ];
+
 
   return (
     <div>
@@ -63,4 +61,4 @@ const Metric = ( {metric}: Props)=> {
   );
 };
 
-export default Metric;
+export default BarGraph;

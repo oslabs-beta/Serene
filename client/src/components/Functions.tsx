@@ -1,7 +1,9 @@
 import React from 'react'
 import FunctionDetails from './FunctionDetails'
 
-type Props = {}
+type Props = {
+
+}
 
 const Functions = (props: Props) => {
 

@@ -1,25 +1,14 @@
-import React, { useEffect, useRef } from 'react';
-import {Chart, BarElement,
-CategoryScale,
-LinearScale,
-Tooltip} from 'chart.js';
-
-import { Bar } from 'react-chartjs-2';
-
+import React from 'react';
+import { Chart, LineElement, CategoryScale, LinearScale, PointElement } from 'chart.js';
+import { Line } from 'react-chartjs-2';
 
 type Props = {
-  metric: string;
+
 };
 
-Chart.register(
-  BarElement,
-  CategoryScale,
-  LinearScale,
-  Tooltip
-)
+Chart.register(LineElement, CategoryScale, LinearScale, PointElement);
 
-const Metric = ( {metric}: Props)=> {
-  
+const LineGraph = (props: Props) => {
   const data = [
     { year: 2010, count: 10 },
     { year: 2011, count: 20 },
@@ -32,35 +21,35 @@ const Metric = ( {metric}: Props)=> {
 
   return (
     <div>
-      <Bar 
+      <Line
         data={{
           labels: data.map((row) => row.year),
           datasets: [
             {
               label: 'Acquisitions by year',
               data: data.map((row) => row.count),
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
               borderColor: 'rgba(75, 192, 192, 1)',
               borderWidth: 1,
+              fill: false,
             },
           ],
         }}
         options={{
-            responsive: true,
-            scales: {
-              x: {
-                grid: {
-                  display: true,
-                },
-              },
-              y: {
-                beginAtZero: true,
+          responsive: true,
+          scales: {
+            x: {
+              grid: {
+                display: true,
               },
             },
+            y: {
+              beginAtZero: true,
+            },
+          },
         }}
       />
-    </div> 
+    </div>
   );
 };
 
-export default Metric;
+export default LineGraph;

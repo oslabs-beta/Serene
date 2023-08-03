@@ -1,24 +1,23 @@
-import React, { useEffect, useRef } from 'react';
-import {Chart, BarElement,
-CategoryScale,
-LinearScale,
-Tooltip} from 'chart.js';
+import React from 'react'
+import {Chart, ArcElement, Legend, Tooltip, CategoryScale, Title} from 'chart.js';
+  
+import { Pie } from 'react-chartjs-2';
 
-import { Bar } from 'react-chartjs-2';
 
 
 type Props = {
-  metric: string;
+
 };
 
 Chart.register(
-  BarElement,
+  ArcElement,
+  Legend,
+  Tooltip,
   CategoryScale,
-  LinearScale,
-  Tooltip
+  Title
 )
 
-const Metric = ( {metric}: Props)=> {
+const PieChart = ( {metric}: Props)=> {
   
   const data = [
     { year: 2010, count: 10 },
@@ -30,16 +29,17 @@ const Metric = ( {metric}: Props)=> {
     { year: 2016, count: 28 },
   ];
 
+
   return (
     <div>
-      <Bar 
+      <Pie
         data={{
           labels: data.map((row) => row.year),
           datasets: [
             {
               label: 'Acquisitions by year',
               data: data.map((row) => row.count),
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              backgroundColor: ['gray','darkgray','lightpink'],
               borderColor: 'rgba(75, 192, 192, 1)',
               borderWidth: 1,
             },
@@ -63,4 +63,4 @@ const Metric = ( {metric}: Props)=> {
   );
 };
 
-export default Metric;
+export default PieChart;

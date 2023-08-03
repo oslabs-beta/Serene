@@ -37,7 +37,7 @@ const LeftSideBar = (props: Props) => {
       )}
 
       <div //entire sidebar div // sidebar does not fully extend to the bottom, research 
-        className={`flex flex-col items-center -left-2 -top-1 -mb-4 w-[25vw] min-w-min bg-gray-300  pl-10 pr-10 text-black fixed h-full z-40  ease-in-out duration-300 border-2 border-black ${
+        className={`flex flex-col items-center -left-2 -top-1 -mb-4  bg-gray-300  pl-10 pr-10 text-black fixed h-full z-40  ease-in-out duration-300 border-2 border-black ${
         showSidebar ? "translate-x-0 " : "-translate-x-full"
         }`}
       >

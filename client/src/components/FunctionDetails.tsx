@@ -22,7 +22,7 @@ const FunctionDetails = ({detailID, name, description, versHist, metric, warmDat
       </p>
       <button className="border-4 border-black">Version history is {versHist} </button><br/>
 
-        <Metric metric={metric}/>
+        {/* <Metric metric={metric}/> */}
       
       
       <button className="border-4 border-black">Warm Data is {warmData}</button><br/>
