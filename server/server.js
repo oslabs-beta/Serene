@@ -10,7 +10,7 @@ const path = require('path');
 // import 'vite/modulepreload-polyfill'
 
 const PORT = 3000;
-
+console.log('In server.js before mongoDB connection')
 mongoose.connect(`${process.env.ACCESS_KEY}`, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
