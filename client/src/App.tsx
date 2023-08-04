@@ -2,6 +2,7 @@ import React from 'react' // div element does not exist on jsx.intrinsic element
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Home from './components/Home'
+import FunctionDetails from './components/FunctionDetails'
 
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
@@ -14,6 +15,7 @@ function App() {
       <Route path = "/" element = {<Login />}/>
       <Route path = "/signup" element = {<Signup /> }/> 
       <Route path = "/home" element ={<Home />}/>
+      <Route path = "/functionDetails" element ={<FunctionDetails />}/>
       
 
 
