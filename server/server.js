@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const awsRouter = require('./routes/awsRouter.js');
 const userRouter = require('./routes/userRouter.js');
+const cloudWatchRouter = require('./routes/cloudWatchRouter.js')
 const path = require('path');
 
 // add the beginning of your app entry
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 //route handlers go here
 app.use('/aws', awsRouter);
 app.use('/user', userRouter);
+app.use('/cloudwatch', cloudWatchRouter);
 
 
 app.use(express.static('../client'))

@@ -3,6 +3,8 @@ const dotenv = require('dotenv').config();
 
 const stsController = {};
 
+// arn:aws:iam::097265058099:role/komodoStack-KomodoRole-24EZX3ST7E28
+
 stsController.getCredentials = async (req, res, next) => {
   console.log('in stsController');
   const credentials = {
