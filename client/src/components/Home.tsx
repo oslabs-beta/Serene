@@ -9,6 +9,8 @@ import LineGraph from './LineGraph'
 import BarGraph from './BarGraph'
 import DoughnutChart from './DoughnutChart'
 
+
+
 type Props = {
   metric: string;
 }
@@ -44,4 +46,3 @@ const Home = ({metric}: Props) => {
 }
 
 export default Home
-
