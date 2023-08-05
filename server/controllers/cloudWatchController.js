@@ -1,8 +1,6 @@
 const { CloudWatchLogs } = require('@aws-sdk/client-cloudwatch-logs')
 // const AWS = require('aws-sdk')
 
-
-
 const cloudWatchController = {};
 
 //user selects function which gets sent to viewFunctions. viewFunction sends back log history of selected function
@@ -26,8 +24,5 @@ cloudWatchController.viewFunctions = async (req, res, next) => {
     });
   }
 }
-
-
-
 
 module.exports = cloudWatchController;
