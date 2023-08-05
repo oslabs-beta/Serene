@@ -24,21 +24,23 @@ const VersionHistory = (props: Props) => {
         </div> 
 
         VERSION HISTORY PAGE
-    {/*BODY DIV */}
-    <div className="flex justify-center border-4 border-green-300 h-screen w-full ">
-      <div className="flex flex-col justify-between items-center border-4 border-red-400 h-1/2 w-1/2">
-        {mockVersionData.map( (item) => (
-          <div className="flex ">
-          <button className='border-2 border-black'> 
-            version {item.version}
-          </button>
-          <span className="ml-2">
-            alias {item.alias}
-          </span>
-          </div>
-        ))}
+ {/*BODY DIV */}
+<div className="flex justify-center border-4 border-green-300 h-screen w-full ">
+  <div className="flex flex-col justify-between border-4 border-red-400 h-1/2 w-1/2">
+    {mockVersionData.map((item) => (
+      <div className="flex justify-between"> {/* Remove justify-between class */}
+        <div></div> {/*HERE for SPACING ONLY*/}
+        <button className='border-2 border-black '> 
+          version {item.version}
+        </button>
+        <span className=""> {/* Add ml-auto class to align the span to the right */}
+          alias {item.alias}
+        </span>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
+
 
 
     </div>
