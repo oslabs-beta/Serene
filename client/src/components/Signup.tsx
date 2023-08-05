@@ -61,7 +61,7 @@ const Signup = (props: Props) => {
           {/* <p >Don't have an account? <a href="#signup">Sign up</a> here</p> */}
         
         </form>
-        <p className="flex flex-col items-center justify-center mt-5 text-black">Already have an account? <span><Link to="/" className="hover:underline hover:text-white">Sign up</Link> here</span></p>
+        <p className="flex flex-col items-center justify-center mt-5 text-black">Already have an account? <span><Link to="/" className="hover:underline hover:text-white">Login</Link> here</span></p>
         
       </div>
     </div>

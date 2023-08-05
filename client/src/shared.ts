@@ -4,4 +4,4 @@ export const mockFuncDetails = [
     { id: 3, name: 'lambdaFunc3', description: 'something3', versHist: "version3", metric: "metric3", warmData: "warmingdata3" }
 ];
 
-export const test = "SORRY I AM WEIRD"
+export const test = "Hi"
