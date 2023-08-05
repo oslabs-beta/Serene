@@ -29,6 +29,8 @@
                   "Effect": "Allow",
                   "Action": [
                     "logs:DescribeLogGroups",
+                    "logs:DescribeLogStreams",
+                    "logs:GetLogEvents",
                     "logs:FilterLogEvents",
                     "cloudwatch:GetMetricData",
                     "lambda:listFunctions"
