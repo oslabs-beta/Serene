@@ -9,6 +9,7 @@ type Props = {}
 const Signup = (props: Props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [response, setResponse] = useState('')
 
   const handleUsernameChange = (e: any) => {
     setUsername(e.target.value)
@@ -17,12 +18,34 @@ const Signup = (props: Props) => {
     setPassword(e.target.value)
   }
 
-  const handleSubmit = (e: any) => {    
+  const handleSubmit = async (e: any) => {    
     e.preventDefault()
+    const body = {
+      username,
+      password
+    }
+    console.log(body)
+    try{
+      console.log('SENDING USER OVER NOW')
+      const response = await fetch ('/user/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+      })
+      console.log('Error after fetch')
+      console.log('res: ',response)
+      const data = await response.json();
+      console.log('data: ', data)
+      console.log('fetch successful')
+      setResponse(data)
+    } catch (error) {
+      
+      console.log('NOW Error: ', error)
+
+    }
   }
-
-
-
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full bg-neutral-200">
@@ -62,6 +85,19 @@ const Signup = (props: Props) => {
         
         </form>
         <p className="flex flex-col items-center justify-center mt-5 text-black">Already have an account? <span><Link to="/" className="hover:underline hover:text-white">Login</Link> here</span></p>
+        { ( () => {
+              switch (response) {
+                case 'username taken':
+                  return 'username is already taken'
+                // case 'user created':
+                //   return <Link to="/home"/>
+                default: 
+                  return <Link to="/home"/>
+              }
+            })
+            () 
+        }
+
         
       </div>
     </div>
