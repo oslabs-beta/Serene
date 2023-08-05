@@ -73,6 +73,9 @@ cloudWatchController.viewStreamInfo = async (req, res, next) => {
 
     res.locals.events = events;
     return next();
+
+    // STILL NEED TO REQ.QUERY FOR THE LOGNAME AND STREAMNAME
+
   } catch(err){
     return next({
       log: `The following error occured: ${err}`,

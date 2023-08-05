@@ -4,16 +4,24 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
+    "autoprefixer": "^10.4.14",
+    "chart.js": "^4.3.3",
+    "d3": "^7.8.5",
+    "module": "^1.2.5",
+    "path": "^0.12.7",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "tw-elements": "^1.0.0-beta3"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
@@ -24,7 +32,10 @@
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "postcss": "^8.4.27",
+    "sass": "^1.64.2",
+    "tailwindcss": "^3.3.3",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.8"
   }
 }
