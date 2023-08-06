@@ -23,13 +23,7 @@ function App() {
       
 
 
-  
-
-
-    </Routes>
-
-
-     
+    </Routes>     
     
   </div>
 }

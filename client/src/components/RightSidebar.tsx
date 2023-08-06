@@ -43,8 +43,7 @@ const RightSideBar = (props: Props) => {
 >
   <h3 className="mt-20 text-4xl font-semibold text-white">{test}</h3>
   <div> 
-
-  
+<button>sign out</button>
   </div>
 
     </div>

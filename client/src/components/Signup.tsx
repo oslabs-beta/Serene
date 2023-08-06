@@ -1,107 +1,111 @@
-import React, {useState, useEffect}  from 'react'
-import { Link } from "react-router-dom"
-import waves2 from '../assets/waves2.png'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import waves2 from '../assets/waves2.png';
 
-
-
-type Props = {}
+type Props = {};
 
 const Signup = (props: Props) => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [response, setResponse] = useState('')
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [response, setResponse] = useState('');
 
   const handleUsernameChange = (e: any) => {
-    setUsername(e.target.value)
-  }
+    setUsername(e.target.value);
+  };
   const handlePasswordChange = (e: any) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
-  const handleSubmit = async (e: any) => {    
-    e.preventDefault()
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
     const body = {
       username,
-      password
-    }
-    console.log(body)
-    try{
-      console.log('SENDING USER OVER NOW')
-      const response = await fetch ('/user/signup', {
+      password,
+    };
+    console.log(body);
+    try {
+      // console.log('SENDING USER OVER NOW')
+      const response = await fetch('/api/user/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(body)
-      })
-      console.log('Error after fetch')
-      console.log('res: ',response)
+        body: JSON.stringify(body),
+      });
+      // console.log('Error after fetch')
+      // console.log('res: ',response)
       const data = await response.json();
-      console.log('data: ', data)
-      console.log('fetch successful')
-      setResponse(data)
+      // console.log('data: ', data)
+      console.log('fetch successful');
+      setResponse(data);
     } catch (error) {
-      
-      console.log('NOW Error: ', error)
-
+      console.log('NOW Error: ', error);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full bg-neutral-200">
-        <img src={waves2} className='w-full fixed z-20 '/>
-         <div className="flex flex-col justify-center border-black bg-neutral-100 bg-opacity-30 p-14 border-2 rounded-lg sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 h-3/5 min-w-1/4 max-w-1/2 z-30" >
-        <form className="w-full max-w-sm  flex flex-col items-center"
-        onSubmit={handleSubmit}
+      <img src={waves2} className="w-full fixed z-20 " />
+      <div className="flex flex-col justify-center border-black bg-neutral-100 bg-opacity-30 p-14 border-2 rounded-lg sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 h-3/5 min-w-1/4 max-w-1/2 z-30">
+        <form
+          className="w-full max-w-sm  flex flex-col items-center"
+          onSubmit={handleSubmit}
         >
           <div className="flex flex-col  border-black w-full">
             {/* <label className="border-grey-500 border-4 my-2" > */}
-              {/* Username */}
-              <input 
-              className = 'bg-transparent border-2 border-black p-1 rounded-md placeholder-black'
+            {/* Username */}
+            <input
+              className="bg-transparent border-2 border-black p-1 rounded-md placeholder-black"
               // className = 'border-white p-1 peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
-              type="text" 
+              type="text"
               value={username}
-              name="username" 
-              placeholder="Username" 
+              name="username"
+              placeholder="Username"
               onChange={handleUsernameChange}
-              />
+            />
             {/* </label> */}
             {/* <label className="border-grey-500 border-4 my-2">
               Password */}
-              <input className="bg-transparent border-2 border-black mt-2 mb-6 p-1 rounded-md placeholder-black"
-              type="password" 
-              name="password" 
-              placeholder="Password" 
-              value = {password}
+            <input
+              className="bg-transparent border-2 border-black mt-2 mb-6 p-1 rounded-md placeholder-black"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={password}
               onChange={handlePasswordChange}
-              />
+            />
             {/* </label> */}
-          </div>  
-          <button type="submit" className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 ease-in-out hover:scale-110 hover:bg-transparent hover:border-2 border-white hover:text-black">
+          </div>
+          <button
+            type="submit"
+            className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 ease-in-out hover:scale-110 hover:bg-transparent hover:border-2 border-white hover:text-black"
+          >
             Signup
           </button>
           {/* <p >Don't have an account? <a href="#signup">Sign up</a> here</p> */}
-        
         </form>
-        <p className="flex flex-col items-center justify-center mt-5 text-black">Already have an account? <span><Link to="/" className="hover:underline hover:text-white">Login</Link> here</span></p>
-        { ( () => {
-              switch (response) {
-                case 'username taken':
-                  return 'username is already taken'
-                // case 'user created':
-                //   return <Link to="/home"/>
-                default: 
-                  return <Link to="/home"/>
-              }
-            })
-            () 
-        }
-
-        
+        <p className="flex flex-col items-center justify-center mt-5 text-black">
+          Already have an account?{' '}
+          <span>
+            <Link to="/" className="hover:underline hover:text-white">
+              Login
+            </Link>{' '}
+            here
+          </span>
+        </p>
+        {(() => {
+          switch (response) {
+            case 'username taken':
+              return 'username is already taken';
+            // case 'user created':
+            //   return <Link to="/home"/>
+            default:
+              return <Link to="/home" />;
+          }
+        })()}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
