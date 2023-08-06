@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import waves2 from '../assets/waves2.png';
 
 type Props = {};
@@ -7,7 +7,12 @@ type Props = {};
 const Signup = (props: Props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [arnInput, setArnInput] = useState('');
   const [response, setResponse] = useState('');
+  const [region, setRegion] = useState('us-east-1')
+
+  const navigate = useNavigate();
+
 
   const handleUsernameChange = (e: any) => {
     setUsername(e.target.value);
@@ -15,6 +20,13 @@ const Signup = (props: Props) => {
   const handlePasswordChange = (e: any) => {
     setPassword(e.target.value);
   };
+  const handleArnChange = (e: any) => {
+    setArnInput(e.target.value);
+  };
+    const handleRegionChange = (e: any) => {
+    setRegion(e.target.value);
+  };
+    const awsConsoleURL = `https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/quickcreate?templateURL=https://komodobucket1.s3.amazonaws.com/komodoTestTemplate.json&stackName=komodoStack`
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -74,8 +86,39 @@ const Signup = (props: Props) => {
               value={password}
               onChange={handlePasswordChange}
             />
+            <input
+              className="bg-transparent border-2 border-black mt-2 mb-6 p-1 rounded-md placeholder-black"
+              type="text"
+              name="arn"
+              placeholder="ARN"
+              value={arnInput}
+              onChange={handleArnChange}
+            />
             {/* </label> */}
           </div>
+          <select className="w-full p-1 text-black bg-white border rounded-md shadow-sm outline-none appearance-none"
+            onChange={handleRegionChange}
+          >
+              <option value="us-east-1" >US East 1 (N. Virginia)</option>
+              <option value="us-east-2" >US East 2 (Ohio)</option>
+              <option value="us-west-1">US West 1 (N. California) </option>
+              <option value="us-west-2">US West 2 (Oregon)</option>
+              <option value="ap-south-1">AP South 1 (Mumbai)</option>
+              <option value="ap-northeast-1">AP Northeast 1 (Tokyo)</option>
+              <option value="ap-northeast-2">AP Northeast 2 (Seoul)</option>
+              <option value="ap-northeast-3">AP Northeast 3 (Osaka)</option>
+              <option value="ap-southeast-1">AP Southeast 1 (Singapore)</option>
+              <option value="ap-southeast-2">AP Southeast 2 (Sydney)</option>
+              <option value="ca-central-1">CA Central 1 (Canada)</option>
+              <option value="eu-central-1">Europe Central 1 (Frankfurt)</option>
+              <option value="eu-west-1">Europe West 1 (Ireland)</option>
+              <option value="eu-west-2">Europe West 2 (London)</option>
+              <option value="eu-west-3">Europe West 3 (Paris)</option>
+              <option value="eu-north-1">EU North 1 (Stockholm)</option>
+              <option value="sa-east-1">SA East 1 (Sao Paulo)</option>
+          </select>
+          <button className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 my-3 ease-in-out hover:scale-110 hover:bg-transparent hover:border-2 border-white hover:text-black"><a href={awsConsoleURL} target='_blank'>Connect Your AWS Account</a></button>
+            
           <button
             type="submit"
             className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 ease-in-out hover:scale-110 hover:bg-transparent hover:border-2 border-white hover:text-black"
