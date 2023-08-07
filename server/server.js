@@ -6,6 +6,7 @@ const awsRouter = require('./routes/awsRouter.js');
 const userRouter = require('./routes/userRouter.js');
 const cloudWatchRouter = require('./routes/cloudWatchRouter.js')
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 // add the beginning of your app entry
 // import 'vite/modulepreload-polyfill'
@@ -17,6 +18,8 @@ mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });
 
+
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

@@ -1,19 +1,18 @@
 const { CloudWatchLogs } = require('@aws-sdk/client-cloudwatch-logs');
-const { timeStamp } = require('console');
+
 // const AWS = require('aws-sdk')
 
-const cloudWatchController = {};
+const cloudWatchLogController = {};
 
 //functions get sent to user from lambdaController. once user selects function, function name gets sent to backend as a req.query
 //req.query gets added onto logName
-cloudWatchController.viewFunctionStreams = async (req, res, next) => {
+cloudWatchLogController.viewFunctionStreams = async (req, res, next) => {
   try {
     // console.log('working')
     // console.log('creds: ', res.locals.creds)
     const cloudWatchLogs = new CloudWatchLogs({ region: 'us-east-1', credentials: res.locals.creds });
     console.log('cloudWatchLogs: ', cloudWatchLogs);
     
-
     const logName = '/aws/lambda/secondFunction'  //req.query from frontend
 
     ///grabs logstreams + last event time for each log group
@@ -47,20 +46,14 @@ cloudWatchController.viewFunctionStreams = async (req, res, next) => {
 }
 
 
-cloudWatchController.viewStreamInfo = async (req, res, next) => {
+cloudWatchLogController.viewStreamInfo = async (req, res, next) => {
   try{
     const cloudWatchLogs = new CloudWatchLogs({ region: 'us-east-1', credentials: res.locals.creds });
-
     const streamName = '2023/08/05/[$LATEST]ed93cc4e073e46f9961dfbe77ba457a9' // req.query
-
     const logName = '/aws/lambda/secondFunction' 
-
     const getLogEvents = await cloudWatchLogs.getLogEvents({logStreamName: streamName, logGroupName: logName}) // logGroupIdentifier or logGroupName
-
     // console.log('getLogEvents: ', getLogEvents)
-
     const { events } = getLogEvents;
-
     events.forEach(event => {
       const timeStampDate = new Date(event.timestamp);
       event.timestamp = timeStampDate;
@@ -68,9 +61,7 @@ cloudWatchController.viewStreamInfo = async (req, res, next) => {
       const ingestionDate = new Date(event.ingestionTime);
       event.ingestionTime = ingestionDate;
     })
-
     console.log('events: ', events);
-
     res.locals.events = events;
     return next();
 
@@ -86,4 +77,4 @@ cloudWatchController.viewStreamInfo = async (req, res, next) => {
 }
 
 
-module.exports = cloudWatchController;
+module.exports = cloudWatchLogController;
