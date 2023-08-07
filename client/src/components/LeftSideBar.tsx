@@ -48,7 +48,7 @@ const LeftSideBar = ({}: Props) => {
           F U N C T I O N S
         </h3>
         <div // function data table in sidebar
-          className="bg-white bg-opacity-40 flex flex-col items-center z-20 overflow-y-auto h-[75%] w-[110%] "
+          className=" flex flex-col items-center z-20 overflow-y-auto h-[75%] w-[110%] "
         >
           {/* <div> */}
           {mockFunctions.map((item) => (

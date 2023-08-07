@@ -57,7 +57,7 @@ const Signup = (props: Props) => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full bg-neutral-200">
-      <img src={waves2} className="w-full fixed z-20 " />
+      <img src={waves2} className="w-full fixed z-20 opacity-90" />
       <div className="flex flex-col justify-center border-black bg-neutral-100 bg-opacity-40 p-14 border-2 rounded-lg sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 h-3/5 min-w-1/4 max-w-1/2 z-30">
         <form
           className="w-full max-w-sm  flex flex-col items-center"

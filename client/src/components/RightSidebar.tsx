@@ -2,6 +2,7 @@ import React, { useState} from 'react'
 import Functions from './Functions'
 import FunctionDetails from './FunctionDetails'
 import { test } from '../shared'
+import waves4 from '../assets/waves4.png';
 
 type Props = {
 
@@ -18,7 +19,7 @@ const RightSideBar = (props: Props) => {
     
   {showSidebar ? (
     <button
-      className="flex text-4xl text-black items-center cursor-pointer fixed right-8 top-6 z-50"
+      className="flex text-4xl text-black items-center cursor-pointer fixed right-8 top-6 z-50 transition duration-400 ease-in-out hover:rotate-90"
       onClick={() => setShowSidebar(!showSidebar)}
     >
       x
@@ -37,10 +38,11 @@ const RightSideBar = (props: Props) => {
 
 
   <div //entire sidebar div
-  className={`top-0 right-0 w-[25vw] bg-blue-600  p-10 pr-20 text-white fixed h-full z-40  ease-in-out duration-300 border-8 border-yellow-500 ${
+  className={`top-0 right-0 w-[25vw] bg-gray-300  p-10 pr-20 text-white fixed h-screen z-40  ease-in-out duration-300  ${
     showSidebar ? "translate-x-0 " : "translate-x-full"
   }`}
 >
+  <img src={waves4} className='fixed h-screen top-0 '/>
   <h3 className="mt-20 text-4xl font-semibold text-white">{test}</h3>
   <div> 
 <button>sign out</button>
