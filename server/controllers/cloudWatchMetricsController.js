@@ -1,78 +1,33 @@
 const { GetMetricDataCommand, CloudWatchClient } = require('@aws-sdk/client-cloudwatch');
-
-const cloudWatchMetricsController = {};
-
+const metricDataQueries = require('./util/metricDataQueries.js');
+const cloudWtatchMetricsController = {};
 cloudWatchMetricsController.getMetrics = async (req, res, next) => {
   try{
     const client = new CloudWatchClient({region: 'us-east-1', credentials: res.locals.creds})
-
-    // console.log('client: ', client)
-
-    // const params = {
-    //   MetricDataQueries: [
-    //     {
-    //       Id: "testId",
-    //       MetricStat: {
-    //         Metric: {
-    //           Namespace: "Invocations"
-    //         }
-    //       }          
-    //     }
-    //   ]
-    // };
     let testIdCount = 0;
     
+    //START TIME AND END TIME
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
     sevenDaysAgo.toString()
+    
+    //METRIC NAME
+    // const { metricName } = req.body;
+    //PERIOD - 1S, 5S, 10S, 30S, 1M, 5M, 15M, 1HR, 6HRS, 1D, 7D, 30D
 
-    const now = new Date();
-    // now.setDate(now.getDate() - 1);
-    now.toString();
+    //SCANBY - ASCENDING/DESCENDING TIME STAMP
 
-    const input = { // GetMetricDataInput
-      MetricDataQueries: [ // MetricDataQueries // required
-        {
-          Id: `testId${testIdCount}`, // required
-          MetricStat: { 
-            Metric: {
-              Namespace: "AWS/Lambda", // doesn't seem to correspond to res object (can be anything)
-              MetricName: "Duration", // corresponds to label (can be anything)
-              Dimensions: [
-                {
-                  Name: `FunctionName`, // required  - can be hardcoded as funciton name
-                  Value: "secondFunction", // required  //function name - needs to be actual function name from front end. req.queried
-                },
-              ],
-            },
-            Period: 900, // required
-            Stat: "Average", // required
-            // Unit: "Seconds"
-          },
-          // Expression: "STRING_VALUE",
-          Label: "Lambda Duration secondFunction",
-          // ReturnData: true || false,
-          // Period: Number("int"),
-          // AccountId: "STRING_VALUE",
-        },
-      ],
-      StartTime: sevenDaysAgo, // required
-      EndTime: now, // required
-      // NextToken: "STRING_VALUE",
-      // ScanBy: "TimestampDescending" || "TimestampAscending",
-      // MaxDatapoints: Number("int"),
-      LabelOptions: { // LabelOptions
-        Timezone: "-0400",
-      },
-    };
+    //needs to be filtered after receiving data from front end: funciton name, metric name,time period (seconds), date range, scan by (sort by oldest to newest or newest to oldest)
 
     const getMetrics = new GetMetricDataCommand(input)
+    const getMetrics2 = new GetMetricDataCommand(params)
     
     const metricsResponse = await client.send(getMetrics);
+    const metricsResponse2 = await client.send(getMetrics2);
 
     const metricsArray = metricsResponse.MetricDataResults;
 
-    console.log('metricsArray: ', metricsArray);
+    console.log('metricsArray: ', metricsArray, 'metricsArray2: ', metricsResponse2.MetricDataResults);
 
     // console.log(metricsResponse);
     testIdCount += 1;
