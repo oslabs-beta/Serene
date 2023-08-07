@@ -56,10 +56,10 @@ cloudWatchLogController.viewStreamInfo = async (req, res, next) => {
     const { events } = getLogEvents;
     events.forEach(event => {
       const timeStampDate = new Date(event.timestamp);
-      event.timestamp = timeStampDate;
+      event.timestamp = timeStampDate.toString();
 
       const ingestionDate = new Date(event.ingestionTime);
-      event.ingestionTime = ingestionDate;
+      event.ingestionTime = ingestionDate.toString();
     })
     console.log('events: ', events);
     res.locals.events = events;
