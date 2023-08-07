@@ -12,7 +12,8 @@ const path = require('path');
 
 const PORT = 3000;
 console.log('In server.js before mongoDB connection')
-mongoose.connect(`${process.env.ACCESS_KEY}`, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`mongodb+srv://wadechadwick13:s8o5OggSZrrmi8LT@osp-testing.quajsh5.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
+
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });
@@ -21,9 +22,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //route handlers go here
-app.use('/aws', awsRouter);
-app.use('/user', userRouter);
-app.use('/cloudwatch', cloudWatchRouter);
+app.use('/api/aws', awsRouter);
+app.use('/api/user', userRouter);
+app.use('/api/cloudwatch', cloudWatchRouter);
 
 
 app.use(express.static('../client'))

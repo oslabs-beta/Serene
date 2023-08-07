@@ -17,7 +17,7 @@ Chart.register(
   Title
 )
 
-const PieChart = ( {metric}: Props)=> {
+const PieChart = ( {}: Props)=> {
   
   const data = [
     { year: 2010, count: 10 },

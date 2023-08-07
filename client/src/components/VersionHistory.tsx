@@ -1,7 +1,6 @@
 import React from 'react'
 import LeftSideBar from './LeftSideBar'
 import RightSideBar from './RightSidebar'
-
 type Props = {}
 
 const VersionHistory = (props: Props) => {
@@ -26,6 +25,7 @@ const VersionHistory = (props: Props) => {
         VERSION HISTORY PAGE
  {/*BODY DIV */}
 <div className="flex justify-center border-4 border-green-300 h-screen w-full ">
+
   <div className="flex flex-col justify-between border-4 border-red-400 h-1/2 w-1/2">
     {mockVersionData.map((item) => (
       <div className="flex justify-between"> {/* Remove justify-between class */}
