@@ -19,11 +19,41 @@ export const mockFunctions = [
     name: 'firstFunction',
     description: 'This is my 1st function',
     arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
-  }
+  },
+  {
+    name: 'secondFunction',
+    description: 'This is my 2nd function',
+    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
+  },  
+  {
+    name: 'firstFunction',
+    description: 'This is my 1st function',
+    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
+  },
+  {
+    name: 'secondFunction',
+    description: 'This is my 2nd function',
+    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
+  },  
+  {
+    name: 'firstFunction',
+    description: 'This is my 1st function',
+    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
+  },
+  {
+    name: 'secondFunction',
+    description: 'This is my 2nd function',
+    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
+  },  
+  {
+    name: 'firstFunction',
+    description: 'This is my 1st function',
+    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
+  },
 ]
 
 
-export const test = "Ari is a smarticle Particle"
+export const test = "Right side bar"
 
 export const mockEvents = [
     {

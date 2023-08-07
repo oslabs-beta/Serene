@@ -77,7 +77,7 @@ const Login = (props: Props) => {
           </div>
           <button
             type="submit"
-            className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 ease-in-out hover:scale-110 hover:bg-transparent hover:border-2 border-white hover:text-yellow-500"
+            className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 ease-in-out hover:scale-110 hover:bg-transparent hover:border-2 border-white hover:text-white"
           >
             LOGIN
           </button>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Functions from './Functions';
 import FunctionDetails from './FunctionDetails';
 import { mockFunctions } from '../shared';
+import waves3 from '../assets/waves3.png';
 
 type Props = {};
 
@@ -12,7 +13,7 @@ const LeftSideBar = ({}: Props) => {
     <div>
       {showSidebar ? (
         <button
-          className="flex text-4xl text-black items-center cursor-pointer fixed left-8 top-6 z-50"
+          className="flex text-4xl text-black items-center cursor-pointer fixed left-8 top-6 z-50 transition duration-400 ease-in-out hover:rotate-90"
           onClick={() => setShowSidebar(!showSidebar)}
         >
           x
@@ -38,15 +39,16 @@ const LeftSideBar = ({}: Props) => {
       )}
 
       <div //entire sidebar div // sidebar does not fully extend to the bottom, research
-        className={`flex flex-col items-center -left-2 -top-1 -mb-4  bg-gray-300  pl-10 pr-10 text-black fixed h-full z-40  ease-in-out duration-300 border-2 border-black ${
+        className={`flex flex-col items-center -left-2 top-0  -mb-4  bg-gray-300  pl-10 pr-10 text-black fixed h-screen z-40  ease-in-out duration-300  ${
           showSidebar ? 'translate-x-0 ' : '-translate-x-full'
         }`}
       >
+        <img src={waves3} className='fixed h-screen z-10 ease-in-out duration-300'/>
         <h3 className="mt-20 text-2xl min-w-min font-semibold text-white mb-5">
           F U N C T I O N S
         </h3>
         <div // function data table in sidebar
-          className="border-8 border-black overflow-y-auto h-[75%] w-[110%]"
+          className="bg-white bg-opacity-40 flex flex-col items-center z-20 overflow-y-auto h-[75%] w-[110%] "
         >
           {/* <div> */}
           {mockFunctions.map((item) => (

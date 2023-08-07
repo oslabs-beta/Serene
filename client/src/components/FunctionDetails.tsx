@@ -18,7 +18,7 @@ const FunctionDetails = ({detailID, name, description, versHist, metric, warmDat
 
 
   return (
-    <div className="border-8 border-pink-400 my-4">
+    <div className="border-2 w-full p-5 my-2 rounded-md border-black hover:bg-black hover:text-white transition duration-300 ease-in-out">
       {
           allProps ? (
           <>

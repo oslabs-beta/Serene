@@ -58,7 +58,7 @@ const Signup = (props: Props) => {
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full bg-neutral-200">
       <img src={waves2} className="w-full fixed z-20 " />
-      <div className="flex flex-col justify-center border-black bg-neutral-100 bg-opacity-30 p-14 border-2 rounded-lg sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 h-3/5 min-w-1/4 max-w-1/2 z-30">
+      <div className="flex flex-col justify-center border-black bg-neutral-100 bg-opacity-40 p-14 border-2 rounded-lg sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 h-3/5 min-w-1/4 max-w-1/2 z-30">
         <form
           className="w-full max-w-sm  flex flex-col items-center"
           onSubmit={handleSubmit}
@@ -79,7 +79,7 @@ const Signup = (props: Props) => {
             {/* <label className="border-grey-500 border-4 my-2">
               Password */}
             <input
-              className="bg-transparent border-2 border-black mt-2 mb-6 p-1 rounded-md placeholder-black"
+              className="bg-transparent border-2 border-black mt-2 p-1 rounded-md placeholder-black"
               type="password"
               name="password"
               placeholder="Password"
@@ -96,9 +96,10 @@ const Signup = (props: Props) => {
             />
             {/* </label> */}
           </div>
-          <select className="w-full p-1 text-black bg-white border rounded-md shadow-sm outline-none appearance-none"
+          <select className="w-full p-1 text-black bg-white border-2 rounded-md shadow-sm outline-none appearance-none transition duration-300 ease-in-out hover:bg-black hover:border-2 border-white hover:text-white"
             onChange={handleRegionChange}
           >
+              <option value="us-east-1" className='text-center'> ---- Select Region ---- </option>
               <option value="us-east-1" >US East 1 (N. Virginia)</option>
               <option value="us-east-2" >US East 2 (Ohio)</option>
               <option value="us-west-1">US West 1 (N. California) </option>
@@ -117,11 +118,11 @@ const Signup = (props: Props) => {
               <option value="eu-north-1">EU North 1 (Stockholm)</option>
               <option value="sa-east-1">SA East 1 (Sao Paulo)</option>
           </select>
-          <button className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 my-3 ease-in-out hover:scale-110 hover:bg-transparent hover:border-2 border-white hover:text-black"><a href={awsConsoleURL} target='_blank'>Connect Your AWS Account</a></button>
+          <button className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 my-3 ease-in-out hover:scale-110 hover:bg-black hover:border-2 border-white hover:text-white"><a href={awsConsoleURL} target='_blank'>Connect Your AWS Account</a></button>
             
           <button
             type="submit"
-            className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 ease-in-out hover:scale-110 hover:bg-transparent hover:border-2 border-white hover:text-black"
+            className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 ease-in-out hover:scale-110 hover:bg-black hover:border-2 border-white hover:text-white"
           >
             Signup
           </button>
