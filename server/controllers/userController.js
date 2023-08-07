@@ -5,8 +5,9 @@ const userController = {};
 
 userController.createUser = async (req, res, next) => {
   const { username, password } = req.body;
+  console.log('started createUser')
   const hashedPassword = await bcrypt.hash(password, 10);
-
+  console.log('hashed password')
   try {
     const newUser = await User.create({username, password: hashedPassword});
     res.locals.newUser = newUser;
@@ -20,9 +21,25 @@ userController.createUser = async (req, res, next) => {
   }
 }
 
+userController.getAllUsers = async (req,res,next) => {
+  try {
+    const allUsers = await User.find({});
+    res.locals.allUsers = allUsers;
+    return next()
+  }
+  catch (error){
+    return next({
+      log: `The following error occured: ${error} in getAllUsers`,
+      status: 400,
+      message: { err: 'An error occured while trying to get all users' }
+    })
+  }
+}
+
+
 userController.login = async (req, res, next) => {
   try{
-    //desconstruct req body
+    //deconstruct req body
     const { username, password } = req.body;
     console.log('inlogincontroller')
     //find by username

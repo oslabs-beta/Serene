@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 import Functions from './Functions'
 import FunctionDetails from './FunctionDetails'
 import { test } from '../shared'
-import waves4 from '../assets/waves4.png';
+import waves5 from '../assets/waves5.png';
 
 type Props = {
 
@@ -42,7 +42,7 @@ const RightSideBar = (props: Props) => {
     showSidebar ? "translate-x-0 " : "translate-x-full"
   }`}
 >
-  <img src={waves4} className='fixed h-screen top-0 '/>
+  <img src={waves5} className='fixed h-screen top-0 '/>
   <h3 className="mt-20 text-4xl font-semibold text-white">{test}</h3>
   <div> 
 <button>sign out</button>
