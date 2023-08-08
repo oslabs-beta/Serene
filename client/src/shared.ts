@@ -211,7 +211,6 @@ export const FetchLogs = async () => {
   try{
     const response = await fetch('/api/cloudwatch/logs')
     const data = response.json();
-    // DO SOMETHIGN WITH DATA
     return data;
   } catch (error) {
     console.log('Error is: ', error)

@@ -19,14 +19,14 @@ type Props = {
 
 const FunctionDetails = ({detailID, name, description, versHist, metric, warmData, arn, logs}: Props) => {
   const allProps = detailID && name && description && versHist && metric && warmData && logs;
-  const [funcArn, setFuncArn] = useState(arn)
+  const [funcName, setFuncName] = useState(name)
 
   const navigate = useNavigate();
 
  
-    const handleArnButtonClick = (e) => {
-      setFuncArn(e.target.value)
-      console.log('arn is ' + funcArn)
+    const handleNameButtonClick = (e) => {
+      setFuncName(e.target.value)
+      console.log('name is ' + funcName)
       navigate('/home')
     
     }
@@ -94,8 +94,8 @@ const FunctionDetails = ({detailID, name, description, versHist, metric, warmDat
 
         <div>
           {/* FUNCTION NAME ONLY */}
-          <button onClick={(e) => handleArnButtonClick(e)}
-            value={arn}
+          <button onClick={(e) => handleNameButtonClick(e)}
+            value={name}
           > FUNCTION NAME IS {name} </button>
           
           {/* <p> FUNCTION ARN IS {arn} </p> */}
