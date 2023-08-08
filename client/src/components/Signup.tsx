@@ -34,6 +34,8 @@ const Signup = (props: Props) => {
     const body = {
       username,
       password,
+      region,
+      ARN: arnInput,
     };
     console.log(body);
     try {

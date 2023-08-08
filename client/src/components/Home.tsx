@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Dropdown } from 'tw-elements'
 import Metric from './Metric'
@@ -10,7 +10,7 @@ import LineGraph from './LineGraph'
 import BarGraph from './BarGraph'
 import DoughnutChart from './DoughnutChart'
 import FunctionDetails from './FunctionDetails'
-import { mockFuncDetails } from '../shared'
+import { mockFuncDetails , FetchFunctions} from '../shared'
 
 
 
@@ -21,6 +21,26 @@ type Props = {
 
 const Home = ({}: Props) => {
   const [isRightMenuToggled, setIsRightMenuToggled] = useState<boolean>(false);
+  // const [data, setData] = useState([])
+
+
+
+  // useEffect(() => {
+  //   // console.log('beginning to fetch')
+  //   FetchFunctions().then( funcData => {
+  //     // console.log('setting data now')
+  //     setData(funcData)
+  //     console.log('data is reset: ', funcData)
+  //   })
+  //   //data logic here
+    
+
+  //   }, [])
+
+
+
+
+
 
   return (
     <div className='bg-gray-200 h-screen'> 
@@ -33,19 +53,23 @@ const Home = ({}: Props) => {
         <div className="border-4 border-black flex flex-col items-center">
    
         <div className='max-w-xs '>
-
-
-          <FunctionDetails
+{/* 
+        <UserContext.Provider value={logName}>
+         
+        <FunctionDetails
               detailID={mockFuncDetails[0].id}
               name={mockFuncDetails[0].name}
               description={mockFuncDetails[0].description}
               versHist={mockFuncDetails[0].versHist}
               metric={mockFuncDetails[0].metric}
               warmData={mockFuncDetails[0].warmData}
-              logs={mockFuncDetails[0].logs}
+              logs={mockFuncDetails[0].logs}  />
+
+          
+        </UserContext.Provider> */}
               
           
-          />
+        
         </div>
  
       </div>

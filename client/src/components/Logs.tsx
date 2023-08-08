@@ -1,7 +1,9 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect, useContext} from 'react'
 import LeftSideBar from './LeftSideBar'
 import RightSideBar from './RightSidebar'
 import {FetchLogs} from '../shared'
+import { UserContext } from '../App'
+import {FuncNameContext} from './FunctionDetails'
 
 type Props = {
 }
@@ -9,6 +11,10 @@ type Props = {
 const Logs = ({}: Props) => {
   const [allLogs, setAllLogs] = useState([])
   const [logStream, setLogStream] = useState('')
+  const [ data, setData,clickedFunction, setClickedFunction ] = useContext(UserContext)
+  // const [funcName, setFuncName] = useContext(FuncNameContext)
+
+  // console.log('logging data in Logs ' + JSON.stringify(data))
 
   useEffect(() => {
     // console.log('beginning to fetch')
@@ -22,13 +28,42 @@ const Logs = ({}: Props) => {
 
   }, [])
 
+  // console.log('Current Logname is ', clickedFunction)
 
   const handleLogClick = (e)=> {
     setLogStream(e.target.value)
   }
   useEffect(() => {console.log('this is logstream', logStream)},[logStream])
 
+  const logName = 'testingfunc'
+  const region = ''
+
+  const FetchLogStreams = async () => {
+    //need logName, streamName, region
+    const body = {
+      logName : {logName},
+      streamName : {logStream},
+
+    };
+    try {
+      const response = await fetch('/api/cloudwatch/getStreamDetails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
   
+      const data = await response.json();
+      console.log('viewing logStream: ', data);
+
+    } catch (error) {
+      console.log('fetch log stream Error: ', error);
+    }
+  
+  }
+  
+ 
 
   return (
     <div>
@@ -42,7 +77,7 @@ const Logs = ({}: Props) => {
 
        {allLogs.map((log) => 
         <button className='block' value={log} onClick={(e)=> {handleLogClick(e)}}>logStream : {log}</button>
-       )}
+       )} 
 
         
     </div>

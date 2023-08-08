@@ -2,23 +2,29 @@ import React, { useState, useEffect} from 'react'
 import LeftSideBar from './LeftSideBar'
 import RightSideBar from './RightSidebar'
 import {FetchLogs} from '../shared'
+// import {FuncNameContext} from './FunctionDetails'
 
 type Props = {
 }
 
+
+
 const Warming = ({}: Props) => {
-  const [allLogs, setAllLogs] = useState([])
+  // const [allLogs, setAllLogs] = useState([])
+    // const [funcName, setFuncName] = useContext(FuncNameContext)
 
 
-  useEffect(() => {
-    // console.log('beginning to fetch')
-    FetchLogs().then( funcLogs => {
-      // console.log('setting data now')
-      setAllLogs(funcLogs)
-      console.log('logs are: ', funcLogs)
-    })
-    //data logic here
-    }, [])
+    // console.log('im in warming ' + funcName)
+
+  // useEffect(() => {
+  //   // console.log('beginning to fetch')
+  //   FetchLogs().then( funcLogs => {
+  //     // console.log('setting data now')
+  //     setAllLogs(funcLogs)
+  //     console.log('logs are: ', funcLogs)
+  //   })
+  //   //data logic here
+  //   }, [])
 
 
 
@@ -32,8 +38,9 @@ const Warming = ({}: Props) => {
         </div> 
 
 
- 
-  
+        <div>
+
+        </div>
 
         
     </div>
