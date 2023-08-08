@@ -9,7 +9,7 @@ versionRouter.get('/list', stsController.getCredentials, versionHistoryControlle
 })
 
 versionRouter.get('/functionVersion', stsController.getCredentials, versionHistoryController.viewVersionList, versionHistoryController.viewFunctionVersion, (req, res) => {
-  return res.status(200).json(res.locals.functionDefinition)
+  return res.status(200).json(res.locals.versionInfo)
 })
 
 

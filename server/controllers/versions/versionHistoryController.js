@@ -56,7 +56,19 @@ versionHistoryController.viewFunctionVersion = async (req, res, next) => {
     const command = new GetFunctionCommand(input)
     const response = await client.send(command)
     console.log('response: ', response.Code.Location)
-    res.locals.functionDefinition = response.Code.Location;
+
+    let timeout;
+
+    (response.Configuration.Timeout > 60) ? timeout = '> 1 min' : timeout = response.Configuration.Timeout;
+
+    const versionInfo = {
+      description: response.Configuration.Description,
+      memory: response.Configuration.MemorySize + ' MB',
+      timeout: timeout + ' sec',
+      ephemeralStorage: response.Configuration.EphemeralStorage.Size + ' MB',
+      linkToFunc: response.Code.Location
+    }
+    res.locals.versionInfo = versionInfo;
     return next();
   } catch (err) {
     return next({
