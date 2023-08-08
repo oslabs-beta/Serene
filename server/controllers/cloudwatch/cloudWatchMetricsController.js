@@ -12,10 +12,10 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
     console.log('In getMetrics before createQuery is invoked')
     //PERIOD - 1S, 5S, 10S, 30S, 1M, 5M, 15M, 1HR, 6HRS, 1D, 7D, 30D
     const metricObj = createQuery(funcName, stat, sortBy, newPeriod, formattedStartDate)
+    //DATE - 1h, 3h, 12h, 1d, 3d, 1w
+    // console.log('createQuery has been invoked')
 
-    console.log('createQuery has been invoked')
-
-    console.log('metricObj: ', metricObj)
+    // console.log('metricObj: ', metricObj)
     //SCANBY - ASCENDING/DESCENDING TIME STAMP
     const getDurationMetrics = new GetMetricDataCommand(metricObj.duration)
     const getInvocationsMetrics = new GetMetricDataCommand(metricObj.invocations)
@@ -29,11 +29,11 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
     const getErrorsMetricsResponse = await client.send(getErrorsMetrics);
     const getConcurrentExeMetricsResponse = await client.send(getConcurrentExeMetrics);
 
-    console.log('duration: ', getDurationMetricsResponse.MetricDataResults)
-    console.log('invocations: ', getInvocationsMetricsResponse.MetricDataResults)
-    console.log('throttles: ', getThrottlesMetricsResponse.MetricDataResults)
-    console.log('errors: ', getErrorsMetricsResponse.MetricDataResults)
-    console.log('concurrentExecutions: ', getConcurrentExeMetricsResponse.MetricDataResults)
+    // console.log('duration: ', getDurationMetricsResponse.MetricDataResults)
+    // console.log('invocations: ', getInvocationsMetricsResponse.MetricDataResults)
+    // console.log('throttles: ', getThrottlesMetricsResponse.MetricDataResults)
+    // console.log('errors: ', getErrorsMetricsResponse.MetricDataResults)
+    // console.log('concurrentExecutions: ', getConcurrentExeMetricsResponse.MetricDataResults)
     // console.log(metricsResponse);
     
     res.locals.metrics = {
@@ -44,6 +44,7 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
       concurrentExecutions: getConcurrentExeMetricsResponse.MetricDataResults
     }
 
+    console.log('res.locals.metrics: ', res.locals.metrics)
     return next();
   } catch(err){
     return next({
@@ -85,12 +86,22 @@ const timePeriodConverter = (period) => {
     }
   } 
   if(period === '1 minute' || period === '5 minutes' || period === '15 minutes') {
-    if(period.length === 8) {
+    if(period.length === 8 || period.length === 9) {
       finalPeriod = Number(period[0]) * 60;
     } else {
       finalPeriod = (Number(period[0].concat(period[1]))) * 60;
     }
   };
+  if(period === '1 hour' || period === '6 hours') {
+      finalPeriod = Number(period[0]) * 3600;
+  };
+  if(period === '1 day' || period === '7 days' || period === '30 days') {
+    if(period.length === 5 || period.length === 6) {
+      finalPeriod = Number(period[0]) * 86400;
+    } else {
+      finalPeriod = (Number(period[0].concat(period[1]))) * 86400;
+    }
+};
   return finalPeriod;
 };
 
