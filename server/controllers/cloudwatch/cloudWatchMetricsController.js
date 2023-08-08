@@ -10,13 +10,10 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
   try{
     const client = new CloudWatchClient({region: region, credentials: res.locals.creds})
     console.log('In getMetrics before createQuery is invoked')
-    //PERIOD - 1S, 5S, 10S, 30S, 1M, 5M, 15M, 1HR, 6HRS, 1D, 7D, 30D
     const metricObj = createQuery(funcName, sortBy, newPeriod, formattedStartDate)
-    //DATE - 1h, 3h, 12h, 1d, 3d, 1w
     // console.log('createQuery has been invoked')
 
     // console.log('metricObj: ', metricObj)
-    //SCANBY - ASCENDING/DESCENDING TIME STAMP
     const getDurationMetrics = new GetMetricDataCommand(metricObj.duration)
     const getInvocationsMetrics = new GetMetricDataCommand(metricObj.invocations)
     const getThrottlesMetrics = new GetMetricDataCommand(metricObj.throttles)

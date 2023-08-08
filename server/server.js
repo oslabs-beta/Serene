@@ -6,6 +6,7 @@ const awsRouter = require('./routes/awsRouter.js');
 const userRouter = require('./routes/userRouter.js');
 const cloudWatchRouter = require('./routes/cloudWatchRouter.js');
 const versionRouter = require('./routes/versionRouter.js')
+const warmingRouter = require('./routes/warmingRouter.js')
 const path = require('path');
 const cookieParser = require('cookie-parser');
 
@@ -29,6 +30,7 @@ app.use('/api/aws', awsRouter);
 app.use('/api/user', userRouter);
 app.use('/api/cloudwatch', cloudWatchRouter);
 app.use('/api/versions', versionRouter);
+app.use('/api/warming', warmingRouter);
 
 app.use(express.static('../client'));
 
