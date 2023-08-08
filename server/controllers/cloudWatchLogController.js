@@ -1,5 +1,4 @@
 const { CloudWatchLogs } = require('@aws-sdk/client-cloudwatch-logs');
-
 // const AWS = require('aws-sdk')
 
 const cloudWatchLogController = {};
