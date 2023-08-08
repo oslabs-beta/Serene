@@ -5,6 +5,7 @@ const dotenv = require('dotenv').config();
 const awsRouter = require('./routes/awsRouter.js');
 const userRouter = require('./routes/userRouter.js');
 const cloudWatchRouter = require('./routes/cloudWatchRouter.js');
+const versionRouter = require('./routes/versionRouter.js')
 const path = require('path');
 const cookieParser = require('cookie-parser');
 
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/aws', awsRouter);
 app.use('/api/user', userRouter);
 app.use('/api/cloudwatch', cloudWatchRouter);
+app.use('/api/versions', versionRouter);
 
 app.use(express.static('../client'));
 

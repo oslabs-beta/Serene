@@ -4,14 +4,14 @@ const { GetMetricDataCommand, CloudWatchClient } = require('@aws-sdk/client-clou
 const cloudWatchMetricsController = {};
 
 cloudWatchMetricsController.getMetrics = async (req, res, next) => {
-  const { funcName, stat, sortBy, period, startDate } = req.body;
+  const { funcName, sortBy, period, startDate, region } = req.body;
   const formattedStartDate = dateConverter(startDate);
   const newPeriod = timePeriodConverter(period);
   try{
-    const client = new CloudWatchClient({region: 'us-east-1', credentials: res.locals.creds})
+    const client = new CloudWatchClient({region: region, credentials: res.locals.creds})
     console.log('In getMetrics before createQuery is invoked')
     //PERIOD - 1S, 5S, 10S, 30S, 1M, 5M, 15M, 1HR, 6HRS, 1D, 7D, 30D
-    const metricObj = createQuery(funcName, stat, sortBy, newPeriod, formattedStartDate)
+    const metricObj = createQuery(funcName, sortBy, newPeriod, formattedStartDate)
     //DATE - 1h, 3h, 12h, 1d, 3d, 1w
     // console.log('createQuery has been invoked')
 
@@ -107,10 +107,10 @@ const timePeriodConverter = (period) => {
 
 let idCount = 0;
 
-const createQuery = (funcName, stat, sortBy, period, startDate) => {
+const createQuery = (funcName, sortBy, period, startDate) => {
   const metricDataQueries = {};
 
-  console.log(funcName, stat, sortBy, period, startDate)
+  console.log(funcName, sortBy, period, startDate)
 
   //METRICS
   metricDataQueries.duration = {
@@ -131,7 +131,7 @@ const createQuery = (funcName, stat, sortBy, period, startDate) => {
             ],
           },
           Period: period, // required (also req.body)
-          Stat: `${stat}`, // required (Average, min/max, sum, sample count, etc) (also req.body)
+          Stat: 'Average', // required (Average, min/max, sum, sample count, etc) (also req.body)
         },
         Label: `Lambda Duration ${funcName}`, //function and MetricName need to be dynamic
       },
@@ -163,7 +163,7 @@ const createQuery = (funcName, stat, sortBy, period, startDate) => {
             ],
           },
           Period: period, // required (also req.body)
-          Stat: `${stat}`, // required (Average, min/max, sum, sample count, etc) (also req.body)
+          Stat: `Sum`, // required (Average, min/max, sum, sample count, etc) (also req.body)
         },
         Label: `Lambda Invocations ${funcName}`, //function and MetricName need to be dynamic
       },
@@ -195,7 +195,7 @@ const createQuery = (funcName, stat, sortBy, period, startDate) => {
             ],
           },
           Period: period, // required (also req.body)
-          Stat: `${stat}`, // required (Average, min/max, sum, sample count, etc) (also req.body)
+          Stat: `Sum`, // required (Average, min/max, sum, sample count, etc) (also req.body)
         },
         Label: `Lambda Throttles ${funcName}`, //function and MetricName need to be dynamic
       },
@@ -227,7 +227,7 @@ const createQuery = (funcName, stat, sortBy, period, startDate) => {
             ],
           },
           Period: period, // required (also req.body)
-          Stat: `${stat}`, // required (Average, min/max, sum, sample count, etc) (also req.body)
+          Stat: `Sum`, // required (Average, min/max, sum, sample count, etc) (also req.body)
         },
         Label: `Lambda Errors ${funcName}`, //function and MetricName need to be dynamic
       },
@@ -259,7 +259,7 @@ const createQuery = (funcName, stat, sortBy, period, startDate) => {
             ],
           },
           Period: period, // required (also req.body)
-          Stat: `${stat}`, // required (Average, min/max, sum, sample count, etc) (also req.body)
+          Stat: `SampleCount`, // required (Average, min/max, sum, sample count, etc) (also req.body)SampleCount
         },
         Label: `Lambda Concurrent Executions ${funcName}`, //function and MetricName need to be dynamic
       },
