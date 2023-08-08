@@ -1,12 +1,11 @@
 const express = require('express');
-const cloudWatchLogController = require('../controllers/cloudWatchLogController.js');
+const cloudWatchLogController = require('../controllers/cloudwatch/cloudWatchLogController.js');
 const stsController = require('../controllers/stsController.js');
 const cloudWatchRouter = express.Router();
-const cloudWatchMetricsController = require('../controllers/cloudWatchMetricsController.js');
-
+const cloudWatchMetricsController = require('../controllers/cloudwatch/cloudWatchMetricsController.js');
 
 //view function streams - user needs to specify function name
-cloudWatchRouter.get('/logs', stsController.getCredentials, cloudWatchLogController.viewFunctionStreams, (req, res) => {
+cloudWatchRouter.get('/getLogs', stsController.getCredentials, cloudWatchLogController.viewFunctionStreams, (req, res) => {
   return res.status(200).json(res.locals.logStreamNames);
 });
 
