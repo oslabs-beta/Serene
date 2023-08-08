@@ -6,7 +6,7 @@ import {FetchLogs} from '../shared'
 type Props = {
 }
 
-const Warming = ({}: Props) => {
+const Logs = ({}: Props) => {
   const [allLogs, setAllLogs] = useState([])
 
 
@@ -30,14 +30,13 @@ const Warming = ({}: Props) => {
         <h1 className='font-extrabold text-4xl font-mono'> KOMODO </h1>
         <RightSideBar />  
         </div> 
-
-
- 
-  
+       {allLogs.map((log) => 
+        <button className='block'>logStream : {log}</button>
+       )}
 
         
     </div>
   )
 }
 
-export default Warming
+export default Logs

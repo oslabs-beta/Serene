@@ -13,7 +13,7 @@ cloudWatchLogController.viewFunctionStreams = async (req, res, next) => {
     const cloudWatchLogs = new CloudWatchLogs({ region: 'us-east-1', credentials: res.locals.creds });
     console.log('cloudWatchLogs: ', cloudWatchLogs);
     
-    const logName = '/aws/lambda/secondFunction'  //req.query from frontend
+    const logName = '/aws/lambda/testingfunc'  //req.query from frontend
 
     ///grabs logstreams + last event time for each log group
     const logStreamRes = await cloudWatchLogs.describeLogStreams({logGroupIdentifier: logName}) // logGroupIdentifier or logGroupName

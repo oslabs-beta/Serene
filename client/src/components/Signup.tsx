@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import waves2 from '../assets/waves2.png';
 
+
 type Props = {};
 
 const Signup = (props: Props) => {
@@ -50,6 +51,7 @@ const Signup = (props: Props) => {
       // console.log('data: ', data)
       console.log('fetch successful');
       setResponse(data);
+      navigate('/home');
     } catch (error) {
       console.log('NOW Error: ', error);
     }

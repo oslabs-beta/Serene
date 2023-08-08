@@ -1,59 +1,62 @@
+import {useState, useEffect} from 'react'
+
+
 export const mockFuncDetails = [
-    { id: 1, name: 'lambdaFunc1', description: 'something1', versHist: "version1", metric: "metric1", warmData: "warmingdata1" },
-    { id: 2, name: 'lambdaFunc2', description: 'something2', versHist: "version2", metric: "metric2", warmData: "warmingdata2" },
-    { id: 3, name: 'lambdaFunc3', description: 'something3', versHist: "version3", metric: "metric3", warmData: "warmingdata3" }
+    { id: 1, name: 'lambdaFunc1', description: 'something1', versHist: "version1", metric: "metric1", warmData: "warmingdata1", logs: 'log1' },
+    { id: 2, name: 'lambdaFunc2', description: 'something2', versHist: "version2", metric: "metric2", warmData: "warmingdata2", logs: 'log2' },
+    { id: 3, name: 'lambdaFunc3', description: 'something3', versHist: "version3", metric: "metric3", warmData: "warmingdata3", logs: 'log3' }
 ];
 
 export const mockFunctions = [
-{
-    name : 'thirdFunction',
-    description: 'This is my 3rd function',
-    arn: 'arn:aws:lambda:us-east-1:097265058099:function:thirdFunction'
-  },
-  {
-    name: 'secondFunction',
-    description: 'This is my 2nd function',
-    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
-  },  
   {
     name: 'firstFunction',
-    description: 'This is my 1st function',
+    description: 'This is my 1rd function',
     arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
   },
   {
     name: 'secondFunction',
-    description: 'This is my 2nd function',
+    description: 'This is my 2st function',
     arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
   },  
   {
-    name: 'firstFunction',
-    description: 'This is my 1st function',
+    name: 'thirdFunction',
+    description: 'This is my 3st function',
     arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
   },
   {
-    name: 'secondFunction',
-    description: 'This is my 2nd function',
+    name: 'fourthFunction',
+    description: 'This is my 4nd function',
     arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
   },  
   {
-    name: 'firstFunction',
-    description: 'This is my 1st function',
+    name: 'fifthFunction',
+    description: 'This is my 5rd function',
     arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
   },
   {
-    name: 'secondFunction',
-    description: 'This is my 2nd function',
+    name: 'sixthFunction',
+    description: 'This is my 6st function',
     arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
   },  
   {
-    name: 'firstFunction',
-    description: 'This is my 1st function',
+    name: 'seventhFunction',
+    description: 'This is my 7nd function',
+    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
+  },
+  {
+    name: 'eighthFunction',
+    description: 'This is my 8st function',
+    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
+  },  
+  {
+    name: 'ninthFunction',
+    description: 'This is my 9nd function',
     arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
   },
 ]
 
 
-export const test = "Right side bar"
+export const test = "side bari"
 
 export const mockEvents = [
     {
@@ -171,4 +174,48 @@ export const mockEvents = [
       timestamp: '2023-08-05T16:32:07.993Z'
     }
   ]
+  // ---      /api/aws/func
+  
+  
+//   export const GetFunctions = () => {
+//     useEffect(() => {
+//       const getLambdaFunc = async () => {
+//         try{
+//           const response = await fetch('/api/aws/func')
+//           const data = response.json();
+//           console.log(data)
+//           // DO SOMETHIGN WITH DATA
+//           return data;
+//         } catch (error) {
+//           console.log('Error is: ', error)
+//         }
+//       }
+
+//       getLambdaFunc();
+//     }, [])
+// }
+
+export const FetchFunctions = async () => {
+      try{
+        const response = await fetch('/api/aws/funcs')
+        const data = response.json();
+        // DO SOMETHIGN WITH DATA
+        return data;
+      } catch (error) {
+        console.log('Error is: ', error)
+      }
+  
+}
+
+export const FetchLogs = async () => {
+  try{
+    const response = await fetch('/api/cloudwatch/logs')
+    const data = response.json();
+    // DO SOMETHIGN WITH DATA
+    return data;
+  } catch (error) {
+    console.log('Error is: ', error)
+  }
+
+}
   

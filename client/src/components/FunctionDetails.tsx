@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Metric from './Metric';
 import VersionHistory from './VersionHistory';
 import Warming from './Warning';
-import { Link } from 'react-router-dom'
+import Logs from './Logs'
+import { Link, useNavigate } from 'react-router-dom'
+
 
 type Props = {
     detailID?: number;
@@ -11,11 +13,34 @@ type Props = {
     versHist?: string;
     metric?: string;
     warmData?: string
+    arn?: string; //<<<<<<<<<
+    logs?: string
 }
 
-const FunctionDetails = ({detailID, name, description, versHist, metric, warmData}: Props) => {
-  const allProps = detailID && name && description && versHist && metric && warmData;
+const FunctionDetails = ({detailID, name, description, versHist, metric, warmData, arn, logs}: Props) => {
+  const allProps = detailID && name && description && versHist && metric && warmData && logs;
+  const [funcArn, setFuncArn] = useState(arn)
 
+  const navigate = useNavigate();
+
+ 
+    const handleArnButtonClick = (e) => {
+      setFuncArn(e.target.value)
+      console.log('arn is ' + funcArn)
+      navigate('/home')
+    
+    }
+ 
+
+
+  // useEffect(() => {
+  //   handleArnButtonClick(e)
+  // }, [])
+
+
+
+
+ 
 
   return (
     <div className="border-2 shadow-md bg-neutral-100 bg-opacity-40 w-full p-4 mb-2 rounded-md border-black hover:bg-black hover:text-white transition duration-300 ease-in-out">
@@ -53,6 +78,10 @@ const FunctionDetails = ({detailID, name, description, versHist, metric, warmDat
         <Link to="/warming">
            Warm Data BUTTON  is {warmData}</Link >
           </button>
+          <button className="border-4 border-black">
+        <Link to="/logs">
+           Logs BUTTON  is {logs}</Link >
+          </button>
       </div>
 
         </div>
@@ -65,7 +94,11 @@ const FunctionDetails = ({detailID, name, description, versHist, metric, warmDat
 
         <div>
           {/* FUNCTION NAME ONLY */}
-          <p> FUNCTION NAME IS {name} </p>
+          <button onClick={(e) => handleArnButtonClick(e)}
+            value={arn}
+          > FUNCTION NAME IS {name} </button>
+          
+          {/* <p> FUNCTION ARN IS {arn} </p> */}
         </div>
 
       )

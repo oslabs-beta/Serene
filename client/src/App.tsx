@@ -5,7 +5,7 @@ import Home from './components/Home'
 import VersionHistory from './components/VersionHistory'
 import Metric from './components/Metric'
 import Warming from './components/Warming'
-
+import Logs from './components/Logs'
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
       <Route path = "/versions" element ={<VersionHistory/>}/>
       <Route path = "/metrics" element ={<Metric />}/>
       <Route path = "/warming" element ={<Warming />}/>
+      <Route path = "/logs" element ={<Logs />}/>
       
 
 

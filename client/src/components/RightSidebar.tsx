@@ -14,9 +14,6 @@ const RightSideBar = (props: Props) => {
 
   return (
     <div>
-
-
-    
   {showSidebar ? (
     <button
       className="flex text-4xl text-black items-center cursor-pointer fixed right-8 top-6 z-50 transition duration-400 ease-in-out hover:rotate-90"
@@ -42,16 +39,17 @@ const RightSideBar = (props: Props) => {
     showSidebar ? "translate-x-0 " : "translate-x-full"
   }`}
 >
-  <img src={waves5} className='fixed h-screen top-0 '/>
-  <h3 className="mt-20 text-4xl font-semibold text-white">{test}</h3>
+<img
+  src={waves5}
+  className={`fixed h-screen -ml-[9vw] top-0  z-10 ${showSidebar ? 'block' : 'hidden'}`}
+/>
+  <h3 className="mt-20 ml-20 text-4xl font-semibold text-white">{test}</h3>
   <div> 
 <button>sign out</button>
   </div>
 
     </div>
   </div>
-
-
   )
 }
 

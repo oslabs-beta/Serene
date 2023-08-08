@@ -11,20 +11,24 @@ stsController.getCredentials = async (req, res, next) => {
     region: 'us-east-1',
     credentials: {
       accessKeyId: process.env.accessKeyId,
-      secretAccessKey: process.env.secretAccessKey,
+      secretAccessKey: process.env.secretAccessKey
     },
   };
   const stsClient = new STSClient(credentials);
-
+  console.log('made it here')
   // arn:aws:cloudformation:us-east-1:097265058099:stack/komodoStack/02fcee50-3196-11ee-8e69-12ff026c8c53
   // arn:aws:iam::097265058099:role/komodoStack-KomodoRole-1SUYS4WE06EP8
   const params = {
-    RoleArn: process.env.tempUserArn, //this is IAM role arn that we get from frontend
+    RoleArn: process.env.RoleArn , //this is IAM role arn that we get from frontend
     RoleSessionName: 'Komodo_Session',
   };
+  console.log('line25 of getcredentials')
   try {
+    console.log('line27 of getcredentials')
     const command = new AssumeRoleCommand(params);
+    console.log('command is: ', command)
     const data = await stsClient.send(command);
+    console.log('data is: ', data)
     roleCreds = {
       accessKeyId: data.Credentials.AccessKeyId,
       secretAccessKey: data.Credentials.SecretAccessKey,

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Dropdown } from 'tw-elements'
 import Metric from './Metric'
 import Functions from './Functions'
@@ -12,13 +13,14 @@ import FunctionDetails from './FunctionDetails'
 import { mockFuncDetails } from '../shared'
 
 
+
+
 type Props = {
+
 }
 
 const Home = ({}: Props) => {
   const [isRightMenuToggled, setIsRightMenuToggled] = useState<boolean>(false);
-
-
 
   return (
     <div className='bg-gray-200 h-screen'> 
@@ -40,6 +42,8 @@ const Home = ({}: Props) => {
               versHist={mockFuncDetails[0].versHist}
               metric={mockFuncDetails[0].metric}
               warmData={mockFuncDetails[0].warmData}
+              logs={mockFuncDetails[0].logs}
+              
           
           />
         </div>

@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Functions from './Functions';
 import FunctionDetails from './FunctionDetails';
-import { mockFunctions } from '../shared';
+// import {mockFunctions} from '../shared'
+import { FetchFunctions } from '../shared'
+
 import waves3 from '../assets/waves3.png';
 
 type Props = {};
 
 const LeftSideBar = ({}: Props) => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [data, setData] = useState([])
 
+
+
+
+
+
+ useEffect(() => {
+  // console.log('beginning to fetch')
+  FetchFunctions().then( funcData => {
+    // console.log('setting data now')
+    setData(funcData)
+    console.log('data is reset: ', funcData)
+  })
+  //data logic here
+  }, [])
+  
   return (
     <div>
       {showSidebar ? (
@@ -51,10 +69,20 @@ const LeftSideBar = ({}: Props) => {
           className=" flex flex-col items-center z-20 overflow-y-auto h-[75%] w-[110%] "
         >
           {/* <div> */}
-          {mockFunctions.map((item) => (
-            <div><button>
-              <FunctionDetails name={item.name} />
-            </button></div>
+          {data.map((item) => (
+            // <div><button onClick={(e) => handleArnButtonClick(e)}
+            // >
+            //   <FunctionDetails 
+            //   name={item.name} 
+            //   arn={item.arn}
+            //   />
+              
+            // </button></div>
+              <FunctionDetails 
+              name={item.name} 
+              arn={item.arn}
+              />
+              
           ))}
 
           {/* </div> */}
