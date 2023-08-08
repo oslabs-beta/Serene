@@ -4,7 +4,7 @@ const versionHistoryController = require('../controllers/versions/versionHistory
 const stsController = require('../controllers/stsController.js')
 
 
-versionRouter.get('/list', stsController.getCredentials, versionHistoryController.viewVersionList, (req, res) => {
+versionRouter.get('/versionList', stsController.getCredentials, versionHistoryController.viewVersionList, (req, res) => {
   return res.status(200).json(res.locals.versionList)
 })
 

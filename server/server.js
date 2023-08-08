@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
-const awsRouter = require('./routes/awsRouter.js');
+const lambdaRouter = require('./routes/lambdaRouter.js');
 const userRouter = require('./routes/userRouter.js');
 const cloudWatchRouter = require('./routes/cloudWatchRouter.js');
 const versionRouter = require('./routes/versionRouter.js')
@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //route handlers go here
-app.use('/api/aws', awsRouter);
+app.use('/api/lambda', lambdaRouter);
 app.use('/api/user', userRouter);
 app.use('/api/cloudwatch', cloudWatchRouter);
 app.use('/api/versions', versionRouter);
