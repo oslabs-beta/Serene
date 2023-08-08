@@ -1,36 +1,43 @@
 const { GetMetricDataCommand, CloudWatchClient } = require('@aws-sdk/client-cloudwatch');
 const metricDataQueries = require('./util/metricDataQueries.js');
-const cloudWtatchMetricsController = {};
+const cloudWatchMetricsController = {};
+
 cloudWatchMetricsController.getMetrics = async (req, res, next) => {
   try{
     const client = new CloudWatchClient({region: 'us-east-1', credentials: res.locals.creds})
-    let testIdCount = 0;
-    
-    //START TIME AND END TIME
-    const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-    sevenDaysAgo.toString()
-    
+    console.log('metricDataQueries: ', metricDataQueries)
     //METRIC NAME
     // const { metricName } = req.body;
     //PERIOD - 1S, 5S, 10S, 30S, 1M, 5M, 15M, 1HR, 6HRS, 1D, 7D, 30D
 
     //SCANBY - ASCENDING/DESCENDING TIME STAMP
 
-    //needs to be filtered after receiving data from front end: funciton name, metric name,time period (seconds), date range, scan by (sort by oldest to newest or newest to oldest)
-
-    const getMetrics = new GetMetricDataCommand(input)
-    const getMetrics2 = new GetMetricDataCommand(params)
+    const getDurationMetrics = new GetMetricDataCommand(metricDataQueries.duration)
+    const getInvocationsMetrics = new GetMetricDataCommand(metricDataQueries.invocations)
+    const getThrottlesMetrics = new GetMetricDataCommand(metricDataQueries.throttles)
+    const getErrorsMetrics = new GetMetricDataCommand(metricDataQueries.errors)
+    const getConcurrentExeMetrics = new GetMetricDataCommand(metricDataQueries.concurrentExecutions)
     
-    const metricsResponse = await client.send(getMetrics);
-    const metricsResponse2 = await client.send(getMetrics2);
+    const getDurationMetricsResponse = await client.send(getDurationMetrics);
+    const getInvocationsMetricsResponse = await client.send(getInvocationsMetrics);
+    const getThrottlesMetricsResponse = await client.send(getThrottlesMetrics);
+    const getErrorsMetricsResponse = await client.send(getErrorsMetrics);
+    const getConcurrentExeMetricsResponse = await client.send(getConcurrentExeMetrics);
 
-    const metricsArray = metricsResponse.MetricDataResults;
-
-    console.log('metricsArray: ', metricsArray, 'metricsArray2: ', metricsResponse2.MetricDataResults);
-
+    console.log('duration: ', getDurationMetricsResponse.MetricDataResults)
+    console.log('invocations: ', getInvocationsMetricsResponse.MetricDataResults)
+    console.log('throttles: ', getThrottlesMetricsResponse.MetricDataResults)
+    console.log('errors: ', getErrorsMetricsResponse.MetricDataResults)
+    console.log('concurrentExecutions: ', getConcurrentExeMetricsResponse.MetricDataResults)
     // console.log(metricsResponse);
-    testIdCount += 1;
+    
+    res.locals.metrics = {
+      duration: getDurationMetricsResponse.MetricDataResults,
+      invocations: getInvocationsMetricsResponse.MetricDataResults,
+      throttles: getThrottlesMetricsResponse.MetricDataResults,
+      errors: getErrorsMetricsResponse.MetricDataResults,
+      concurrentExecutions: getConcurrentExeMetricsResponse.MetricDataResults
+    }
 
     return next();
   } catch(err){
