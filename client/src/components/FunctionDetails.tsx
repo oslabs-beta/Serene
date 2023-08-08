@@ -44,7 +44,7 @@ const FunctionDetails = ({
     // navigate('/logs');
   };
 
-  console.log('clicked is ', clickedFunction);
+  // console.log('clicked is ', clickedFunction);
 
   // useEffect(() => {
   //   handleNameButtonClick(e)

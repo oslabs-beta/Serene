@@ -4,12 +4,12 @@ const bcrypt = require('bcrypt');
 const userController = {};
 
 userController.createUser = async (req, res, next) => {
-  const { username, password } = req.body;
+  const { username, password, region, ARN } = req.body;
   console.log('started createUser')
   const hashedPassword = await bcrypt.hash(password, 10);
   console.log('hashed password')
   try {
-    const newUser = await User.create({username, password: hashedPassword});
+    const newUser = await User.create({username, password: hashedPassword, region, ARN});
     res.locals.newUser = newUser;
     return next();
   } catch (error) {

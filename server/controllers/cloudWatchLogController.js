@@ -10,11 +10,12 @@ cloudWatchLogController.viewFunctionStreams = async (req, res, next) => {
   try {
     // console.log('working')
     // console.log('creds: ', res.locals.creds)
-    const cloudWatchLogs = new CloudWatchLogs({ region: 'us-east-1', credentials: res.locals.creds });
+    // const {funcLogName, streamName, region} = req.body;
+    const cloudWatchLogs = new CloudWatchLogs({ region: `us-east-1`, credentials: res.locals.creds });
     console.log('cloudWatchLogs: ', cloudWatchLogs);
     
-    const logName = '/aws/lambda/testingfunc'  //req.query from frontend
-
+    // const logName = `/aws/lambda/${funcLogName}`
+    const logName = `/aws/lambda/testingfunc`  //req.query from frontend
     ///grabs logstreams + last event time for each log group
     const logStreamRes = await cloudWatchLogs.describeLogStreams({logGroupIdentifier: logName}) // logGroupIdentifier or logGroupName
 
@@ -48,9 +49,11 @@ cloudWatchLogController.viewFunctionStreams = async (req, res, next) => {
 
 cloudWatchLogController.viewStreamInfo = async (req, res, next) => {
   try{
-    const cloudWatchLogs = new CloudWatchLogs({ region: 'us-east-1', credentials: res.locals.creds });
-    const streamName = '2023/08/05/[$LATEST]ed93cc4e073e46f9961dfbe77ba457a9' // req.query
-    const logName = '/aws/lambda/secondFunction' 
+    const {funcLogName, streamName, region} = req.body;
+    console.log(req.body)
+    const cloudWatchLogs = new CloudWatchLogs({ region: region, credentials: res.locals.creds });
+    // const streamName = '2023/08/05/[$LATEST]ed93cc4e073e46f9961dfbe77ba457a9' // req.query
+    const logName = `/aws/lambda/${funcLogName}` 
     const getLogEvents = await cloudWatchLogs.getLogEvents({logStreamName: streamName, logGroupName: logName}) // logGroupIdentifier or logGroupName
     // console.log('getLogEvents: ', getLogEvents)
     const { events } = getLogEvents;

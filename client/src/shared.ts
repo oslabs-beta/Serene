@@ -218,3 +218,30 @@ export const FetchLogs = async () => {
 
 }
   
+
+const testArray = [
+  {
+      "eventId": "37718431289054891614950417578524278114159878507337547776",
+      "ingestionTime": "2023-08-06T20:16:02.571Z",
+      "message": "INIT_START Runtime Version: nodejs:18.v9\tRuntime Version ARN: arn:aws:lambda:us-east-1::runtime:7d5f06b69c951da8a48b926ce280a9daf2e8bb1a74fc4a2672580c787d608206\n",
+      "timestamp": "2023-08-06T20:15:54.947Z"
+  },
+  {
+      "eventId": "37718431292756815317906501020019207347419506517330296833",
+      "ingestionTime": "2023-08-06T20:16:02.571Z",
+      "message": "START RequestId: 0b28ecc2-e8ef-43ae-af03-d82eec082bee Version: $LATEST\n",
+      "timestamp": "2023-08-06T20:15:55.113Z"
+  },
+  {
+      "eventId": "37718431292846018298700623512585350220510099963354218498",
+      "ingestionTime": "2023-08-06T20:16:02.571Z",
+      "message": "END RequestId: 0b28ecc2-e8ef-43ae-af03-d82eec082bee\n",
+      "timestamp": "2023-08-06T20:15:55.117Z"
+  },
+  {
+      "eventId": "37718431292846018298700623512585350220510099963354218499",
+      "ingestionTime": "2023-08-06T20:16:02.571Z",
+      "message": "REPORT RequestId: 0b28ecc2-e8ef-43ae-af03-d82eec082bee\tDuration: 2.45 ms\tBilled Duration: 3 ms\tMemory Size: 128 MB\tMax Memory Used: 66 MB\tInit Duration: 165.37 ms\t\n",
+      "timestamp": "2023-08-06T20:15:55.117Z"
+  }
+]

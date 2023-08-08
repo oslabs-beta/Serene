@@ -1,9 +1,12 @@
 import React from 'react'
+import { testArray } from '../shared'
 
-type Props = {}
+type Props = {
+  logStreamArr : []
+}
 
-const LogStream = (props: Props) => {
-
+const LogStream = ({logStreamArr}: Props) => {
+  console.log('hi, im in logstream now', logStreamArr)
 
 
 
@@ -11,8 +14,12 @@ const LogStream = (props: Props) => {
 
 
     <div>
-        
-    LogStream
+        {logStreamArr.map(log => (
+          <div>
+            <p>{log.message}</p>
+            <p>{log.timestamp}</p>
+          </div>
+        ))}
         
     </div>
   )

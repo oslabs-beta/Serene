@@ -20,6 +20,7 @@
     "install": "^0.13.0",
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.1",
+    "nodemon": "^3.0.1",
     "npm": "^9.8.1"
   },
   "devDependencies": {
