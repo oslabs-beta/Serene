@@ -6,9 +6,10 @@ const stsController = {};
 // arn:aws:iam::097265058099:role/komodoStack-KomodoRole-24EZX3ST7E28
 
 stsController.getCredentials = async (req, res, next) => {
-  console.log('in stsController');
+  // console.log('in stsController');
+  const { region, RoleArn } = req.body
   const credentials = {
-    region: 'us-east-1',
+    region: region,
     credentials: {
       accessKeyId: process.env.accessKeyId,
       secretAccessKey: process.env.secretAccessKey
@@ -19,7 +20,11 @@ stsController.getCredentials = async (req, res, next) => {
   // arn:aws:cloudformation:us-east-1:097265058099:stack/komodoStack/02fcee50-3196-11ee-8e69-12ff026c8c53
   // arn:aws:iam::097265058099:role/komodoStack-KomodoRole-1SUYS4WE06EP8
   const params = {
+<<<<<<< HEAD
     RoleArn: process.env.RoleArn , //this is IAM role arn that we get from frontend
+=======
+    RoleArn: RoleArn, //this is IAM role arn that we get from frontend
+>>>>>>> backend
     RoleSessionName: 'Komodo_Session',
   };
   console.log('line25 of getcredentials')
@@ -34,7 +39,7 @@ stsController.getCredentials = async (req, res, next) => {
       secretAccessKey: data.Credentials.SecretAccessKey,
       sessionToken: data.Credentials.SessionToken,
     };
-    console.log('roleCreds: ', roleCreds);
+    // console.log('roleCreds: ', roleCreds);
     res.locals.creds = roleCreds;
     return next();
   } catch (err) {
