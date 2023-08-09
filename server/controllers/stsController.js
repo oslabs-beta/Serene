@@ -32,7 +32,7 @@ stsController.getCredentials = async (req, res, next) => {
       sessionToken: data.Credentials.SessionToken,
     };
     // console.log('roleCreds: ', roleCreds);
-    res.locals.creds = roleCreds;
+    res.locals.creds = {roleCreds, region};
     return next();
   } catch (err) {
     return next({

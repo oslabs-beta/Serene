@@ -6,8 +6,8 @@ warmingController.warmFunction = async (req, res, next) => {
   const { region, functionArn, intervalVar } = req.body;
   try {
     const client = new LambdaClient({
-      credentials: res.locals.creds,
-      region: region,  //this should come from front end - req.query
+      credentials: res.locals.creds.roleCreds,
+      region: res.locals.creds.region,  //this should come from front end - req.query
     });
 
     const params = {
