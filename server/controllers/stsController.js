@@ -7,7 +7,9 @@ const stsController = {};
 
 stsController.getCredentials = async (req, res, next) => {
   // console.log('in stsController');
-  const { region, RoleArn } = req.body
+  // const { region, RoleArn } = req.body
+  const region = 'us-east-1'
+  const RoleArn = process.env.RoleArn
   const credentials = {
     region: region,
     credentials: {
@@ -20,11 +22,7 @@ stsController.getCredentials = async (req, res, next) => {
   // arn:aws:cloudformation:us-east-1:097265058099:stack/komodoStack/02fcee50-3196-11ee-8e69-12ff026c8c53
   // arn:aws:iam::097265058099:role/komodoStack-KomodoRole-1SUYS4WE06EP8
   const params = {
-<<<<<<< HEAD
     RoleArn: process.env.RoleArn , //this is IAM role arn that we get from frontend
-=======
-    RoleArn: RoleArn, //this is IAM role arn that we get from frontend
->>>>>>> backend
     RoleSessionName: 'Komodo_Session',
   };
   console.log('line25 of getcredentials')

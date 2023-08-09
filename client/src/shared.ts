@@ -197,7 +197,7 @@ export const mockEvents = [
 
 export const FetchFunctions = async () => {
       try{
-        const response = await fetch('/api/aws/funcs')
+        const response = await fetch('/api/lambda/functions')
         const data = response.json();
         // DO SOMETHIGN WITH DATA
         return data;
@@ -209,7 +209,7 @@ export const FetchFunctions = async () => {
 
 export const FetchLogs = async () => {
   try{
-    const response = await fetch('/api/cloudwatch/logs')
+    const response = await fetch('/api/cloudwatch/getLogs')
     const data = response.json();
     return data;
   } catch (error) {
