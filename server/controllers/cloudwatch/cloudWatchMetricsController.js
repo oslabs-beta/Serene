@@ -40,7 +40,7 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
       errors: getErrorsMetricsResponse.MetricDataResults,
       concurrentExecutions: getConcurrentExeMetricsResponse.MetricDataResults
     }
-
+    
     console.log('res.locals.metrics: ', res.locals.metrics)
     return next();
   } catch(err){

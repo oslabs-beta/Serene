@@ -36,7 +36,6 @@ userController.getAllUsers = async (req,res,next) => {
   }
 }
 
-
 userController.login = async (req, res, next) => {
   try{
     //deconstruct req body
@@ -74,5 +73,19 @@ userController.login = async (req, res, next) => {
     })
   }
 }
+
+// userController.getRegionAndArn = async (req, res, next) => {
+//   try {
+    
+//   } catch (err) {
+//     return next({
+//       log: `The following error occured: ${err}`,
+//       status: 400,
+//       message: { err: `An error occured while trying to get the user region and ARN` }
+//     })
+//   }
+// }
+
+
 
 module.exports = userController;
