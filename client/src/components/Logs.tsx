@@ -44,31 +44,31 @@ const Logs = ({}: Props) => {
   const funcLogName = 'testingfunc';
   const region = 'us-east-1';
 
-  const FetchLogStreams = async () => {
-    //need logName, streamName, region
-    const body = {
-      funcLogName,
-      streamName: logStream,
-      region,
-    };
-    try {
-      const response = await fetch('/api/cloudwatch/getStreamDetails', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      });
+  // const FetchLogStreams = async () => {
+  //   //need logName, streamName, region
+  //   const body = {
+  //     funcLogName,
+  //     streamName: logStream,
+  //     region,
+  //   };
+  //   try {
+  //     const response = await fetch('/api/cloudwatch/getStreamDetails', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(body),
+  //     });
 
-      const data = await response.json();
-      setLogArray(data)
-      console.log('viewing logStream: ', data);
-    } catch (error) {
-      console.log('fetch log stream Error: ', error);
-    }
-  };
+  //     const data = await response.json();
+  //     setLogArray(data)
+  //     console.log('viewing logStream: ', data);
+  //   } catch (error) {
+  //     console.log('fetch log stream Error: ', error);
+  //   }
+  // };
 
-  FetchLogStreams()
+  // FetchLogStreams()
    
 
 

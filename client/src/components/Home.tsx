@@ -12,6 +12,7 @@ import DoughnutChart from './DoughnutChart'
 import FunctionDetails from './FunctionDetails'
 import { mockFuncDetails , FetchFunctions} from '../shared'
 
+import { UserContext } from '../App';
 
 
 
@@ -21,7 +22,7 @@ type Props = {
 
 const Home = ({}: Props) => {
   const [isRightMenuToggled, setIsRightMenuToggled] = useState<boolean>(false);
-  // const [data, setData] = useState([])
+  const [data, setData] = useState([])
 
 
 
@@ -53,8 +54,8 @@ const Home = ({}: Props) => {
         <div className="border-4 border-black flex flex-col items-center">
    
         <div className='max-w-xs '>
-{/* 
-        <UserContext.Provider value={logName}>
+
+        <UserContext.Provider value={data}>
          
         <FunctionDetails
               detailID={mockFuncDetails[0].id}
@@ -63,10 +64,10 @@ const Home = ({}: Props) => {
               versHist={mockFuncDetails[0].versHist}
               metric={mockFuncDetails[0].metric}
               warmData={mockFuncDetails[0].warmData}
-              logs={mockFuncDetails[0].logs}  />
+              logs={mockFuncDetails[0].logs}  /> 
 
           
-        </UserContext.Provider> */}
+        </UserContext.Provider>
               
           
         
