@@ -4,7 +4,7 @@ import VersionHistory from './VersionHistory';
 import Warming from './Warming';
 import Logs from './Logs';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserContext } from '../App';
+// import { UserContext } from '../App';
 
 type Props = {
   detailID?: number;
@@ -30,18 +30,18 @@ const FunctionDetails = ({
 }: Props) => {
   const allProps =
     detailID && name && description && versHist && metric && warmData && logs;
+    
   const [funcName, setFuncName] = useState(name);
-  const [data, setData, clickedFunction, setClickedFunction] =
-    useContext(UserContext);
+  // const [data, setData, clickedFunction, setClickedFunction] =
+  //   useContext(UserContext);
 
   // const UserContext = createContext() //moved to HOME
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleNameButtonClick = (e) => {
-    setClickedFunction(e.target.value);
+    setFuncName(e.target.value);
     console.log('name is ' + funcName);
-    // navigate('/logs');
   };
 
   // console.log('clicked is ', clickedFunction);
@@ -90,7 +90,9 @@ const FunctionDetails = ({
                <Warming/>  */}
 
           <button onClick={(e) => handleNameButtonClick(e)} value={name}>
-            <Link to="/logs">FUNCTION NAME IS {name}</Link>
+            {/* <Link to="/logs"> */}
+              FUNCTION NAME IS {name}
+              {/* </Link> */}
           </button>
           {/* </FuncNameContext.Provider> */}
         </div>

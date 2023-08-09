@@ -3,34 +3,35 @@ import Functions from './Functions';
 import FunctionDetails from './FunctionDetails';
 // import {mockFunctions} from '../shared'
 import { FetchFunctions } from '../shared'
-import { UserContext } from '../App'
+// import { UserContext } from '../App'
 import waves3 from '../assets/waves3.png';
 
 type Props = {};
 
 const LeftSideBar = ({}: Props) => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [data, setData] = useState([]);
   // const  = useContext(UserContext)
-  const [ data, setData, clickedFunction, setClickedFunction ] = useContext(UserContext)
+  // const [ data, setData, clickedFunction, setClickedFunction ] = useContext(UserContext)
+
+ useEffect(() => {
+  // console.log('beginning to fetch')
+  FetchFunctions().then( funcData => {
+    // console.log('setting data now')
+    setData(funcData)
+    console.log('data is reset: ', funcData)
+  })
+  //data logic here
+  }, [])
 
 
-console.log('data from Leftsidebar is ', data)
+
+// const handleFunctionClick = (e) => {
+//   setClickedFunction(e.target.value)
+// }
 
 
-const handleFunctionClick = (e) => {
-  setClickedFunction(e.target.value)
-}
 
-
-//  useEffect(() => {
-//   // console.log('beginning to fetch')
-//   FetchFunctions().then( funcData => {
-//     // console.log('setting data now')
-//     setData(funcData)
-//     console.log('data is reset: ', funcData)
-//   })
-//   //data logic here
-//   }, [])
   
   return (
     <div>
@@ -83,7 +84,8 @@ const handleFunctionClick = (e) => {
             //   />
               
             // </button></div>
-              <FunctionDetails  
+              <FunctionDetails
+              key={item.name}  
               name={item.name} 
               arn={item.arn}
               />

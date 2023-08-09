@@ -2,8 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import LeftSideBar from './LeftSideBar';
 import RightSideBar from './RightSidebar';
 import { FetchLogs } from '../shared';
-import { UserContext } from '../App';
-import { FuncNameContext } from './FunctionDetails';
 import { testArray } from '../shared';
 import LogStream from './LogStream';
 
@@ -13,7 +11,7 @@ type Props = {};
 const Logs = ({}: Props) => {
   const [allLogs, setAllLogs] = useState([]);
   const [logStream, setLogStream] = useState('');
-  const [logArray, setLogArray] = useState([])
+  const [logArray, setLogArray] = useState([''])
   // const [logData, setLogData] = useState([])
   // const [data, setData, clickedFunction, setClickedFunction] =
   //   useContext(UserContext);
@@ -62,15 +60,19 @@ const Logs = ({}: Props) => {
 
       const data = await response.json();
       setLogArray(data)
-      console.log('viewing logStream: ', data);
+      return data;
     } catch (error) {
       console.log('fetch log stream Error: ', error);
     }
   };
 
-  FetchLogStreams()
-   
-
+  useEffect(() => {
+     const fetchData = async () => {
+      await FetchLogStreams();
+     }
+     fetchData();
+  },[logStream])
+  
 
   return (
     <div>
@@ -85,6 +87,7 @@ const Logs = ({}: Props) => {
         <button
           className="block border-2 border-black"
           value={log}
+          key={log}
           onClick={(e) => {
             handleLogClick(e);
           }}
@@ -92,6 +95,10 @@ const Logs = ({}: Props) => {
           logStream : {log}
         </button>
       ))}
+
+
+
+
       
       <LogStream
       logStreamArr = {logArray}
