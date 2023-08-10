@@ -8,10 +8,12 @@ const lambdaController = {};
 
 // fetch request would be called on useEffect
 lambdaController.getFunctions = async (req, res, next) => {
+  // const { region } = req.body;
+  const region = 'us-east-1'
   console.log('in getFunctions');
   const client = new LambdaClient({
     credentials: res.locals.creds,
-    region: 'us-east-1',  //this should come from front end - req.query
+    region: region,  //this should come from front end - req.query
   });
 
   const listFunctions = new ListFunctionsCommand({});

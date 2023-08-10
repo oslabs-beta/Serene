@@ -4,7 +4,7 @@ import VersionHistory from './VersionHistory';
 import Warming from './Warming';
 import Logs from './Logs';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserContext } from '../App';
+// import { UserContext } from '../App';
 
 type Props = {
   detailID?: number;
@@ -15,8 +15,11 @@ type Props = {
   warmData?: string;
   arn?: string; //<<<<<<<<<
   logs?: string;
+  funcName: string;
+  setFuncName: Function;
 };
-// export const FuncNameContext = createContext();
+
+// export const FuncNameContext = createContext()
 
 const FunctionDetails = ({
   detailID,
@@ -27,22 +30,21 @@ const FunctionDetails = ({
   warmData,
   arn,
   logs,
+  funcName,
+  setFuncName,
 }: Props) => {
-  const allProps =
-    detailID && name && description && versHist && metric && warmData && logs;
-  const [funcName, setFuncName] = useState(name);
-  const [data, setData, clickedFunction, setClickedFunction] =
-    useContext(UserContext);
+  // const [funcName, setFuncName] = useState(name);
+  // const [data, setData, clickedFunction, setClickedFunction] =
+  //   useContext(UserContext);
 
   // const UserContext = createContext() //moved to HOME
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleNameButtonClick = (e) => {
-    setClickedFunction(e.target.value);
-    console.log('name is ' + funcName);
-    // navigate('/logs');
-  };
+  // const handleNameButtonClick = (e) => {
+  //   setFuncName(e.target.value);
+  //   console.log('name is ' + funcName);
+  // };
 
   // console.log('clicked is ', clickedFunction);
 
@@ -51,50 +53,67 @@ const FunctionDetails = ({
   // }, [])
 
   return (
-    <div className="border-2 shadow-md bg-neutral-100 bg-opacity-40 w-full p-4 mb-2 rounded-md border-black hover:bg-black hover:text-white transition duration-300 ease-in-out">
-      {allProps ? (
-        <>
-          {/* FUNCTION PAGE WINDOW */}
-          <div>
-            <div>{/* LAMBDA FUNCTION CODE */}</div>
-            <div>{/* 6METRIC MINI VIEWER  */}</div>
-            Function DETAILS PAGE
-            {/* BUTTONS DIV*/}
-            <div>
-              <p> Function detail ID is {detailID} </p>
-              <p> function name is {name}</p>
-              <p> function description is {description} </p>
+    <div className="flex flex-col items-center  bg-neutral-100 bg-opacity-40 w-full rounded-md">
+      {/* FUNCTION PAGE WINDOW */}
+      <div>
+        <h1 className="font-bold text-2xl text-center mt-10 mb-6">
+          {' '}
+          Function Name: {name}
+        </h1>
 
-              <div className="flex">
-                <button className="border-4 border-black">
-                  <Link to="/versions">
-                    Version history BUTTON is {versHist}{' '}
-                  </Link>
-                </button>
-                <button className="border-4 border-black">
-                  <Link to="/metrics">View Metric BUTTON {metric}</Link>
-                </button>
-                <button className="border-4 border-black">
-                  <Link to="/warming">Warm Data BUTTON is {warmData}</Link>
-                </button>
-                <button className="border-4 border-black">
-                  <Link to="/logs">Logs BUTTON is {logs}</Link>
-                </button>
-              </div>
-            </div>
-          </div>
-        </>
-      ) : (
-        <div>
-          {/* <FuncNameContext.Provider value={[funcName, setFuncName]}> 
-               <Warming/>  */}
+        <div className="flex">
+          {/* <button className="border-4 border-black">
+            <Link to="/versions" state={{name:name, funcName: funcName}}>
+              Version history BUTTON is {name}
+            </Link><br></br>
+    
+          </button> */}
 
-          <button onClick={(e) => handleNameButtonClick(e)} value={name}>
-            <Link to="/logs">FUNCTION NAME IS {name}</Link>
-          </button>
-          {/* </FuncNameContext.Provider> */}
+          <a
+            href="/versions"
+            className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
+          >
+            <span className="absolute h-0 transition-all duration-300 origin-center rotate-45 -translate-x-45 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+            <span className="relative text-black transition duration-200 group-hover:text-white ease">
+              {' '}
+              Version History
+            </span>
+          </a>
+
+          <a
+            href="/metrics"
+            className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
+          >
+            <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-36 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+            <span className="relative text-black transition duration-200 group-hover:text-white ease">
+              {' '}
+              Metrics
+            </span>
+          </a>
+
+          <a
+            href="/warming"
+            className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
+          >
+            <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 translate-x-5 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+            <span className="relative text-black transition duration-200 group-hover:text-white ease">
+              {' '}
+              Warm Functions
+            </span>
+          </a>
+
+          <a
+            href="/logs"
+            className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
+          >
+            <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 translate-x-5 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+            <span className="relative text-black transition duration-200 group-hover:text-white ease">
+              {' '}
+              View Logs
+            </span>
+          </a>
         </div>
-      )}
+      </div>
     </div>
   );
 };

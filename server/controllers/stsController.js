@@ -6,9 +6,12 @@ const stsController = {};
 // arn:aws:iam::097265058099:role/komodoStack-KomodoRole-24EZX3ST7E28
 
 stsController.getCredentials = async (req, res, next) => {
-  console.log('in stsController');
+  // console.log('in stsController');
+  // const { region, RoleArn } = req.body
+  const region = 'us-east-1'
+  const RoleArn = process.env.RoleArn
   const credentials = {
-    region: 'us-east-1',
+    region: region,
     credentials: {
       accessKeyId: process.env.accessKeyId,
       secretAccessKey: process.env.secretAccessKey
@@ -34,7 +37,7 @@ stsController.getCredentials = async (req, res, next) => {
       secretAccessKey: data.Credentials.SecretAccessKey,
       sessionToken: data.Credentials.SessionToken,
     };
-    console.log('roleCreds: ', roleCreds);
+    // console.log('roleCreds: ', roleCreds);
     res.locals.creds = roleCreds;
     return next();
   } catch (err) {

@@ -14,12 +14,16 @@ const LogStream = ({logStreamArr}: Props) => {
 
 
     <div>
-        {logStreamArr.map(log => (
-          <div>
-            <p>{log.message}</p>
-            <p>{log.timestamp}</p>
+        { logStreamArr.length ?
+          logStreamArr.map(log => (
+          <div className = 'my-5'>
+            <p>Message: {log.message}</p>
+            <p>Time Stamp: {log.timestamp}</p>
           </div>
-        ))}
+        )) : (
+            <p>Please Select A Log Stream</p>            
+        )
+        }
         
     </div>
   )

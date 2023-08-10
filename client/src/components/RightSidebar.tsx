@@ -3,6 +3,7 @@ import Functions from './Functions'
 import FunctionDetails from './FunctionDetails'
 import { test } from '../shared'
 import waves5 from '../assets/waves5.png';
+import { Link, useNavigate } from 'react-router-dom'
 
 type Props = {
 
@@ -10,7 +11,7 @@ type Props = {
 
 const RightSideBar = (props: Props) => {
   const [showSidebar, setShowSidebar] = useState(false);
-  
+  const navigate = useNavigate()
 
   return (
     <div>
@@ -43,10 +44,15 @@ const RightSideBar = (props: Props) => {
   src={waves5}
   className={`fixed h-screen -ml-[9vw] top-0  z-10 ${showSidebar ? 'block' : 'hidden'}`}
 />
-  <h3 className="mt-20 ml-20 text-4xl font-semibold text-white">{test}</h3>
-  <div> 
-<button>sign out</button>
+  <div className='flex flex-col items-center justify-center'>
+    <h3 className="mt-10 ml-20 text-2xl font-semibold text-white">{test}</h3>
+    <div className='flex flex-col items-center my-4 ml-20 z-40'> 
+      <button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out'>Add Arn</button>
+      <button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out'>Edit Profile</button>
+      <button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out' onClick={()=> navigate('/')}>Sign Out</button>
+    </div>
   </div>
+
 
     </div>
   </div>

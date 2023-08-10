@@ -2,9 +2,11 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
-const awsRouter = require('./routes/awsRouter.js');
+const lambdaRouter = require('./routes/lambdaRouter.js');
 const userRouter = require('./routes/userRouter.js');
-const cloudWatchRouter = require('./routes/cloudWatchRouter.js')
+const cloudWatchRouter = require('./routes/cloudWatchRouter.js');
+const versionRouter = require('./routes/versionRouter.js')
+const warmingRouter = require('./routes/warmingRouter.js')
 const path = require('path');
 const cookieParser = require('cookie-parser');
 
@@ -13,29 +15,29 @@ const cookieParser = require('cookie-parser');
 
 const PORT = 3000;
 console.log('In server.js before mongoDB connection')
-mongoose.connect(`mongodb+srv://wadechadwick13:s8o5OggSZrrmi8LT@osp-testing.quajsh5.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.ACCESS_KEY, { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });
-
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //route handlers go here
-app.use('/api/aws', awsRouter);
+app.use('/api/lambda', lambdaRouter);
 app.use('/api/user', userRouter);
 app.use('/api/cloudwatch', cloudWatchRouter);
+app.use('/api/versions', versionRouter);
+app.use('/api/warming', warmingRouter);
 
-
-app.use(express.static('../client'))
+app.use(express.static('../client'));
 
 //404 handler
 app.use('*', (req, res) => {
-  res.status(404).send('Not Found')
-})
+  res.status(404).send('Not Found');
+});
 
 //global error handler
 app.use((err, req, res, next) => {
@@ -45,7 +47,7 @@ app.use((err, req, res, next) => {
     status: 400,
     message: { err: 'An error occurred' },
   };
-  
+
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj);
   res.status(errorObj.status).json(errorObj.message);

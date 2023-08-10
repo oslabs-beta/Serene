@@ -2,8 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import LeftSideBar from './LeftSideBar';
 import RightSideBar from './RightSidebar';
 import { FetchLogs } from '../shared';
-import { UserContext } from '../App';
-import { FuncNameContext } from './FunctionDetails';
 import { testArray } from '../shared';
 import LogStream from './LogStream';
 
@@ -13,7 +11,7 @@ type Props = {};
 const Logs = ({}: Props) => {
   const [allLogs, setAllLogs] = useState([]);
   const [logStream, setLogStream] = useState('');
-  const [logArray, setLogArray] = useState([])
+  const [logArray, setLogArray] = useState([''])
   // const [logData, setLogData] = useState([])
   // const [data, setData, clickedFunction, setClickedFunction] =
   //   useContext(UserContext);
@@ -44,33 +42,40 @@ const Logs = ({}: Props) => {
   const funcLogName = 'testingfunc';
   const region = 'us-east-1';
 
-  // const FetchLogStreams = async () => {
-  //   //need logName, streamName, region
-  //   const body = {
-  //     funcLogName,
-  //     streamName: logStream,
-  //     region,
-  //   };
-  //   try {
-  //     const response = await fetch('/api/cloudwatch/getStreamDetails', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(body),
-  //     });
+  const FetchLogStreams = async () => {
+    //need logName, streamName, region
+    const body = {
+      funcLogName,
+      streamName: logStream,
+      region,
+    };
+    try {
+      const response = await fetch('/api/cloudwatch/getStreamDetails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
 
-  //     const data = await response.json();
-  //     setLogArray(data)
-  //     console.log('viewing logStream: ', data);
-  //   } catch (error) {
-  //     console.log('fetch log stream Error: ', error);
-  //   }
-  // };
+      const data = await response.json();
+      setLogArray(data)
+      console.log('return data ' , data)
+      return data;
+    } catch (error) {
+      console.log('fetch log stream Error: ', error);
+    }
+  };
 
-  // FetchLogStreams()
-   
+  useEffect(() => {
+     const fetchData = async () => {
+      await FetchLogStreams();
+     }
+     fetchData();
+  },[logStream])
+  
 
+  console.log('LOG ARRAY IS HERE', logArray)
 
   return (
     <div>
@@ -80,22 +85,29 @@ const Logs = ({}: Props) => {
         <h1 className="font-extrabold text-4xl font-mono"> KOMODO </h1>
         <RightSideBar />
       </div>
-
-      {allLogs.map((log) => (
-        <button
-          className="block border-2 border-black"
-          value={log}
-          onClick={(e) => {
-            handleLogClick(e);
-          }}
-        >
-          logStream : {log}
-        </button>
-      ))}
-      
-      <LogStream
-      logStreamArr = {logArray}
-      />
+      <div className='flex'>
+        {/* this is where all the streamlogs are */}
+        <div className='w-2/5 my-5 ml-5 flex flex-col flex-wrap break-words' >
+          {allLogs.map((log) => (
+            <button
+              className="w-full border-2 shadow-md p-2 bg-neutral-100 bg-opacity-40 my-1 rounded-md border-black hover:bg-black hover:text-white transition duration-300 ease-in-out"
+              value={log}
+              key={log}
+              onClick={(e) => {
+                handleLogClick(e);
+              }}
+            >
+              logStream : {log}
+            </button>
+          ))}
+        </div>
+        <div className='ml-10 mr-5 my-6 flex flex-col items-center w-full border-2 border-black p-2 bg-black rounded-md text-gray-400'>
+          <LogStream
+          logStreamArr = {logArray}
+          />
+        </div>
+  
+      </div>
 
     </div>
   );
