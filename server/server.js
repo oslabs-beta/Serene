@@ -9,6 +9,7 @@ const versionRouter = require('./routes/versionRouter.js')
 const warmingRouter = require('./routes/warmingRouter.js')
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 // add the beginning of your app entry
 // import 'vite/modulepreload-polyfill'
@@ -24,6 +25,12 @@ mongoose.connection.once('open', () => {
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.use(session({
+//   secret: ,
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { secure: true }
+// }))
 
 //route handlers go here
 app.use('/api/lambda', lambdaRouter);

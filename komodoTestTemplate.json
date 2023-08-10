@@ -33,7 +33,12 @@
                     "logs:GetLogEvents",
                     "logs:FilterLogEvents",
                     "cloudwatch:GetMetricData",
-                    "lambda:listFunctions"
+                    "lambda:listFunctions",
+                    "lambda:ListVersionsByFunction",
+                    "lambda:InvokeFunction",
+                    "lambda:ListAliases",
+                    "lambda:GetAlias",
+                    "lambda:*"
                   ],
                   "Resource": "*"
                 }
