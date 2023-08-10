@@ -10,7 +10,7 @@ userController.createUser = async (req, res, next) => {
   // console.log('hashed password')
   try {
     const newUser = await User.create({username, password: hashedPassword, ARN, region });
-    res.locals.username = newUser.username;
+    res.locals.signUpUsername = newUser.username;
     return next();
   } catch (error) {
     return next({
@@ -63,11 +63,11 @@ userController.login = async (req, res, next) => {
       }) 
     }
     console.log('passwords match!')
-    res.locals.username = userResult.username;
+    res.locals.loginUsername = userResult.username;
     return next()
   } catch (err) {
     return next({
-      log: `The following error occured: ${error}`,
+      log: `The following error occured: ${err}`,
       status: 400,
       message: { err: `An error occured while trying to login` }
     })

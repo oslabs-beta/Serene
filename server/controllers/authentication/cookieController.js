@@ -4,31 +4,38 @@ const Session = require('../../models/sessionModel.js')
 const cookieController = {}
 
 cookieController.setSSIDCookie = async(req, res, next) => {
-  const { username } = req.body;
+  if(res.locals.loginUsername) {
+    console.log('hello in setssidcookie')
+    // const { loginUsername } = req.body;
+    
+    const foundUser = await User.findOne({ username: res.locals.loginUsername });
 
-  const foundUser = await User.findOne({ username });
+    console.log('foundUser setSSIDCookie: ', foundUser);
 
-  if(foundUser){
+    res.locals.ssid = foundUser._id;
+    return next();
+  } else {
+    const foundUser = await User.findOne({ username: res.locals.signUpUsername });
     res.locals.ssid = foundUser._id;
     return next();
   }
 }
 
 cookieController.newSession = async(req, res, next) => {
+  console.log('in new session controller but outside try block')
   try{
     console.log('in newSession controller')
-    const foundUser = await User.findOne({ username: res.locals.username })
-    console.log('req.cookies (line 21): ', req.cookies)
+    const foundUser = await User.findOne({ username: res.locals.loginUsername || res.locals.signUpUsername })
+    console.log('req.cookies (line 24): ', req.cookies.SSID)
     if(req.cookies.SSID) {
       console.log('in req.cookies.ssid')
       const sessionObj = {
-        cookieID: `${foundUser._id}`
+        cookieID: `${foundUser._id}`,
+        createdAt: new Date()
       }
-      await Session.create(sessionObj)
+      const newSession = await Session.create(sessionObj)
+      console.log('newSession: ', newSession)
       return next()
-    } else{
-      res.cookie('SSID', res.locals.ssid, { httpOnly: true });
-      console.log('req.cookies (line 31): ', req.cookies)
     }
     console.log('cookie: ', req.cookies.SSID)
     res.locals.newCookie = req.cookies.SSID

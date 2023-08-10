@@ -5,7 +5,12 @@ const cookieController = require('../controllers/authentication/cookieController
 
 //routers go here
 userRouter.post('/signup', userController.createUser, cookieController.setSSIDCookie, cookieController.newSession, (req, res) => {
-  return res.status(200).json(res.locals.newCookie);
+  if(req.body.username === '' || req.body.password === '') {
+    return res.status(400)
+  } else {
+    console.log('in last middleware')
+    res.cookie('SSID', res.locals.ssid, { httpOnly: true }).sendStatus(200);
+  }
 });
 
 userRouter.get('/', userController.getAllUsers, (req,res) => {
@@ -16,8 +21,10 @@ userRouter.post('/login', userController.login, cookieController.setSSIDCookie, 
   if(req.body.username === '' || req.body.password === '') {
     return res.status(400)
   } else {
-    res.cookie('SSID',res.locals.ssid, { httpOnly: true });
-    return res.status(200).send('success');
+    console.log('in last middleware')
+    res.cookie('SSID', res.locals.ssid, { httpOnly: true }).sendStatus(200);
+    console.log('cookie should be created')
+    // return res.status(200);
   }
 });
 

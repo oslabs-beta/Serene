@@ -1,4 +1,7 @@
 const { STSClient, AssumeRoleCommand } = require('@aws-sdk/client-sts');
+const session = require('express-session')
+const Session = require('../models/sessionModel.js');
+const User = require('../models/userModel.js');
 const dotenv = require('dotenv').config();
 
 const stsController = {};
@@ -8,8 +11,21 @@ const stsController = {};
 stsController.getCredentials = async (req, res, next) => {
   // console.log('in stsController');
   // const { region, RoleArn } = req.body
-  const region = 'us-east-1'
-  const RoleArn = process.env.RoleArn
+
+  // const region = 'us-east-1'
+  // const ARN = process.env.RoleArn
+
+  console.log('sessionID: ', req.cookies.SSID)
+
+  const foundUser = await User.findOne({ _id: req.cookies.SSID })
+  // console.log('foundUser: ', foundUser)
+
+  const { ARN, region } = foundUser;
+
+  console.log('region: ', region)
+  console.log('ARN: ', ARN)
+
+
   const credentials = {
     region: region,
     credentials: {
@@ -22,7 +38,7 @@ stsController.getCredentials = async (req, res, next) => {
   // arn:aws:cloudformation:us-east-1:097265058099:stack/komodoStack/02fcee50-3196-11ee-8e69-12ff026c8c53
   // arn:aws:iam::097265058099:role/komodoStack-KomodoRole-1SUYS4WE06EP8
   const params = {
-    RoleArn: process.env.RoleArn , //this is IAM role arn that we get from frontend
+    RoleArn: ARN, //this is IAM role arn that we get from frontend
     RoleSessionName: 'Komodo_Session',
   };
   console.log('line25 of getcredentials')
