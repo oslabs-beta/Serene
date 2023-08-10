@@ -20,7 +20,8 @@
     "install": "^0.13.0",
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.1",
-    "npm": "^9.8.1"
+    "npm": "^9.8.1",
+    "rootpath": "^0.1.2"
   },
   "devDependencies": {
     "@types/node": "^20.4.5",
