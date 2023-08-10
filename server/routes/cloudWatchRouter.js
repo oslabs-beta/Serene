@@ -6,15 +6,17 @@ const cloudWatchMetricsController = require('../controllers/cloudwatch/cloudWatc
 
 //view function streams - user needs to specify function name
 cloudWatchRouter.get('/getLogs', stsController.getCredentials, cloudWatchLogController.viewFunctionStreams, (req, res) => {
-  return res.status(200).json(res.locals.logStreamNames);
+
+    return res.status(200).json(res.locals.logStreamNames);
 });
 
 //view timestamp and message - user needs to specify function name and stream name
-cloudWatchRouter.get('/getStreamDetails', stsController.getCredentials, cloudWatchLogController.viewStreamInfo, (req, res) => {
+cloudWatchRouter.post('/getStreamDetails', stsController.getCredentials, cloudWatchLogController.viewStreamInfo, (req, res) => {
   return res.status(200).json(res.locals.events);
 });
 
-cloudWatchRouter.get('/getMetrics', stsController.getCredentials, cloudWatchMetricsController.getMetrics, (req, res) => {
+// 1st req body { region, roleArn } // 2nd req body { funcName, sortBy, period, startDate, region }
+cloudWatchRouter.post('/getMetrics', stsController.getCredentials, cloudWatchMetricsController.getMetrics, (req, res) => {
   return res.status(200).json(res.locals.metrics);
 });
 

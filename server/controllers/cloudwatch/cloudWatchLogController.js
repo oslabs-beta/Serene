@@ -8,7 +8,15 @@ const cloudWatchLogController = {};
 cloudWatchLogController.viewFunctionStreams = async (req, res, next) => {
   const { funcName } = req.body;
   try {
-    const cloudWatchLogs = new CloudWatchLogsClient({ region: res.locals.creds.region, credentials: res.locals.creds.roleCreds });
+    // console.log('working')
+    // console.log('creds: ', res.locals.creds)
+    // const {funcLogName, streamName, region} = req.body;
+    const cloudWatchLogs = new CloudWatchLogs({ region: `us-east-1`, credentials: res.locals.creds });
+    // console.log('cloudWatchLogs: ', cloudWatchLogs);
+    
+    // const logName = `/aws/lambda/${funcLogName}`
+    const logName = `/aws/lambda/testingfunc`  //req.query from frontend
+    // const cloudWatchLogs = new CloudWatchLogs({ region: region, credentials: res.locals.creds });
     console.log('cloudWatchLogs: ', cloudWatchLogs);
     
     // const logName = `/aws/lambda/${funcName}`  //req.query from frontend
@@ -55,6 +63,7 @@ cloudWatchLogController.viewFunctionStreams = async (req, res, next) => {
 
 
 cloudWatchLogController.viewStreamInfo = async (req, res, next) => {
+<<<<<<< HEAD
   const { streamName, logName } = req.body;
   try{
     const cloudWatchLogs = new CloudWatchLogsClient({ region: res.locals.creds.region, credentials: res.locals.creds.roleCreds });
@@ -75,6 +84,16 @@ cloudWatchLogController.viewStreamInfo = async (req, res, next) => {
 
     const getLogEvents = await cloudWatchLogs.send(command);
 
+=======
+  // const { region, streamName, logName } = req.body;
+  try{
+    const {funcLogName, streamName, region} = req.body;
+    // console.log(req.body)
+    const cloudWatchLogs = new CloudWatchLogs({ region: region, credentials: res.locals.creds });
+    // const streamName = '2023/08/05/[$LATEST]ed93cc4e073e46f9961dfbe77ba457a9' // req.query
+    const logName = `/aws/lambda/${funcLogName}` 
+    const getLogEvents = await cloudWatchLogs.getLogEvents({logStreamName: streamName, logGroupName: logName, startFromHead: true}) // logGroupIdentifier or logGroupName
+>>>>>>> f093c1aa8992d77cb90271ada9fcce083108977d
     console.log('getLogEvents: ', getLogEvents)
     const { events } = getLogEvents;
     events.forEach(event => {

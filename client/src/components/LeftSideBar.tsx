@@ -1,14 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import Functions from './Functions';
 import FunctionDetails from './FunctionDetails';
-import { mockFunctions } from '../shared';
+// import {mockFunctions} from '../shared'
+import { FetchFunctions } from '../shared'
+// import { FunctionContext } from '../App'
 import waves3 from '../assets/waves3.png';
 
-type Props = {};
+type Props = {
+  funcName: string;
+  setFuncName: Function;
+};
 
-const LeftSideBar = ({}: Props) => {
+const LeftSideBar = ({funcName, setFuncName}: Props) => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [data, setData] = useState([]);
+//   // const  = useContext(FunctionContext)
+//   // const [ data, setData, clickedFunction, setClickedFunction ] = useContext(UserContext)
 
+ useEffect(() => {
+  // console.log('beginning to fetch')
+  FetchFunctions().then( funcData => {
+    // console.log('setting data now')
+    setData(funcData)
+    console.log('data is reset: ', funcData)
+  })
+  //data logic here
+  }, [])
+
+
+  console.log('funcname in leftsidebar', funcName)
+// const handleFunctionClick = (e) => {
+//   setClickedFunction(e.target.value)
+// }
+
+
+
+  
   return (
     <div>
       {showSidebar ? (
@@ -39,7 +66,7 @@ const LeftSideBar = ({}: Props) => {
       )}
 
       <div //entire sidebar div // sidebar does not fully extend to the bottom, research
-        className={`flex flex-col items-center -left-2 top-0  -mb-4  bg-gray-300  pl-10 pr-10 text-black fixed h-screen z-40  ease-in-out duration-300  ${
+        className={`flex flex-col items-center -left-2 top-0  -mb-4  bg-gray-300  pl-10 pr-10 text-black fixed h-screen w-1/3 z-40  ease-in-out duration-300  ${
           showSidebar ? 'translate-x-0 ' : '-translate-x-full'
         }`}
       >
@@ -48,16 +75,27 @@ const LeftSideBar = ({}: Props) => {
           F U N C T I O N S
         </h3>
         <div // function data table in sidebar
-          className=" flex flex-col items-center z-20 overflow-y-auto h-[75%] w-[110%] "
+          className="z-20 overflow-y-auto h-[75%] w-full "
         >
-          {/* <div> */}
-          {mockFunctions.map((item) => (
-            <div><button>
-              <FunctionDetails name={item.name} />
-            </button></div>
+          <div>
+          {data.map((item) => (
+            // <div><button onClick={(e) => handleArnButtonClick(e)}
+            // >
+            //   <FunctionDetails 
+            //   name={item.name} 
+            //   arn={item.arn}
+            //   />
+              
+            // </button></div>
+              <Functions funcName={funcName} setFuncName={setFuncName} 
+              key={item.name}  
+              name={item.name} 
+              arn={item.arn}
+              />
+              
           ))}
 
-          {/* </div> */}
+          </div>
         </div>
       </div>
     </div>
