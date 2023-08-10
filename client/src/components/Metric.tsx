@@ -36,10 +36,56 @@ const Metric = ({}: Props) => {
         <h1 className="font-extrabold text-4xl font-mono"> KOMODO </h1>
         <RightSideBar />
       </div>
+      <div className="flex justify-center">
 
+      <a
+            href="/home"
+            className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
+          >
+            <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+            <span className="relative text-black transition duration-200 group-hover:text-white ease">
+         
+              Home
+            </span>
+          </a>
+<a
+            href="/versions"
+            className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
+          >
+            <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+            <span className="relative text-black transition duration-200 group-hover:text-white ease">
+         
+              Version History
+            </span>
+          </a>
+
+
+
+          <a
+            href="/warming"
+            className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
+          >
+            <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+            <span className="relative text-black transition duration-200 group-hover:text-white ease">
+        
+              Warm Functions
+            </span>
+          </a>
+
+          <a
+            href="/logs"
+            className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
+          >
+            <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+            <span className="relative text-black transition duration-200 group-hover:text-white ease">
+         
+              View Logs
+            </span>
+          </a>
+        </div>
       {/* body div */}
       <div className="flex flex-col items-center justify-center">
-        <div className="w-1/4">
+        <div className="w-1/4 hidden">
           {
             (() => {
               switch (currentChart) {
@@ -58,7 +104,7 @@ const Metric = ({}: Props) => {
           }
         </div>
         {/* button div */}
-        <div className="mt-20 fixed bottom-20">
+        {/* <div className="mt-20 fixed bottom-20">
           <button
             onClick={() => handleClick('pie')}
             className="relative inline-block text-lg group mx-3"
@@ -115,21 +161,60 @@ const Metric = ({}: Props) => {
               data-rounded="rounded-lg"
             ></span>
           </button>
-        </div>
+        </div> */}
         {/* END OF BUTTON DIV */}
 
         {/* METRICS DISPLAY */}
-        <div className="border-4 border-black flex w-full flex-wrap">
+        {/* START OF DROPDOWN MENUS */}
+        <div className='flex mt-5 mb-2 '>
+        <select className="mx-1 w-full p-1 text-black bg-white border-2 border-black rounded-md shadow-sm outline-none appearance-none transition duration-100 ease-in-out hover:bg-black hover:border-2 hover:text-white"
+          >
+              <option value="TimestampAscending" className='text-center'> -- SortBy -- </option>
+              <option value="TimestampDescending" > TimestampDescending </option>
+              <option value="TimestampAscending" >TimestampAscending</option>
+   
+          </select>
+          <select className="mx-1 w-full p-1 text-black bg-white border-2 rounded-md shadow-sm outline-none appearance-none transition duration-100 ease-in-out hover:bg-black hover:border-2 border-black hover:text-white"
+          >
+              <option value="5 minutes" className='text-center'> -- Period -- </option>
+              <option value="5 seconds" >5 seconds</option>
+              <option value="5 seconds">5 seconds </option>
+              <option value="1 minute">1 minute</option>
+              <option value="5 minutes">5 minutes</option>
+              <option value="1 hour">1 hour</option>
+              <option value="6 hours">6 hours</option>
+              <option value="1 day">1 day</option>
+              <option value="7 days">7 days</option>
+              <option value="30 days">30 days</option>
+        
+          </select>    
+          <select className="mx-1 w-full p-1 text-black bg-white border-2 rounded-md shadow-sm outline-none appearance-none transition duration-100 ease-in-out hover:bg-black hover:border-2 border-black hover:text-white"
+          >
+            {/* 1h, 3h, 12h, 1d, 3d, 1w */}
+              <option value="1w" className='text-center'> -- Start Date --</option>
+              <option value="1h" >1h</option>
+              <option value="3h" >3h</option>
+              <option value="12h">12h</option>
+              <option value="1d">1d</option>
+              <option value="3d">3d</option>
+              <option value="1w">1w</option>
+   
+          </select>
+
+        
+        </div>
+          {/* END OF DROPDOWN MENUS */}
+        <div className="border-4 border-black flex w-full flex-wrap mx-5">
           {Object.keys(metricsData).map(
             (eachMetric) =>
               eachMetric !== 'concurrentExecutions' && (
                 <div
                   key={eachMetric}
-                  className="border-4 border-gray-300 h-full w-96"
+                  className="border-4 border-gray-300 h-full w-1/2"
                 >
-                  <p>{eachMetric}</p>
+                  {/* <p>{eachMetric}</p> */}
                   {metricsData[eachMetric].map((each) => (
-                    <div key={each.Id}>
+                    <div className="mx-10" key={each.Id}>
                       {/* <p>ID: {each.Id}</p>
                       <p>Label: {each.Label}</p>
                       <p>Timestamps: {`${each.Timestamps}, `}</p>

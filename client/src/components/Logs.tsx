@@ -85,6 +85,58 @@ const Logs = ({}: Props) => {
         <h1 className="font-extrabold text-4xl font-mono"> KOMODO </h1>
         <RightSideBar />
       </div>
+
+      <div className="flex justify-center">
+      <a
+            href="/home"
+            className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
+          >
+            <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+            <span className="relative text-black transition duration-200 group-hover:text-white ease">
+         
+              Home
+            </span>
+          </a>
+<a
+            href="/versions"
+            className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
+          >
+            <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+            <span className="relative text-black transition duration-200 group-hover:text-white ease">
+         
+              Version History
+            </span>
+          </a>
+
+          <a
+            href="/metrics"
+            className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
+          >
+            <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+            <span className="relative text-black transition duration-200 group-hover:text-white ease">
+         
+              Metrics
+            </span>
+          </a>
+
+          <a
+            href="/warming"
+            className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
+          >
+            <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+            <span className="relative text-black transition duration-200 group-hover:text-white ease">
+        
+              Warm Functions
+            </span>
+          </a>
+
+
+        </div>
+
+
+
+
+      
       <div className='flex'>
         {/* this is where all the streamlogs are */}
         <div className='w-2/5 my-5 ml-5 flex flex-col flex-wrap break-words' >

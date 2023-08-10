@@ -24,7 +24,7 @@ type Props = {
 const Home = ({}: Props) => {
   const [isRightMenuToggled, setIsRightMenuToggled] = useState<boolean>(false);
   const [data, setData] = useState([])
-  const [funcName, setFuncName] = useState('');
+  const [funcName, setFuncName] = useState('Please select Function');
 
 
 
@@ -52,7 +52,11 @@ const Home = ({}: Props) => {
         <h1 className='font-extrabold text-4xl font-mono'> KOMODO </h1>
         <RightSideBar />  
         </div> 
+        {/* <nav className="bg-gray-300 border-4 border-black"> THIS IS NAVBAR
+          
         
+        </nav> */}
+
         {/* <div className="border-4 border-pink-300 flex flex-col items-center"> */}
    
         {/* <div className='max-w-md '> */}

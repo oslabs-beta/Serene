@@ -87,7 +87,7 @@ const LeftSideBar = ({funcName, setFuncName}: Props) => {
             //   />
               
             // </button></div>
-              <Functions funcName={funcName} setFuncName={setFuncName}
+              <Functions funcName={funcName} setFuncName={setFuncName} 
               key={item.name}  
               name={item.name} 
               arn={item.arn}

@@ -27,7 +27,7 @@ const Functions = ({ funcName, setFuncName,  name }: Props) => {
       
       " onClick={(e) => handleNameButtonClick(e)} value={name}>
         {/* <Link to="/logs"> */}
-        FUNCTION NAME <br/>IS {name}
+        FUNCTION NAME <br/>IS {name.toUpperCase()}
         {/* </Link> */}
       </button>
   );
