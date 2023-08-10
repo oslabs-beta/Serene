@@ -161,21 +161,21 @@ const mockCode5 = () => {
  
 <div className="flex justify-center h-screen w-full ">
    
-  <div className="flex flex-col justify-between my-3 border-4 bg-gray-200 rounded-md h-2/3 w-3/4 ">
+  <div className="flex flex-col justify-between items-end my-3 border-4 bg-gray-200 rounded-md h-2/3 w-3/4 ">
     {mockVersionData.reverse().map((item) => (
-      <div className="group flex justify-start"> {/* Remove justify-between class */}
-        <div></div> HERE for SPACING ONLY
-        <Popover placement="left">
-          <PopoverHandler className='w-20 mr-auto p-1 mt-2 mb-1 transition duration-100 ease-in-out group-hover:scale-150'>
+      <div className="group flex w-1/2"> {/* Remove justify-between class */}
+        {/* <div></div> HERE for SPACING ONLY */}
+        <Popover placement="left" >
+          <PopoverHandler className='w-20 p-1 mt-2 mb-1 transition duration-100 ease-in-out group-hover:scale-150 ml-0'>
             <Button>version {item.version}</Button>
           </PopoverHandler>
-          <PopoverContent className='border-black border-2'>
+          <PopoverContent className='border-black border-2 w-1/3'>
             <span>more version {item.code.toString()} details here</span>
           </PopoverContent>
         </Popover>
 
 
-<div className="relative w-10 h-20 transition-all duration-200 ease-in-out transform-growth group-hover:w-80 ml-auto">
+      <div className="relative w-10 h-20 transition-all duration-200 ease-in-out transform-growth group-hover:w-7/12 ml-10">
       <svg className="w-full h-full overflow-visible">
         <defs>
           <marker id="m" markerWidth="4" markerHeight="8" refX="0" refY="1" viewBox="0 0 1 2">
@@ -190,6 +190,7 @@ const mockCode5 = () => {
         <span className="group-hover:bg-black group-hover:text-white bg-white rounded-md p-2 transition duration-100 ease-in-out group-hover:scale-110 text-center flex items-center ml-auto"> {/* Add ml-auto class to align the span to the right */}
           alias {item.alias}
         </span>
+        
       </div>
     ))}
 
