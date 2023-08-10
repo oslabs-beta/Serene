@@ -50,7 +50,7 @@ userController.login = async (req, res, next) => {
         log: `The following error occured: ${error}`,
         status: 400,
         message: 'invalid username or password'
-      }) 
+      })
     }
     //if userResult has a value, move on to below comparisons
     //pull pw from mongo and use bcrypt.compare to compare hashed pw with inputted pw
