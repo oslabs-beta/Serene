@@ -11,42 +11,29 @@ cloudWatchLogController.viewFunctionStreams = async (req, res, next) => {
     // console.log('working')
     // console.log('creds: ', res.locals.creds)
     // const {funcLogName, streamName, region} = req.body;
-    const cloudWatchLogs = new CloudWatchLogs({ region: `us-east-1`, credentials: res.locals.creds });
+    const cloudWatchLogs = new CloudWatchLogsClient({ region: res.locals.creds.region, credentials: res.locals.creds.roleCreds });
+    // const cloudWatchLogs = new CloudWatchClient({ region: res.locals.creds.region, credentials: res.locals.creds.roleCreds })
     // console.log('cloudWatchLogs: ', cloudWatchLogs);
     
-    // const logName = `/aws/lambda/${funcLogName}`
-    const logName = `/aws/lambda/testingfunc`  //req.query from frontend
+    const logName = `/aws/lambda/${funcName}`
+    console.log('logName: ', logName)
+    // const logName = `/aws/lambda/testingfunc`  //req.query from frontend
     // const cloudWatchLogs = new CloudWatchLogs({ region: region, credentials: res.locals.creds });
-    console.log('cloudWatchLogs: ', cloudWatchLogs);
-    
-    // const logName = `/aws/lambda/${funcName}`  //req.query from frontend
-
-    ///grabs logstreams + last event time for each log group
-    // const logStreamRes = await cloudWatchLogs.describeLogStreams({logGroupIdentifier: logName}) // logGroupIdentifier or logGroupName
+    // console.log('cloudWatchLogs: ', cloudWatchLogs);
 
     const input = {
-      logGroupName: funcName
+      logGroupName: logName
     }
-
     const command = new DescribeLogStreamsCommand(input);
-
     const logStreamsRes = await cloudWatchLogs.send(command);
-    console.log('logStreamRes: ', logStreamRes);
-
-
+    // console.log('logStreamRes: ', logStreamRes);
     const logStreamNames = []
-    
     // logStreamRes is an object with the logStreams array on it
-    logStreamRes.logStreams.forEach(log => {
+    logStreamsRes.logStreams.forEach(log => {
       // push each logStreamName into our logStreamNames array to be sent to frontend
       logStreamNames.push(log.logStreamName);
     })
-
-    //grabs timestamp and message for each logstream
-
-    
-    
-    console.log('logStreamNames: ', logStreamNames);
+    // console.log('logStreamNames: ', logStreamNames);
     res.locals.logStreamNames = logStreamNames;
     return next();
 

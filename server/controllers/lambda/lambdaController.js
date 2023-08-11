@@ -9,14 +9,14 @@ const lambdaController = {};
 // fetch request would be called on useEffect
 lambdaController.getFunctions = async (req, res, next) => {
   // const { region } = req.body;
-  console.log('region', res.locals.creds.region);
+  // console.log('region', res.locals.creds.region);
   const client = new LambdaClient({
     credentials: res.locals.creds.roleCreds,
     region: res.locals.creds.region,  //this should come from front end - req.query
   });
 
   const listFunctions = new ListFunctionsCommand({});
-  console.log('got listFunctions');
+  // console.log('got listFunctions');
   try {
     const data = await client.send(listFunctions);
     // console.log('data: ', data);
@@ -31,7 +31,7 @@ lambdaController.getFunctions = async (req, res, next) => {
       });
     });
 
-    console.log('functions: ', functions);
+    // console.log('functions: ', functions);
     //these get sent to front end for user to see/choose which function to select
     res.locals.functions = functions;
     return next();

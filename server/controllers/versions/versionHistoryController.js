@@ -54,7 +54,7 @@ versionHistoryController.viewFunctionVersion = async (req, res, next) => {
 
     const command = new GetFunctionCommand(input)
     const response = await client.send(command)
-    console.log('response: ', response.Code.Location)
+    // console.log('response: ', response.Code.Location)
 
     let timeout;
 

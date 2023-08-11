@@ -40,7 +40,7 @@ userController.login = async (req, res, next) => {
   try{
     //deconstruct req body
     const { username, password } = req.body;
-    console.log('inlogincontroller')
+    // console.log('inlogincontroller')
     //find by username
     const userResult = await User.findOne({ username: username });
     //if userResult return nothing, throw err
@@ -62,7 +62,7 @@ userController.login = async (req, res, next) => {
         message: 'invalid username or password'
       }) 
     }
-    console.log('passwords match!')
+    // console.log('passwords match!')
     res.locals.loginUsername = userResult.username;
     return next()
   } catch (err) {

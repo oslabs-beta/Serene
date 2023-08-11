@@ -9,7 +9,9 @@ userRouter.post('/signup', userController.createUser, cookieController.setSSIDCo
     return res.status(400)
   } else {
     console.log('in last middleware')
-    res.cookie('SSID', res.locals.ssid, { httpOnly: true }).sendStatus(200);
+    const hours = 1;
+    const maxAgeInMs = hours * 60 * 60 * 1000;
+    res.cookie('SSID', res.locals.ssid, {maxAge: maxAgeInMs}, { httpOnly: true }).sendStatus(200);
   }
 });
 
@@ -22,7 +24,9 @@ userRouter.post('/login', userController.login, cookieController.setSSIDCookie, 
     return res.status(400)
   } else {
     console.log('in last middleware')
-    res.cookie('SSID', res.locals.ssid, { httpOnly: true }).sendStatus(200);
+    const hours = 1;
+    const maxAgeInMs = hours * 60 * 60 * 1000;
+    res.cookie('SSID', res.locals.ssid, {maxAge: maxAgeInMs}, { httpOnly: true }).sendStatus(200);
     console.log('cookie should be created')
     // return res.status(200);
   }

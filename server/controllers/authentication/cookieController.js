@@ -10,7 +10,7 @@ cookieController.setSSIDCookie = async(req, res, next) => {
     
     const foundUser = await User.findOne({ username: res.locals.loginUsername });
 
-    console.log('foundUser setSSIDCookie: ', foundUser);
+    // console.log('foundUser setSSIDCookie: ', foundUser);
 
     res.locals.ssid = foundUser._id;
     return next();
@@ -22,19 +22,19 @@ cookieController.setSSIDCookie = async(req, res, next) => {
 }
 
 cookieController.newSession = async(req, res, next) => {
-  console.log('in new session controller but outside try block')
+  // console.log('in new session controller but outside try block')
   try{
     console.log('in newSession controller')
     const foundUser = await User.findOne({ username: res.locals.loginUsername || res.locals.signUpUsername })
     console.log('req.cookies (line 24): ', req.cookies.SSID)
     if(req.cookies.SSID) {
-      console.log('in req.cookies.ssid')
+      // console.log('in req.cookies.ssid')
       const sessionObj = {
         cookieID: `${foundUser._id}`,
         createdAt: new Date()
       }
       const newSession = await Session.create(sessionObj)
-      console.log('newSession: ', newSession)
+      // console.log('newSession: ', newSession)
       return next()
     }
     console.log('cookie: ', req.cookies.SSID)

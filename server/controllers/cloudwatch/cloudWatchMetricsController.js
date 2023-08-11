@@ -9,7 +9,7 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
   const newPeriod = timePeriodConverter(period);
   try{
     const client = new CloudWatchClient({region: res.locals.creds.region, credentials: res.locals.creds.roleCreds })
-    console.log('In getMetrics before createQuery is invoked')
+    // console.log('In getMetrics before createQuery is invoked')
     const metricObj = createQuery(funcName, sortBy, newPeriod, formattedStartDate)
     // console.log('createQuery has been invoked')
 
