@@ -67,7 +67,7 @@ userController.login = async (req, res, next) => {
     return next()
   } catch (err) {
     return next({
-      log: `The following error occured: ${err}`,
+      log: `The following error occured in login: ${err}`,
       status: 400,
       message: { err: `An error occured while trying to login` }
     })

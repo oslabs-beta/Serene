@@ -7,44 +7,46 @@ warmingController.warmFunction = async (req, res, next) => {
   try {
     const client = new LambdaClient({
       credentials: res.locals.creds.roleCreds,
-      region: res.locals.creds.region,  //this should come from front end - req.query
+      region: res.locals.creds.region, //this should come from front end - req.query
     });
 
     const params = {
       FunctionName: functionArn,
-    }
+    };
 
     const command = new InvokeCommand(params);
 
-    /*
+    // const intervalVar = 1000;
     let counter = 0;
-    
-    const warming = setInterval(async () => {
-      response = await client.send(command)
-      
-      counter+=1;
+    let userMaxInput = 10;
 
-      if(counter === userMaxInput){   ///
+    const warming = setInterval(async () => {
+      // const response = await client.send(command)
+
+      counter += 1;
+      console.log(counter);
+
+      if (counter === userMaxInput) {
         clearInterval(warming);
-        console.log('finished')
+        console.log('finished');
       }
     }, intervalVar); // req.body
-    */
-    
-    response = await client.send(command)
+
+    //parameter to stop the warming after x amount of hours or days or weeks
+
+    const response = await client.send(command);
 
     console.log('response: ', response);
 
-    res.locals.statusCodeRes = response.StatusCode
+    res.locals.statusCodeRes = response.StatusCode;
     return next();
   } catch (err) {
     return next({
-      log: `The following error occured: ${err}`,
+      log: `The following error occured in warmFunction: ${err}`,
       status: 400,
-      message: 'An error occured when trying to warm the function'
-    }) 
+      message: 'An error occured when trying to warm the function',
+    });
   }
-}
-
+};
 
 module.exports = warmingController;
