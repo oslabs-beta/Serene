@@ -32,10 +32,8 @@ userRouter.post('/login', userController.login, cookieController.setSSIDCookie, 
   }
 });
 
-// userRouter.post('/logout', userController.endSession, (req, res) => {
-//   return res.status(200).json({
-//     message: 'Logout Successful'
-//   });
-// });
+userRouter.post('/logout', cookieController.endSession, (req, res) => {
+  return res.end('done');
+});
 
 module.exports = userRouter;

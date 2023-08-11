@@ -50,8 +50,17 @@ cookieController.newSession = async(req, res, next) => {
 }
 
 cookieController.endSession = async (req, res, next) => {
-  res.clearCookie('SSID');
-  return next();
+  try{
+    console.log('ending session');
+    res.clearCookie('SSID');
+    return next();
+  } catch(err){
+    return next({
+      log: `The following error occured: ${err} in endSession`,
+      status: 400,
+      message: { err: 'An error occured while trying to end a session' }
+    })
+  }
 }
 
 
