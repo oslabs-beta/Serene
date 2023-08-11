@@ -4,7 +4,6 @@ import {Chart, ArcElement, Legend, Tooltip, CategoryScale, Title} from 'chart.js
 import { Pie } from 'react-chartjs-2';
 
 
-
 type Props = {
 
 };

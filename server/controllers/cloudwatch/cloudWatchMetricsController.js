@@ -4,12 +4,12 @@ const { GetMetricDataCommand, CloudWatchClient } = require('@aws-sdk/client-clou
 const cloudWatchMetricsController = {};
 
 cloudWatchMetricsController.getMetrics = async (req, res, next) => {
-  const { funcName, sortBy, period, startDate, region } = req.body;
+  const { funcName, sortBy, period, startDate } = req.body;
   const formattedStartDate = dateConverter(startDate);
   const newPeriod = timePeriodConverter(period);
   try{
-    const client = new CloudWatchClient({region: region, credentials: res.locals.creds})
-    console.log('In getMetrics before createQuery is invoked')
+    const client = new CloudWatchClient({region: res.locals.creds.region, credentials: res.locals.creds.roleCreds })
+    // console.log('In getMetrics before createQuery is invoked')
     const metricObj = createQuery(funcName, sortBy, newPeriod, formattedStartDate)
     // console.log('createQuery has been invoked')
 
@@ -40,7 +40,7 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
       errors: getErrorsMetricsResponse.MetricDataResults,
       concurrentExecutions: getConcurrentExeMetricsResponse.MetricDataResults
     }
-
+    
     console.log('res.locals.metrics: ', res.locals.metrics)
     return next();
   } catch(err){
