@@ -7,7 +7,17 @@
 ![image](https://github.com/oslabs-beta/Komodo/assets/112911565/8d586a20-cb64-4990-8b6d-a253602ff41c)
 ![image](https://github.com/oslabs-beta/Komodo/assets/112911565/a17f650c-3b6d-48cc-bcbd-3db72946f4b5)
 
+![image](https://github.com/oslabs-beta/Komodo/assets/112911565/5ca543b2-7545-4ae7-95bd-a9c1037cfdba)
+![image](https://github.com/oslabs-beta/Komodo/assets/112911565/d572d12a-083a-41b2-9ebe-8cea6d8fd7ec)
+![image](https://github.com/oslabs-beta/Komodo/assets/112911565/17ad761e-fdc8-482e-9ce4-7eaf8791cb62)
 
-README FOR OSPF
+
+KOMODO
+
+⭐️ Star us on GitHub! ⭐️
+
+Visit our website at **COMING SOON**.
+
+Komodo is building an exciting developer tool to help monitor AWS lambda resources and prevent cold start latency delays. 
 
 Arianna Kyle Kenny Wade
