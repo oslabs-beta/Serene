@@ -4,7 +4,11 @@ import RightSideBar from './RightSidebar';
 import { FetchLogs } from '../shared';
 import { testArray } from '../shared';
 import LogStream from './LogStream';
-
+import {
+  PushSpinner, TraceSpinner, RainbowSpinner,
+  RingSpinner, SwishSpinner, PongSpinner,
+  MetroSpinner, JellyfishSpinner, GridSpinner
+} from 'react-spinners-kit'
 
 type Props = {};
 
@@ -16,6 +20,9 @@ const Logs = ({}: Props) => {
   // const [data, setData, clickedFunction, setClickedFunction] =
   //   useContext(UserContext);
   // const [funcName, setFuncName] = useContext(FuncNameContext)
+  const [isLoading, setIsLoading] = useState(false)
+
+
 
   // console.log('logging data in Logs ' + JSON.stringify(data))
 
@@ -33,11 +40,15 @@ const Logs = ({}: Props) => {
   // console.log('Current Logname is ', clickedFunction)
 
   const handleLogClick = (e) => {
+    console.log('starting load state is ', isLoading)
+    setIsLoading(true)
     setLogStream(e.target.value);
   };
-  useEffect(() => {
-    console.log('this is logstream', logStream);
-  }, [logStream]);
+  console.log('updated load state is ', isLoading)
+
+  // useEffect(() => {
+  //   console.log('this is logstream', logStream);
+  // }, [logStream]);
 
   const funcLogName = 'testingfunc';
   const region = 'us-east-1';
@@ -72,6 +83,8 @@ const Logs = ({}: Props) => {
       await FetchLogStreams();
      }
      fetchData();
+     setIsLoading(false);
+     console.log('after loading state is ', isLoading)
   },[logStream])
   
 
@@ -147,16 +160,28 @@ const Logs = ({}: Props) => {
               key={log}
               onClick={(e) => {
                 handleLogClick(e);
-              }}
-            >
+              }}>
               logStream : {log}
             </button>
           ))}
         </div>
+
+
+
         <div className='ml-10 mr-5 my-6 flex flex-col items-center w-full border-2 border-black p-2 bg-black rounded-md text-gray-400'>
+
+        {isLoading ? (
+            <div className="flex justify-center h-full">
+              <JellyfishSpinner size={120} color="white"  />
+            </div>     
+          ) : (
+            
           <LogStream
-          logStreamArr = {logArray}
+          logStreamArr = {logArray} isLoading={isLoading}
           />
+          )}
+        
+    
         </div>
   
       </div>

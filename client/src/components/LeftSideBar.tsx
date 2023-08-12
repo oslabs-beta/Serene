@@ -37,7 +37,7 @@ const LeftSideBar = ({funcName, setFuncName}: Props) => {
 
   
   return (
-    <div>
+    <div className="">
       {showSidebar ? (
         <button
           className="flex text-4xl text-black items-center cursor-pointer fixed left-8 top-6 z-50 transition duration-400 ease-in-out hover:rotate-90"
@@ -52,7 +52,7 @@ const LeftSideBar = ({funcName, setFuncName}: Props) => {
           strokeWidth={1.5}
           stroke="currentColor"
           onClick={() => setShowSidebar(!showSidebar)}
-          className="fixed  z-40 flex items-center cursor-pointer left-4 top-2"
+          className="fixed  z-40 flex items-center cursor-pointer left-4 top-2 border-6 border-red-400"
           viewBox="0 -5 90 80"
           width="150"
           height="150"

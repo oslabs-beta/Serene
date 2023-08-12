@@ -9,6 +9,13 @@ import {
   Button,
 } from "@material-tailwind/react";
 
+import {
+  PushSpinner, TraceSpinner, RainbowSpinner,
+  RingSpinner, SwishSpinner, PongSpinner,
+  MetroSpinner, JellyfishSpinner
+}
+  from "react-spinners-kit"
+
 type Props = {
   // name: string;
   // funcName: string;
@@ -37,29 +44,27 @@ const VersionHistory = () => {
       return response;
   }
   const mockCode2 = () => { 
-    const arr = ['info1','info2','info3','info4', 'info5']
-    Math.floor(arr.length/2)
+    const arr = ['info1','info2','info3']
     const response = {
       statusCode: 200,
-      body: JSON.stringify('error fixed')
+      body: JSON.stringify('testing response')
     };
     return response;
 }
 const mockCode3 = () => { 
-  const arr = ['info1','info2','info3','info4', 'info5']
+  const arr = ['info1', 'info5']
   Math.floor(arr.length/2)
   const response = {
     statusCode: 200,
-    body: JSON.stringify('error fixed')
+    body: JSON.stringify('version3')
   };
   return response;
 }
 const mockCode4 = () => { 
-  const arr = ['info1','info2','info3','info4', 'info5']
-  Math.floor(arr.length/2)
+  const arr = ['info1','info2','info3', 'info5']
   const response = {
     statusCode: 200,
-    body: JSON.stringify('error fixed')
+    body: JSON.stringify('testing errors')
   };
   return response;
 }
@@ -99,6 +104,14 @@ const mockCode5 = () => {
         </div> 
         <div className="flex justify-center">
         
+      {/* <div>
+      <JellyfishSpinner />
+
+      </div> */}
+
+
+
+
         {/* {isLoading ? (
          <div
   className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
