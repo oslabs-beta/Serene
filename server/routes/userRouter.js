@@ -36,4 +36,8 @@ userRouter.post('/logout', cookieController.endSession, (req, res) => {
   return res.end('done');
 });
 
+userRouter.patch('/edit', userController.updateUser, (req, res) => {
+  return res.status(200).json(res.locals.updatedUser)
+})
+
 module.exports = userRouter;

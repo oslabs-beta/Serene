@@ -12,5 +12,8 @@ versionRouter.get('/functionVersion', stsController.getCredentials, versionHisto
   return res.status(200).json(res.locals.versionInfo)
 })
 
+versionRouter.get('/getAlias', stsController.getCredentials, versionHistoryController.getAlias, (req, res) => {
+  return res.status(200).json(res.locals.aliasList);
+})
 
 module.exports = versionRouter;
