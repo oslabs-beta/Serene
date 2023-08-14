@@ -49,10 +49,10 @@ const Signup = (props: Props) => {
       });
       // console.log('Error after fetch')
       // console.log('res: ',response)
-      const data = await response.json();
+      // const data = await response.json();
       // console.log('data: ', data)
       console.log('fetch successful');
-      setResponse(data);
+      // setResponse(data);
       navigate('/home');
     } catch (error) {
       console.log('NOW Error: ', error);

@@ -10,7 +10,7 @@ userController.createUser = async (req, res, next) => {
   // console.log('hashed password')
   try {
     const newUser = await User.create({username, password: hashedPassword, ARN, region });
-    res.locals.newUser = newUser;
+    res.locals.signUpUsername = newUser.username;
     return next();
   } catch (error) {
     return next({
@@ -36,12 +36,11 @@ userController.getAllUsers = async (req,res,next) => {
   }
 }
 
-
 userController.login = async (req, res, next) => {
   try{
     //deconstruct req body
     const { username, password } = req.body;
-    console.log('inlogincontroller')
+    // console.log('inlogincontroller')
     //find by username
     const userResult = await User.findOne({ username: username });
     //if userResult return nothing, throw err
@@ -50,7 +49,7 @@ userController.login = async (req, res, next) => {
         log: `The following error occured: ${error}`,
         status: 400,
         message: 'invalid username or password'
-      }) 
+      })
     }
     //if userResult has a value, move on to below comparisons
     //pull pw from mongo and use bcrypt.compare to compare hashed pw with inputted pw
@@ -63,12 +62,12 @@ userController.login = async (req, res, next) => {
         message: 'invalid username or password'
       }) 
     }
-    console.log('passwords match!')
-    res.locals.username = userResult.username;
+    // console.log('passwords match!')
+    res.locals.loginUsername = userResult.username;
     return next()
   } catch (err) {
     return next({
-      log: `The following error occured: ${error}`,
+      log: `The following error occured: ${err}`,
       status: 400,
       message: { err: `An error occured while trying to login` }
     })

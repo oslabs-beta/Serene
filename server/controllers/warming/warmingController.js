@@ -3,11 +3,11 @@ const { LambdaClient, InvokeCommand } = require('@aws-sdk/client-lambda');
 const warmingController = {};
 
 warmingController.warmFunction = async (req, res, next) => {
-  const { region, functionArn, intervalVar } = req.body;
+  const { functionArn, intervalVar } = req.body;
   try {
     const client = new LambdaClient({
-      credentials: res.locals.creds,
-      region: region,  //this should come from front end - req.query
+      credentials: res.locals.creds.roleCreds,
+      region: res.locals.creds.region,  //this should come from front end - req.query
     });
 
     const params = {
@@ -16,7 +16,6 @@ warmingController.warmFunction = async (req, res, next) => {
 
     const command = new InvokeCommand(params);
 
-    
     /*
     let counter = 0;
     

@@ -6,10 +6,9 @@ const versionHistoryController = {};
 //output: object - key: function name, value: funciton version arn
 versionHistoryController.viewVersionList = async (req, res, next) => {
   try {
-    const { region } = req.body;
     const client = new LambdaClient({
-      credentials: res.locals.creds,
-      region: region,  //this should come from front end - req.query
+      credentials: res.locals.creds.roleCreds,
+      region: res.locals.creds.region,  //this should come from front end - req.query
     });
 
     const params = {
@@ -55,7 +54,7 @@ versionHistoryController.viewFunctionVersion = async (req, res, next) => {
 
     const command = new GetFunctionCommand(input)
     const response = await client.send(command)
-    console.log('response: ', response.Code.Location)
+    // console.log('response: ', response.Code.Location)
 
     let timeout;
 

@@ -33,8 +33,8 @@ const Login = (props: Props) => {
         body: JSON.stringify(body),
       });
 
-      const data = await response.json();
-      console.log('data: ', data);
+      // const data = await response.json();
+      // console.log('data: ', data);
       console.log('fetch successful');
       //probably need an error case to catch
       navigate('/home');

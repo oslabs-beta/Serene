@@ -1,4 +1,4 @@
-const { CloudWatchLogs } = require('@aws-sdk/client-cloudwatch-logs');
+const { CloudWatchLogsClient, DescribeLogStreamsCommand, GetLogEventsCommand } = require('@aws-sdk/client-cloudwatch-logs');
 // const AWS = require('aws-sdk')
 
 const cloudWatchLogController = {};
@@ -6,37 +6,34 @@ const cloudWatchLogController = {};
 //functions get sent to user from lambdaController. once user selects function, function name gets sent to backend as a req.query
 //req.query gets added onto logName
 cloudWatchLogController.viewFunctionStreams = async (req, res, next) => {
-  const { region, funcName } = req.body;
+  const { funcName } = req.body;
   try {
     // console.log('working')
     // console.log('creds: ', res.locals.creds)
     // const {funcLogName, streamName, region} = req.body;
-    const cloudWatchLogs = new CloudWatchLogs({ region: `us-east-1`, credentials: res.locals.creds });
+    const cloudWatchLogs = new CloudWatchLogsClient({ region: res.locals.creds.region, credentials: res.locals.creds.roleCreds });
+    // const cloudWatchLogs = new CloudWatchClient({ region: res.locals.creds.region, credentials: res.locals.creds.roleCreds })
     // console.log('cloudWatchLogs: ', cloudWatchLogs);
     
-    // const logName = `/aws/lambda/${funcLogName}`
-    const logName = `/aws/lambda/${funcName}`  //req.query from frontend
+    const logName = `/aws/lambda/${funcName}`
+    console.log('logName: ', logName)
+    // const logName = `/aws/lambda/testingfunc`  //req.query from frontend
     // const cloudWatchLogs = new CloudWatchLogs({ region: region, credentials: res.locals.creds });
-    console.log('cloudWatchLogs: ', cloudWatchLogs);
-    
-    // const logName = `/aws/lambda/${funcName}`  //req.query from frontend
+    // console.log('cloudWatchLogs: ', cloudWatchLogs);
 
-    ///grabs logstreams + last event time for each log group
-    const logStreamRes = await cloudWatchLogs.describeLogStreams({logGroupIdentifier: logName}) // logGroupIdentifier or logGroupName
-
+    const input = {
+      logGroupName: logName
+    }
+    const command = new DescribeLogStreamsCommand(input);
+    const logStreamsRes = await cloudWatchLogs.send(command);
+    // console.log('logStreamRes: ', logStreamRes);
     const logStreamNames = []
-    
     // logStreamRes is an object with the logStreams array on it
-    logStreamRes.logStreams.forEach(log => {
+    logStreamsRes.logStreams.forEach(log => {
       // push each logStreamName into our logStreamNames array to be sent to frontend
       logStreamNames.push(log.logStreamName);
     })
-
-    //grabs timestamp and message for each logstream
-
-    console.log('logStreamRes: ', logStreamRes);
-    
-    console.log('logStreamNames: ', logStreamNames);
+    // console.log('logStreamNames: ', logStreamNames);
     res.locals.logStreamNames = logStreamNames;
     return next();
 
@@ -53,14 +50,26 @@ cloudWatchLogController.viewFunctionStreams = async (req, res, next) => {
 
 
 cloudWatchLogController.viewStreamInfo = async (req, res, next) => {
-  // const { region, streamName, logName } = req.body;
+  const { streamName, logName } = req.body;
   try{
-    const {funcLogName, streamName, region} = req.body;
-    // console.log(req.body)
-    const cloudWatchLogs = new CloudWatchLogs({ region: region, credentials: res.locals.creds });
+    const cloudWatchLogs = new CloudWatchLogsClient({ region: res.locals.creds.region, credentials: res.locals.creds.roleCreds });
+    console.log('logName', logName)
     // const streamName = '2023/08/05/[$LATEST]ed93cc4e073e46f9961dfbe77ba457a9' // req.query
-    const logName = `/aws/lambda/${funcLogName}` 
-    const getLogEvents = await cloudWatchLogs.getLogEvents({logStreamName: streamName, logGroupName: logName, startFromHead: true}) // logGroupIdentifier or logGroupName
+    const logGroupName = `/aws/lambda/${logName}`
+    console.log('logGroupName: ', logGroupName)
+
+    const input = {
+      logGroupName: logGroupName,
+      logStreamName: streamName,
+      startFromHead: true
+    }
+
+    const command = new GetLogEventsCommand(input);
+
+    // const getLogEvents = await cloudWatchLogs.getLogEvents({logStreamName: streamName, logGroupName: logGroupName}) // logGroupIdentifier or logGroupName
+
+    const getLogEvents = await cloudWatchLogs.send(command);
+
     console.log('getLogEvents: ', getLogEvents)
     const { events } = getLogEvents;
     events.forEach(event => {
