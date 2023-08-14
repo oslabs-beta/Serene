@@ -12,6 +12,17 @@ type Props = {
 const RightSideBar = (props: Props) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const navigate = useNavigate()
+  
+  function signOutClick (e) {
+    fetch('/api/user/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    navigate('/')
+  } 
+
 
   return (
     <div>
@@ -49,7 +60,7 @@ const RightSideBar = (props: Props) => {
     <div className='flex flex-col items-center my-4 ml-20 z-40'> 
       <button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out'>Add Arn</button>
       <button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out'>Edit Profile</button>
-      <button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out' onClick={()=> navigate('/')}>Sign Out</button>
+      <button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out' onClick={signOutClick}>Sign Out</button>
     </div>
   </div>
 
