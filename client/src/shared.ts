@@ -207,16 +207,7 @@ export const FetchFunctions = async () => {
   
 }
 
-export const FetchLogs = async () => {
-  try{
-    const response = await fetch('/api/cloudwatch/getLogs')
-    const data = response.json();
-    return data;
-  } catch (error) {
-    console.log('Error is: ', error)
-  }
 
-}
 const funcName = 'testingfunc'
 const sortBy = 'TimestampDescending'
 const period = '5 minutes'

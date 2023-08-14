@@ -5,17 +5,17 @@ import FunctionDetails from './FunctionDetails';
 import { FetchFunctions } from '../shared'
 // import { FunctionContext } from '../App'
 import waves3 from '../assets/waves3.png';
+import { FunctionContext } from '@/App';
 
 type Props = {
-  funcName: string;
-  setFuncName: Function;
 };
 
-const LeftSideBar = ({funcName, setFuncName}: Props) => {
+const LeftSideBar = (props: Props) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [data, setData] = useState([]);
 //   // const  = useContext(FunctionContext)
 //   // const [ data, setData, clickedFunction, setClickedFunction ] = useContext(UserContext)
+
 
  useEffect(() => {
   // console.log('beginning to fetch')
@@ -28,7 +28,7 @@ const LeftSideBar = ({funcName, setFuncName}: Props) => {
   }, [])
 
 
-  console.log('funcname in leftsidebar', funcName)
+  // console.log('funcname in leftsidebar', funcName)
 // const handleFunctionClick = (e) => {
 //   setClickedFunction(e.target.value)
 // }
@@ -87,7 +87,7 @@ const LeftSideBar = ({funcName, setFuncName}: Props) => {
             //   />
               
             // </button></div>
-              <Functions funcName={funcName} setFuncName={setFuncName} 
+              <Functions 
               key={item.name}  
               name={item.name} 
               arn={item.arn}

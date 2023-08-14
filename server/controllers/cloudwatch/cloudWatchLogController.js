@@ -15,7 +15,7 @@ cloudWatchLogController.viewFunctionStreams = async (req, res, next) => {
     // console.log('cloudWatchLogs: ', cloudWatchLogs);
     
     // const logName = `/aws/lambda/${funcLogName}`
-    const logName = `/aws/lambda/testingfunc`  //req.query from frontend
+    const logName = `/aws/lambda/${funcName}`  //req.query from frontend
     // const cloudWatchLogs = new CloudWatchLogs({ region: region, credentials: res.locals.creds });
     console.log('cloudWatchLogs: ', cloudWatchLogs);
     
