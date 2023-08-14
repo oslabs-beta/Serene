@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import waves from '../assets/waves.png';
 import { FunctionContext } from '../App';
+import { UserContext } from '../App';
 
 type Props = {};
 
 const Login = (props: Props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { currentUser, setCurrentUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -32,12 +34,16 @@ const Login = (props: Props) => {
         },
         body: JSON.stringify(body),
       });
-
-      // const data = await response.json();
-      // console.log('data: ', data);
-      console.log('fetch successful');
+      // console.log('data: ', response);
+      // console.log('fetch successful');
       //probably need an error case to catch
-      navigate('/home');
+      if(response.status === 200){
+        setCurrentUser(username)
+        navigate('/home');
+      } else {
+        alert('Invalid username or password')
+      }
+      
     } catch (error) {
       console.log('NOW Error: ', error);
     }

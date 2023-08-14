@@ -18,6 +18,7 @@ stsController.getCredentials = async (req, res, next) => {
   const foundUser = await User.findOne({ _id: req.cookies.SSID })
   // console.log('foundUser: ', foundUser)
 
+  
   const { ARN, region } = foundUser;
 
   // console.log('region: ', region)

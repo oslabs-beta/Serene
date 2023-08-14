@@ -9,12 +9,14 @@ import Logs from './components/Logs';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 export const FunctionContext = createContext();
+export const UserContext = createContext();
 
 function App() {
   // const [data, setData] = useState([]);
   // const [clickedFunction, setClickedFunction] = useState([]);
 
-  const [funcName, setFuncName] = useState('functionName');
+  const [funcName, setFuncName] = useState('SELECT A FUNCTION');
+  const [currentUser, setCurrentUser] = useState('');
 
   // const FetchFunctions = async () => {
   //   try {
@@ -42,15 +44,17 @@ function App() {
   return (
     <div className="bg-red-20">
       <FunctionContext.Provider value={{ funcName, setFuncName }}>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/user/signup" element={<Signup />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/versions" element={<VersionHistory />} />
-          <Route path="/metrics" element={<Metric />} />
-          <Route path="/warming" element={<Warming />} />
-          <Route path="/logs" element={<Logs />} />
-        </Routes>
+        <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/user/signup" element={<Signup />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/versions" element={<VersionHistory />} />
+            <Route path="/metrics" element={<Metric />} />
+            <Route path="/warming" element={<Warming />} />
+            <Route path="/logs" element={<Logs />} />
+          </Routes>
+        </UserContext.Provider>
       </FunctionContext.Provider>
     </div>
   );

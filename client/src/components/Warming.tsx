@@ -1,8 +1,10 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect, useContext} from 'react'
 import LeftSideBar from './LeftSideBar'
 import RightSideBar from './RightSidebar'
 import {FetchLogs} from '../shared'
 // import {FuncNameContext} from './FunctionDetails'
+import { FunctionContext } from '@/App';
+import { Link, useNavigate } from 'react-router-dom';
 
 type Props = {
 }
@@ -12,7 +14,10 @@ type Props = {
 const Warming = ({}: Props) => {
   // const [allLogs, setAllLogs] = useState([])
     // const [funcName, setFuncName] = useContext(FuncNameContext)
+    const { funcName, setFuncName } = useContext(FunctionContext)
 
+
+    const navigate = useNavigate();
 
     // console.log('im in warming ' + funcName)
 
@@ -33,12 +38,19 @@ const Warming = ({}: Props) => {
         {/* TOP SECTION OF EVERY PAGE */}
         <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />    
-        <h1 className='font-extrabold text-4xl font-mono'> KOMODO </h1>
+        <h1 className='font-extrabold text-4xl font-mono'> SERENE </h1>
         <RightSideBar />  
         </div> 
+
+        <div>CURRENT FUNC NAME STATE IS {funcName}</div>
+
+
+
+
         <div className="flex justify-center">
       <a
-            href="/home"
+            onClick={() => {
+              navigate("/home")}}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
             <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -48,7 +60,8 @@ const Warming = ({}: Props) => {
             </span>
           </a>
 <a
-            href="/versions"
+             onClick={() => {
+              navigate("/versions")}}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
             <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -59,7 +72,8 @@ const Warming = ({}: Props) => {
           </a>
 
           <a
-            href="/metrics"
+             onClick={() => {
+              navigate("/metrics")}}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
             <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -70,7 +84,8 @@ const Warming = ({}: Props) => {
           </a>
 
           <a
-            href="/logs"
+             onClick={() => {
+              navigate("/logs")}}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
             <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>

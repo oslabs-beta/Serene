@@ -1,9 +1,10 @@
-import React, { useState} from 'react'
+import React, { useState, useContext} from 'react'
 import Functions from './Functions'
 import FunctionDetails from './FunctionDetails'
 import { test } from '../shared'
 import waves5 from '../assets/waves5.png';
 import { Link, useNavigate } from 'react-router-dom'
+import { UserContext } from '@/App';
 
 type Props = {
 
@@ -12,9 +13,28 @@ type Props = {
 const RightSideBar = (props: Props) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const navigate = useNavigate()
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+
+  const handleSignOut = ()=> {
+    fetch("/api/user/logout", {
+    method: "POST",
+  })
+  .then(response => {
+    console.log("Status code:", response.status);
+  })
+  .then(data => {
+    console.log("Response data:", data);
+    navigate('/')
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+  }
 
   return (
     <div>
+      <div className='mr-40'>CURRENT USERNAME IS <br/>{currentUser}</div>
   {showSidebar ? (
     <button
       className="flex text-4xl text-black items-center cursor-pointer fixed right-8 top-6 z-50 transition duration-400 ease-in-out hover:rotate-90"
@@ -49,7 +69,7 @@ const RightSideBar = (props: Props) => {
     <div className='flex flex-col items-center my-4 ml-20 z-40'> 
       <button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out'>Add Arn</button>
       <button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out'>Edit Profile</button>
-      <button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out' onClick={()=> navigate('/')}>Sign Out</button>
+      <button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out' onClick={()=> handleSignOut()}>Sign Out</button>
     </div>
   </div>
 

@@ -29,11 +29,10 @@ const Logs = ({}: Props) => {
   const { funcName, setFuncName } = useContext(FunctionContext);
 
   // console.log('logging data in Logs ' + JSON.stringify(data))
-  const funcLogName = funcName;
+  // const funcLogName = funcName;
   const region = 'us-east-1';
 
   const FetchLogs = async () => {
-    console.log('37');
     const body = {
       funcName,
       region,
@@ -89,14 +88,12 @@ const Logs = ({}: Props) => {
   // useEffect(() => {
   //   console.log('this is logstream', logStream);
   // }, [logStream]);
-
+  
   const FetchLogStreams = async () => {
     //need logName, streamName, region
-    console.log('85');
     const body = {
-      funcLogName,
-      streamName: logStream,
-      region,
+      logName : funcName,
+      streamName: logStream
     };
     try {
       const response = await fetch('/api/cloudwatch/getStreamDetails', {
@@ -132,7 +129,7 @@ const Logs = ({}: Props) => {
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <h1 className="font-extrabold text-4xl font-mono"> KOMODO </h1>
+        <h1 className="font-extrabold text-4xl font-mono"> SERENE </h1>
         <RightSideBar />
       </div>
 

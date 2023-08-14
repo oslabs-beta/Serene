@@ -38,7 +38,7 @@ const Home = ({}: Props) => {
     <div className="bg-gray-200 h-screen">
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <h1 className="font-extrabold text-4xl font-mono"> KOMODO </h1>
+        <h1 className="font-extrabold text-4xl font-mono"> SERENE </h1>
         <RightSideBar />
       </div>
       {/* <nav className="bg-gray-300 border-4 border-black"> THIS IS NAVBAR

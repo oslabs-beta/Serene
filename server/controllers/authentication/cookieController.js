@@ -4,13 +4,13 @@ const Session = require('../../models/sessionModel.js')
 const cookieController = {}
 
 cookieController.setSSIDCookie = async(req, res, next) => {
-  if(res.locals.loginUsername) {
+  if(res.locals.loginUsername) { // ADD TRY CATCH ????????
     console.log('hello in setssidcookie')
     // const { loginUsername } = req.body;
     
     const foundUser = await User.findOne({ username: res.locals.loginUsername });
 
-    // console.log('foundUser setSSIDCookie: ', foundUser);
+    console.log('foundUser setSSIDCookie: ', foundUser);
 
     res.locals.ssid = foundUser._id;
     return next();
@@ -28,13 +28,13 @@ cookieController.newSession = async(req, res, next) => {
     const foundUser = await User.findOne({ username: res.locals.loginUsername || res.locals.signUpUsername })
     console.log('req.cookies (line 24): ', req.cookies.SSID)
     if(req.cookies.SSID) {
-      // console.log('in req.cookies.ssid')
+      console.log('in req.cookies.ssid')
       const sessionObj = {
         cookieID: `${foundUser._id}`,
         createdAt: new Date()
       }
       const newSession = await Session.create(sessionObj)
-      // console.log('newSession: ', newSession)
+      console.log('newSession: ', newSession)
       return next()
     }
     console.log('cookie: ', req.cookies.SSID)

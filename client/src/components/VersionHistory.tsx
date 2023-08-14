@@ -1,13 +1,14 @@
 import React, {useContext, useState, useEffect} from 'react'
 import LeftSideBar from './LeftSideBar'
 import RightSideBar from './RightSidebar'
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import {
   Popover,
   PopoverHandler,
   PopoverContent,
   Button,
 } from "@material-tailwind/react";
+import { FunctionContext } from '@/App';
 
 import {
   PushSpinner, TraceSpinner, RainbowSpinner,
@@ -24,14 +25,48 @@ type Props = {
 
 const VersionHistory = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const { funcName, setFuncName } = useContext(FunctionContext)
 
+  const navigate = useNavigate()
   // const [popoverViewing, setPopoverViewing] = useState(Array(mockVersionData))
 
-  useEffect(() => {
-    setTimeout( () => {
-      setIsLoading(false);
-    }, 2000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout( () => {
+  //     setIsLoading(false);
+  //   }, 2000);
+  // }, []);
+
+//api/versions/versionList
+
+const FetchVersions = async () => {
+  const body = {
+    funcName,
+  };
+  try {
+    const response = await fetch('api/versions/versionList', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+    console.log('fetched versions: ', data);
+    console.log('fetch versions successful');
+    return data;
+  } catch (error) {
+    console.log('Error in versions: ', error);
+  }
+};
+
+useEffect(() => {
+  const fetchVersions = async () => {
+    await FetchVersions();
+  };
+  fetchVersions();
+
+}, [funcName]);
 
 
   const mockCode1 = () => { 
@@ -99,11 +134,12 @@ const mockCode5 = () => {
         <div className="flex justify-between items-center bg-gray-300 h-24">
         {/* <LeftSideBar funcName={funcName} setFuncName={setFuncName} />     */}
         <LeftSideBar /> 
-        <h1 className='font-extrabold text-4xl font-mono'> KOMODO </h1>
+        <h1 className='font-extrabold text-4xl font-mono'> SERENE </h1>
         <RightSideBar />  
         </div> 
         <div className="flex justify-center">
-        
+        <div>CURRENT FUNC NAME STATE IS {funcName}</div>
+
       {/* <div>
       <JellyfishSpinner />
 
@@ -129,7 +165,8 @@ const mockCode5 = () => {
         
         
         <a
-            href="/home"
+            onClick={() => {
+              navigate("/home")}}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
             <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -139,7 +176,8 @@ const mockCode5 = () => {
             </span>
           </a>
           <a
-            href="/metrics"
+            onClick={() => {
+              navigate("/metrics")}}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
             <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -149,7 +187,8 @@ const mockCode5 = () => {
             </span>
           </a>
           <a
-            href="/warming"
+            onClick={() => {
+              navigate("/warming")}}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
             <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -160,7 +199,8 @@ const mockCode5 = () => {
           </a>
 
           <a
-            href="/logs"
+            onClick={() => {
+              navigate("/logs")}}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
             <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
