@@ -54,7 +54,7 @@ const Logs = ({}: Props) => {
 
   useEffect(() => {
     // console.log('beginning to fetch')
-    if (funcName !== 'functionName') {
+    if (funcName !== 'SELECT A FUNCTION') {
       FetchLogs().then((funcLogs) => {
         // console.log('setting data now')
         setAllLogs(funcLogs);

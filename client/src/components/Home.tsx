@@ -41,6 +41,7 @@ const Home = ({}: Props) => {
         <h1 className="font-extrabold text-4xl font-mono"> SERENE </h1>
         <RightSideBar />
       </div>
+      {/* <div className="mb-4"> FOOTER </div> */}
       {/* <nav className="bg-gray-300 border-4 border-black"> THIS IS NAVBAR
           
         
