@@ -84,6 +84,8 @@ const Metric = ({}: Props) => {
           </a>
         </div>
       {/* body div */}
+    {/* <div>CURRENT FUNC IS {funcName}</div> */}
+
       <div className="flex flex-col items-center justify-center">
         <div className="w-1/4 hidden">
           {

@@ -68,7 +68,7 @@ const LineGraph = ({TimeStamps, Values, metric}: Props) => {
           // labels: ['2023-08-06','2023-08-07','2023-08-08','2023-08-09','2023-08-10']
           datasets: [
             {
-              label: metric,
+              label: metric.toUpperCase(),
               data: newTimeArr,
               // data: newTimeArr,
               borderColor: 'rgba(75, 192, 192, 1)',

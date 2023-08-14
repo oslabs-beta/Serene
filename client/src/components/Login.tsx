@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import waves from '../assets/waves.png';
+import { FunctionContext } from '../App';
 
 type Props = {};
 
