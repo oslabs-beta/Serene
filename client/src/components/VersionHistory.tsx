@@ -31,6 +31,7 @@ const VersionHistory = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { funcName, setFuncName } = useContext(FunctionContext);
   const [versions, setVersions] = useState({});
+  const [aliases, setAliases] = useState([])
 
   const navigate = useNavigate();
   // const [popoverViewing, setPopoverViewing] = useState(Array(mockVersionData))
@@ -118,47 +119,38 @@ const VersionHistory = () => {
     };
     return response;
   };
-  const mockVersionData = [
-    {
-      version: 1,
-      alias: 'test1',
-      arn: 'xxx:hellouniverse:test',
-      code: mockCode1,
-    },
-    {
-      version: 2,
-      alias: 'test2',
-      arn: 'xxx:hellouniverse:test',
-      code: mockCode2,
-    },
-    {
-      version: 3,
-      alias: 'test3',
-      arn: 'xxx:hellouniverse:test',
-      code: mockCode3,
-    },
-    {
-      version: 4,
-      alias: 'test4',
-      arn: 'xxx:hellouniverse:test',
-      code: mockCode4,
-    },
-    {
-      version: 5,
-      alias: 'test5',
-      arn: 'xxx:hellouniverse:test',
-      code: mockCode5,
-    },
-  ];
-  // console.log('is this code? ', mockVersionData[0].code)
-  // const location = useLocation()
-  // const data = location.state.name
-  // console.log('this is data in versions ', data)
 
-  // const context = useContext(FuncNameContext)
-  // console.log(name, funcName)
-  // console.log(`this is versions line 156 ${JSON.stringify(versions)}`)
-  // console.log(Object.keys(versions).length)
+  const FetchAliases = async () => {
+    const body = {
+      funcName,
+    };
+    try {
+      const response = await fetch('api/versions/getAlias', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+
+      const data = await response.json();
+      console.log('fetched aliases: ', JSON.stringify(data));
+      // console.log('fetch versions successful');
+      setAliases(data);
+      return data;
+    } catch (error) {
+      console.log('Error in versions/alias: ', error);
+    }
+  };
+
+  useEffect(() => {
+    if (funcName !== 'SELECT A FUNCTION') {
+      const fetchAlias = async () => {
+        await FetchAliases();
+      };
+      fetchAlias();
+    }
+  }, [funcName]);
 
   return (
     <div>
@@ -242,13 +234,16 @@ const VersionHistory = () => {
 
       <div className="h-screen w-full flex justify-center">
         <div className="flex flex-col my-3 border-2 border-black bg-gray-200 rounded-md h-full w-3/4">
+          <div className='border-4 border-green-200'>
+            
+          {aliases.length}
+            
           {Object.keys(versions).length !== 0 ? (
             Object.keys(versions)
               // {/* { versions !== null ? Object.keys(versions) */}
               .reverse()
               .map((item) => (
-                <div className="border-4 border-pink-200 group flex w-1/2 mr-10">
-                  {' '}
+                <div className="border-4 border-pink-200 group flex w-1/2 ml-auto">
                   {/* Remove justify-between class */}
                   {/* <div></div> HERE for SPACING ONLY */}
                   <Popover placement="left">
@@ -298,7 +293,7 @@ const VersionHistory = () => {
             </div>
           )}
         </div>
-
+        </div>
         {/* <div>{Object.keys(versions).length}</div> */}
       </div>
     </div>

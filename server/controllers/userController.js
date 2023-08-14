@@ -43,6 +43,7 @@ userController.login = async (req, res, next) => {
     // console.log('inlogincontroller')
     //find by username
     const userResult = await User.findOne({ username: username });
+    console.log('userResult', userResult)
     //if userResult return nothing, throw err
     if(userResult === null || userResult === undefined) {
       return next({
@@ -51,6 +52,7 @@ userController.login = async (req, res, next) => {
         message: 'invalid username or password'
       })
     }
+    console.log('past the conditional')
     //if userResult has a value, move on to below comparisons
     //pull pw from mongo and use bcrypt.compare to compare hashed pw with inputted pw
     const hashedPassword = userResult.password;
@@ -70,6 +72,25 @@ userController.login = async (req, res, next) => {
       log: `The following error occured: ${err}`,
       status: 400,
       message: { err: `An error occured while trying to login` }
+    })
+  }
+}
+
+userController.updateUser = async (req, res, next) => {
+  const { newARN, newRegion } = req.body;
+  try {
+    const updated = await User.findOneAndUpdate(
+      { _id: req.cookies.SSID }, 
+      { ARN: newARN, region: newRegion }, 
+      { new: true }
+    );
+    res.locals.updatedUser = updated;
+    return next();
+  } catch (err) {
+    return next({
+      log: `The following error occured: ${err}`,
+      status: 400,
+      message: { err: `An error occured while trying to update a user` }
     })
   }
 }

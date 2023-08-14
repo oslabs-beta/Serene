@@ -1,4 +1,4 @@
-const { LambdaClient, ListVersionsByFunctionCommand, GetFunctionCommand } = require('@aws-sdk/client-lambda');
+const { LambdaClient, ListVersionsByFunctionCommand, GetFunctionCommand, ListAliasesCommand } = require('@aws-sdk/client-lambda');
 
 const versionHistoryController = {};
 
@@ -47,8 +47,8 @@ versionHistoryController.viewFunctionVersion = async (req, res, next) => {
   const { region, functionArn } = req.body;
   try {
     const client = new LambdaClient({
-      credentials: res.locals.creds,
-      region: region,  //this should come from front end - req.query
+      credentials: res.locals.creds.roleCreds,
+      region: res.locals.creds.region,  //this should come from front end - req.query
     });
 
     const input = {
@@ -81,17 +81,41 @@ versionHistoryController.viewFunctionVersion = async (req, res, next) => {
   }
 }
 
+versionHistoryController.getAlias = async (req, res, next) => {
+  const { funcName } = req.body;
+  try {
+    const client = new LambdaClient({
+      credentials: res.locals.creds.roleCreds,
+      region: res.locals.creds.region,  //this should come from front end - req.query
+    });
+    const input = {
+      FunctionName: funcName
+    }
+    const command = new ListAliasesCommand(input);
+    const aliasList = await client.send(command);
+    const list = aliasList.Aliases
+    list.forEach(alias => {
+      if(!alias.RoutingConfig)  alias.weight = 1.00;   
+      else{
+        console.log('alias.RoutingConfig: ', alias.RoutingConfig);
+        let val;
+        for(let key in alias.RoutingConfig.AdditionalVersionWeights){
+          val = alias.RoutingConfig.AdditionalVersionWeights[key];
+          console.log('val: ', val);
+        }
+        alias.weight = 1.00 - val;
+      }
+    })
+    
+    res.locals.aliasList = list;
+    return next();
+  } catch(err) {
+    return next({
+      log: `The following error occured: ${err}`,
+      status: 400,
+      message: 'An error occured when trying to view the function alias details'
+    }) 
+  }
+}
+
 module.exports = versionHistoryController;
-
-
-// "logs:DescribeLogGroups",
-// "logs:DescribeLogStreams",
-// "logs:GetLogEvents",
-// "logs:FilterLogEvents",
-// "cloudwatch:GetMetricData",
-// "lambda:listFunctions",
-// "lambda:ListVersionsByFunction",
-// "lambda:InvokeFunction",
-// "lambda:ListAliases",
-// "lambda:GetAlias"
-// "lambda:*"

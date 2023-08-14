@@ -6,13 +6,16 @@
   "scripts": {
     "start": "nodemon ./server/server.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "@aws-sdk/client-cloudwatch": "^3.385.0",
     "@aws-sdk/client-cloudwatch-logs": "^3.382.0",
     "@aws-sdk/client-lambda": "^3.382.0",
     "@aws-sdk/client-sts": "^3.382.0",
+    "@babel/plugin-transform-async-to-generator": "^7.22.5",
+    "@babel/runtime": "^7.1.2",
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
@@ -25,6 +28,13 @@
     "npm": "^9.8.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
     "@types/node": "^20.4.5",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
