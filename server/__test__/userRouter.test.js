@@ -1,32 +1,49 @@
 const request = require('supertest');
-const response = require('supertest');
 const express = require('express');
 const mongoose = require("mongoose");
 const { describe, beforeEach, expect, test, jest: requiredJest } = require('@jest/globals');
 
-const bodyParser = require('body-parser');
-const app = express();
+const app = require('../server.js');
 
-const server = 'http://localhost:3000'
+// const app = express();
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+// app.use(express.json());
 
-const userRouter = require('../routes/userRouter.js');
+// const userRouter = require('../routes/userRouter.js');
 
-app.use('/api/user', userRouter);
+// app.get('/api/user', (req, res) => res.status(200).json({ please: 'work' }))
+
+// app.use('/api/user', userRouter);
+
+// app.use((err, req, res, next) => {
+//   console.error(err.stack);
+//   const defaultErr = {
+//     log: 'Express error handler caught unknown middleware error',
+//     status: 400,
+//     message: { err: 'An error occurred' },
+//   };
+
+//   const errorObj = Object.assign({}, defaultErr, err);
+//   console.log(errorObj);
+//   res.status(errorObj.status).json(errorObj.message);
+// });
 
 // beforeEach(done => {
 //   done()
 // })
 
-// afterEach(async () => {
-//   // Closing the DB connection allows Jest to exit successfully.
-//   // mongoose.connection.close()
-//   await app.close();
-// })
+afterAll(() => {
+  // Closing the DB connection allows Jest to exit successfully.
+  // mongoose.connection.close()
+  // await app.close();
+  mongoose.disconnect();
+  app.close();
+})
 
 // user signup test
 describe('test user signup', () => {
+
   it('Signup - Create User', async () => {
     const requestBody = {
       username: 'testUsername',
@@ -35,13 +52,15 @@ describe('test user signup', () => {
       region: 'testRegion'
     }
     console.log('in test block')
-    return request(server)
+    const res = await request(app)
       .post('/api/user/signup')
       .send(requestBody)
       // expect(res.status).toBe(200)
-      .expect('Content-Type', 'application/json; charset=utf-8')
-      .expect(200)
+      // .expect('Content-Type', 'application/json; charset=utf-8')
+    console.log(res.body)
+    expect(res.status).toEqual(200)
       // .expect(response)
-  }, 100000)
+      // .end(done)
+    
+  })
 })
-
