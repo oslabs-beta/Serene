@@ -234,27 +234,44 @@ const VersionHistory = () => {
 
       <div className="h-screen w-full flex justify-center">
         <div className="flex flex-col my-3 border-2 border-black bg-gray-200 rounded-md h-full w-3/4">
-          <div className='border-4 border-green-200'>
             
-          {aliases.length}
-            
-          {Object.keys(versions).length !== 0 ? (
-            Object.keys(versions)
-              // {/* { versions !== null ? Object.keys(versions) */}
-              .reverse()
-              .map((item) => (
-                <div className="border-4 border-pink-200 group flex w-1/2 ml-auto">
-                  {/* Remove justify-between class */}
-                  {/* <div></div> HERE for SPACING ONLY */}
-                  <Popover placement="left">
-                    <PopoverHandler className="w-20 p-1 mt-2 mb-1 transition duration-100 ease-in-out group-hover:scale-150 ml-0">
-                      <Button>Alias {item}</Button>
-                    </PopoverHandler>
-                    <PopoverContent className="border-black border-2 w-1/3">
-                      {/* <span>more version {item.code.toString()} details here</span> */}
-                    </PopoverContent>
-                  </Popover>
-                  <div className="flex relative w-10 h-20 transition-all duration-200 ease-in-out transform-growth group-hover:w-7/12 ml-10">
+          { aliases.length === 0 ? (
+         <div className="flex justify-center my-3 border-4 bg-gray-200 rounded-md h-full w-full ">
+         <h3 className="font-semibold">PLEASE SELECT A FUNCTION</h3>
+       </div>
+          ) :      aliases.map((el) => (
+            // <Popover placement="left">
+            //   <PopoverHandler className="w-20 p-1 mt-2 mb-1 transition duration-100 ease-in-out group-hover:scale-150 ml-0">
+            //     <Button>Alias {el}</Button>
+            //   </PopoverHandler>
+            //   <PopoverContent className="border-black border-2 w-1/3">
+            //     {/* <span>more version {item.code.toString()} details here</span> */}
+            //   </PopoverContent>
+            // </Popover>
+            <div className='border-4 border-black flex'>
+            <div className='mr-10'>{el.Name}</div>
+            <div className='mr-10'>version is {el.FunctionVersion} weight is {el.weight}</div>
+            {el.RoutingConfig ? (
+              <div>additional version is {Object.keys(el.RoutingConfig.AdditionalVersionWeights)[0]} weight is {Object.values(el.RoutingConfig.AdditionalVersionWeights)[0]} </div>
+            ): (<div>null goes here</div>)}
+            {/**
+             * 
+             if ( el.RoutingConfig ) {
+              element will be el.RoutingConfig.AdditionalVersionWeights
+             }
+              weight of main version = el.weight
+             * 
+             */}
+     {/* {
+              "AliasArn": "arn:aws:lambda:us-east-1:097265058099:function:secondFunction:secondAlias",
+              "Description": "This is the second alias for secondFunction (version 2)",
+              "FunctionVersion": "2",
+              "Name": "secondAlias",
+              "RevisionId": "e90afe10-5891-4102-a4aa-3bfe002fe84c",
+              "weight": 1
+              } */}
+
+            <div className="flex relative w-10 h-20 transition-all duration-200 ease-in-out transform-growth group-hover:w-7/12 ml-10">
                     <svg className="w-full h-full overflow-visible">
                       <defs>
                         <marker
@@ -278,26 +295,48 @@ const VersionHistory = () => {
                         stroke="black"
                       />
                     </svg>
-                    <span className="group-hover:bg-black group-hover:text-white bg-white rounded-md p-2 transition duration-100 ease-in-out group-hover:scale-110 text-center flex items-center ml-auto">
-                      {' fdsf'}
-                      {/* Add ml-auto class to align the span to the right */}
-                      {/* alias {item.alias} */}
-                      {/* version.item} */}
-                    </span>
-                  </div>
-                </div>
-              ))
-          ) : (
-            <div className="flex justify-center my-3 border-4 bg-gray-200 rounded-md h-full w-full ">
-              <h3 className="font-semibold">PLEASE SELECT A FUNCTION</h3>
+
+
+                   </div>
+
+            {/* <span className="group-hover:bg-black group-hover:text-white bg-white rounded-md p-2 transition duration-100 ease-in-out group-hover:scale-110 text-center flex items-center ml-auto">
+                        VERSION
+                    </span> */}
             </div>
-          )}
+          ))
+          }
+
+       
+
+
+
+
+            {/* 
+            Object.keys(versions).length !== 0 ? (
+            Object.keys(versions)
+              // {/*  versions !== null ? Object.keys(versions) 
+              .reverse()
+              .map((item) => (
+                <div className="border-4 border-pink-200 group flex w-1/2 ml-auto">
+    
+                  {/* <div></div> HERE for SPACING ONLY */}
+                 
+
+{/*                     
+                  </div>
+                
+              ))
+              )} */}
+            </div>
+            
         </div>
-        </div>
+              
         {/* <div>{Object.keys(versions).length}</div> */}
       </div>
-    </div>
   );
 };
 
 export default VersionHistory;
+
+
+// fetched aliases:  [{"AliasArn":"arn:aws:lambda:us-east-1:449206294758:function:testingfunc:first-run","Description":"","FunctionVersion":"$LATEST","Name":"first-run","RevisionId":"3f57b57d-e58f-4ea3-8498-5645416c08e6","weight":1},{"AliasArn":"arn:aws:lambda:us-east-1:449206294758:function:testingfunc:second-run","Description":"","FunctionVersion":"1","Name":"second-run","RevisionId":"59454881-fa6d-42d3-b8aa-def3f3d88d55","RoutingConfig":{"AdditionalVersionWeights":{"2":0.75}},"weight":0.25}]
