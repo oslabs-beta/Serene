@@ -16,27 +16,6 @@ warmingController.warmFunction = async (req, res, next) => {
 
     const command = new InvokeCommand(params);
 
-<<<<<<< HEAD
-    // const intervalVar = 1000;
-    let counter = 0;
-    let userMaxInput = 10;
-
-    const warming = setInterval(async () => {
-      // const response = await client.send(command)
-
-      counter += 1;
-      console.log(counter);
-
-      if (counter === userMaxInput) {
-        clearInterval(warming);
-        console.log('finished');
-      }
-    }, intervalVar); // req.body
-
-    //parameter to stop the warming after x amount of hours or days or weeks
-
-    const response = await client.send(command);
-=======
     
     let counter = 0;
     
@@ -53,7 +32,6 @@ warmingController.warmFunction = async (req, res, next) => {
     
     
     response = await client.send(command)
->>>>>>> 32878f1abaaedfe3b0457d037868d108d96f4c15
 
     console.log('response: ', response);
 

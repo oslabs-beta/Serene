@@ -84,6 +84,8 @@ userController.updateUser = async (req, res, next) => {
       { ARN: newARN, region: newRegion }, 
       { new: true }
     );
+    console.log('req.cookies.SSID', req.cookies.SSID)
+    console.log('updated: ', updated);
     res.locals.updatedUser = updated;
     return next();
   } catch (err) {
