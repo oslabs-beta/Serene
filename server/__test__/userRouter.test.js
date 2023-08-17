@@ -29,7 +29,7 @@ describe('test user signup', () => {
 
   it('should create a new user', async () => {
     const requestBody = {
-      username: 'testUsername',
+      username: 'newTestUsername',
       password: 'testPassword',
       ARN:  'testARN',
       region: 'testRegion'
