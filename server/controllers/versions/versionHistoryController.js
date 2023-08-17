@@ -5,20 +5,21 @@ const versionHistoryController = {};
 //list of version history for specific func - need to grab arn for diff versions
 //output: object - key: function name, value: funciton version arn
 versionHistoryController.viewVersionList = async (req, res, next) => {
+  const { funcName } = req.body;
   try {
     const client = new LambdaClient({
       credentials: res.locals.creds.roleCreds,
       region: res.locals.creds.region,  //this should come from front end - req.query
     });
-
+    console.log('funcName', funcName)
     const params = {
-      FunctionName: 'secondFunction'
+      FunctionName: funcName
     }
 
     const command = new ListVersionsByFunctionCommand(params)
     const versionRes = await client.send(command)
 
-    // console.log('versionRes: ', versionRes.Versions)
+    console.log('versionRes: ', versionRes.Versions)
     
     const versions = {};
 
@@ -27,7 +28,7 @@ versionHistoryController.viewVersionList = async (req, res, next) => {
     })
 
     // console.log('versions: ', versions)
-    
+
     res.locals.versionList = versions
     return next();
   } catch (err) {

@@ -1,4 +1,4 @@
-const { GetMetricDataCommand, CloudWatchClient } = require('@aws-sdk/client-cloudwatch');
+const { GetMetricDataCommand, CloudWatchClient, DescribeLogStreamsCommand } = require('@aws-sdk/client-cloudwatch');
 // const metricDataQueries = require('./util/metricDataQueries.js');
 // const queryCreator = require('./util/metricDataQueries.js');
 const cloudWatchMetricsController = {};
@@ -12,7 +12,7 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
     // console.log('In getMetrics before createQuery is invoked')
     const metricObj = createQuery(funcName, sortBy, newPeriod, formattedStartDate)
     // console.log('createQuery has been invoked')
-
+    
     // console.log('metricObj: ', metricObj)
     const getDurationMetrics = new GetMetricDataCommand(metricObj.duration)
     const getInvocationsMetrics = new GetMetricDataCommand(metricObj.invocations)
@@ -75,6 +75,7 @@ const dateConverter = (date) => {
 }
 
 const timePeriodConverter = (period) => {
+  let finalPeriod;
   if(period === '1 second' || period === '5 seconds' || period === '10 seconds' || period === '30 seconds') {
     if(period.length === 8) {
       finalPeriod = Number(period[0]);
@@ -105,6 +106,9 @@ const timePeriodConverter = (period) => {
 let idCount = 0;
 
 const createQuery = (funcName, sortBy, period, startDate) => {
+  if(!funcName || !sortBy || !period || !startDate){
+    return 'ERROR: invalid funcName, sortBy, period, or startDate'
+  }
   const metricDataQueries = {};
 
   console.log(funcName, sortBy, period, startDate)
