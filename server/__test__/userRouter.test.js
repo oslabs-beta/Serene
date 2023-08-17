@@ -8,8 +8,6 @@ const {
   test,
   jest: requiredJest,
 } = require('@jest/globals');
-const User = require('../models/userModel.js');
-const Cookie = require('js-cookie');
 
 const app = require('../server.js');
 
