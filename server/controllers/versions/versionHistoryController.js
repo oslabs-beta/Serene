@@ -45,6 +45,8 @@ versionHistoryController.viewVersionList = async (req, res, next) => {
 //use version arn to view function definition
 versionHistoryController.viewFunctionVersion = async (req, res, next) => {
   const { region, functionArn } = req.body;
+  // const region = "us-east-1"
+  // const functionArn = "arn:aws:lambda:us-east-1:449206294758:function:testingfunc"
   try {
     const client = new LambdaClient({
       credentials: res.locals.creds.roleCreds,

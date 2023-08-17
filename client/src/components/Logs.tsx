@@ -14,6 +14,7 @@ import {
   GridSpinner,
 } from 'react-spinners-kit';
 import { FunctionContext } from '@/App';
+import { useNavigate } from 'react-router-dom'
 
 type Props = {};
 
@@ -33,6 +34,9 @@ const Logs = ({}: Props) => {
   const region = 'us-east-1';
 
   const FetchLogs = async () => {
+
+    const navigate = useNavigate();
+
     const body = {
       funcName,
       region,
@@ -135,7 +139,8 @@ const Logs = ({}: Props) => {
 
       <div className="flex justify-center">
         <a
-          href="/home"
+       onClick={() => {
+        navigate("/home")}}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
           <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -144,7 +149,8 @@ const Logs = ({}: Props) => {
           </span>
         </a>
         <a
-          href="/versions"
+         onClick={() => {
+          navigate("/versions")}}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
           <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -154,7 +160,8 @@ const Logs = ({}: Props) => {
         </a>
 
         <a
-          href="/metrics"
+         onClick={() => {
+          navigate("/metrics")}}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
           <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -164,7 +171,8 @@ const Logs = ({}: Props) => {
         </a>
 
         <a
-          href="/warming"
+onClick={() => {
+  navigate("/warming")}}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
           <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>

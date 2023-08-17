@@ -8,7 +8,7 @@ versionRouter.post('/versionList', stsController.getCredentials, versionHistoryC
   return res.status(200).json(res.locals.versionList)
 })
 
-versionRouter.get('/functionVersion', stsController.getCredentials, versionHistoryController.viewVersionList, versionHistoryController.viewFunctionVersion, (req, res) => {
+versionRouter.post('/functionVersion', stsController.getCredentials, versionHistoryController.viewVersionList, versionHistoryController.viewFunctionVersion, (req, res) => {
   return res.status(200).json(res.locals.versionInfo)
 })
 

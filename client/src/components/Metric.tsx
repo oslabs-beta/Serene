@@ -234,7 +234,6 @@ const Metric = ({}: Props) => {
               {' '}
               -- Period --{' '}
             </option>
-            <option value="5 seconds">5 seconds</option>
             <option value="5 seconds">5 seconds </option>
             <option value="1 minute">1 minute</option>
             <option value="5 minutes">5 minutes</option>
