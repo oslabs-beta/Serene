@@ -27,16 +27,16 @@ cookieController.newSession = async(req, res, next) => {
     console.log('in newSession controller')
     const foundUser = await User.findOne({ username: res.locals.loginUsername || res.locals.signUpUsername })
     console.log('req.cookies (line 24): ', req.cookies.SSID)
-    if(req.cookies.SSID) {
-      // console.log('in req.cookies.ssid')
-      const sessionObj = {
-        cookieID: `${foundUser._id}`,
-        createdAt: new Date()
-      }
-      const newSession = await Session.create(sessionObj)
-      // console.log('newSession: ', newSession)
-      return next()
-    }
+    // if(req.cookies.SSID) {
+    //   console.log('in req.cookies.ssid')
+    //   const sessionObj = {
+    //     cookieID: `${foundUser._id}`,
+    //     createdAt: new Date()
+    //   }
+    //   const newSession = await Session.create(sessionObj)
+    //   console.log('newSession: ', newSession)
+    //   return next()
+    // }
     console.log('cookie: ', req.cookies.SSID)
     res.locals.newCookie = req.cookies.SSID
     return next()

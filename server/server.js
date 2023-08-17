@@ -54,7 +54,7 @@ app.use((err, req, res, next) => {
   res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+const server = app.listen(PORT, () => console.log(`listening on port ${PORT}`));
 
 // export const handler = app;
-module.exports = app;
+module.exports = server;
