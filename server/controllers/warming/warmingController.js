@@ -3,7 +3,7 @@ const { LambdaClient, InvokeCommand } = require('@aws-sdk/client-lambda');
 const warmingController = {};
 
 warmingController.warmFunction = async (req, res, next) => {
-  const { functionArn } = req.body;
+  const { functionArn, intervalVar, maxDuration } = req.body;
   try {
     const client = new LambdaClient({
       credentials: res.locals.creds.roleCreds,
@@ -22,10 +22,10 @@ warmingController.warmFunction = async (req, res, next) => {
     //   response = await client.send(command)
     //   // increment = userMaxInput / intervalVar 
     //   // increment: 168
-    //   counter+=1;
+    //   counter += intervalVar;
     //   // counter + intervalVar
 
-    //   if(counter === userMaxInput){
+    //   if(counter >= maxDuration){
     //     clearInterval(warming);
     //     console.log('finished')
     //   }
@@ -47,11 +47,9 @@ warmingController.warmFunction = async (req, res, next) => {
       }
     }, interval)
     
-    // const response = await client.send(command)
+    console.log('response: ', response);
 
-    // console.log('response: ', response);
-
-    // res.locals.statusCodeRes = response.StatusCode;
+    res.locals.statusCodeRes = response.StatusCode;
       res.locals.statusCodeRes = 'started warming'
     return next();
   } catch (err) {
