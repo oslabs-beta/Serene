@@ -4,12 +4,15 @@ import { Express, Request, Response, NextFunction, RequestHandler, Router } from
 const app: Express = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
+
+// require in routers
 const lambdaRouter: Router = require('./routes/lambdaRouter.js');
 const userRouter: Router = require('./routes/userRouter.js');
 const cloudWatchRouter: Router = require('./routes/cloudWatchRouter.js');
 const versionRouter: Router = require('./routes/versionRouter.js')
 const warmingRouter: Router = require('./routes/warmingRouter.js')
-const path = require('path');
+
+// require cookies
 const cookieParser = require('cookie-parser');
 
 
