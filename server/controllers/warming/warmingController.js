@@ -3,7 +3,7 @@ const { LambdaClient, InvokeCommand } = require('@aws-sdk/client-lambda');
 const warmingController = {};
 
 warmingController.warmFunction = async (req, res, next) => {
-  const { functionArn, intervalVar } = req.body;
+  const { functionArn } = req.body;
   try {
     const client = new LambdaClient({
       credentials: res.locals.creds.roleCreds,
@@ -31,7 +31,7 @@ warmingController.warmFunction = async (req, res, next) => {
     // }, intervalVar); // req.body
     
     
-    response = await client.send(command)
+    const response = await client.send(command)
 
     console.log('response: ', response);
 

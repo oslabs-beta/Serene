@@ -31,7 +31,7 @@ afterAll(() => {
 
 // user signup test
 describe('test user signup', () => {
-  xit('should create a new user', async () => {
+  it('should create a new user', async () => {
     const requestBody = {
       username: 'newTestUsername',
       password: 'testPassword',
@@ -46,7 +46,7 @@ describe('test user signup', () => {
 });
 
 describe('test signup with improper input', () => {
-  xit('should reject the user signup', async () => {
+  it('should reject the user signup', async () => {
     const requestBody = {
       password: 'testPassword',
       ARN: 'testARN',
@@ -58,7 +58,7 @@ describe('test signup with improper input', () => {
 });
 
 describe('test user login', () => {
-  xit('should verify the user', async () => {
+  it('should verify the user', async () => {
     const requestBody = {
       username: 'testUsername',
       password: 'testPassword',
@@ -69,7 +69,7 @@ describe('test user login', () => {
 });
 
 describe('test login with false credentials', () => {
-  xit('should reject the user login', async () => {
+  it('should reject the user login', async () => {
     const requestBody = {
       username: 'thisUsernameDoesNotExist',
       password: 'neitherDoesThisPassword',
@@ -78,34 +78,6 @@ describe('test login with false credentials', () => {
     expect(res.status).toEqual(400);
   });
 });
-
-// revisit
-// describe('test updating a user', () => {
-//   it('should successfully update a user', async () => {
-//     // const foundUser = User.findOne({_id: '64dac7ac144ec92c900cf30f'})
-//     // console.log(foundUser)
-//     const filter = {
-//       _id: '64dac7ac144ec92c900cf30f'
-//     }
-//     // const cookie = Object.defineProperty(window.document, 'SSID', {
-//     //   writable: true,
-//     //   value: '64dac7ac144ec92c900cf30f'
-//     // })
-//     const newStuff = {
-//       // _id: '64dac7ac144ec92c900cf30f',
-//       newRegion: 'newRegion',
-//       newARN: 'newARN'
-//     }
-//     const res = await request(app)
-//       .patch('/api/user/edit')
-//       // .set('SSID', 'SSID=64dac7ac144ec92c900cf30f')
-//       .send(filter, newStuff)
-//     console.log('res.locals', res.locals)
-//     // const res = await User.findOneAndUpdate(filter, newStuff, { new: true });
-//     expect(res.status).toEqual(200)
-//     expect(res.locals.updatedUser.ARN).toBe('newARN')
-//   })
-// })
 
 describe('test updating a user', () => {
   it('should successfully update a user', async () => {

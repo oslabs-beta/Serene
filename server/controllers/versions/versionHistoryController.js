@@ -19,7 +19,7 @@ versionHistoryController.viewVersionList = async (req, res, next) => {
     const command = new ListVersionsByFunctionCommand(params)
     const versionRes = await client.send(command)
 
-    console.log('versionRes: ', versionRes.Versions)
+    // console.log('versionRes: ', versionRes.Versions)
     
     const versions = {};
 
