@@ -8,10 +8,10 @@ versionRouter.get('/versionList', stsController.getCredentials, versionHistoryCo
   return res.status(200).json(res.locals.versionList)
 })
 
-versionRouter.get('/functionVersion', stsController.getCredentials, versionHistoryController.viewVersionList, versionHistoryController.viewFunctionVersion, (req, res) => {
-  return res.status(200).json(res.locals.versionInfo)
+versionRouter.get('/functionVersion', stsController.getCredentials, versionHistoryController.viewFunctionVersion, (req, res) => {
+  return res.status(200).json(res.locals.versionInfo);
 })
-
+//versionHistoryController.viewVersionList, 
 versionRouter.get('/getAlias', stsController.getCredentials, versionHistoryController.getAlias, (req, res) => {
   return res.status(200).json(res.locals.aliasList);
 })

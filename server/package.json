@@ -13,7 +13,7 @@
     "@aws-sdk/client-cloudwatch": "^3.385.0",
     "@aws-sdk/client-cloudwatch-logs": "^3.382.0",
     "@aws-sdk/client-lambda": "^3.382.0",
-    "@aws-sdk/client-sts": "^3.382.0",
+    "@aws-sdk/client-sts": "^3.391.0",
     "@babel/plugin-transform-async-to-generator": "^7.22.5",
     "@babel/runtime": "^7.1.2",
     "bcrypt": "^5.1.0",

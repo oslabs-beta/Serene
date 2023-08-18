@@ -40,7 +40,6 @@ describe('testing view function streams post', () => {
   })
 })
 
-
 describe('testing view function streams post', () => {
   it('should try to return the stream array but return status of 400 (proper creds - wrong func name)', async () => {
     const reqBody = {

@@ -42,7 +42,7 @@ versionHistoryController.viewVersionList = async (req, res, next) => {
 
 //use version arn to view function definition
 versionHistoryController.viewFunctionVersion = async (req, res, next) => {
-  const { region, functionArn } = req.body;
+  const { functionArn } = req.body;
   try {
     const client = new LambdaClient({
       credentials: res.locals.creds.roleCreds,
