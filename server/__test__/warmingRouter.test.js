@@ -21,6 +21,7 @@ describe('testing warming router', () => {
       .set('Cookie', `SSID=64d51ed8a4b2f36d496865a0`)
       .send(reqBody)
     expect(res.status).toEqual(200)
+    expect(res.body).toEqual(200)
   })
 })
 

@@ -16,26 +16,43 @@ warmingController.warmFunction = async (req, res, next) => {
 
     const command = new InvokeCommand(params);
 
-    
     let counter = 0;
-    
     // const warming = setInterval(async () => {
-    //   response = await client.send(command)
-      
-    //   counter+=1;
 
-    //   if(counter === userMaxInput){   ///
+    //   response = await client.send(command)
+    //   // increment = userMaxInput / intervalVar 
+    //   // increment: 168
+    //   counter+=1;
+    //   // counter + intervalVar
+
+    //   if(counter === userMaxInput){
     //     clearInterval(warming);
     //     console.log('finished')
     //   }
     // }, intervalVar); // req.body
-    
-    
-    const response = await client.send(command)
 
-    console.log('response: ', response);
+    // intervalVar: 3600000 (once every hour)
+    // userMaxInput: 604800000 (run for a week)
 
-    res.locals.statusCodeRes = response.StatusCode;
+    const interval = 5000;
+    const maxInput = 60000;
+    const warmingTest = setInterval(async () => {
+
+      counter += interval
+      console.log(`increment at ${counter} ms`)
+
+      if(counter >= maxInput){
+        clearInterval(warmingTest);
+        console.log('finished')
+      }
+    }, interval)
+    
+    // const response = await client.send(command)
+
+    // console.log('response: ', response);
+
+    // res.locals.statusCodeRes = response.StatusCode;
+      res.locals.statusCodeRes = 'started warming'
     return next();
   } catch (err) {
     return next({
