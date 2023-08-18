@@ -1,7 +1,5 @@
-const express = require('express');
-// const { req, res, next } = require('express')
-import { Express, Request, Response, NextFunction, RequestHandler, Router } from 'express';
-const app: Express = express();
+const  express = require('express');
+import { ErrorRequestHandler, Express, Request, Response, NextFunction, RequestHandler, Router } from 'express';
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 
@@ -12,15 +10,19 @@ const cloudWatchRouter: Router = require('./routes/cloudWatchRouter.js');
 const versionRouter: Router = require('./routes/versionRouter.js')
 const warmingRouter: Router = require('./routes/warmingRouter.js')
 
+// import types
+// const { ServerError } = require('./types.ts')
+import { ServerError } from './types.ts';
+
 // require cookies
 const cookieParser = require('cookie-parser');
 
-
+const app: Express = express();
 // add the beginning of your app entry
 // import 'vite/modulepreload-polyfill'
 
 const PORT: number = 3000;
-console.log('In server.js before mongoDB connection')
+
 mongoose.connect(process.env.ACCESS_KEY, { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.once('open', () => {
@@ -47,16 +49,14 @@ app.use('*', (req: Request, res: Response) => {
 });
 
 //global error handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
-  const defaultErr = {
+app.use((err: ErrorRequestHandler, req: Request, res: Response, next: NextFunction) => {
+  const defaultErr: ServerError = {
     log: 'Express error handler caught unknown middleware error',
     status: 400,
     message: { err: 'An error occurred' },
   };
 
-  const errorObj = Object.assign({}, defaultErr, err);
-  console.log(errorObj);
+  const errorObj: ServerError = Object.assign({}, defaultErr, err);
   res.status(errorObj.status).json(errorObj.message);
 });
 
