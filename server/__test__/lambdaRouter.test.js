@@ -19,7 +19,7 @@ lambdaRouter Testing Suite:
 
 
 describe('test GET request for lambda function list', () => {
-  xit('should return an array of objects (functions)', async () => {
+  it('should return an array of objects (functions)', async () => {
     const res = await request(app)
       .get('/api/lambda/functions')
       .set('Cookie', `SSID=64d51ed8a4b2f36d496865a0`)
@@ -30,7 +30,7 @@ describe('test GET request for lambda function list', () => {
 })
 
 describe('test GET for lambda function list (invalid creds)', () => {
-  xit('should try to return an array but return a status of 400 instead', async () => {
+  it('should try to return an array but return a status of 400 instead', async () => {
     const res = await request(app)
       .get('/api/lambda/functions')
       .set('Cookie', 'SSID=64dac7ac144ec92c900cf30f')
