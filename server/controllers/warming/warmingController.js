@@ -16,7 +16,6 @@ warmingController.warmFunction = async (req, res, next) => {
 
     const command = new InvokeCommand(params);
 
-    
     let counter = 0;
     
     // const warming = setInterval(async () => {
