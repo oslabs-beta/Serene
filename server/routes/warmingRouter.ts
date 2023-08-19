@@ -9,7 +9,7 @@ import stsController from '../controllers/stsController';
 const warmingRouter = express.Router();
 
 // invokes the function at the user specified frequency and duration (req.body)
-warmingRouter.get('/functions', stsController.getCredentials, warmingController.warmFunction, (req: Request, res: Response) => {
+warmingRouter.post('/functions', stsController.getCredentials, warmingController.warmFunction, (req: Request, res: Response) => {
   // send a 200 status
   res.status(200)
 })

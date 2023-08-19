@@ -111,49 +111,49 @@ const VersionHistory = () => {
     fetchVersionDetails();
   }, [funcName]);
 
-  const mockCode1 = () => {
-    const arr = ['info1', 'info2', 'info3', 'info4', 'info5'];
-    Math.floor(arr.length / 2);
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify('error fixed'),
-    };
-    return response;
-  };
-  const mockCode2 = () => {
-    const arr = ['info1', 'info2', 'info3'];
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify('testing response'),
-    };
-    return response;
-  };
-  const mockCode3 = () => {
-    const arr = ['info1', 'info5'];
-    Math.floor(arr.length / 2);
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify('version3'),
-    };
-    return response;
-  };
-  const mockCode4 = () => {
-    const arr = ['info1', 'info2', 'info3', 'info5'];
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify('testing errors'),
-    };
-    return response;
-  };
-  const mockCode5 = () => {
-    const arr = ['info1', 'info2', 'info3', 'info4', 'info5'];
-    Math.floor(arr.length / 2);
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify('error fixed'),
-    };
-    return response;
-  };
+  // const mockCode1 = () => {
+  //   const arr = ['info1', 'info2', 'info3', 'info4', 'info5'];
+  //   Math.floor(arr.length / 2);
+  //   const response = {
+  //     statusCode: 200,
+  //     body: JSON.stringify('error fixed'),
+  //   };
+  //   return response;
+  // };
+  // const mockCode2 = () => {
+  //   const arr = ['info1', 'info2', 'info3'];
+  //   const response = {
+  //     statusCode: 200,
+  //     body: JSON.stringify('testing response'),
+  //   };
+  //   return response;
+  // };
+  // const mockCode3 = () => {
+  //   const arr = ['info1', 'info5'];
+  //   Math.floor(arr.length / 2);
+  //   const response = {
+  //     statusCode: 200,
+  //     body: JSON.stringify('version3'),
+  //   };
+  //   return response;
+  // };
+  // const mockCode4 = () => {
+  //   const arr = ['info1', 'info2', 'info3', 'info5'];
+  //   const response = {
+  //     statusCode: 200,
+  //     body: JSON.stringify('testing errors'),
+  //   };
+  //   return response;
+  // };
+  // const mockCode5 = () => {
+  //   const arr = ['info1', 'info2', 'info3', 'info4', 'info5'];
+  //   Math.floor(arr.length / 2);
+  //   const response = {
+  //     statusCode: 200,
+  //     body: JSON.stringify('error fixed'),
+  //   };
+  //   return response;
+  // };
 
   const FetchAliases = async () => {
     const body = {
