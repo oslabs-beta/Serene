@@ -4,7 +4,7 @@ import { STSClient, AssumeRoleCommand, AssumeRoleCommandOutput, AssumeRoleComman
 const dotenv = require('dotenv').config();
 import { Request, Response, NextFunction } from 'express';
 // import model
-import User from '../models/userModel.js';
+import User from '../models/userModel';
 // import types
 import { STSController, UserInfo, RoleCreds } from '../types'
 

@@ -16,7 +16,7 @@ userController.createUser = async (req: Request, res: Response, next: NextFuncti
   const { username, password, ARN, region }: CreateUserInfo = req.body;
 
   // encrypt the password using bcrypt
-  const hashedPassword: number = await bcrypt.hash(password, 10);
+  const hashedPassword: string = await bcrypt.hash(password, 10);
 
   try {
     // create the user in MongoDB with the username, hashedPassword, ARN, and region
@@ -112,6 +112,22 @@ userController.updateUser = async (req, res, next) => {
       log: `The following error occured: ${err}`,
       status: 400,
       message: { err: `An error occured while trying to update a user` }
+    })
+  }
+}
+
+// deletes the current user from MongoDB based on cookie
+userController.deleteUser = async(req, res, next) => {
+  try {
+    const deletedUser = await User.findOneAndDelete({ _id: req.cookies.SSID });
+  
+    res.locals.deletedUser = deletedUser;
+    return next()
+  } catch (err) {
+    return next({
+      log: `The following error occured: ${err}`,
+      status: 400,
+      message: { err: `An error occured while trying to delete a user` }
     })
   }
 }

@@ -12,7 +12,8 @@ export type UserController = {
   createUser: (req: Request, res: Response, next: NextFunction) => Promise <void>
   getAllUsers: (req: Request, res: Response, next: NextFunction) => Promise <void>
   login: (req: Request, res: Response, next: NextFunction) => Promise <void>
-  updateUser: (req: Request, res: Response, next: NextFunction) => Promise <void>
+  updateUser: (req: Request, res: Response, next: NextFunction) => Promise <void>,
+  deleteUser: (req: Request, res: Response, next: NextFunction) => Promise <void>
 }
 
 export type CreateUserInfo =  {

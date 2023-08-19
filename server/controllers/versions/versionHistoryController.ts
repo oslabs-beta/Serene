@@ -30,7 +30,8 @@ versionHistoryController.viewVersionList = async (req, res, next) => {
     const command: ListVersionsByFunctionCommand = new ListVersionsByFunctionCommand(params)
     const versionRes: ListVersionsByFunctionCommandOutput = await client.send(command)
 
-    const versions = {} as VersionObject;
+    // fix any type
+    const versions = {} as any;
 
     versionRes.Versions.forEach(func => {
       versions[func.Version] = func.FunctionArn
@@ -111,7 +112,7 @@ versionHistoryController.getAlias = async (req, res, next) => {
 
     // the alias only has weight if it has multiple versions on it
     // we wrote this so that if the alias was only pointing to one version, it would show a weight of 100%
-    list.forEach(alias => {
+    list.forEach((alias: any)=> {
       if(!alias.RoutingConfig)  alias.weight = 1.00;   
       else{
         console.log('alias.RoutingConfig: ', alias.RoutingConfig);

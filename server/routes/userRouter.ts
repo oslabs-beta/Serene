@@ -53,4 +53,10 @@ userRouter.patch('/edit', userController.updateUser, (req: Request, res: Respons
   return res.status(200).json(res.locals.updatedUser);
 });
 
+// updates user -- takes newArn and newRegion in req.body
+userRouter.delete('/delete', userController.deleteUser, (req: Request, res: Response) => {
+  // send a 200 status and the updated user
+  return res.status(200).json(res.locals.deletedUser);
+});
+
 export default userRouter;

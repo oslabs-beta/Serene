@@ -57,7 +57,7 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
 }
 
 // converts startDate to a usable format
-const dateConverter = (date) => {
+const dateConverter = (date: string) => {
   if(date[1] === 'w'){
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - 7);
@@ -79,7 +79,7 @@ const dateConverter = (date) => {
 }
 
 // converts period to a usable format
-const timePeriodConverter = (period) => {
+const timePeriodConverter = (period: string) => {
   let finalPeriod;
   if(period === '1 second' || period === '5 seconds' || period === '10 seconds' || period === '30 seconds') {
     if(period.length === 8) {
@@ -113,7 +113,7 @@ let idCount = 0;
 // creates and returns an object with 5 different properties (one for each metric)
 // the function will input the desired formatting into the object allowing it to be dynamic
 // this particular AWS method is very strict in how it is formatted and we determined this to be a decent workaround for allowing user manipulation of the data
-const createQuery = (funcName, sortBy, period, startDate) => {
+const createQuery = (funcName: string, sortBy: string, period: number, startDate: Date) => {
   if(!funcName || !sortBy || !period || !startDate){
     return 'ERROR: invalid funcName, sortBy, period, or startDate'
   }

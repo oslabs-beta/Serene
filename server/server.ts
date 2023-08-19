@@ -2,6 +2,8 @@
 import express, { ErrorRequestHandler, Express, Request, Response, NextFunction, RequestHandler, Router } from 'express';
 import mongoose, { ConnectOptions } from 'mongoose'
 const dotenv = require('dotenv').config();
+// import dotenv from 'dotenv';
+// dotenv.configDotenv()
 
 // require in routers
 import lambdaRouter from './routes/lambdaRouter'
