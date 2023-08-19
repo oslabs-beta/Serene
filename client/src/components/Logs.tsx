@@ -14,6 +14,7 @@ import {
   GridSpinner,
 } from 'react-spinners-kit';
 import { FunctionContext } from '@/App';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {};
 
@@ -28,12 +29,14 @@ const Logs = ({}: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { funcName, setFuncName } = useContext(FunctionContext);
 
+  const navigate = useNavigate();
   // console.log('logging data in Logs ' + JSON.stringify(data))
-  const funcLogName = funcName;
+  // const funcLogName = funcName;
   const region = 'us-east-1';
 
   const FetchLogs = async () => {
-    console.log('37');
+
+
     const body = {
       funcName,
       region,
@@ -55,7 +58,7 @@ const Logs = ({}: Props) => {
 
   useEffect(() => {
     // console.log('beginning to fetch')
-    if (funcName !== 'functionName') {
+    if (funcName !== 'SELECT A FUNCTION') {
       FetchLogs().then((funcLogs) => {
         // console.log('setting data now')
         setAllLogs(funcLogs);
@@ -92,11 +95,9 @@ const Logs = ({}: Props) => {
 
   const FetchLogStreams = async () => {
     //need logName, streamName, region
-    console.log('85');
     const body = {
-      funcLogName,
+      logName: funcName,
       streamName: logStream,
-      region,
     };
     try {
       const response = await fetch('/api/cloudwatch/getStreamDetails', {
@@ -132,13 +133,15 @@ const Logs = ({}: Props) => {
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <h1 className="font-extrabold text-4xl font-mono"> KOMODO </h1>
+        <h1 className="font-extrabold text-4xl font-mono"> SERENE </h1>
         <RightSideBar />
       </div>
 
       <div className="flex justify-center">
         <a
-          href="/home"
+          onClick={() => {
+            navigate('/home');
+          }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
           <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -147,7 +150,9 @@ const Logs = ({}: Props) => {
           </span>
         </a>
         <a
-          href="/versions"
+          onClick={() => {
+            navigate('/versions');
+          }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
           <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -157,7 +162,9 @@ const Logs = ({}: Props) => {
         </a>
 
         <a
-          href="/metrics"
+          onClick={() => {
+            navigate('/metrics');
+          }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
           <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -167,7 +174,9 @@ const Logs = ({}: Props) => {
         </a>
 
         <a
-          href="/warming"
+          onClick={() => {
+            navigate('/warming');
+          }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
           <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -206,6 +215,8 @@ const Logs = ({}: Props) => {
           )}
         </div>
       </div>
+      <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">&copy; SERENE 2023 </div>
+
     </div>
   );
 };

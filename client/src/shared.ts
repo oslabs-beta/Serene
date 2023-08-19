@@ -198,8 +198,8 @@ export const mockEvents = [
 export const FetchFunctions = async () => {
       try{
         const response = await fetch('/api/lambda/functions')
+        // console.log('we get to fetch now, and response is ', response)
         const data = response.json();
-        // DO SOMETHIGN WITH DATA
         return data;
       } catch (error) {
         console.log('Error is: ', error)

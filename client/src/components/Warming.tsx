@@ -1,99 +1,206 @@
-import React, { useState, useEffect} from 'react'
-import LeftSideBar from './LeftSideBar'
-import RightSideBar from './RightSidebar'
-import {FetchLogs} from '../shared'
+import React, { useState, useEffect, useContext } from 'react';
+import LeftSideBar from './LeftSideBar';
+import RightSideBar from './RightSidebar';
+import { FetchLogs } from '../shared';
 // import {FuncNameContext} from './FunctionDetails'
+import { FunctionContext, FunctionArnContext, WarmingContext } from '@/App';
+import { Link, useNavigate } from 'react-router-dom';
+import { Slider } from '@mui/material/';
+import { MuiThemeProvider } from 'material-ui';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import AnimatedBackground from './AnimatedBackground';
 
-type Props = {
-}
-
-
+type Props = {};
 
 const Warming = ({}: Props) => {
-  // const [allLogs, setAllLogs] = useState([])
-    // const [funcName, setFuncName] = useContext(FuncNameContext)
+  const { funcName, setFuncName } = useContext(FunctionContext);
+  const [intervalValue, setIntervalValue] = useState(0);
+  const [durationValue, setDurationlValue] = useState(0);
+  const { funcArn, setFuncArn } = useContext(FunctionArnContext);
+  const { warmArray, setWarmArray } = useContext(WarmingContext);
 
+  const changeIntervalValue = (e, val) => {
+    setIntervalValue(val);
+  };
 
-    // console.log('im in warming ' + funcName)
+  const changeDurationValue = (e, val) => {
+    setDurationlValue(val);
+  };
 
-  // useEffect(() => {
-  //   // console.log('beginning to fetch')
-  //   FetchLogs().then( funcLogs => {
-  //     // console.log('setting data now')
-  //     setAllLogs(funcLogs)
-  //     console.log('logs are: ', funcLogs)
-  //   })
-  //   //data logic here
-  //   }, [])
+  const FetchWarmFunction = async () => {
+    //need logName, streamName, region
+    const body = {
+      functionArn: funcArn,
+      intervalVar: intervalValue,
+      maxDuration: durationValue,
+    };
+    try {
+      const response = await fetch('/api/warming/functions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
 
+      const data = await response.json();
+      console.log('response from warming ', data);
+      return data;
+    } catch (error) {
+      console.log('Warming Func Error: ', error);
+    }
+  };
 
+  const handleStartButton = () => {
+    //make fetch request
+    if (!warmArray.includes(funcName)) {
+      // warmArray.push(funcName);
+      setWarmArray([...warmArray, funcName]);
+    }
+  };
+
+  useEffect(() => {
+    if (funcName !== 'SELECT A FUNCTION') handleStartButton();
+  }, []);
+
+  const navigate = useNavigate();
 
   return (
     <div>
-        {/* TOP SECTION OF EVERY PAGE */}
-        <div className="flex justify-between items-center bg-gray-300 h-24">
-        <LeftSideBar />    
-        <h1 className='font-extrabold text-4xl font-mono'> KOMODO </h1>
-        <RightSideBar />  
-        </div> 
+      {/* TOP SECTION OF EVERY PAGE */}
+      <div className="flex justify-between items-center bg-gray-300 h-24">
+        <LeftSideBar />
+        <h1 className="font-extrabold text-4xl font-mono"> SERENE </h1>
+        <RightSideBar />
+      </div>
+
+      {/* <div>CURRENT FUNC NAME STATE IS {funcName}</div> */}
+
+      {/* ENTIRE BODY DIV */}
+      <div className="flex flex-col items-center">
         <div className="flex justify-center">
-      <a
-            href="/home"
+          <a
+            onClick={() => {
+              navigate('/home');
+            }}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
             <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
             <span className="relative text-black transition duration-200 group-hover:text-white ease">
-         
               Home
             </span>
           </a>
-<a
-            href="/versions"
+          <a
+            onClick={() => {
+              navigate('/versions');
+            }}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
             <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
             <span className="relative text-black transition duration-200 group-hover:text-white ease">
-         
               Version History
             </span>
           </a>
 
           <a
-            href="/metrics"
+            onClick={() => {
+              navigate('/metrics');
+            }}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
             <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
             <span className="relative text-black transition duration-200 group-hover:text-white ease">
-         
               Metrics
             </span>
           </a>
 
           <a
-            href="/logs"
+            onClick={() => {
+              navigate('/logs');
+            }}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
             <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20  bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
             <span className="relative text-black transition duration-200 group-hover:text-white ease">
-        
               Logs
             </span>
           </a>
-
-
         </div>
-        <div>
+        {/* BOTTOM BODY DIV */}
+        {/* CURRENT ARN IS {funcArn} */}
+        <div className="border-2 border-black w-3/4 mt-10 rounded-md text-center">
+          <h1 className="font-semibold text-2xl mt-10">
+            WARMING FUNCTION: {funcName.toUpperCase()}{' '}
+          </h1>
+          <p className='mb-10'>
+            EVERY {intervalValue} MINUTE(S) FOR {durationValue} HOUR(S)
+          </p>
+          <div className="flex mx-2">
+            <div className="flex flex-col  w-1/2 mr-5 bg-black rounded-md ">
+              <div className="flex w-1/3 font-semibold text-gray-200 pl-3">
+                Interval: {intervalValue}{' '}
+              </div>
+              <Slider
+                aria-label="Custom marks"
+                // getAriaValueText={valuetext}
+                min={0}
+                max={50}
+                value={intervalValue}
+                onChange={changeIntervalValue}
+                valueLabelDisplay="auto"
+              />
+            </div>
+            <div className="flex flex-col w-1/2 bg-black rounded-md ">
+              <div className="flex w-1/3 font-semibold text-gray-200 pl-3">
+                Duration: {durationValue}
+              </div>
+              <Slider
+                aria-label="Custom marks"
+                // getAriaValueText={valuetext}
+                min={0}
+                max={50}
+                value={durationValue}
+                onChange={changeDurationValue}
+                valueLabelDisplay="auto"
+              />
+            </div>
+          </div>
+          <button
+            className="items-center justify-center z-20 overflow-y-auto h-[40%]  my-5 
+            border-2 shadow-md bg-neutral-100 bg-opacity-40 p-2 rounded-md border-black hover:bg-black hover:text-white transition duration-200 ease-in-out
+            mt-6
+            "
+            onClick={() => {
+              handleStartButton();
+            }}
+          >
+            {' '}
+            Start Warming
+          </button>
+          <div></div>
+          <div>
+            <h1 className='font-semibold'>Currently Warming</h1>
+            <div>
+              {warmArray.length !== 0
+                ? warmArray.map((el) => <div>{el}</div>)
+                : null}
+            </div>
+          </div>
+        </div>
+        {/* END OF BOTTOM BODY DIV */}
+      </div>
+      {/* END OF ENTIRE BODY DIV */}
+      {/* <div>
   <img
     src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Forig00.deviantart.net%2F9273%2Ff%2F2017%2F033%2F4%2Fc%2Fkeeping_warm_by_uradoodlelover2-daxms1b.gif&f=1&nofb=1&ipt=e67139040496533bfaa51a492b4a43800ca0e49dcb328d46986ba905def36c02&ipo=images"
     alt="warming"
   />
-</div>
-
-    
-
-        
+</div> */}
+      <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
+        &copy; SERENE 2023{' '}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Warming
+export default Warming;

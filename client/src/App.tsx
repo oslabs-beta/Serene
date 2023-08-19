@@ -6,51 +6,55 @@ import VersionHistory from './components/VersionHistory';
 import Metric from './components/Metric';
 import Warming from './components/Warming';
 import Logs from './components/Logs';
+import LandingPage from './components/LandingPage'
+import NotFound from './components/NotFound'
+import TestToggle from './components/TestToggle'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { FetchFunctions } from './shared'
+
+
+
 
 export const FunctionContext = createContext();
+export const UserContext = createContext();
+export const FunctionArnContext = createContext();
+export const FunctionDataContext = createContext();
+export const WarmingContext = createContext();
 
 function App() {
   // const [data, setData] = useState([]);
   // const [clickedFunction, setClickedFunction] = useState([]);
 
-  const [funcName, setFuncName] = useState('functionName');
+  const [funcName, setFuncName] = useState('SELECT A FUNCTION');
+  const [currentUser, setCurrentUser] = useState('');
+  const [funcArn, setFuncArn] = useState('SELECT FUNC ARN')
+  const [funcData, setFuncData] = useState([])
+  const [warmArray, setWarmArray] = useState([]);
 
-  // const FetchFunctions = async () => {
-  //   try {
-  //     const response = await fetch('/api/aws/funcs');
-  //     const data = response.json();
-  //     // DO SOMETHIGN WITH DATA
-  //     return data;
-  //   } catch (error) {
-  //     console.log('Error is: ', error);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //     // console.log('beginning to fetch')
-  //     FetchFunctions().then((funcData) => {
-  //       // console.log('setting data now')
-  //       setData(funcData);
-  //       console.log('data is reset: ', funcData);
-  //     });
-  //     //data logic here
-  //   }, []);
-
-  //   console.log('data from App: ', data)
 
   return (
     <div className="bg-red-20">
       <FunctionContext.Provider value={{ funcName, setFuncName }}>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/user/signup" element={<Signup />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/versions" element={<VersionHistory />} />
-          <Route path="/metrics" element={<Metric />} />
-          <Route path="/warming" element={<Warming />} />
-          <Route path="/logs" element={<Logs />} />
-        </Routes>
+      <FunctionArnContext.Provider value={{ funcArn, setFuncArn }}>
+      <FunctionDataContext.Provider value={{ funcData, setFuncData }}>
+      <WarmingContext.Provider value={{ warmArray, setWarmArray}}>
+        <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/user/signup" element={<Signup />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/versions" element={<VersionHistory />} />
+            <Route path="/metrics" element={<Metric />} />
+            <Route path="/warming" element={<Warming />} />
+            <Route path="/logs" element={<Logs />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/testing" element={<TestToggle /> } />
+          </Routes>
+        </UserContext.Provider>
+      </WarmingContext.Provider>
+      </FunctionDataContext.Provider>
+      </FunctionArnContext.Provider>
       </FunctionContext.Provider>
     </div>
   );
