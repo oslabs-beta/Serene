@@ -17,6 +17,7 @@ const Warming = ({}: Props) => {
   const [intervalValue, setIntervalValue] = useState(0);
   const [durationValue, setDurationlValue] = useState(0);
   const { funcArn, setFuncArn } = useContext(FunctionArnContext);
+  const [warmArray, setWarmArray] = useState([])
 
   const changeIntervalValue = (e, val) => {
     setIntervalValue(val);
@@ -25,16 +26,44 @@ const Warming = ({}: Props) => {
   const changeDurationValue = (e, val) => {
     setDurationlValue(val);
   }
-  console.log(intervalValue);
+ 
+  const FetchWarmFunction = async () => {
+    //need logName, streamName, region
+    const body = {
+      functionArn: funcArn,
+      intervalVar: intervalValue,
+      maxDuration: durationValue
+    };
+    try {
+      const response = await fetch('/api/warming/functions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+
+      const data = await response.json();
+      console.log('response from warming ', data);
+      return data;
+    } catch (error) {
+      console.log('Warming Func Error: ', error);
+    }
+  };
+
+
+  const handleStartButton = () => {
+    //make fetch request
+    warmArray.push(funcName)
+    console.log(warmArray)
+    setWarmArray(warmArray)
+  }
+
+  
 
   const navigate = useNavigate();
 
-  // const muiTheme = getMuiTheme({
-  //   slider: {
-  //     trackColor: "yellow",
-  //     selectionColor: "red"
-  //   }
-  // });
+
   return (
     <div>
       {/* TOP SECTION OF EVERY PAGE */}
@@ -99,10 +128,11 @@ const Warming = ({}: Props) => {
         {/* BOTTOM BODY DIV */}
         CURRENT ARN IS {funcArn}
         <div className="border-2 border-black w-3/4 mt-10 rounded-md text-center">
-          <h1 className="font-semibold">Warming Function : {funcName} </h1>
-          <div className='flex border-2 border-green-400'> 
-          <div className='flex flex-col  border-2 w-1/2 mr-5 bg-black rounded-md'>
-          <div className='flex w-1/3 font-semibold text-gray-200 ' >Interval: {intervalValue} </div>
+          <h1 className="font-semibold mt-10">FUNCTION: {funcName.toUpperCase()} </h1>
+          <p>For {durationValue} minutes, every {intervalValue} hours</p>
+          <div className='flex mx-2'> 
+          <div className='flex flex-col  w-1/2 mr-5 bg-black rounded-md '>
+          <div className='flex w-1/3 font-semibold text-gray-200 pl-3' >Interval: {intervalValue} </div>
           <Slider
               aria-label="Custom marks"
               // getAriaValueText={valuetext}
@@ -113,9 +143,9 @@ const Warming = ({}: Props) => {
               valueLabelDisplay="auto"
             />
             </div>
-            <div className='flex flex-col border-2 w-1/2'>
+            <div className='flex flex-col w-1/2 bg-black rounded-md '>
 
-          <div className='flex w-1/3 font-semibold'>Duration: {durationValue}</div>
+          <div className='flex w-1/3 font-semibold text-gray-200 pl-3'>Duration: {durationValue}</div>
             <Slider
               aria-label="Custom marks"
               // getAriaValueText={valuetext}
@@ -127,20 +157,21 @@ const Warming = ({}: Props) => {
             />
             </div>
             </div>
+            <button 
+            className="items-center justify-center z-20 overflow-y-auto h-[40%]  my-5 
+            border-2 shadow-md bg-neutral-100 bg-opacity-40 p-2 rounded-md border-black hover:bg-black hover:text-white transition duration-200 ease-in-out
+            
+            "
+            onClick={() => {handleStartButton()}}
+            > Start Warming</button>
           <div>
 
-            {/* <label
-    htmlFor="warmingInterval"
-    className="mb-2 inline-block text-black"
-    >Interval</label
-  >
-  <input
-    type="range"
-    className="transparent w-1/2 cursor-pointer
-  appearance-none border-transparent bg-neutral-200 dark:bg-neutral-600"
-    min="0"
-    max="5"
-    id="warmingInterval" /> */}
+          </div>
+          <div>
+            <h1>Currently Warming</h1>
+            <div>{warmArray.length !== 0 ? (warmArray.map(el => (
+              <div>{el}</div>
+            ))) : null}</div>
           </div>
         </div>
         {/* END OF BOTTOM BODY DIV */}
@@ -152,6 +183,8 @@ const Warming = ({}: Props) => {
     alt="warming"
   />
 </div> */}
+      {/* <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">&copy; SERENE 2023 </div> */}
+
     </div>
   );
 };
