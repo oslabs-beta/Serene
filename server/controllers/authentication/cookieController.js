@@ -3,6 +3,7 @@ const Session = require('../../models/sessionModel.js')
 
 const cookieController = {}
 
+//if user exists, finds user by username and grabs id
 cookieController.setSSIDCookie = async(req, res, next) => {
   if(res.locals.loginUsername) {
     console.log('hello in setssidcookie')
@@ -21,6 +22,7 @@ cookieController.setSSIDCookie = async(req, res, next) => {
   }
 }
 
+//
 cookieController.newSession = async(req, res, next) => {
   // console.log('in new session controller but outside try block')
   try{

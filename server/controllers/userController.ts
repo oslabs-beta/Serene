@@ -1,16 +1,22 @@
-const User = require('../models/userModel.js');
-const bcrypt = require('bcrypt');
-import { UserController, ServerError, CreateUserInfo } from '../types';
+import User from '../models/userModel';
+import bcrypt from 'bcrypt';
+import { Request, Response, NextFunction } from 'express';
+
+import { UserController, ServerError, CreateUserInfo, UserInfo, Login, UpdatedUserInfo } from '../types';
+
 
 const userController = {} as UserController
 
-userController.createUser = async (req, res, next) => {
+userController.createUser = async (req: Request, res: Response, next: NextFunction) => {
   const { username, password, ARN, region }: CreateUserInfo = req.body;
-  // console.log('started createUser')
-  const hashedPassword: Number = await bcrypt.hash(password, 10);
-  // console.log('hashed password')
+
+  const hashedPassword: number = await bcrypt.hash(password, 10);
+
   try {
-    const newUser = await User.create({username, password: hashedPassword, ARN, region });
+    // create the user in MongoDB with the username, hashedPassword, ARN, and region
+    const newUser: UserInfo = await User.create({username, password: hashedPassword, ARN, region });
+    // send back the username as the signUpUsername
+      // (wanted to differentiate btwn signup and login usernames)
     res.locals.signUpUsername = newUser.username;
     return next();
   } catch (error) {
@@ -22,8 +28,9 @@ userController.createUser = async (req, res, next) => {
   }
 }
 
-userController.getAllUsers = async (req,res,next) => {
+userController.getAllUsers = async (req: Request,res: Response,next: NextFunction) => {
   try {
+    // find all users in Mongo and send them back
     const allUsers = await User.find({});
     res.locals.allUsers = allUsers;
     return next()
@@ -37,14 +44,12 @@ userController.getAllUsers = async (req,res,next) => {
   }
 }
 
-userController.login = async (req, res, next) => {
+userController.login = async (req: Request, res: Response, next: NextFunction) => {
   try{
-    // deconstruct req body
-    const { username, password } = req.body;
-    // console.log('inlogincontroller')
+    const { username, password }: Login = req.body;
     // find by username
-    const userResult = await User.findOne({ username });
-    console.log('userResult', userResult)
+    const userResult: UserInfo = await User.findOne({ username });
+
     // if userResult return nothing, throw err
     if(userResult === null || userResult === undefined) {
       return next({
@@ -57,7 +62,7 @@ userController.login = async (req, res, next) => {
     // if userResult has a value, move on to below comparisons
     // pull pw from mongo and use bcrypt.compare to compare hashed pw with inputted pw
     const hashedPassword = userResult.password;
-    const isPasswordMatch = await bcrypt.compare(password, hashedPassword);
+    const isPasswordMatch: boolean = await bcrypt.compare(password, hashedPassword);
     if(!isPasswordMatch) {
       return next({
         log: `The following error occured: invalid username or password`,
@@ -78,15 +83,14 @@ userController.login = async (req, res, next) => {
 }
 
 userController.updateUser = async (req, res, next) => {
-  const { newARN, newRegion } = req.body;
+  const { newARN, newRegion }: UpdatedUserInfo = req.body;
   try {
-    const updated = await User.findOneAndUpdate(
+    const updated: UserInfo = await User.findOneAndUpdate(
       { _id: req.cookies.SSID },
       { ARN: newARN, region: newRegion },
       { new: true }
     );
-    console.log('req.cookies.SSID', req.cookies.SSID)
-    console.log('updated: ', updated);
+
     res.locals.updatedUser = updated;
     return next();
   } catch (err) {
@@ -98,4 +102,4 @@ userController.updateUser = async (req, res, next) => {
   }
 }
 
-module.exports = userController;
+export default userController;

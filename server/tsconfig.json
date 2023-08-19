@@ -3,19 +3,21 @@
       "module": "commonjs",
       "esModuleInterop": true,
       "target": "es6",
-      "noImplicitAny": true,
+      "noImplicitAny": false,
       "moduleResolution": "node",
       "sourceMap": true,
       "outDir": "dist",
       "baseUrl": ".",
-      "paths": {
-          "*": [
-              "node_modules/*"
-          ]
-      },
+      "noEmit": true,
+    //   "paths": {
+    //       "*": [
+    //           "node_modules/*"
+    //       ]
+    //   },
       "allowImportingTsExtensions": true
   },
   "include": [
-      "./**/*"
-  ]
+      "*/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
 }

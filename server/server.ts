@@ -1,31 +1,28 @@
-const  express = require('express');
-import { ErrorRequestHandler, Express, Request, Response, NextFunction, RequestHandler, Router } from 'express';
-// const mongoose = require('mongoose');
-import mongoose from 'mongoose'
+import express, { ErrorRequestHandler, Express, Request, Response, NextFunction, RequestHandler, Router } from 'express';
+import mongoose, { ConnectOptions } from 'mongoose'
 const dotenv = require('dotenv').config();
 
 // require in routers
-// const lambdaRouter: Router = require('./routes/lambdaRouter.js');
-import lambdaRouter from './routes/lambdaRouter.ts'
-const userRouter: Router = require('./routes/userRouter.js');
-const cloudWatchRouter: Router = require('./routes/cloudWatchRouter.js');
-const versionRouter: Router = require('./routes/versionRouter.js')
-const warmingRouter: Router = require('./routes/warmingRouter.js')
+import lambdaRouter from './routes/lambdaRouter'
+import userRouter from './routes/userRouter';
+import cloudWatchRouter from './routes/cloudWatchRouter';
+import versionRouter from './routes/versionRouter';
+import warmingRouter from './routes/warmingRouter'
 
 // import types
-// const { ServerError } = require('./types.ts')
 import { ServerError } from './types.js';
 
 // require cookies
 const cookieParser = require('cookie-parser');
 
 const app: Express = express();
-// add the beginning of your app entry
-// import 'vite/modulepreload-polyfill'
+
 
 const PORT: number = 3000;
 
-mongoose.connect(process.env.ACCESS_KEY, { useNewUrlParser: true, useUnifiedTopology: true });
+const ACCESS_KEY: any = process.env.ACCESS_KEY
+
+mongoose.connect(ACCESS_KEY, { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions);
 
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
@@ -65,4 +62,4 @@ app.use((err: ErrorRequestHandler, req: Request, res: Response, next: NextFuncti
 const server = app.listen(PORT, () => console.log(`listening on port ${PORT}`));
 
 // export const handler = app;
-module.exports = server;
+export default server;

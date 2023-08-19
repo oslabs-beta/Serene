@@ -1,9 +1,10 @@
-const express = require('express');
+import express from 'express';
 import { Request, Response, Router } from 'express';
-const cloudWatchLogController = require('../controllers/cloudwatch/cloudWatchLogController.js');
-const stsController = require('../controllers/stsController.js');
+import cloudWatchLogController from '../controllers/cloudwatch/cloudWatchLogController';
+import stsController from '../controllers/stsController';
+import cloudWatchMetricsController from '../controllers/cloudwatch/cloudWatchMetricsController';
+
 const cloudWatchRouter: Router = express.Router();
-const cloudWatchMetricsController = require('../controllers/cloudwatch/cloudWatchMetricsController.js');
 
 // view function streams - user needs to specify function name
 cloudWatchRouter.post('/getLogs', stsController.getCredentials, cloudWatchLogController.viewFunctionStreams, (req: Request, res: Response) => {
@@ -20,4 +21,4 @@ cloudWatchRouter.post('/getMetrics', stsController.getCredentials, cloudWatchMet
   return res.status(200).json(res.locals.metrics);
 });
 
-module.exports = cloudWatchRouter;
+export default cloudWatchRouter;

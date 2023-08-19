@@ -1,24 +1,23 @@
-const {
-  LambdaClient,
-  GetFunctionUrlConfigCommand,
-  ListFunctionsCommand,
-} = require('@aws-sdk/client-lambda');
+import { LambdaClient, ListFunctionsCommand, ListFunctionsCommandOutput } from '@aws-sdk/client-lambda';
+import { Request, Response, NextFunction} from 'express'
 
-const lambdaController = {};
+import { LambdaController } from '../../types';
+
+const lambdaController = {} as LambdaController;
 
 // fetch request would be called on useEffect
-lambdaController.getFunctions = async (req, res, next) => {
+lambdaController.getFunctions = async (req: Request, res: Response, next: NextFunction) => {
   // const { region } = req.body;
   // console.log('region', res.locals.creds.region);
-  const client = new LambdaClient({
+  const client: LambdaClient = new LambdaClient({
     credentials: res.locals.creds.roleCreds,
     region: res.locals.creds.region,  //this should come from front end - req.query
   });
 
-  const listFunctions = new ListFunctionsCommand({});
+  const listFunctions: ListFunctionsCommand = new ListFunctionsCommand({});
   // console.log('got listFunctions');
   try {
-    const data = await client.send(listFunctions);
+    const data: ListFunctionsCommandOutput = await client.send(listFunctions);
     // console.log('data: ', data);
 
     const funcList = data.Functions;
@@ -46,4 +45,4 @@ lambdaController.getFunctions = async (req, res, next) => {
   }
 };
 
-module.exports = lambdaController;
+export default lambdaController;

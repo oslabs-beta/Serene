@@ -46,7 +46,7 @@ versionHistoryController.viewFunctionVersion = async (req, res, next) => {
   try {
     const client = new LambdaClient({
       credentials: res.locals.creds.roleCreds,
-      region: res.locals.creds.region,  //this should come from front end - req.query
+      region: res.locals.creds.region, 
     });
 
     const input = {
