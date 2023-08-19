@@ -20,7 +20,7 @@ const Functions = ({ name }: Props) => {
     setFuncName(e.target.value);
     // console.log('name is ' + name);
   };
-  console.log('funcName after handlebutton in functions component', funcName);
+  // console.log('funcName after handlebutton in functions component', funcName);
 
 
 

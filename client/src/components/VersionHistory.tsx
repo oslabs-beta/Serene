@@ -1,14 +1,14 @@
-import React, { useContext, useState, useEffect } from "react";
-import LeftSideBar from "./LeftSideBar";
-import RightSideBar from "./RightSidebar";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from 'react';
+import LeftSideBar from './LeftSideBar';
+import RightSideBar from './RightSidebar';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Popover,
   PopoverHandler,
   PopoverContent,
   Button,
-} from "@material-tailwind/react";
-import { FunctionContext } from "@/App";
+} from '@material-tailwind/react';
+import { FunctionContext } from '@/App';
 
 import {
   PushSpinner,
@@ -19,7 +19,7 @@ import {
   PongSpinner,
   MetroSpinner,
   JellyfishSpinner,
-} from "react-spinners-kit";
+} from 'react-spinners-kit';
 
 type Props = {
   // name: string;
@@ -49,26 +49,26 @@ const VersionHistory = () => {
       funcName,
     };
     try {
-      const response = await fetch("api/versions/versionList", {
-        method: "POST",
+      const response = await fetch('api/versions/versionList', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
-      console.log("fetched versions: ", JSON.stringify(data));
+      console.log('fetched versions: ', JSON.stringify(data));
       // console.log('fetch versions successful');
       setVersions(data);
       return data;
     } catch (error) {
-      console.log("Error in versions: ", error);
+      console.log('Error in versions: ', error);
     }
   };
 
   useEffect(() => {
-    if (funcName !== "SELECT A FUNCTION") {
+    if (funcName !== 'SELECT A FUNCTION') {
       const fetchVersions = async () => {
         await FetchVersions();
       };
@@ -76,83 +76,81 @@ const VersionHistory = () => {
     }
   }, [funcName]);
 
+  const region = 'us-east-1';
+  const functionArn =
+    'arn:aws:lambda:us-east-1:449206294758:function:testingfunc';
 
-  const region = 'us-east-1'
-  const functionArn = "arn:aws:lambda:us-east-1:449206294758:function:testingfunc"
-
-  const FetchVersionDetails = async ()=> {
+  const FetchVersionDetails = async () => {
     const body = {
-      funcName, 
+      funcName,
       region,
-      functionArn
-    }
+      functionArn,
+    };
     try {
-      const response = await fetch("api/versions/functionVersion", {
-        method: "POST",
+      const response = await fetch('api/versions/functionVersion', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
-      console.log("fetched version details: ", JSON.stringify(data));
+      console.log('fetched version details: ', JSON.stringify(data));
       console.log('fetch versions successful');
       return data;
     } catch (error) {
-      console.log("Error in versions: ", error);
+      console.log('Error in versions: ', error);
     }
-  }
+  };
 
   useEffect(() => {
-      const fetchVersionDetails = async () => {
-        await FetchVersionDetails();  
-    }
+    const fetchVersionDetails = async () => {
+      await FetchVersionDetails();
+    };
     fetchVersionDetails();
   }, [funcName]);
 
-
-
   const mockCode1 = () => {
-    const arr = ["info1", "info2", "info3", "info4", "info5"];
+    const arr = ['info1', 'info2', 'info3', 'info4', 'info5'];
     Math.floor(arr.length / 2);
     const response = {
       statusCode: 200,
-      body: JSON.stringify("error fixed"),
+      body: JSON.stringify('error fixed'),
     };
     return response;
   };
   const mockCode2 = () => {
-    const arr = ["info1", "info2", "info3"];
+    const arr = ['info1', 'info2', 'info3'];
     const response = {
       statusCode: 200,
-      body: JSON.stringify("testing response"),
+      body: JSON.stringify('testing response'),
     };
     return response;
   };
   const mockCode3 = () => {
-    const arr = ["info1", "info5"];
+    const arr = ['info1', 'info5'];
     Math.floor(arr.length / 2);
     const response = {
       statusCode: 200,
-      body: JSON.stringify("version3"),
+      body: JSON.stringify('version3'),
     };
     return response;
   };
   const mockCode4 = () => {
-    const arr = ["info1", "info2", "info3", "info5"];
+    const arr = ['info1', 'info2', 'info3', 'info5'];
     const response = {
       statusCode: 200,
-      body: JSON.stringify("testing errors"),
+      body: JSON.stringify('testing errors'),
     };
     return response;
   };
   const mockCode5 = () => {
-    const arr = ["info1", "info2", "info3", "info4", "info5"];
+    const arr = ['info1', 'info2', 'info3', 'info4', 'info5'];
     Math.floor(arr.length / 2);
     const response = {
       statusCode: 200,
-      body: JSON.stringify("error fixed"),
+      body: JSON.stringify('error fixed'),
     };
     return response;
   };
@@ -162,26 +160,26 @@ const VersionHistory = () => {
       funcName,
     };
     try {
-      const response = await fetch("api/versions/getAlias", {
-        method: "POST",
+      const response = await fetch('api/versions/getAlias', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
-      console.log("fetched aliases: ", JSON.stringify(data));
+      console.log('fetched aliases: ', JSON.stringify(data));
       // console.log('fetch versions successful');
       setAliases(data);
       return data;
     } catch (error) {
-      console.log("Error in versions/alias: ", error);
+      console.log('Error in versions/alias: ', error);
     }
   };
 
   useEffect(() => {
-    if (funcName !== "SELECT A FUNCTION") {
+    if (funcName !== 'SELECT A FUNCTION') {
       const fetchAlias = async () => {
         await FetchAliases();
       };
@@ -222,7 +220,7 @@ const VersionHistory = () => {
 
         <a
           onClick={() => {
-            navigate("/home");
+            navigate('/home');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -233,7 +231,7 @@ const VersionHistory = () => {
         </a>
         <a
           onClick={() => {
-            navigate("/metrics");
+            navigate('/metrics');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -244,7 +242,7 @@ const VersionHistory = () => {
         </a>
         <a
           onClick={() => {
-            navigate("/warming");
+            navigate('/warming');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -256,7 +254,7 @@ const VersionHistory = () => {
 
         <a
           onClick={() => {
-            navigate("/logs");
+            navigate('/logs');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -273,14 +271,16 @@ const VersionHistory = () => {
         <div className="flex flex-col my-3 border-2 border-black bg-gray-200 rounded-md h-full w-3/4">
           {aliases.length === 0 ? (
             <div className="flex justify-center my-3 border-4 bg-gray-200 rounded-md h-full w-full ">
-              <h3 className="font-semibold">NO VERSION OR ALIAS FOR THIS FUNCTION</h3>
+              <h3 className="font-semibold">
+                NO VERSION OR ALIAS FOR THIS FUNCTION
+              </h3>
             </div>
           ) : (
             aliases.map((el) => (
               <div className="group border-4 border-red-400 flex items-center ml-auto w-7/12">
                 <Popover placement="left">
                   <PopoverHandler className="border-2 border-white w-1/5 h-full p-1 mt-2 mb-1 transition duration-100 ease-in-out group-hover:scale-125 ml-0">
-                    <Button className="break-words">Alias  {el.Name}</Button>
+                    <Button className="break-words">Alias {el.Name}</Button>
                   </PopoverHandler>
                   <PopoverContent className="border-black border-2 w-1/3">
                     <span>more version {el.FunctionVersion} details here</span>
@@ -315,17 +315,34 @@ const VersionHistory = () => {
                 </div>
 
                 <div className="w-1/3 ml-auto border-2 border-black flex justify-around rounded-md bg-white group-hover:bg-black group-hover:text-white flex-wrap text-center">
-                  version :  <span className="font-bold inline-block">{el.FunctionVersion} </span>weight :  <span className="font-bold inline-block">{el.weight * 100}%</span>
-                {el.RoutingConfig ? (
-                  <div className="border-t-2 border-black">
-                    version : {" "}<span className="font-bold">
-                    {Object.keys(el.RoutingConfig.AdditionalVersionWeights)[0]} </span>
-                    {" "} <br/>weight : {" "} <span className="font-bold">
-                    {
-                      Object.values( el.RoutingConfig.AdditionalVersionWeights)[0] *100
-                    }% </span>
-                  </div>
-                ) : null}
+                  version :{' '}
+                  <span className="font-bold inline-block">
+                    {el.FunctionVersion}{' '}
+                  </span>
+                  weight :{' '}
+                  <span className="font-bold inline-block">
+                    {el.weight * 100}%
+                  </span>
+                  {el.RoutingConfig ? (
+                    <div className="border-t-2 border-black">
+                      version :{' '}
+                      <span className="font-bold">
+                        {
+                          Object.keys(
+                            el.RoutingConfig.AdditionalVersionWeights
+                          )[0]
+                        }{' '}
+                      </span>{' '}
+                      <br />
+                      weight :{' '}
+                      <span className="font-bold">
+                        {Object.values(
+                          el.RoutingConfig.AdditionalVersionWeights
+                        )[0] * 100}
+                        %{' '}
+                      </span>
+                    </div>
+                  ) : null}
                 </div>
                 {/**
              * 
@@ -371,6 +388,9 @@ const VersionHistory = () => {
       </div>
 
       {/* <div>{Object.keys(versions).length}</div> */}
+      {/* <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
+        &copy; SERENE 2023{' '}
+      </div> */}
     </div>
   );
 };

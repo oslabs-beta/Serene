@@ -18,7 +18,7 @@ const LeftSideBar = (props: Props) => {
   const { funcArn, setFuncArn } = useContext(FunctionArnContext);
 //   // const  = useContext(FunctionContext)
 //   // const [ data, setData, clickedFunction, setClickedFunction ] = useContext(UserContext)
-console.log('current sidebar data is ', funcData)
+// console.log('current sidebar data is ', funcData)
     
   useEffect(() => {
       FetchFunctions().then((returnedFuncData) => {

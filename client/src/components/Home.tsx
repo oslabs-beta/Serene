@@ -21,16 +21,16 @@ const Home = ({}: Props) => {
   const [data, setData] = useState([]);
   const { funcName, setFuncName } = useContext(FunctionContext);
 
-  useEffect(() => {
-    // console.log('beginning to fetch')
+  // useEffect(() => {
+  //   // console.log('beginning to fetch')
 
-    FetchFunctions().then((funcData) => {
-      // console.log('setting data now')
-      setData(funcData);
-      console.log('data is reset: ', funcData);
-    });
-    //data logic here
-  }, []);
+  //   FetchFunctions().then((funcData) => {
+  //     // console.log('setting data now')
+  //     setData(funcData);
+  //     console.log('data is reset: ', funcData);
+  //   });
+  //   //data logic here
+  // }, []);
 
   // console.log('start of funcname', funcName)
 

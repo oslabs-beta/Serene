@@ -8,6 +8,7 @@ import Warming from './components/Warming';
 import Logs from './components/Logs';
 import LandingPage from './components/LandingPage'
 import NotFound from './components/NotFound'
+import TestToggle from './components/TestToggle'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { FetchFunctions } from './shared'
 
@@ -18,6 +19,7 @@ export const FunctionContext = createContext();
 export const UserContext = createContext();
 export const FunctionArnContext = createContext();
 export const FunctionDataContext = createContext();
+export const WarmingContext = createContext();
 
 function App() {
   // const [data, setData] = useState([]);
@@ -27,6 +29,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState('');
   const [funcArn, setFuncArn] = useState('SELECT FUNC ARN')
   const [funcData, setFuncData] = useState([])
+  const [warmArray, setWarmArray] = useState([]);
 
 
   return (
@@ -34,6 +37,7 @@ function App() {
       <FunctionContext.Provider value={{ funcName, setFuncName }}>
       <FunctionArnContext.Provider value={{ funcArn, setFuncArn }}>
       <FunctionDataContext.Provider value={{ funcData, setFuncData }}>
+      <WarmingContext.Provider value={{ warmArray, setWarmArray}}>
         <UserContext.Provider value={{ currentUser, setCurrentUser }}>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -45,8 +49,10 @@ function App() {
             <Route path="/warming" element={<Warming />} />
             <Route path="/logs" element={<Logs />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/testing" element={<TestToggle /> } />
           </Routes>
         </UserContext.Provider>
+      </WarmingContext.Provider>
       </FunctionDataContext.Provider>
       </FunctionArnContext.Provider>
       </FunctionContext.Provider>

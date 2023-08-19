@@ -32,6 +32,7 @@ const RightSideBar = (props: Props) => {
   });
   }
 
+
   return (
     <div>
       <div className='mr-40'>CURRENT USERNAME IS <br/>{currentUser}</div>
