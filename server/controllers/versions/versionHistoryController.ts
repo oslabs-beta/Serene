@@ -5,13 +5,6 @@ import { VersionHistoryController, FuncNameBody, VersionObject, FunctionArnBody,
 
 const versionHistoryController = {} as VersionHistoryController;
 
-/*
-Notes:
--LambdaClient typing
--In getAlias, we altered the output directly which messed up some typing
-  -list is type any for now
-*/
-
 
 // takes in the function name from the user and returns an array of the versions of that function
 versionHistoryController.viewVersionList = async (req, res, next) => {

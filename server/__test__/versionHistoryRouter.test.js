@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const { describe, beforeEach, expect, test, jest: requiredJest } = require('@jest/globals');
 const dotenv = require('dotenv').config();
 
-const app = require('../server.js');
+const app = require('../server.ts');
 
 afterAll(() => {
   mongoose.disconnect();

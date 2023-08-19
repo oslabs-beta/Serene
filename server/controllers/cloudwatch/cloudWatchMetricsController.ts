@@ -5,10 +5,6 @@ import { CloudWatchMetricsController, MetricBody } from '../../types';
 
 const cloudWatchMetricsController = {} as CloudWatchMetricsController;
 
-/*
-Notes:
--This one is rough on TS so anys have been used
-*/
 
 // takes in funcName, sortBy, period, and startDate as a way for user to format their metrics
 // sends back a nested object with all the proper metrics for the user's desired function

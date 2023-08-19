@@ -9,7 +9,7 @@ const {
   jest: requiredJest,
 } = require('@jest/globals');
 
-const app = require('../server.js');
+const app = require('../server.ts');
 
 /*
 userRouter Testing Suite: 

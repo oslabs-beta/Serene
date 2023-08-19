@@ -5,10 +5,6 @@ import { CloudWatchLogController, FuncNameBody, FunctionArnBody, StreamInfoBody 
 
 const cloudWatchLogController = {} as CloudWatchLogController;
 
-/*
-Notes:
--Event list in last middlware is type any for now
-*/
 
 // takes in function name from user
 // sends command and packages data into an array
