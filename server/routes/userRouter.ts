@@ -1,18 +1,11 @@
 const express = require('express');
 import { Request, Response, Router } from 'express';
 const userRouter: Router = express.Router();
-// const userController: userController = require('../controllers/userController.js');
-import * as userController from '../controllers/userController';
+import { UserController } from '../types';
+const userController: UserController = require('../controllers/userController.ts');
 const cookieController = require('../controllers/authentication/cookieController.js');
 
-// type userController = {
-//   createUser: Function,
-//   getAllUsers: Function,
-//   login: Function,
-//   updateUser: Function
-// }
 
-//routers go here
 userRouter.post('/signup', userController.createUser, cookieController.setSSIDCookie, cookieController.newSession, (req: Request, res: Response) => {
   if(req.body.username === '' || req.body.password === '') {
     return res.status(400);
@@ -26,7 +19,7 @@ userRouter.post('/signup', userController.createUser, cookieController.setSSIDCo
 
 userRouter.get('/', userController.getAllUsers, (req: Request, res: Response) => {
   return res.status(200).json(res.locals.allUsers);
-}) 
+})
 
 userRouter.post('/login', userController.login, cookieController.setSSIDCookie, cookieController.newSession, (req: Request, res: Response) => {
   if(req.body.username === '' || req.body.password === '') {

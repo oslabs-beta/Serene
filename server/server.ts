@@ -1,10 +1,12 @@
 const  express = require('express');
 import { ErrorRequestHandler, Express, Request, Response, NextFunction, RequestHandler, Router } from 'express';
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 const dotenv = require('dotenv').config();
 
 // require in routers
-const lambdaRouter: Router = require('./routes/lambdaRouter.js');
+// const lambdaRouter: Router = require('./routes/lambdaRouter.js');
+import lambdaRouter from './routes/lambdaRouter.ts'
 const userRouter: Router = require('./routes/userRouter.js');
 const cloudWatchRouter: Router = require('./routes/cloudWatchRouter.js');
 const versionRouter: Router = require('./routes/versionRouter.js')
@@ -12,7 +14,7 @@ const warmingRouter: Router = require('./routes/warmingRouter.js')
 
 // import types
 // const { ServerError } = require('./types.ts')
-import { ServerError } from './types.ts';
+import { ServerError } from './types.js';
 
 // require cookies
 const cookieParser = require('cookie-parser');
@@ -34,7 +36,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-//route handlers go here
+// route handlers go here
 app.use('/api/lambda', lambdaRouter);
 app.use('/api/user', userRouter);
 app.use('/api/cloudwatch', cloudWatchRouter);
@@ -43,12 +45,12 @@ app.use('/api/warming', warmingRouter);
 
 app.use(express.static('../client'));
 
-//404 handler
+// 404 handler
 app.use('*', (req: Request, res: Response) => {
   res.status(404).send('Not Found');
 });
 
-//global error handler
+// global error handler
 app.use((err: ErrorRequestHandler, req: Request, res: Response, next: NextFunction) => {
   const defaultErr: ServerError = {
     log: 'Express error handler caught unknown middleware error',

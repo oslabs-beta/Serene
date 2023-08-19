@@ -13,7 +13,7 @@ versionRouter.get('/versionList', stsController.getCredentials, versionHistoryCo
 versionRouter.get('/functionVersion', stsController.getCredentials, versionHistoryController.viewFunctionVersion, (req: Request, res: Response) => {
   return res.status(200).json(res.locals.versionInfo);
 })
-//versionHistoryController.viewVersionList, 
+// versionHistoryController.viewVersionList,
 versionRouter.get('/getAlias', stsController.getCredentials, versionHistoryController.getAlias, (req: Request, res: Response) => {
   return res.status(200).json(res.locals.aliasList);
 })
