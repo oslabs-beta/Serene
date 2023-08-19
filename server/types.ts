@@ -67,6 +67,11 @@ export type LambdaController = {
   getFunctions: (req: Request, res: Response, next: NextFunction) => Promise <void>
 }
 
+export type ArrayFiller = {
+  name: string,
+  description: string,
+  arn: string
+}
 
 
 // warmingController.ts

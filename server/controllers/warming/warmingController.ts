@@ -10,6 +10,10 @@ const warmingController = {} as WarmingController;
 Notes:
 -Unsure how to type the LambdaClient inputs
 */
+
+// takes in the function ARN, intervalVar (frequency of invocation), and maxDuration (total duration of invoking period) from user
+// only sends back a status
+// allows user to navigate site while the algorithm completes
 warmingController.warmFunction = async (req: Request, res: Response, next: NextFunction) => {
   const { functionArn, intervalVar, maxDuration }: WarmingReqBody = req.body;
   try {
@@ -22,20 +26,23 @@ warmingController.warmFunction = async (req: Request, res: Response, next: NextF
       FunctionName: functionArn,
     };
 
+    // create command
     const command: InvokeCommand = new InvokeCommand(params);
 
     let counter: number = 0;
     const warming = setInterval(async () => {
-
+      // invoke the function once every interval
       const response: InvokeCommandOutput = await client.send(command)
 
+      // increment the counter by the interval every invocation
       counter += intervalVar;
 
+      // once the counter is greater than or equal to the maxDuration, kill the interval
       if(counter >= maxDuration){
         clearInterval(warming);
         console.log('finished')
       }
-    }, intervalVar); // req.body
+    }, intervalVar); // frequency of invocation
 
     // intervalVar: 3600000 (once every hour)
     // userMaxInput: 604800000 (run for a week)
@@ -53,9 +60,6 @@ warmingController.warmFunction = async (req: Request, res: Response, next: NextF
     //   }
     // }, interval)
     
-
-    // res.locals.statusCodeRes = response.StatusCode;
-    // res.locals.statusCodeRes = 'started warming'
     return next();
   } catch (err) {
     return next({

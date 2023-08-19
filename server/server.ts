@@ -1,3 +1,4 @@
+// boilerplate
 import express, { ErrorRequestHandler, Express, Request, Response, NextFunction, RequestHandler, Router } from 'express';
 import mongoose, { ConnectOptions } from 'mongoose'
 const dotenv = require('dotenv').config();
@@ -14,12 +15,12 @@ import { ServerError } from './types.js';
 
 // require cookies
 const cookieParser = require('cookie-parser');
-
+// intialize our app
 const app: Express = express();
-
-
+// declare our port
 const PORT: number = 3000;
 
+// grab our access key from .env and connect to MongoDB
 const ACCESS_KEY: any = process.env.ACCESS_KEY
 
 mongoose.connect(ACCESS_KEY, { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions);
@@ -28,6 +29,7 @@ mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });
 
+// parse cookies and incoming requests
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -40,9 +42,10 @@ app.use('/api/cloudwatch', cloudWatchRouter);
 app.use('/api/versions', versionRouter);
 app.use('/api/warming', warmingRouter);
 
+// serve static files
 app.use(express.static('../client'));
 
-// 404 handler
+// 404 catch-all route handler
 app.use('*', (req: Request, res: Response) => {
   res.status(404).send('Not Found');
 });
@@ -59,7 +62,7 @@ app.use((err: ErrorRequestHandler, req: Request, res: Response, next: NextFuncti
   res.status(errorObj.status).json(errorObj.message);
 });
 
+// listen and export app/server
 const server = app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
-// export const handler = app;
 export default server;

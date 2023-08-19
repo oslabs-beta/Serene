@@ -1,5 +1,6 @@
+// import necessary AWS commands
 import { LambdaClient, ListVersionsByFunctionCommand, GetFunctionCommand, ListAliasesCommand, ListVersionsByFunctionCommandOutput, GetFunctionCommandOutput, ListAliasesCommandOutput } from '@aws-sdk/client-lambda';
-
+// import types
 import { VersionHistoryController, FuncNameBody, VersionObject, FunctionArnBody, VersionInfo, AliasList } from '../../types';
 
 const versionHistoryController = {} as VersionHistoryController;
@@ -12,8 +13,7 @@ Notes:
 */
 
 
-//list of version history for specific func - need to grab arn for diff versions
-//output: object - key: function name, value: funciton version arn
+// takes in the function name from the user and returns an array of the versions of that function
 versionHistoryController.viewVersionList = async (req, res, next) => {
   const { funcName }: FuncNameBody = req.body;
   try {
@@ -26,18 +26,15 @@ versionHistoryController.viewVersionList = async (req, res, next) => {
       FunctionName: funcName
     }
 
+    // create and send command from client
     const command: ListVersionsByFunctionCommand = new ListVersionsByFunctionCommand(params)
     const versionRes: ListVersionsByFunctionCommandOutput = await client.send(command)
 
-    // console.log('versionRes: ', versionRes.Versions)
-    
     const versions = {} as VersionObject;
 
     versionRes.Versions.forEach(func => {
       versions[func.Version] = func.FunctionArn
     })
-
-    // console.log('versions: ', versions)
 
     res.locals.versionList = versions
     return next();
@@ -50,7 +47,7 @@ versionHistoryController.viewVersionList = async (req, res, next) => {
   }
 }
 
-//use version arn to view function definition
+// takes in the function ARN from the user and returns an object housing info about that version
 versionHistoryController.viewFunctionVersion = async (req, res, next) => {
   const { functionArn }: FunctionArnBody = req.body;
   try {
@@ -63,14 +60,16 @@ versionHistoryController.viewFunctionVersion = async (req, res, next) => {
       FunctionName: functionArn
     }
 
+    // create and send command from client
     const command: GetFunctionCommand = new GetFunctionCommand(input)
     const response: GetFunctionCommandOutput = await client.send(command)
-    // console.log('response: ', response.Code.Location)
 
+    // we are updating the timeout such that we can manipulate it and send it back easier
     let timeout: number | string;
 
     (response.Configuration.Timeout > 60) ? timeout = '> 1 min' : timeout = response.Configuration.Timeout;
 
+    // extracting only the information we want from the response to send to frontend
     const versionInfo = {
       description: response.Configuration.Description,
       memory: response.Configuration.MemorySize + ' MB',
@@ -90,6 +89,7 @@ versionHistoryController.viewFunctionVersion = async (req, res, next) => {
   }
 }
 
+// takes in function name from user and returns an array of aliases of that function
 versionHistoryController.getAlias = async (req, res, next) => {
   const { funcName }: FuncNameBody = req.body;
   try {
@@ -102,11 +102,15 @@ versionHistoryController.getAlias = async (req, res, next) => {
       FunctionName: funcName
     }
 
+    // create and send command from client
     const command: ListAliasesCommand = new ListAliasesCommand(input);
     const aliasList: ListAliasesCommandOutput = await client.send(command);
     
+    // extract the array of aliases from the response
     const list: any = aliasList.Aliases
 
+    // the alias only has weight if it has multiple versions on it
+    // we wrote this so that if the alias was only pointing to one version, it would show a weight of 100%
     list.forEach(alias => {
       if(!alias.RoutingConfig)  alias.weight = 1.00;   
       else{
@@ -119,7 +123,6 @@ versionHistoryController.getAlias = async (req, res, next) => {
         alias.weight = 1.00 - val;
       }
     })
-
     
     res.locals.aliasList = list;
     return next();

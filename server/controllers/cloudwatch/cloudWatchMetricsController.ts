@@ -1,3 +1,4 @@
+// import necessary AWS commands
 import { GetMetricDataCommand, CloudWatchClient } from '@aws-sdk/client-cloudwatch';
 
 import { CloudWatchMetricsController, MetricBody } from '../../types';
@@ -9,17 +10,21 @@ Notes:
 -This one is rough on TS so anys have been used
 */
 
-
+// takes in funcName, sortBy, period, and startDate as a way for user to format their metrics
+// sends back a nested object with all the proper metrics for the user's desired function
 cloudWatchMetricsController.getMetrics = async (req, res, next) => {
   const { funcName, sortBy, period, startDate }: MetricBody = req.body;
 
+  // format inputted startDate and period
   const formattedStartDate: Date = dateConverter(startDate);
   const newPeriod: number = timePeriodConverter(period);
   try{
     const client: CloudWatchClient = new CloudWatchClient({region: res.locals.creds.region, credentials: res.locals.creds.roleCreds })
 
+    // createQuery is a pretty brute force way to send the proper data but it does work
     const metricObj: any = createQuery(funcName, sortBy, newPeriod, formattedStartDate)
     
+    // create and send the commands for each metric from the client
     const getDurationMetrics = new GetMetricDataCommand(metricObj.duration)
     const getInvocationsMetrics = new GetMetricDataCommand(metricObj.invocations)
     const getThrottlesMetrics = new GetMetricDataCommand(metricObj.throttles)
@@ -32,13 +37,6 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
     const getErrorsMetricsResponse = await client.send(getErrorsMetrics);
     const getConcurrentExeMetricsResponse = await client.send(getConcurrentExeMetrics);
 
-    // console.log('duration: ', getDurationMetricsResponse.MetricDataResults)
-    // console.log('invocations: ', getInvocationsMetricsResponse.MetricDataResults)
-    // console.log('throttles: ', getThrottlesMetricsResponse.MetricDataResults)
-    // console.log('errors: ', getErrorsMetricsResponse.MetricDataResults)
-    // console.log('concurrentExecutions: ', getConcurrentExeMetricsResponse.MetricDataResults)
-    // console.log(metricsResponse);
-    
     res.locals.metrics = {
       duration: getDurationMetricsResponse.MetricDataResults,
       invocations: getInvocationsMetricsResponse.MetricDataResults,
@@ -58,7 +56,7 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
   }
 }
 
-//START TIME AND END TIME
+// converts startDate to a usable format
 const dateConverter = (date) => {
   if(date[1] === 'w'){
     const startDate = new Date();
@@ -80,6 +78,7 @@ const dateConverter = (date) => {
   // return startDate;
 }
 
+// converts period to a usable format
 const timePeriodConverter = (period) => {
   let finalPeriod;
   if(period === '1 second' || period === '5 seconds' || period === '10 seconds' || period === '30 seconds') {
@@ -111,6 +110,9 @@ const timePeriodConverter = (period) => {
 
 let idCount = 0;
 
+// creates and returns an object with 5 different properties (one for each metric)
+// the function will input the desired formatting into the object allowing it to be dynamic
+// this particular AWS method is very strict in how it is formatted and we determined this to be a decent workaround for allowing user manipulation of the data
 const createQuery = (funcName, sortBy, period, startDate) => {
   if(!funcName || !sortBy || !period || !startDate){
     return 'ERROR: invalid funcName, sortBy, period, or startDate'

@@ -1,5 +1,6 @@
+// import specific AWS commands and types
 import { CloudWatchLogsClient, DescribeLogStreamsCommand, GetLogEventsCommand, DescribeLogStreamsCommandOutput, GetLogEventsCommandOutput } from '@aws-sdk/client-cloudwatch-logs';
-
+// import types
 import { CloudWatchLogController, FuncNameBody, FunctionArnBody, StreamInfoBody } from '../../types'
 
 const cloudWatchLogController = {} as CloudWatchLogController;
@@ -9,31 +10,23 @@ Notes:
 -Event list in last middlware is type any for now
 */
 
-//functions get sent to user from lambdaController. once user selects function, function name gets sent to backend as a req.query
-//req.query gets added onto logName
+// takes in function name from user
+// sends command and packages data into an array
 cloudWatchLogController.viewFunctionStreams = async (req, res, next) => {
   const { funcName }: FuncNameBody = req.body;
   try {
-    // console.log('working')
-    // console.log('creds: ', res.locals.creds)
-    // const {funcLogName, streamName, region} = req.body;
     const cloudWatchLogs: CloudWatchLogsClient = new CloudWatchLogsClient({ region: res.locals.creds.region, credentials: res.locals.creds.roleCreds });
-    // const cloudWatchLogs = new CloudWatchClient({ region: res.locals.creds.region, credentials: res.locals.creds.roleCreds })
-    // console.log('cloudWatchLogs: ', cloudWatchLogs);
-    
+    // all log names will begin with this string, so add the function name from the user
     const logName: string = `/aws/lambda/${funcName}`
-    // const logName = `/aws/lambda/testingfunc`  //req.query from frontend
-    // const cloudWatchLogs = new CloudWatchLogs({ region: region, credentials: res.locals.creds });
-    // console.log('cloudWatchLogs: ', cloudWatchLogs);
 
     const input = {
       logGroupName: logName
     }
+    // create and send the command from the client
     const command: DescribeLogStreamsCommand = new DescribeLogStreamsCommand(input);
     const logStreamsRes: DescribeLogStreamsCommandOutput = await cloudWatchLogs.send(command);
-    // console.log('logStreamRes: ', logStreamRes);
-    const logStreamNames: string[] = [];
 
+    const logStreamNames: string[] = [];
     // logStreamRes is an object with the logStreams array on it
     logStreamsRes.logStreams.forEach(log => {
       // push each logStreamName into our logStreamNames array to be sent to frontend
@@ -42,22 +35,21 @@ cloudWatchLogController.viewFunctionStreams = async (req, res, next) => {
 
     res.locals.logStreamNames = logStreamNames;
     return next();
-  } catch (error) {
+  } catch (err) {
     return next({
-      log: `The following error occured: ${error}`,
+      log: `The following error occured: ${err}`,
       status: 400,
-      message: { err: 'An error occured while trying to view the user\'s lambda function' }
+      message: { err: `An error occured while trying to view the log streams for ${funcName}`}
     });
   }
 }
 
-
+// takes in the stream name and log name from the user
+// sends command and packages data into an array
 cloudWatchLogController.viewStreamInfo = async (req, res, next) => {
   const { streamName, logName }: StreamInfoBody = req.body;
   try{
     const cloudWatchLogs: CloudWatchLogsClient = new CloudWatchLogsClient({ region: res.locals.creds.region, credentials: res.locals.creds.roleCreds });
-
-    // const streamName = '2023/08/05/[$LATEST]ed93cc4e073e46f9961dfbe77ba457a9' // req.query
 
     const logGroupName: string = `/aws/lambda/${logName}`
 
@@ -67,15 +59,14 @@ cloudWatchLogController.viewStreamInfo = async (req, res, next) => {
       startFromHead: true
     }
 
+    // create and send command from client
     const command: GetLogEventsCommand = new GetLogEventsCommand(input);
-
-    // const getLogEvents = await cloudWatchLogs.getLogEvents({logStreamName: streamName, logGroupName: logGroupName}) // logGroupIdentifier or logGroupName
-
     const getLogEvents: GetLogEventsCommandOutput = await cloudWatchLogs.send(command);
 
     // const { events } = getLogEvents;
     const eventList: any[] = getLogEvents.events
 
+    // formatting all the timestamps on the resulting data
     eventList.forEach(event => {
       const timeStampDate = new Date(event.timestamp);
       event.timestamp = timeStampDate.toString();
@@ -86,9 +77,6 @@ cloudWatchLogController.viewStreamInfo = async (req, res, next) => {
     
     res.locals.events = eventList;
     return next();
-
-    // STILL NEED TO REQ.QUERY FOR THE LOGNAME AND STREAMNAME
-
   } catch(err){
     return next({
       log: `The following error occured: ${err}`,
