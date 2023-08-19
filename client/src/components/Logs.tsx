@@ -29,13 +29,14 @@ const Logs = ({}: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { funcName, setFuncName } = useContext(FunctionContext);
 
+  const navigate = useNavigate();
+
   // console.log('logging data in Logs ' + JSON.stringify(data))
   // const funcLogName = funcName;
   const region = 'us-east-1';
 
   const FetchLogs = async () => {
 
-    const navigate = useNavigate();
 
     const body = {
       funcName,

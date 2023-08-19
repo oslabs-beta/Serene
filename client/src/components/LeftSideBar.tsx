@@ -5,7 +5,7 @@ import FunctionDetails from './FunctionDetails';
 import { FetchFunctions } from '../shared'
 // import { FunctionContext } from '../App'
 import waves3 from '../assets/waves3.png';
-import { FunctionContext } from '@/App';
+import { FunctionContext, FunctionDataContext, FunctionArnContext } from '@/App';
 
 type Props = {
 };
@@ -13,28 +13,29 @@ type Props = {
 const LeftSideBar = (props: Props) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [data, setData] = useState([]);
+  const { funcName, setFuncName } = useContext(FunctionContext);
+  const { funcData, setFuncData } = useContext(FunctionDataContext);
+  const { funcArn, setFuncArn } = useContext(FunctionArnContext);
 //   // const  = useContext(FunctionContext)
 //   // const [ data, setData, clickedFunction, setClickedFunction ] = useContext(UserContext)
-
-
- useEffect(() => {
-  // console.log('beginning to fetch')
-  FetchFunctions().then( funcData => {
-    // console.log('setting data now')
-    setData(funcData)
-    console.log('data is reset: ', funcData)
-  })
-  //data logic here
-  }, [])
-
+console.log('current sidebar data is ', funcData)
+    
+  useEffect(() => {
+      FetchFunctions().then((returnedFuncData) => {
+        setFuncData(returnedFuncData);
+        // console.log('data is reset: ', funcData);
+        returnedFuncData.forEach( (item, index) => {
+          if( item.name === funcName ){
+        setFuncArn(item.arn)  
+        }
+      });
+      //data logic here
+    })}, [funcName]);
 
   // console.log('funcname in leftsidebar', funcName)
 // const handleFunctionClick = (e) => {
 //   setClickedFunction(e.target.value)
 // }
-
-
-
   
   return (
     <div className="">
@@ -78,7 +79,7 @@ const LeftSideBar = (props: Props) => {
           className="z-20 overflow-y-auto h-[75%] w-full "
         >
           <div>
-          {data.map((item) => (
+          {funcData.map((item) => (
             // <div><button onClick={(e) => handleArnButtonClick(e)}
             // >
             //   <FunctionDetails 
@@ -90,7 +91,7 @@ const LeftSideBar = (props: Props) => {
               <Functions 
               key={item.name}  
               name={item.name} 
-              arn={item.arn}
+              // arn={item.arn}
               />
               
           ))}

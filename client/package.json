@@ -10,8 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@heroicons/react": "^2.0.18",
     "@material-tailwind/react": "^2.1.0",
+    "@mui/material": "^5.14.5",
     "autoprefixer": "^10.4.14",
     "chart.js": "^4.3.3",
     "chartjs-adapter-date-fns": "^3.0.0",
