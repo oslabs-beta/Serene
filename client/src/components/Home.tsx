@@ -60,6 +60,7 @@ const Home = ({}: Props) => {
       {/* </div> */}
 
       {/* </div> */}
+      {/* <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">&copy; SERENE 2023 </div> */}
     </div>
   );
 };

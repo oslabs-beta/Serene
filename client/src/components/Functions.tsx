@@ -22,6 +22,11 @@ const Functions = ({ name }: Props) => {
   };
   console.log('funcName after handlebutton in functions component', funcName);
 
+
+
+
+
+
   return (
     <button
       className="flex flex-col items-center justify-center z-20 overflow-y-auto h-[40%]  my-5 

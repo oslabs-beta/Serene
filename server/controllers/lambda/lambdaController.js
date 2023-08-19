@@ -16,7 +16,7 @@ lambdaController.getFunctions = async (req, res, next) => {
   });
 
   const listFunctions = new ListFunctionsCommand({});
-  // console.log('got listFunctions');
+  console.log('got listFunctions');
   try {
     const data = await client.send(listFunctions);
     // console.log('data: ', data);
