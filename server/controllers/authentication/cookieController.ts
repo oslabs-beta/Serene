@@ -1,22 +1,20 @@
-const User = require('../../models/userModel.js');
-const Session = require('../../models/sessionModel.js')
+import User from '../../models/userModel';
+import Session from '../../models/sessionModel';
 
-const cookieController = {}
+import { CookieController, UserInfo } from '../../types'
+
+const cookieController = {} as CookieController;
 
 //if user exists, finds user by username and grabs id
 cookieController.setSSIDCookie = async(req, res, next) => {
   if(res.locals.loginUsername) {
-    console.log('hello in setssidcookie')
-    // const { loginUsername } = req.body;
-    
-    const foundUser = await User.findOne({ username: res.locals.loginUsername });
 
-    // console.log('foundUser setSSIDCookie: ', foundUser);
+    const foundUser: UserInfo = await User.findOne({ username: res.locals.loginUsername });
 
     res.locals.ssid = foundUser._id;
     return next();
   } else {
-    const foundUser = await User.findOne({ username: res.locals.signUpUsername });
+    const foundUser: UserInfo = await User.findOne({ username: res.locals.signUpUsername });
     res.locals.ssid = foundUser._id;
     return next();
   }
@@ -24,10 +22,8 @@ cookieController.setSSIDCookie = async(req, res, next) => {
 
 //
 cookieController.newSession = async(req, res, next) => {
-  // console.log('in new session controller but outside try block')
   try{
-    console.log('in newSession controller')
-    const foundUser = await User.findOne({ username: res.locals.loginUsername || res.locals.signUpUsername })
+    const foundUser: UserInfo = await User.findOne({ username: res.locals.loginUsername || res.locals.signUpUsername })
     console.log('req.cookies (line 24): ', req.cookies.SSID)
     // if(req.cookies.SSID) {
     //   console.log('in req.cookies.ssid')
@@ -39,7 +35,6 @@ cookieController.newSession = async(req, res, next) => {
     //   console.log('newSession: ', newSession)
     //   return next()
     // }
-    console.log('cookie: ', req.cookies.SSID)
     res.locals.newCookie = req.cookies.SSID
     return next()
   } catch(err){
@@ -53,7 +48,6 @@ cookieController.newSession = async(req, res, next) => {
 
 cookieController.endSession = async (req, res, next) => {
   try{
-    console.log('ending session');
     res.clearCookie('SSID');
     return next();
   } catch(err){
@@ -66,4 +60,4 @@ cookieController.endSession = async (req, res, next) => {
 }
 
 
-module.exports = cookieController;
+export default cookieController;

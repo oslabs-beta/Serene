@@ -1,19 +1,25 @@
-const { GetMetricDataCommand, CloudWatchClient, DescribeLogStreamsCommand } = require('@aws-sdk/client-cloudwatch');
-// const metricDataQueries = require('./util/metricDataQueries.js');
-// const queryCreator = require('./util/metricDataQueries.js');
-const cloudWatchMetricsController = {};
+import { GetMetricDataCommand, CloudWatchClient } from '@aws-sdk/client-cloudwatch';
+
+import { CloudWatchMetricsController, MetricBody } from '../../types';
+
+const cloudWatchMetricsController = {} as CloudWatchMetricsController;
+
+/*
+Notes:
+-This one is rough on TS so anys have been used
+*/
+
 
 cloudWatchMetricsController.getMetrics = async (req, res, next) => {
-  const { funcName, sortBy, period, startDate } = req.body;
-  const formattedStartDate = dateConverter(startDate);
-  const newPeriod = timePeriodConverter(period);
+  const { funcName, sortBy, period, startDate }: MetricBody = req.body;
+
+  const formattedStartDate: Date = dateConverter(startDate);
+  const newPeriod: number = timePeriodConverter(period);
   try{
-    const client = new CloudWatchClient({region: res.locals.creds.region, credentials: res.locals.creds.roleCreds })
-    // console.log('In getMetrics before createQuery is invoked')
-    const metricObj = createQuery(funcName, sortBy, newPeriod, formattedStartDate)
-    // console.log('createQuery has been invoked')
+    const client: CloudWatchClient = new CloudWatchClient({region: res.locals.creds.region, credentials: res.locals.creds.roleCreds })
+
+    const metricObj: any = createQuery(funcName, sortBy, newPeriod, formattedStartDate)
     
-    // console.log('metricObj: ', metricObj)
     const getDurationMetrics = new GetMetricDataCommand(metricObj.duration)
     const getInvocationsMetrics = new GetMetricDataCommand(metricObj.invocations)
     const getThrottlesMetrics = new GetMetricDataCommand(metricObj.throttles)
@@ -109,7 +115,7 @@ const createQuery = (funcName, sortBy, period, startDate) => {
   if(!funcName || !sortBy || !period || !startDate){
     return 'ERROR: invalid funcName, sortBy, period, or startDate'
   }
-  const metricDataQueries = {};
+  const metricDataQueries = {} as any;
 
   console.log(funcName, sortBy, period, startDate)
 
@@ -279,4 +285,4 @@ const createQuery = (funcName, sortBy, period, startDate) => {
   return metricDataQueries;
 }
 
-module.exports = cloudWatchMetricsController;
+export default cloudWatchMetricsController;

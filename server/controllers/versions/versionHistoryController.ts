@@ -1,27 +1,37 @@
-const { LambdaClient, ListVersionsByFunctionCommand, GetFunctionCommand, ListAliasesCommand } = require('@aws-sdk/client-lambda');
+import { LambdaClient, ListVersionsByFunctionCommand, GetFunctionCommand, ListAliasesCommand, ListVersionsByFunctionCommandOutput, GetFunctionCommandOutput, ListAliasesCommandOutput } from '@aws-sdk/client-lambda';
 
-const versionHistoryController = {};
+import { VersionHistoryController, FuncNameBody, VersionObject, FunctionArnBody, VersionInfo, AliasList } from '../../types';
+
+const versionHistoryController = {} as VersionHistoryController;
+
+/*
+Notes:
+-LambdaClient typing
+-In getAlias, we altered the output directly which messed up some typing
+  -list is type any for now
+*/
+
 
 //list of version history for specific func - need to grab arn for diff versions
 //output: object - key: function name, value: funciton version arn
 versionHistoryController.viewVersionList = async (req, res, next) => {
-  const { funcName } = req.body;
+  const { funcName }: FuncNameBody = req.body;
   try {
-    const client = new LambdaClient({
+    const client: LambdaClient = new LambdaClient({
       credentials: res.locals.creds.roleCreds,
       region: res.locals.creds.region,  //this should come from front end - req.query
     });
-    console.log('funcName', funcName)
+
     const params = {
       FunctionName: funcName
     }
 
-    const command = new ListVersionsByFunctionCommand(params)
-    const versionRes = await client.send(command)
+    const command: ListVersionsByFunctionCommand = new ListVersionsByFunctionCommand(params)
+    const versionRes: ListVersionsByFunctionCommandOutput = await client.send(command)
 
     // console.log('versionRes: ', versionRes.Versions)
     
-    const versions = {};
+    const versions = {} as VersionObject;
 
     versionRes.Versions.forEach(func => {
       versions[func.Version] = func.FunctionArn
@@ -42,9 +52,9 @@ versionHistoryController.viewVersionList = async (req, res, next) => {
 
 //use version arn to view function definition
 versionHistoryController.viewFunctionVersion = async (req, res, next) => {
-  const { functionArn } = req.body;
+  const { functionArn }: FunctionArnBody = req.body;
   try {
-    const client = new LambdaClient({
+    const client: LambdaClient = new LambdaClient({
       credentials: res.locals.creds.roleCreds,
       region: res.locals.creds.region, 
     });
@@ -53,11 +63,11 @@ versionHistoryController.viewFunctionVersion = async (req, res, next) => {
       FunctionName: functionArn
     }
 
-    const command = new GetFunctionCommand(input)
-    const response = await client.send(command)
+    const command: GetFunctionCommand = new GetFunctionCommand(input)
+    const response: GetFunctionCommandOutput = await client.send(command)
     // console.log('response: ', response.Code.Location)
 
-    let timeout;
+    let timeout: number | string;
 
     (response.Configuration.Timeout > 60) ? timeout = '> 1 min' : timeout = response.Configuration.Timeout;
 
@@ -67,7 +77,8 @@ versionHistoryController.viewFunctionVersion = async (req, res, next) => {
       timeout: timeout + ' sec',
       ephemeralStorage: response.Configuration.EphemeralStorage.Size + ' MB',
       linkToFunc: response.Code.Location
-    }
+    } as VersionInfo
+
     res.locals.versionInfo = versionInfo;
     return next();
   } catch (err) {
@@ -80,18 +91,22 @@ versionHistoryController.viewFunctionVersion = async (req, res, next) => {
 }
 
 versionHistoryController.getAlias = async (req, res, next) => {
-  const { funcName } = req.body;
+  const { funcName }: FuncNameBody = req.body;
   try {
-    const client = new LambdaClient({
+    const client: LambdaClient = new LambdaClient({
       credentials: res.locals.creds.roleCreds,
       region: res.locals.creds.region,  //this should come from front end - req.query
     });
+
     const input = {
       FunctionName: funcName
     }
-    const command = new ListAliasesCommand(input);
-    const aliasList = await client.send(command);
-    const list = aliasList.Aliases
+
+    const command: ListAliasesCommand = new ListAliasesCommand(input);
+    const aliasList: ListAliasesCommandOutput = await client.send(command);
+    
+    const list: any = aliasList.Aliases
+
     list.forEach(alias => {
       if(!alias.RoutingConfig)  alias.weight = 1.00;   
       else{
@@ -104,6 +119,7 @@ versionHistoryController.getAlias = async (req, res, next) => {
         alias.weight = 1.00 - val;
       }
     })
+
     
     res.locals.aliasList = list;
     return next();
@@ -116,4 +132,4 @@ versionHistoryController.getAlias = async (req, res, next) => {
   }
 }
 
-module.exports = versionHistoryController;
+export default versionHistoryController;

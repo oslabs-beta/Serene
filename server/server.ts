@@ -59,7 +59,7 @@ app.use((err: ErrorRequestHandler, req: Request, res: Response, next: NextFuncti
   res.status(errorObj.status).json(errorObj.message);
 });
 
-const server = app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+const server = app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
 // export const handler = app;
 export default server;

@@ -21,7 +21,14 @@ lambdaController.getFunctions = async (req: Request, res: Response, next: NextFu
     // console.log('data: ', data);
 
     const funcList = data.Functions;
-    const functions = [];
+
+    type arrayFiller = {
+      name: string,
+      description: string,
+      arn: string
+    }
+    const functions: arrayFiller[] = [];
+
     funcList.forEach(el => {
       functions.push({
         name: el.FunctionName,
