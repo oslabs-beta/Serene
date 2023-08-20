@@ -27,6 +27,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2",
     "react-spinners-kit": "^1.9.1",
+    "react-tsparticles": "^2.12.2",
     "react-xarrows": "^2.0.2",
     "reactjs-popup": "^2.0.5",
     "scss": "^0.2.4",
