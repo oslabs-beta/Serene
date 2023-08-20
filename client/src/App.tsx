@@ -20,6 +20,7 @@ export const UserContext = createContext();
 export const FunctionArnContext = createContext();
 export const FunctionDataContext = createContext();
 export const WarmingContext = createContext();
+export const RegionContext = createContext();
 
 function App() {
   // const [data, setData] = useState([]);
@@ -28,6 +29,7 @@ function App() {
   const [funcName, setFuncName] = useState('SELECT A FUNCTION');
   const [currentUser, setCurrentUser] = useState('');
   const [funcArn, setFuncArn] = useState('SELECT FUNC ARN')
+  const [region, setRegion] = useState('us-east-1')
   const [funcData, setFuncData] = useState([])
   const [warmArray, setWarmArray] = useState([]);
 
@@ -37,6 +39,7 @@ function App() {
       <FunctionContext.Provider value={{ funcName, setFuncName }}>
       <FunctionArnContext.Provider value={{ funcArn, setFuncArn }}>
       <FunctionDataContext.Provider value={{ funcData, setFuncData }}>
+      <RegionContext.Provider value={{ region, setRegion}}>
       <WarmingContext.Provider value={{ warmArray, setWarmArray}}>
         <UserContext.Provider value={{ currentUser, setCurrentUser }}>
           <Routes>
@@ -53,6 +56,7 @@ function App() {
           </Routes>
         </UserContext.Provider>
       </WarmingContext.Provider>
+      </RegionContext.Provider>
       </FunctionDataContext.Provider>
       </FunctionArnContext.Provider>
       </FunctionContext.Provider>

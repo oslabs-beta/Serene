@@ -59,9 +59,9 @@ const Warming = ({}: Props) => {
     }
   };
 
-  useEffect(() => {
-    if (funcName !== 'SELECT A FUNCTION') handleStartButton();
-  }, []);
+  // useEffect(() => {
+  //   if (funcName !== 'SELECT A FUNCTION') handleStartButton();
+  // }, []);
 
   const navigate = useNavigate();
 

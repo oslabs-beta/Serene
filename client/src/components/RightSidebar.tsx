@@ -4,7 +4,7 @@ import FunctionDetails from './FunctionDetails';
 import { test } from '../shared';
 import waves5 from '../assets/waves5.png';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserContext, FunctionArnContext } from '@/App';
+import { UserContext, FunctionArnContext, RegionContext } from '@/App';
 import Popup from 'reactjs-popup';
 
 type Props = {};
@@ -15,16 +15,29 @@ const RightSideBar = (props: Props) => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const { funcArn, setFuncArn } = useContext(FunctionArnContext);
   const [usernameField, setUsernameField] = useState('')
-  const [ArnField, setArnField] = useState('')
+  const [arnField, setArnField] = useState('')
+  const [regionField, setRegionField] = useState('')
+  const { region, setRegion } = useContext(RegionContext)
 
-  const handleUsernameChange = (e) => {
-    setUsernameField(e.target.value);
+
+  // const handleUsernameChange = (e) => {
+  //   setUsernameField(e.target.value);
+  // };
+  // const handleUsernameSubmit = (e) => {
+  //   e.preventDefault();
+  //   setCurrentUser(usernameField)
+  //   console.log('New username:', usernameField);
+  //   setUsernameField('');
+  // };
+
+  const handleRegionChange = (e) => {
+    setRegionField(e.target.value);
   };
-  const handleUsernameSubmit = (e) => {
+  const handleRegionSubmit = (e) => {
     e.preventDefault();
-    setCurrentUser(usernameField)
-    console.log('New username:', usernameField);
-    setUsernameField('');
+    setRegion(regionField)
+    console.log('New region:', regionField);
+    setRegionField('');
   };
 
   const handleArnChange = (e) => {
@@ -32,8 +45,8 @@ const RightSideBar = (props: Props) => {
   };
   const handleArnSubmit = (e) => {
     e.preventDefault();
-    setFuncArn(ArnField)
-    console.log('New ARN:', ArnField);
+    setFuncArn(arnField)
+    console.log('New ARN:', arnField);
     setArnField('');
   };
 
@@ -78,7 +91,27 @@ const RightSideBar = (props: Props) => {
   // })}, [funcName]);
 
 
+  const handleUpdate = async () => {
+    try {
+      const body = {
+        newARN: arnField,
+        newRegion: region
+      }
+      const res = await fetch('/api/user/edit', {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+      console.log('fetch (patch) successful')
+      const parsedRes = await res.json();
+      console.log('updateUser response: ', parsedRes)
+    } catch (error) {
+      console.log('ERROR sending update patch: ', error)
+    }
 
+  }
 
 
 
@@ -185,7 +218,7 @@ const RightSideBar = (props: Props) => {
                       id="userInput"
                       className="border border-gray-300 p-1 rounded-lg w-full"
                       placeholder="Enter new username"
-                      value={usernameField}
+                      value={regionField}
                       // onChange={}
                     />
                     <button
@@ -200,7 +233,7 @@ const RightSideBar = (props: Props) => {
             </div>
 
 
-            <div className="">
+            {/* <div className="">
               <Popup
                 trigger={<button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md  border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out' >Update Profile</button>}
                 position="left center"
@@ -229,7 +262,7 @@ const RightSideBar = (props: Props) => {
                   </form>
                 </div>
               </Popup>
-            </div>
+            </div> */}
 
             <button
               className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out"
