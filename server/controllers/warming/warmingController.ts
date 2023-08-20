@@ -15,13 +15,18 @@ Notes:
 // only sends back a status
 // allows user to navigate site while the algorithm completes
 warmingController.warmFunction = async (req: Request, res: Response, next: NextFunction) => {
+  // intervalVar in minutes and maxDuration in hours
   const { functionArn, intervalVar, maxDuration }: WarmingReqBody = req.body;
+  // intervalVar * 60000
+  const newInterval: number = intervalVar * 60000;
+  // maxDuration * 3600000
+  const newDuration: number = maxDuration * 3600000;
   try {
     const client: LambdaClient = new LambdaClient({
       credentials: res.locals.creds.roleCreds,
       region: res.locals.creds.region, //this should come from front end - req.query
     });
-
+    // console.log('interval, duration: ', newInterval, newDuration)
     const params = {
       FunctionName: functionArn,
     };
@@ -33,32 +38,30 @@ warmingController.warmFunction = async (req: Request, res: Response, next: NextF
     const warming = setInterval(async () => {
       // invoke the function once every interval
       const response: InvokeCommandOutput = await client.send(command)
-
       // increment the counter by the interval every invocation
-      counter += intervalVar;
-
+      counter += newInterval;
+      
+      let percent: number = counter / newDuration
+      console.log(`${percent * 100}% complete`)
+      
       // once the counter is greater than or equal to the maxDuration, kill the interval
-      if(counter >= maxDuration){
+      if(counter >= newDuration){
         clearInterval(warming);
         console.log('finished')
       }
-    }, intervalVar); // frequency of invocation
+    }, newInterval); // frequency of invocation
 
-    // intervalVar: 3600000 (once every hour)
-    // userMaxInput: 604800000 (run for a week)
-
-    // const interval = 5000;
-    // const maxInput = 60000;
+    // tested methodology with console.logs
     // const warmingTest = setInterval(async () => {
-
-    //   counter += interval
+    //   console.log('in interval')
+    //   counter += newInterval
     //   console.log(`increment at ${counter} ms`)
-
-    //   if(counter >= maxInput){
+      
+    //   if(counter >= newDuration){
     //     clearInterval(warmingTest);
     //     console.log('finished')
     //   }
-    // }, interval)
+    // }, newInterval)
     
     return next();
   } catch (err) {
