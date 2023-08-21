@@ -1,3 +1,7 @@
+![serene](https://github.com/oslabs-beta/Serene/assets/112911565/95f391d2-3d11-419e-9b61-385d743fa57e)
+
+SERENE
+
 ![image](https://github.com/kenniford/kenniford/assets/112911565/f5bf3a2c-f5a4-4360-84af-d1c3f5b59c8c)
 ![image](https://github.com/kenniford/kenniford/assets/112911565/a3ab678f-8ecc-460a-800a-933654c18518)
 ![image](https://github.com/kenniford/kenniford/assets/112911565/e66a8697-f64c-41a2-b9eb-8f6a4c10d2eb)
@@ -17,10 +21,6 @@
 ![image](https://github.com/kenniford/kenniford/assets/112911565/96d64956-bfc6-4b9c-b90b-f0a450fc9234)
 ![image](https://github.com/kenniford/kenniford/assets/112911565/e6eec745-adb1-4d24-a19e-8766b0644d6b)
 ![image](https://github.com/kenniford/kenniford/assets/112911565/9e360dcd-27c0-4683-ab76-d67d882d3abc)
-![image](https://github.com/oslabs-beta/Serene/assets/112911565/17ad761e-fdc8-482e-9ce4-7eaf8791cb62)
-
-
-SERENE
 
 ⭐️ Star us on GitHub! ⭐️
 
