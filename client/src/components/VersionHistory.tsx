@@ -277,10 +277,10 @@ const VersionHistory = () => {
             </div>
           ) : (
             aliases.map((el) => (
-              <div className="group border-4 border-red-400 flex items-center ml-auto w-7/12">
+              <div className="group flex items-center ml-auto w-7/12">
                 <Popover placement="left">
                   <PopoverHandler className="border-2 border-white w-1/5 h-full p-1 mt-2 mb-1 transition duration-100 ease-in-out group-hover:scale-125 ml-0">
-                    <Button className="break-words">Alias {el.Name}</Button>
+                    <Button className="break-words mb-2">Alias {el.Name}</Button>
                   </PopoverHandler>
                   <PopoverContent className="border-black border-2 w-1/3">
                     <span>more version {el.FunctionVersion} details here</span>
@@ -288,7 +288,7 @@ const VersionHistory = () => {
                 </Popover>
 
                 {/* ARROW */}
-                <div className="flex relative w-10 h-20 transition-all duration-200 ease-in-out transform-growth ml-5 group-hover:w-1/3 border-2 border-purple-300">
+                <div className="flex relative w-10 h-20 transition-all duration-200 ease-in-out transform-growth ml-5 group-hover:w-1/3">
                   <svg className="w-full h-full overflow-visible">
                     <defs>
                       <marker

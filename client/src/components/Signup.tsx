@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import waves2 from '../assets/waves2.png';
 import { RegionContext } from '@/App';
@@ -10,10 +10,9 @@ const Signup = (props: Props) => {
   const [password, setPassword] = useState('');
   const [arnInput, setArnInput] = useState('');
   const [response, setResponse] = useState('');
-  const { region, setRegion } = useContext(RegionContext)
+  const { region, setRegion } = useContext(RegionContext);
 
   const navigate = useNavigate();
-
 
   const handleUsernameChange = (e: any) => {
     setUsername(e.target.value);
@@ -24,10 +23,10 @@ const Signup = (props: Props) => {
   const handleArnChange = (e: any) => {
     setArnInput(e.target.value);
   };
-    const handleRegionChange = (e: any) => {
+  const handleRegionChange = (e: any) => {
     setRegion(e.target.value);
   };
-    const awsConsoleURL = `https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/quickcreate?templateURL=https://komodobucket1.s3.amazonaws.com/komodoTestTemplate.json&stackName=komodoStack`
+  const awsConsoleURL = `https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/quickcreate?templateURL=https://komodobucket1.s3.amazonaws.com/komodoTestTemplate.json&stackName=komodoStack`;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -100,30 +99,38 @@ const Signup = (props: Props) => {
             />
             {/* </label> */}
           </div>
-          <select className="w-full p-1 text-black bg-white border-2 rounded-md shadow-sm outline-none appearance-none transition duration-300 ease-in-out hover:bg-black hover:border-2 border-white hover:text-white"
+          <select
+            className="w-full p-1 text-black bg-white border-2 rounded-md shadow-sm outline-none appearance-none transition duration-300 ease-in-out hover:bg-black hover:border-2 border-white hover:text-white"
             onChange={handleRegionChange}
           >
-              <option value="us-east-1" className='text-center'> ---- Select Region ---- </option>
-              <option value="us-east-1" >US East 1 (N. Virginia)</option>
-              <option value="us-east-2" >US East 2 (Ohio)</option>
-              <option value="us-west-1">US West 1 (N. California) </option>
-              <option value="us-west-2">US West 2 (Oregon)</option>
-              <option value="ap-south-1">AP South 1 (Mumbai)</option>
-              <option value="ap-northeast-1">AP Northeast 1 (Tokyo)</option>
-              <option value="ap-northeast-2">AP Northeast 2 (Seoul)</option>
-              <option value="ap-northeast-3">AP Northeast 3 (Osaka)</option>
-              <option value="ap-southeast-1">AP Southeast 1 (Singapore)</option>
-              <option value="ap-southeast-2">AP Southeast 2 (Sydney)</option>
-              <option value="ca-central-1">CA Central 1 (Canada)</option>
-              <option value="eu-central-1">Europe Central 1 (Frankfurt)</option>
-              <option value="eu-west-1">Europe West 1 (Ireland)</option>
-              <option value="eu-west-2">Europe West 2 (London)</option>
-              <option value="eu-west-3">Europe West 3 (Paris)</option>
-              <option value="eu-north-1">EU North 1 (Stockholm)</option>
-              <option value="sa-east-1">SA East 1 (Sao Paulo)</option>
+            <option value="us-east-1" className="text-center">
+              {' '}
+              ---- Select Region ----{' '}
+            </option>
+            <option value="us-east-1">US East 1 (N. Virginia)</option>
+            <option value="us-east-2">US East 2 (Ohio)</option>
+            <option value="us-west-1">US West 1 (N. California) </option>
+            <option value="us-west-2">US West 2 (Oregon)</option>
+            <option value="ap-south-1">AP South 1 (Mumbai)</option>
+            <option value="ap-northeast-1">AP Northeast 1 (Tokyo)</option>
+            <option value="ap-northeast-2">AP Northeast 2 (Seoul)</option>
+            <option value="ap-northeast-3">AP Northeast 3 (Osaka)</option>
+            <option value="ap-southeast-1">AP Southeast 1 (Singapore)</option>
+            <option value="ap-southeast-2">AP Southeast 2 (Sydney)</option>
+            <option value="ca-central-1">CA Central 1 (Canada)</option>
+            <option value="eu-central-1">Europe Central 1 (Frankfurt)</option>
+            <option value="eu-west-1">Europe West 1 (Ireland)</option>
+            <option value="eu-west-2">Europe West 2 (London)</option>
+            <option value="eu-west-3">Europe West 3 (Paris)</option>
+            <option value="eu-north-1">EU North 1 (Stockholm)</option>
+            <option value="sa-east-1">SA East 1 (Sao Paulo)</option>
           </select>
-          <button className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 my-3 ease-in-out hover:scale-110 hover:bg-black hover:border-2 border-white hover:text-white"><a href={awsConsoleURL} target='_blank'>Connect Your AWS Account</a></button>
-            
+          <button className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 my-3 ease-in-out hover:scale-110 hover:bg-black hover:border-2 border-white hover:text-white">
+            <a href={awsConsoleURL} target="_blank">
+              Connect Your AWS Account
+            </a>
+          </button>
+
           <button
             type="submit"
             className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 ease-in-out hover:scale-110 hover:bg-black hover:border-2 border-white hover:text-white"

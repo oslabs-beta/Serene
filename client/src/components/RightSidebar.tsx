@@ -14,11 +14,10 @@ const RightSideBar = (props: Props) => {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const { funcArn, setFuncArn } = useContext(FunctionArnContext);
-  const [usernameField, setUsernameField] = useState('')
-  const [arnField, setArnField] = useState('')
-  const [regionField, setRegionField] = useState('')
-  const { region, setRegion } = useContext(RegionContext)
-
+  const [usernameField, setUsernameField] = useState('');
+  const [arnField, setArnField] = useState('');
+  const [regionField, setRegionField] = useState('');
+  const { region, setRegion } = useContext(RegionContext);
 
   // const handleUsernameChange = (e) => {
   //   setUsernameField(e.target.value);
@@ -35,7 +34,7 @@ const RightSideBar = (props: Props) => {
   };
   const handleRegionSubmit = (e) => {
     e.preventDefault();
-    setRegion(regionField)
+    setRegion(regionField);
     console.log('New region:', regionField);
     setRegionField('');
   };
@@ -45,7 +44,7 @@ const RightSideBar = (props: Props) => {
   };
   const handleArnSubmit = (e) => {
     e.preventDefault();
-    setFuncArn(arnField)
+    setFuncArn(arnField);
     console.log('New ARN:', arnField);
     setArnField('');
   };
@@ -66,7 +65,6 @@ const RightSideBar = (props: Props) => {
       });
   };
 
-
   const handleDelete = () => {
     fetch('/api/user/delete', {
       method: 'DELETE',
@@ -85,37 +83,31 @@ const RightSideBar = (props: Props) => {
 
   // useEffect(() => {
   //   FetchUser().then((returnedUserData) => {
-      // setCurrentUser(returnedUserData);
+  // setCurrentUser(returnedUserData);
   //     // console.log('data is reset: ', funcData);
   //   //data logic here
   // })}, [funcName]);
-
 
   const handleUpdate = async () => {
     try {
       const body = {
         newARN: arnField,
-        newRegion: region
-      }
+        newRegion: region,
+      };
       const res = await fetch('/api/user/edit', {
         method: 'PATCH',
         headers: {
-          'Content-type': 'application/json'
+          'Content-type': 'application/json',
         },
-        body: JSON.stringify(body)
-      })
-      console.log('fetch (patch) successful')
+        body: JSON.stringify(body),
+      });
+      console.log('fetch (patch) successful');
       const parsedRes = await res.json();
-      console.log('updateUser response: ', parsedRes)
+      console.log('updateUser response: ', parsedRes);
     } catch (error) {
-      console.log('ERROR sending update patch: ', error)
+      console.log('ERROR sending update patch: ', error);
     }
-
-  }
-
-
-
-
+  };
 
   return (
     <div>
@@ -166,18 +158,20 @@ const RightSideBar = (props: Props) => {
             {test}
           </h3>
           <div className="flex flex-col items-center my-4 ml-20 z-40">
-           
-           
             {/* <!-- Modal toggle -->   */}
             <div className="">
               <Popup
-                trigger={<button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out' >Update Arn</button>}
+                trigger={
+                  <button className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out">
+                    Update Arn
+                  </button>
+                }
                 position="left center"
               >
                 <div className=" h-1/3 border-2 border-white w-2/3 bg-white">
                   Update your ARN here
                   <br />
-                  <form onSubmit={handleArnSubmit}> 
+                  <form onSubmit={handleArnSubmit}>
                     <label htmlFor="arnInput" className="block mb-2">
                       ARN:
                     </label>
@@ -201,26 +195,64 @@ const RightSideBar = (props: Props) => {
 
             <div className="">
               <Popup
-                trigger={<button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md  border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out' >Update Region</button>}
+                trigger={
+                  <button className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md  border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out">
+                    Update Region
+                  </button>
+                }
                 position="left center"
               >
                 <div className=" h-1/3 border-2 border-white w-2/3 bg-white">
                   Update your region here
                   <br />
-                  <form 
-                  // onSubmit={}
-                  >
+                  <form onSubmit={handleRegionSubmit}>
                     <label htmlFor="regionInput" className="block mb-2">
                       New region:
                     </label>
-                    <input
-                      type="text"
-                      id="userInput"
-                      className="border border-gray-300 p-1 rounded-lg w-full"
-                      placeholder="Enter new username"
-                      value={regionField}
-                      // onChange={}
-                    />
+
+                    <select
+                      className="w-full p-1 text-black bg-white border-2 rounded-md shadow-sm outline-none appearance-none transition duration-300 ease-in-out hover:bg-black hover:border-2 border-white hover:text-white"
+                      onChange={handleRegionChange}
+                    >
+                      <option value="us-east-1" className="text-center">
+                        {' '}
+                        ---- Select Region ----{' '}
+                      </option>
+                      <option value="us-east-1">US East 1 (N. Virginia)</option>
+                      <option value="us-east-2">US East 2 (Ohio)</option>
+                      <option value="us-west-1">
+                        US West 1 (N. California){' '}
+                      </option>
+                      <option value="us-west-2">US West 2 (Oregon)</option>
+                      <option value="ap-south-1">AP South 1 (Mumbai)</option>
+                      <option value="ap-northeast-1">
+                        AP Northeast 1 (Tokyo)
+                      </option>
+                      <option value="ap-northeast-2">
+                        AP Northeast 2 (Seoul)
+                      </option>
+                      <option value="ap-northeast-3">
+                        AP Northeast 3 (Osaka)
+                      </option>
+                      <option value="ap-southeast-1">
+                        AP Southeast 1 (Singapore)
+                      </option>
+                      <option value="ap-southeast-2">
+                        AP Southeast 2 (Sydney)
+                      </option>
+                      <option value="ca-central-1">
+                        CA Central 1 (Canada)
+                      </option>
+                      <option value="eu-central-1">
+                        Europe Central 1 (Frankfurt)
+                      </option>
+                      <option value="eu-west-1">Europe West 1 (Ireland)</option>
+                      <option value="eu-west-2">Europe West 2 (London)</option>
+                      <option value="eu-west-3">Europe West 3 (Paris)</option>
+                      <option value="eu-north-1">EU North 1 (Stockholm)</option>
+                      <option value="sa-east-1">SA East 1 (Sao Paulo)</option>
+                    </select>
+
                     <button
                       type="submit"
                       className="border-2 border-black mt-2"
@@ -231,7 +263,6 @@ const RightSideBar = (props: Props) => {
                 </div>
               </Popup>
             </div>
-
 
             {/* <div className="">
               <Popup
@@ -264,12 +295,33 @@ const RightSideBar = (props: Props) => {
               </Popup>
             </div> */}
 
-            <button
-              className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out"
-              onClick={() => handleDelete()}
-            >
-              Delete Account
-            </button>
+            <div className="">
+              <Popup
+                trigger={
+                  <button className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out">
+                    Delete Account
+                  </button>
+                }
+                position="left center"
+              >
+                <div className=" h-1/3 border-2 border-white w-2/3 bg-white">
+                  Are you sure you want to delete your account?
+                  <br />
+                  <button
+                    onClick={handleDelete}
+                    className="border-2 border-black mt-2 mr-2"
+                  >
+                    Yes, Delete
+                  </button>
+                  <button
+                    onClick={close}
+                    className="border-2 border-black mt-2"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </Popup>
+            </div>
 
             {/* <button className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out">
               Add Arn

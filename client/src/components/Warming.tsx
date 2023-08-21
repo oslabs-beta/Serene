@@ -54,7 +54,41 @@ const Warming = ({}: Props) => {
   const handleStartButton = () => {
     //make fetch request
     if (!warmArray.includes(funcName)) {
-      // warmArray.push(funcName);
+      FetchWarmFunction();
+      setWarmArray([...warmArray, funcName]);
+    }
+  };
+
+const EndWarmFunction = async () => {
+    //need logName, streamName, region
+    const body = {
+      functionArn: funcArn,
+      intervalVar: intervalValue,
+      maxDuration: durationValue,
+    };
+    try {
+      const response = await fetch('/api/warming/functions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+
+      const data = await response.json();
+      console.log('response from warming ', data);
+      return data;
+    } catch (error) {
+      console.log('Warming Func Error: ', error);
+    }
+  };
+
+
+
+  const handleEndButton = () => {
+    //make fetch request
+    if (!warmArray.includes(funcName)) {
+      FetchWarmFunction();
       setWarmArray([...warmArray, funcName]);
     }
   };
@@ -132,7 +166,7 @@ const Warming = ({}: Props) => {
           <h1 className="font-semibold text-2xl mt-10">
             WARMING FUNCTION: {funcName.toUpperCase()}{' '}
           </h1>
-          <p className='mb-10'>
+          <p className="mb-10">
             EVERY {intervalValue} MINUTE(S) FOR {durationValue} HOUR(S)
           </p>
           <div className="flex mx-2">
@@ -171,7 +205,7 @@ const Warming = ({}: Props) => {
             mt-6
             "
             onClick={() => {
-              handleStartButton();
+              handleStartButton;
             }}
           >
             {' '}
@@ -183,15 +217,15 @@ const Warming = ({}: Props) => {
             mt-6
             "
             onClick={() => {
-              //end warming
+              handleEndButton;
             }}
           >
             {' '}
             End Warming
           </button>
-          <div></div>
+
           <div>
-            <h1 className='font-semibold'>Currently Warming</h1>
+            <h1 className="font-semibold">Currently Warming</h1>
             <div>
               {warmArray.length !== 0
                 ? warmArray.map((el) => <div>{el}</div>)

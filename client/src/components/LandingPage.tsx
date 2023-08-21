@@ -106,41 +106,50 @@ const LandingPage = (props: Props) => {
             comme Aldus PageMaker.
           </div>
         </div>
-        <div className="bg-gray-200 text-center font-semibold text-5xl py-10">
+        <div className="bg-gray-200 text-center font-semibold text-5xl py-10 border-2 border-black">
           HOW TO GET STARTED
         </div>
-        <div className="bg-gray-200 border-2 border-black flex justify-center">
-          <p className="mb-4">
-            {' '}
-            Le Lorem Ipsum est simplement du faux texte employé dans la
-            composition et la mise en page avant impression. Le Lorem Ipsum est
-            le faux texte standard de l'imprimerie depuis les années 1500, quand
-            un imprimeur anonyme assembla ensemble des morceaux de texte pour
-            réaliser un livre spécimen de polices de texte.
-          </p>
-          <p className="mb-4">
-            Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à
-            la bureautique informatique, sans que son contenu n'en soit modifié.
-            Il a été popularisé dans les années 1960 grâce à la vente de
-            feuilles
-          </p>
-          <p className="mb-4">
-            {' '}
-            Letraset contenant des passages du Lorem Ipsum, et, plus récemment,
-            par son inclusion dans des applications de mise en page de texte,
-            comme Aldus PageMaker.{' '}
-          </p>
-          <p>
-            {' '}
-            Contrairement à une opinion répandue, le Lorem Ipsum n'est pas
-            simplement du texte aléatoire. Il trouve ses racines dans une oeuvre
-            de la littérature latine classique datant de 45 av. J.-C., le
-            rendant vieux de 2000 ans.{' '}
-          </p>
+        <div>
+          
         </div>
-        <div className="flex-col bg-gray-200 border-2 border-black text-center ">
+
+        
+        
+
+        <div className="flex-col bg-gray-200 border-2 border-green-400 text-center ">
           <div>MEET THE TEAM</div>
-          <div className="flex items-center justify-around flex-1 ">
+          <div className="bg-gray-200 border-2 border-pink-400 flex justify-center ">
+          <div className='w-1/4 border-2 border-black'>
+            <p className="mb-4">
+              {' '}
+              Arianna
+            </p>
+            <div>IMAGE HERE</div>
+          </div>
+          <div className='w-1/4 border-2 border-black'>
+            <p className="mb-4">
+              {' '}
+              Kyle
+            </p>
+            <div>IMAGE HERE</div>
+          </div>
+          <div className='w-1/4 border-2 border-black'>
+            <p className="mb-4">
+              {' '}
+              Wade
+            </p>
+            <div>IMAGE HERE</div>
+          </div>
+          <div className='w-1/4 border-2 border-black'>
+            <p className="mb-4">
+              {' '}
+              Kenny
+            </p>
+            <div>IMAGE HERE</div>
+          </div>
+        </div>
+
+          {/* <div className="flex items-center justify-around flex-1 ">
             <div className="flex flex-col w-1/5 h-25 object-cover">
               <img
                 className="w-2/3"
@@ -169,7 +178,8 @@ const LandingPage = (props: Props) => {
               />
               Kenny
             </div>
-          </div>
+          </div> */}
+
         </div>
       </div>
       {/* FOOTER */}
