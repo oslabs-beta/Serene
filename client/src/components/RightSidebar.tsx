@@ -32,22 +32,24 @@ const RightSideBar = (props: Props) => {
   const handleRegionChange = (e) => {
     setRegionField(e.target.value);
   };
-  const handleRegionSubmit = (e) => {
-    e.preventDefault();
-    setRegion(regionField);
-    console.log('New region:', regionField);
-    setRegionField('');
-  };
+
+  // const handleRegionSubmit = (e) => {
+  //   e.preventDefault();
+  //   setRegion(regionField);
+  //   console.log('New region:', regionField);
+  //   setRegionField('');
+  // };
 
   const handleArnChange = (e) => {
     setArnField(e.target.value);
   };
-  const handleArnSubmit = (e) => {
-    e.preventDefault();
-    setFuncArn(arnField);
-    console.log('New ARN:', arnField);
-    setArnField('');
-  };
+
+  // const handleArnSubmit = (e) => {
+  //   e.preventDefault();
+  //   setFuncArn(arnField);
+  //   console.log('New ARN:', arnField);
+  //   setArnField('');
+  // };
 
   const handleSignOut = () => {
     fetch('/api/user/logout', {
@@ -90,10 +92,13 @@ const RightSideBar = (props: Props) => {
 
   const handleUpdate = async () => {
     try {
-      const body = {
-        newARN: arnField,
-        newRegion: region,
-      };
+      const body = {};
+      if (regionField !== ''){
+        body.newRegion = regionField
+      } else if (arnField !== ''){
+        body.newARN= arnField
+      }
+      
       const res = await fetch('/api/user/edit', {
         method: 'PATCH',
         headers: {
@@ -104,6 +109,8 @@ const RightSideBar = (props: Props) => {
       console.log('fetch (patch) successful');
       const parsedRes = await res.json();
       console.log('updateUser response: ', parsedRes);
+      setRegionField('')
+      setArnField('')
     } catch (error) {
       console.log('ERROR sending update patch: ', error);
     }
@@ -171,7 +178,7 @@ const RightSideBar = (props: Props) => {
                 <div className=" h-1/3 border-2 border-white w-2/3 bg-white">
                   Update your ARN here
                   <br />
-                  <form onSubmit={handleArnSubmit}>
+                  <form onSubmit={handleUpdate}>
                     <label htmlFor="arnInput" className="block mb-2">
                       ARN:
                     </label>
@@ -205,13 +212,13 @@ const RightSideBar = (props: Props) => {
                 <div className=" h-1/3 border-2 border-white w-2/3 bg-white">
                   Update your region here
                   <br />
-                  <form onSubmit={handleRegionSubmit}>
+                  <form onSubmit={handleUpdate}>
                     <label htmlFor="regionInput" className="block mb-2">
                       New region:
                     </label>
 
                     <select
-                      className="w-full p-1 text-black bg-white border-2 rounded-md shadow-sm outline-none appearance-none transition duration-300 ease-in-out hover:bg-black hover:border-2 border-white hover:text-white"
+                      className="w-full p-1 text-black bg-white border-2 border-black rounded-md shadow-sm outline-none appearance-none transition duration-300 ease-in-out hover:bg-black hover:border-2 hover:text-white"
                       onChange={handleRegionChange}
                     >
                       <option value="us-east-1" className="text-center">

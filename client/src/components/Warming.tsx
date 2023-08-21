@@ -59,39 +59,39 @@ const Warming = ({}: Props) => {
     }
   };
 
-const EndWarmFunction = async () => {
-    //need logName, streamName, region
-    const body = {
-      functionArn: funcArn,
-      intervalVar: intervalValue,
-      maxDuration: durationValue,
-    };
-    try {
-      const response = await fetch('/api/warming/functions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      });
+// const EndWarmFunction = async () => {
+//     //need logName, streamName, region
+//     const body = {
+//       functionArn: funcArn,
+//       intervalVar: intervalValue,
+//       maxDuration: durationValue,
+//     };
+//     try {
+//       const response = await fetch('/api/warming/functions', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(body),
+//       });
 
-      const data = await response.json();
-      console.log('response from warming ', data);
-      return data;
-    } catch (error) {
-      console.log('Warming Func Error: ', error);
-    }
-  };
+//       const data = await response.json();
+//       console.log('response from warming ', data);
+//       return data;
+//     } catch (error) {
+//       console.log('Warming Func Error: ', error);
+//     }
+//   };
 
 
 
-  const handleEndButton = () => {
-    //make fetch request
-    if (!warmArray.includes(funcName)) {
-      FetchWarmFunction();
-      setWarmArray([...warmArray, funcName]);
-    }
-  };
+  // const handleEndButton = () => {
+  //   //make fetch request
+  //   if (!warmArray.includes(funcName)) {
+  //     FetchWarmFunction();
+  //     setWarmArray([...warmArray, funcName]);
+  //   }
+  // };
 
   // useEffect(() => {
   //   if (funcName !== 'SELECT A FUNCTION') handleStartButton();
