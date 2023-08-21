@@ -23,7 +23,7 @@ const app: Express = express();
 const PORT: number = 3000;
 
 // grab our access key from .env and connect to MongoDB
-const ACCESS_KEY: any = process.env.ACCESS_KEY
+const ACCESS_KEY: string = process.env.ACCESS_KEY!
 
 mongoose.connect(ACCESS_KEY, { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions);
 
