@@ -99,14 +99,35 @@ userController.updateUser = async (req, res, next) => {
   try {
     // filter: _id
     // new information: ARN, region
-    const updated: UserInfo = await User.findOneAndUpdate(
-      { _id: req.cookies.SSID },
-      { ARN: newARN, region: newRegion },
-      { new: true }
-    );
+    if(newARN && newRegion){
+      const updated: UserInfo = await User.findOneAndUpdate(
+        { _id: req.cookies.SSID },
+        { ARN: newARN, region: newRegion },
+        { new: true }
+      );
+      res.locals.updatedUser = updated;
+      return next();
+    }
 
-    res.locals.updatedUser = updated;
-    return next();
+    if(newARN && !newRegion){
+      const updated: UserInfo = await User.findOneAndUpdate(
+        { _id: req.cookies.SSID },
+        { ARN: newARN },
+        { new: true }
+      );
+      res.locals.updatedUser = updated;
+      return next();
+    }
+
+    if(!newARN && newRegion){
+      const updated: UserInfo = await User.findOneAndUpdate(
+        { _id: req.cookies.SSID },
+        { region: newRegion },
+        { new: true }
+      );
+      res.locals.updatedUser = updated;
+      return next();
+    }
   } catch (err) {
     return next({
       log: `The following error occured: ${err}`,

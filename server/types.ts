@@ -37,8 +37,8 @@ export type Login = {
 }
 
 export type UpdatedUserInfo = {
-  newRegion: string,
-  newARN: string
+  newRegion?: string,
+  newARN?: string
 }
 
 
