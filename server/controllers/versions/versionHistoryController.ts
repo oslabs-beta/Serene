@@ -24,10 +24,11 @@ versionHistoryController.viewVersionList = async (req, res, next) => {
     const versionRes: ListVersionsByFunctionCommandOutput = await client.send(command)
 
     // fix any type
-    const versions = {} as any;
+    const versions = {} as VersionObject;
+
 
     versionRes.Versions.forEach(func => {
-      versions[func.Version] = func.FunctionArn
+      versions[func.Version as keyof VersionObject] = func.FunctionArn
     })
 
     res.locals.versionList = versions

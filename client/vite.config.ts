@@ -18,7 +18,8 @@ export default defineConfig({
     }
   },
   server: {
-    host: '127.0.0.1',
+    host: true,
+    strictPort: true,
     port: 5173,
     proxy: {
       "/api": {
@@ -29,6 +30,9 @@ export default defineConfig({
         // secure: false,
       },
     },
+    watch: {
+      usePolling: true
+    }
   },
 })
 

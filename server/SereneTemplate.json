@@ -1,8 +1,8 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Creation of Role for komodo",
+  "Description": "Creation of Role for Serene",
   "Resources": {
-    "KomodoRole": {
+    "SereneRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -12,7 +12,7 @@
               "Sid": "Statement1",
               "Effect": "Allow",
               "Principal": {
-                "AWS": "arn:aws:iam::287836476382:user/komodoUser1"
+                "AWS": "arn:aws:iam::287836476382:user/SereneUserParent"
               },
               "Action": "sts:AssumeRole"
             }
@@ -20,7 +20,7 @@
         },
         "Policies": [
           {
-            "PolicyName": "KomodoPolicy",
+            "PolicyName": "SerenePolicy",
             "PolicyDocument": {
               "Version": "2012-10-17",
               "Statement": [

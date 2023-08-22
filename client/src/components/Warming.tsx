@@ -51,13 +51,14 @@ const Warming = ({}: Props) => {
     }
   };
 
-  const handleStartButton = () => {
+  const handleStartButton = async () => {
     //make fetch request
     if (!warmArray.includes(funcName)) {
       // warmArray.push(funcName);
       setWarmArray([...warmArray, funcName]);
     }
   };
+
 
   // useEffect(() => {
   //   if (funcName !== 'SELECT A FUNCTION') handleStartButton();
@@ -174,6 +175,7 @@ const Warming = ({}: Props) => {
               handleStartButton();
             }}
           >
+            
             {' '}
             Start Warming
           </button>

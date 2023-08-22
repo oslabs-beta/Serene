@@ -35,7 +35,7 @@ stsController.getCredentials = async (req: Request, res: Response, next: NextFun
 
     const params: AssumeRoleCommandInput = {
       RoleArn: ARN, //this is IAM role arn that we get from frontend
-      RoleSessionName: 'Komodo_Session',
+      RoleSessionName: 'Serene_Session',
     };
     
     // create and send the command from the client
