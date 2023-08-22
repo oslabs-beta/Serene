@@ -34,7 +34,7 @@ Serene is building an exciting developer tool to help monitor AWS lambda resourc
       <br />
       <sub><b>Arianna Newynn</b></sub>
       <br />
-      <a href="" target="_blank"><img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="20"/></a>
+      <a href="https://www.linkedin.com/in/ariannanguyen/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="20"/></a>
       <a href="https://github.com/dahliarianna" target="_blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20"/></a>
     </td>
     <td align="center">
