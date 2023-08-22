@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import Functions from './Functions';
 import FunctionDetails from './FunctionDetails';
-import { test } from '../shared';
+import { profile } from '../shared';
 import waves5 from '../assets/waves5.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext, FunctionArnContext, RegionContext } from '@/App';
@@ -83,6 +83,7 @@ const RightSideBar = (props: Props) => {
       });
   };
 
+
   // useEffect(() => {
   //   FetchUser().then((returnedUserData) => {
   // setCurrentUser(returnedUserData);
@@ -118,13 +119,13 @@ const RightSideBar = (props: Props) => {
 
   return (
     <div>
-      <div className="mr-40">
+      {/* <div className="mr-40">
         CURRENT USERNAME IS <br />
         {currentUser}
-      </div>
+      </div> */}
       {showSidebar ? (
         <button
-          className="flex text-4xl text-black items-center cursor-pointer fixed right-8 top-6 z-50 transition duration-400 ease-in-out hover:rotate-90"
+          className="flex text-5xl text-black items-center cursor-pointer fixed right-8 top-6 z-50 transition duration-400 ease-in-out hover:rotate-90"
           onClick={() => setShowSidebar(!showSidebar)}
         >
           x
@@ -136,10 +137,10 @@ const RightSideBar = (props: Props) => {
           strokeWidth={1.5}
           stroke="currentColor"
           onClick={() => setShowSidebar(!showSidebar)}
-          className="fixed  z-40 flex items-center cursor-pointer right-8 top-6"
-          viewBox="-40 0 20 100"
-          width="150"
-          height="150"
+          className="fixed  z-40 flex items-center cursor-pointer right-4 top-6"
+          viewBox="10 0 5 25"
+          width="55"
+          height="55"
         >
           <path
             stroke-linecap="round"
@@ -162,11 +163,11 @@ const RightSideBar = (props: Props) => {
         />
         <div className="flex flex-col items-center justify-center">
           <h3 className="mt-10 ml-20 text-2xl font-semibold text-white">
-            {test}
+            {profile}
           </h3>
-          <div className="flex flex-col items-center my-4 ml-20 z-40">
+          <div className="flex flex-col items-center my-4 ml-20 w-full z-40 ">
             {/* <!-- Modal toggle -->   */}
-            <div className="">
+            <div className="w-full">
               <Popup
                 trigger={
                   <button className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out">
@@ -175,23 +176,23 @@ const RightSideBar = (props: Props) => {
                 }
                 position="left center"
               >
-                <div className=" h-1/3 border-2 border-white w-2/3 bg-white">
-                  Update your ARN here
+                <div className=" h-1/3 border-2 border-white w-full bg-neutral-800 text-gray-300 p-4 flex flex-col items-center rounded-md shadow-lg">
+                <h1 className='font-semibold -mb-2'> UPDATE YOUR ARN HERE </h1>
                   <br />
-                  <form onSubmit={handleUpdate}>
+                  <form onSubmit={handleUpdate} className='flex flex-col '>
                     <label htmlFor="arnInput" className="block mb-2">
                       ARN:
                     </label>
                     <input
                       type="text"
                       id="arnInput"
-                      className="border border-gray-300 p-1 rounded-lg w-full"
+                      className="border border-gray-300 p-1 rounded-lg w-full text-black"
                       placeholder="Enter ARN..."
                       onChange={handleArnChange}
                     />
                     <button
                       type="submit"
-                      className="border-2 border-black mt-2"
+                      className="border-2 border-white mt-2 rounded-sm"
                     >
                       Submit Arn
                     </button>
@@ -200,7 +201,7 @@ const RightSideBar = (props: Props) => {
               </Popup>
             </div>
 
-            <div className="">
+            <div className="w-full">
               <Popup
                 trigger={
                   <button className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md  border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out">
@@ -209,16 +210,16 @@ const RightSideBar = (props: Props) => {
                 }
                 position="left center"
               >
-                <div className=" h-1/3 border-2 border-white w-2/3 bg-white">
-                  Update your region here
+                <div className=" h-1/3 border-2 border-white w-full bg-neutral-800 text-gray-300 p-4 flex flex-col items-center rounded-md shadow-lg ">
+                  <h1 className='font-semibold -mb-2'> UPDATE YOUR REGION HERE </h1>
                   <br />
-                  <form onSubmit={handleUpdate}>
+                  <form onSubmit={handleUpdate} className='flex flex-col '>
                     <label htmlFor="regionInput" className="block mb-2">
                       New region:
                     </label>
 
                     <select
-                      className="w-full p-1 text-black bg-white border-2 border-black rounded-md shadow-sm outline-none appearance-none transition duration-300 ease-in-out hover:bg-black hover:border-2 hover:text-white"
+                      className="w-full p-1 text-black bg-white border-2 border-white rounded-md shadow-sm outline-none appearance-none transition duration-300 ease-in-out hover:bg-black hover:border-2 hover:text-white"
                       onChange={handleRegionChange}
                     >
                       <option value="us-east-1" className="text-center">
@@ -262,9 +263,9 @@ const RightSideBar = (props: Props) => {
 
                     <button
                       type="submit"
-                      className="border-2 border-black mt-2"
+                      className="border-2 border-white mt-2 rounded-sm"
                     >
-                      Submit region
+                      Submit Region
                     </button>
                   </form>
                 </div>
@@ -302,7 +303,7 @@ const RightSideBar = (props: Props) => {
               </Popup>
             </div> */}
 
-            <div className="">
+            <div className="w-full">
               <Popup
                 trigger={
                   <button className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out">
@@ -311,18 +312,18 @@ const RightSideBar = (props: Props) => {
                 }
                 position="left center"
               >
-                <div className=" h-1/3 border-2 border-white w-2/3 bg-white">
+                <div className="h-1/3 border-2 border-white w-full bg-neutral-800 text-gray-300 p-4 flex flex-col items-center rounded-md shadow-lg">
                   Are you sure you want to delete your account?
                   <br />
                   <button
                     onClick={handleDelete}
-                    className="border-2 border-black mt-2 mr-2"
+                    className="border-2 border-white mt-2 rounded-sm px-3 w-1/3 hover:bg-red-500 hover:animate-pulse"
                   >
                     Yes, Delete
                   </button>
                   <button
                     onClick={close}
-                    className="border-2 border-black mt-2"
+                    className="border-2 border-white mt-2 rounded-sm px-3 w-1/3 hover:bg-white hover:text-black hover:animate-pulse"
                   >
                     Cancel
                   </button>

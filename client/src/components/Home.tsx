@@ -11,6 +11,7 @@ import BarGraph from './BarGraph';
 import DoughnutChart from './DoughnutChart';
 import FunctionDetails from './FunctionDetails';
 import { mockFuncDetails, FetchFunctions } from '../shared';
+import serene from '../assets/serene.png';
 
 import { FunctionContext } from '../App';
 
@@ -38,7 +39,8 @@ const Home = ({}: Props) => {
     <div className="bg-gray-200 h-screen">
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <h1 className="font-extrabold text-4xl font-mono"> SERENE </h1>
+        {/* <h1 className="font-extrabold text-4xl font-mono"> SERENE </h1> */}
+        <img src={serene} alt='Serene image' className='h-full py-1'/>
         <RightSideBar />
       </div>
       {/* <div className="mb-4"> FOOTER </div> */}
@@ -52,8 +54,10 @@ const Home = ({}: Props) => {
       {/* <div className='max-w-md '> */}
 
       {/* <UserContext.Provider value={data}> */}
-
-      <FunctionDetails />
+      
+      <div className='mt-10'><FunctionDetails/> </div>
+  
+    
 
       {/* </UserContext.Provider> */}
 

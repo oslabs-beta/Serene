@@ -9,6 +9,7 @@ import {
   Button,
 } from '@material-tailwind/react';
 import { FunctionContext } from '@/App';
+import serene from '../assets/serene.png';
 
 import {
   PushSpinner,
@@ -193,7 +194,7 @@ const VersionHistory = () => {
       <div className="flex justify-between items-center bg-gray-300 h-24">
         {/* <LeftSideBar funcName={funcName} setFuncName={setFuncName} />     */}
         <LeftSideBar />
-        <h1 className="font-extrabold text-4xl font-mono"> SERENE </h1>
+        <img src={serene} alt='Serene image' className='h-full py-1'/>
         <RightSideBar />
       </div>
       <div className="flex justify-center">

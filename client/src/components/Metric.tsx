@@ -8,6 +8,8 @@ import LeftSideBar from './LeftSideBar';
 import RightSideBar from './RightSideBar';
 import { FetchMetrics } from '@/shared';
 import { FunctionContext } from '@/App';
+import serene from '../assets/serene.png';
+
 
 type Props = {};
 
@@ -75,11 +77,11 @@ const Metric = ({}: Props) => {
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <h1 className="font-extrabold text-4xl font-mono"> SERENE </h1>
+        <img src={serene} alt='Serene image' className='h-full py-1'/>
         <RightSideBar />
       </div>
 
-      <div>CURRENT FUNC NAME STATE IS {funcName}</div>
+      {/* <div>CURRENT FUNC NAME STATE IS {funcName}</div> */}
 
       <div className="flex justify-center">
         <a
@@ -261,7 +263,7 @@ const Metric = ({}: Props) => {
           </select>
         </div>
         {/* END OF DROPDOWN MENUS */}
-        <div className="border-4 border-black flex w-full flex-wrap mx-5">
+        <div className=" flex w-full flex-wrap mx-5">
           {Object.keys(metricsData).map(
             (eachMetric) =>
               eachMetric !== 'concurrentExecutions' && (

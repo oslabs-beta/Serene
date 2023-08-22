@@ -15,6 +15,7 @@ import {
 } from 'react-spinners-kit';
 import { FunctionContext } from '@/App';
 import { useNavigate } from 'react-router-dom';
+import serene from '../assets/serene.png';
 
 type Props = {};
 
@@ -133,7 +134,7 @@ const Logs = ({}: Props) => {
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <h1 className="font-extrabold text-4xl font-mono"> SERENE </h1>
+        <img src={serene} alt='Serene image' className='h-full py-1'/>
         <RightSideBar />
       </div>
 
@@ -186,7 +187,7 @@ const Logs = ({}: Props) => {
         </a>
       </div>
 
-      <div>THIS IS current {funcName} </div>
+      {/* <div>THIS IS current {funcName} </div> */}
 
       <div className="flex">
         {/* this is where all the streamlogs are */}

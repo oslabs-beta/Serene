@@ -74,7 +74,7 @@ const FunctionDetails = ({
   // }
 
   return (
-    <div className="flex flex-col items-center  bg-neutral-100 bg-opacity-40 w-full rounded-md">
+    <div className="flex flex-col items-center bg-opacity-40 w-full rounded-md">
       {/* FUNCTION PAGE WINDOW */}
       <div>
         <h1 className="font-bold text-2xl text-center mt-10 mb-6">

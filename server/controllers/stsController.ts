@@ -14,15 +14,11 @@ const stsController = {} as STSController;
 // grabs the user cookie which corresponds to their MongoDB ID
 // with user info from DB and .env credentials, generate credentials to be used in other middleware
 stsController.getCredentials = async (req: Request, res: Response, next: NextFunction) => {
-  
   try {
     const foundUser: UserInfo = await User.findOne({ _id: req.cookies.SSID })
-  
     const { ARN, region } = foundUser;
-  
     const accessKeyId: string = process.env.accessKeyId;
     const secretAccessKey: string = process.env.secretAccessKey
-  
     const credentials = {
       region: region,
       credentials: {
@@ -30,7 +26,6 @@ stsController.getCredentials = async (req: Request, res: Response, next: NextFun
         secretAccessKey: secretAccessKey
       },
     };
-
     const stsClient: STSClient = new STSClient(credentials);
 
     const params: AssumeRoleCommandInput = {

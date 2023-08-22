@@ -1,62 +1,6 @@
 import {useState, useEffect} from 'react'
 
-
-export const mockFuncDetails = [
-    { id: 1, name: 'lambdaFunc1', description: 'something1', versHist: "version1", metric: "metric1", warmData: "warmingdata1", logs: 'log1' },
-    { id: 2, name: 'lambdaFunc2', description: 'something2', versHist: "version2", metric: "metric2", warmData: "warmingdata2", logs: 'log2' },
-    { id: 3, name: 'lambdaFunc3', description: 'something3', versHist: "version3", metric: "metric3", warmData: "warmingdata3", logs: 'log3' }
-];
-
-export const mockFunctions = [
-  {
-    name: 'firstFunction',
-    description: 'This is my 1rd function',
-    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
-  },
-  {
-    name: 'secondFunction',
-    description: 'This is my 2st function',
-    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
-  },  
-  {
-    name: 'thirdFunction',
-    description: 'This is my 3st function',
-    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
-  },
-  {
-    name: 'fourthFunction',
-    description: 'This is my 4nd function',
-    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
-  },  
-  {
-    name: 'fifthFunction',
-    description: 'This is my 5rd function',
-    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
-  },
-  {
-    name: 'sixthFunction',
-    description: 'This is my 6st function',
-    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
-  },  
-  {
-    name: 'seventhFunction',
-    description: 'This is my 7nd function',
-    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
-  },
-  {
-    name: 'eighthFunction',
-    description: 'This is my 8st function',
-    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
-  },  
-  {
-    name: 'ninthFunction',
-    description: 'This is my 9nd function',
-    arn: 'arn:aws:lambda:us-east-1:097265058099:function:secondFunction'
-  },
-]
-
-
-export const test = "P R O F I L E"
+export const profile = "P R O F I L E"
 
 export const mockEvents = [
     {
@@ -200,6 +144,7 @@ export const FetchFunctions = async () => {
         const response = await fetch('/api/lambda/functions')
         // console.log('we get to fetch now, and response is ', response)
         const data = response.json();
+        console.log('data looks  like ', data)
         return data;
       } catch (error) {
         console.log('Error is: ', error)
@@ -255,54 +200,3 @@ export const FetchMetrics = async () => {
   }
 }
 
-const testArray = [
-  {
-      "eventId": "37724325969299888520355743076229293386705677795134668800",
-      "ingestionTime": "Wed Aug 09 2023 14:41:28 GMT-0700 (Pacific Daylight Time)",
-      "message": "INIT_START Runtime Version: nodejs:18.v9\tRuntime Version ARN: arn:aws:lambda:us-east-1::runtime:7d5f06b69c951da8a48b926ce280a9daf2e8bb1a74fc4a2672580c787d608206\n",
-      "timestamp": "Wed Aug 09 2023 14:41:21 GMT-0700 (Pacific Daylight Time)"
-  },
-  {
-      "eventId": "37724325973068714458907418387148829774783250889645359105",
-      "ingestionTime": "Wed Aug 09 2023 14:41:28 GMT-0700 (Pacific Daylight Time)",
-      "message": "START RequestId: 1b858519-61d6-4122-a6d8-357c7fb2f754 Version: $LATEST\n",
-      "timestamp": "Wed Aug 09 2023 14:41:21 GMT-0700 (Pacific Daylight Time)"
-  },
-  {
-      "eventId": "37724325973247120420495663372281115520964437781693202434",
-      "ingestionTime": "Wed Aug 09 2023 14:41:28 GMT-0700 (Pacific Daylight Time)",
-      "message": "END RequestId: 1b858519-61d6-4122-a6d8-357c7fb2f754\n",
-      "timestamp": "Wed Aug 09 2023 14:41:21 GMT-0700 (Pacific Daylight Time)"
-  },
-  {
-      "eventId": "37724325973247120420495663372281115520964437781693202435",
-      "ingestionTime": "Wed Aug 09 2023 14:41:28 GMT-0700 (Pacific Daylight Time)",
-      "message": "REPORT RequestId: 1b858519-61d6-4122-a6d8-357c7fb2f754\tDuration: 6.24 ms\tBilled Duration: 7 ms\tMemory Size: 128 MB\tMax Memory Used: 66 MB\tInit Duration: 168.61 ms\t\n",
-      "timestamp": "Wed Aug 09 2023 14:41:21 GMT-0700 (Pacific Daylight Time)"
-  },
-  {
-      "eventId": "37724326030916847503895854816292482974033100636158558212",
-      "ingestionTime": "Wed Aug 09 2023 14:41:28 GMT-0700 (Pacific Daylight Time)",
-      "message": "START RequestId: 8927505a-37cc-41c6-a947-ebf5c31c8136 Version: $LATEST\n",
-      "timestamp": "Wed Aug 09 2023 14:41:24 GMT-0700 (Pacific Daylight Time)"
-  },
-  {
-      "eventId": "37724326030961448994292916062575554410578397359170519045",
-      "ingestionTime": "Wed Aug 09 2023 14:41:28 GMT-0700 (Pacific Daylight Time)",
-      "message": "END RequestId: 8927505a-37cc-41c6-a947-ebf5c31c8136\n",
-      "timestamp": "Wed Aug 09 2023 14:41:24 GMT-0700 (Pacific Daylight Time)"
-  },
-  {
-      "eventId": "37724326030961448994292916062575554410578397359170519046",
-      "ingestionTime": "Wed Aug 09 2023 14:41:28 GMT-0700 (Pacific Daylight Time)",
-      "message": "REPORT RequestId: 8927505a-37cc-41c6-a947-ebf5c31c8136\tDuration: 1.27 ms\tBilled Duration: 2 ms\tMemory Size: 128 MB\tMax Memory Used: 67 MB\t\n",
-      "timestamp": "Wed Aug 09 2023 14:41:24 GMT-0700 (Pacific Daylight Time)"
-  }
-]
-
-
-
-
-const mockLogs = {
-  
-}

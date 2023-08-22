@@ -1,6 +1,17 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import FUNCS from '../assets/FUNCS.jpeg';
+import waves7 from '../assets/waves7.png';
+import serene from '../assets/serene.png';
+import kenny from '../assets/kenny.jpeg';
+import ari from '../assets/ari.jpeg';
+import kyle from '../assets/kyle.jpeg';
+import wade from '../assets/wade.jpeg';
+import login from '../assets/login.jpeg';
+import linkedinlogo from '../assets/linkedinlogo.png';
+import githubcat from '../assets/githubcat.png';
+import { FaLinkedin, FaLinkedinIn, FaGithubSquare } from 'react-icons/fa';
+
 type Props = {};
 
 const LandingPage = (props: Props) => {
@@ -8,29 +19,21 @@ const LandingPage = (props: Props) => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex justify-end items-center bg-gray-300 h-24 border-red-400 border-2 ">
+      <div className="flex justify-end items-center bg-gray-300 h-24  ">
         {/* left side element -- TBD */}
-        <button
+        <a href='https://github.com/oslabs-beta/Serene'
           type="button"
-          className="border-none bg-transparent p-0 hover:scale-110 mx-1"
+          className="border-none bg-transparent p-0 hover:scale-110  mx-1"
         >
-          <img
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.vhv.rs%2Ffile%2Fmax%2F8%2F80805_linkedin-logo-white-png.png&f=1&nofb=1&ipt=44f330d4d9414e2fc69d51ad09044e03294dbc0dc7a5e86c465b0843ab14c98e&ipo=images"
-            alt="LinkedIn Button Image"
-            className="w-14 h-14"
-          />
-        </button>
+        <img src={githubcat} className='w-16 h-16'/>
+        </a>
 
-        <button
+        <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
           type="button"
-          className="border-none bg-transparent p-0 hover:scale-110 mx-1"
+          className="border-4 border-black bg-transparent p-2 rounded-full hover:scale-110 mx-1 mr-3"
         >
-          <img
-            src="https://pngimg.com/uploads/github/github_PNG40.png"
-            alt="Button Image"
-            className="w-16 h-16"
-          />
-        </button>
+          <FaLinkedinIn size={40} className=''/>
+        </a>
 
         <button
           onClick={() => {
@@ -56,9 +59,10 @@ const LandingPage = (props: Props) => {
 
       {/* MAIN CONTENT */}
       <div className="flex flex-col ">
-        <div className="h-1/4 flex bg-gray-200 border-2 border-black justify-around items-center py-20">
-          <div className="font-extrabold font-sans text-9xl">SERENE</div>
-          <div className="text-l w-1/3">
+        <div className="h-1/4 flex bg-gray-200  justify-around items-center py-20">
+          {/* <div className="font-extrabold font-sans text-9xl">SERENE</div> */}
+          <img src={serene} alt="Serene image" className="w-1/2" />
+          <div className="text-l w-1/3 text-gray-800 text-xl text-center">
             Unveiling the art of simplicity through technology, our app, Serene,
             stands as a testament to transforming complexity into serenity. With
             intuitive features designed to untangle intricacies, Serene
@@ -66,11 +70,11 @@ const LandingPage = (props: Props) => {
             haven where efficiency and ease converge.{' '}
           </div>
         </div>
-        <div className="bg-gray-200 border-2 border-green-400 flex justify-center py-10 h-1/3">
+        <div className="bg-gray-200  flex justify-center py-10 h-1/3">
           <div className="w-2/5 text-gray-300 bg-black p-5 -ml-10">
             <img src={FUNCS}></img>
           </div>
-          <div className="w-2/5 ml-10 text-2xl flex items-center">
+          <div className="w-2/5 ml-10 text-xl flex items-center">
             Manage all Lambda functions in one place by providing a centralized
             platform for overseeing logs, versions, and aliases. Experience the
             ease of accessing all key information in one place, streamlining
@@ -106,48 +110,112 @@ const LandingPage = (props: Props) => {
             comme Aldus PageMaker.
           </div>
         </div>
-        <div className="bg-gray-200 text-center font-semibold text-5xl py-10 border-2 border-black">
-          HOW TO GET STARTED
+        <div className="bg-gray-200">
+          <h1 className="bg-gray-200 text-center font-semibold text-5xl py-10 ">
+            {' '}
+            HOW TO GET STARTED
+          </h1>
+          <div className="flex text-center border-2 border-black justify-center items-center p-2">
+            <div className="w-1/3 mr-10">
+              Create an account, select your preferred region, and connect your
+              AWS account via our Serene stack on CloudFormation
+            </div>
+            <div className="w-1/4">
+              <img src={login} className="border-8 border-black grayscale" />
+            </div>
+          </div>
+          <div className="flex text-center border-2 border-black">
+            <div className="w-2/3">IMAGE HERE</div>
+            <div className="w-1/3">INSTRUCTIONS HERE</div>
+          </div>
+          <div className="flex text-center border-2 border-black">
+            <div className="w-1/3">INSTRUCTIONS HERE</div>
+            <div className="w-2/3">IMAGE HERE</div>
+          </div>
         </div>
-        <div>
+        <div></div>
+
+        <div className="flex-col bg-gray-200 text-center ">
+          <h1 className="font-semibold text-4xl my-5">MEET THE TEAM</h1>
           
-        </div>
+          <div className="bg-gray-200 flex justify-center ">
+            {/* ARI */}
+            
+            <div className="relative w-1/4 h-1/2 group  rounded-md mx-1 transition duration-100 ease-in-out bg-white">
+            <div className="group-hover:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] group:hover:z-40 z-10 rounded-md mx-1 transition duration-100 ease-in-out bg-white group-hover:scale-110  ">
+              <div>
+                <img
+                  src={ari}
+                  alt="ari image"
+                  className="p-4 rounded-md grayscale group-hover:grayscale-0 transition duration-300 z-0"
+                />
+              </div>
+              <p className=" font-semibold mt-4 "> ARIANNA</p>
+              <p className="mb-2">Software Engineer</p>
+              </div>
+              <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-100 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
+                <button className='hover:scale-110'><FaGithubSquare size={60} /></button>
+                <button className='hover:scale-110'> <FaLinkedin size={60} /></button>
+          
+              </div>
+            </div>
+            {/* KYLE */}
+            <div className="group-hover:scale-110 relative w-1/4 h-1/2 group group-hover:animate-bounce rounded-md mx-1 transition duration-100 ease-in-out bg-white">
+            <div className=" rounded-md mx-1 transition duration-100 ease-in-out bg-white group-hover:scale-110">
+              <div>
+                <img
+                  src={kyle}
+                  alt="kyle image"
+                  className="p-4 rounded-md grayscale group-hover:grayscale-0 transition duration-300 z-0"
+                />
+              </div>
+              <p className=" font-semibold mt-4 "> KYLE</p>
+              <p className="mb-2">Software Engineer</p>
+              </div>
+              <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
+                <button className='hover:scale-110'><FaGithubSquare size={60} /></button>
+                <button className='hover:scale-110'> <FaLinkedin size={60} /></button>
+              </div>
+            </div>
+            {/* WADE */}
+            <div className="group-hover:scale-110 relative w-1/4 h-1/2 group group-hover:animate-bounce rounded-md mx-1 transition duration-100 ease-in-out bg-white">
+            <div className="rounded-md mx-1 transition duration-100 ease-in-out bg-white group-hover:scale-110">
+              <div>
+                <img
+                    src={wade}
+                    alt="wade image"
+                  className="p-4 rounded-md grayscale group-hover:grayscale-0 transition duration-300 z-0"
+                />
+              </div>
+              <p className=" font-semibold mt-4 "> WADE</p>
+              <p className="mb-2">Software Engineer</p>
+              </div>
+              <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
+                <button className='hover:scale-110'><FaGithubSquare size={60} /></button>
+                <button className='hover:scale-110'> <FaLinkedin size={60} /></button>
+              </div>
+            </div>
+            {/* KENNY */}
+            <div className="group-hover:scale-110 relative w-1/4 h-1/2 group group-hover:animate-bounce rounded-md mx-1 transition duration-100 ease-in-out bg-white">
+            <div className="rounded-md mx-1 transition duration-100 ease-in-out bg-white group-hover:scale-110">
+              <div>
+                <img
+                  src={kenny}
+                  alt="kenny image"
+                  className="p-4 rounded-md grayscale group-hover:grayscale-0 transition duration-300 z-0"
+                />
+              </div>
+              <p className=" font-semibold mt-4 "> KENNY</p>
+              <p className="mb-2">Software Engineer</p>
+              </div>
+              <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
+                <button className='hover:scale-110'><FaGithubSquare size={60} /></button>
+                <button className='hover:scale-110'> <FaLinkedin size={60} /></button>
+              </div>
+            </div>
+            
 
-        
-        
-
-        <div className="flex-col bg-gray-200 border-2 border-green-400 text-center ">
-          <div>MEET THE TEAM</div>
-          <div className="bg-gray-200 border-2 border-pink-400 flex justify-center ">
-          <div className='w-1/4 border-2 border-black'>
-            <p className="mb-4">
-              {' '}
-              Arianna
-            </p>
-            <div>IMAGE HERE</div>
           </div>
-          <div className='w-1/4 border-2 border-black'>
-            <p className="mb-4">
-              {' '}
-              Kyle
-            </p>
-            <div>IMAGE HERE</div>
-          </div>
-          <div className='w-1/4 border-2 border-black'>
-            <p className="mb-4">
-              {' '}
-              Wade
-            </p>
-            <div>IMAGE HERE</div>
-          </div>
-          <div className='w-1/4 border-2 border-black'>
-            <p className="mb-4">
-              {' '}
-              Kenny
-            </p>
-            <div>IMAGE HERE</div>
-          </div>
-        </div>
 
           {/* <div className="flex items-center justify-around flex-1 ">
             <div className="flex flex-col w-1/5 h-25 object-cover">
@@ -179,12 +247,12 @@ const LandingPage = (props: Props) => {
               Kenny
             </div>
           </div> */}
-
         </div>
       </div>
       {/* FOOTER */}
-      <div className="bg-gray-200 text-black py-4 px-5 border-2 border-red-700">
-        &copy; SERENE 2023{' '}
+      <div className="bg-gray-200 text-black py-4 px-5 flex justify-between">
+        <span>&copy; SERENE 2023</span>
+        {/* <button className=' w-20 bg-black'><img src={waves7}/></button> */} 
       </div>
     </div>
   );
