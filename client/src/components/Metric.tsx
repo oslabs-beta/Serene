@@ -5,7 +5,7 @@ import LineGraph from './LineGraph';
 import BarGraph from './BarGraph';
 import DoughnutChart from './DoughnutChart';
 import LeftSideBar from './LeftSideBar';
-import RightSideBar from './RightSideBar';
+import RightSideBar from './RightSidebar';
 import { FetchMetrics } from '@/shared';
 import { FunctionContext } from '@/App';
 
