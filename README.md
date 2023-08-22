@@ -63,4 +63,3 @@ Serene is building an exciting developer tool to help monitor AWS lambda resourc
     </td>
   </tr>
 </table>
-Arianna Kyle Kenny Wade
