@@ -34,32 +34,32 @@ Serene is building an exciting developer tool to help monitor AWS lambda resourc
       <br />
       <sub><b>Arianna Newynn</b></sub>
       <br />
-      <a href=""><img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="20"/></a>
-      <a href="https://github.com/dahliarianna"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20"/></a>
+      <a href="" target="_blank"><img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="20"/></a>
+      <a href="https://github.com/dahliarianna" target="_blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20"/></a>
     </td>
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/110702444?v=4" width="100"/>
       <br />
       <sub><b>Kyle Newynn</b></sub>
       <br />
-      <a href="https://www.linkedin.com/in/kylehng/"><img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="20"/></a>
-      <a href="https://github.com/khnguyen07"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20"/></a>
+      <a href="https://www.linkedin.com/in/kylehng/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="20"/></a>
+      <a href="https://github.com/khnguyen07" target="_blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20"/></a>
     </td>
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/112911565?v=4" width="100"/>
       <br />
       <sub><b>Kenny Kim</b></sub>
       <br />
-      <a href="https://www.linkedin.com/in/kenniford/"><img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="20"/></a>
-      <a href="https://github.com/kenniford"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20"/></a>
+      <a href="https://www.linkedin.com/in/kenniford/ target="_blank""><img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="20"/></a>
+      <a href="https://github.com/kenniford" target="_blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20"/></a>
     </td>
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/125922315?v=4" width="100"/>
       <br />
       <sub><b>Wade Chadwick</b></sub>
       <br />
-      <a href="https://www.linkedin.com/in/wade-chadwick/"><img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="20"/></a>
-      <a href="https://github.com/WadeChadwick"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20"/></a>
+      <a href="https://www.linkedin.com/in/wade-chadwick/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="20"/></a>
+      <a href="https://github.com/WadeChadwick" target="_blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20"/></a>
     </td>
   </tr>
 </table>
