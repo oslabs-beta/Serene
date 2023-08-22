@@ -23,7 +23,7 @@ const LeftSideBar = (props: Props) => {
   useEffect(() => {
       FetchFunctions().then((returnedFuncData) => {
         setFuncData(returnedFuncData);
-        console.log('data is  reset: ', returnedFuncData);
+        // console.log('data is  reset: ', returnedFuncData);
         returnedFuncData.forEach( (item, index) => {
           if( item.name === funcName ){
         setFuncArn(item.arn)  

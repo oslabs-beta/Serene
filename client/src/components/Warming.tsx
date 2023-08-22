@@ -11,7 +11,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AnimatedBackground from './AnimatedBackground';
 import serene from '../assets/serene.png';
 
-
 type Props = {};
 
 const Warming = ({}: Props) => {
@@ -61,31 +60,29 @@ const Warming = ({}: Props) => {
     }
   };
 
-// const EndWarmFunction = async () => {
-//     //need logName, streamName, region
-//     const body = {
-//       functionArn: funcArn,
-//       intervalVar: intervalValue,
-//       maxDuration: durationValue,
-//     };
-//     try {
-//       const response = await fetch('/api/warming/functions', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(body),
-//       });
+  // const EndWarmFunction = async () => {
+  //     //need logName, streamName, region
+  //     const body = {
+  //       functionArn: funcArn,
+  //       intervalVar: intervalValue,
+  //       maxDuration: durationValue,
+  //     };
+  //     try {
+  //       const response = await fetch('/api/warming/functions', {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify(body),
+  //       });
 
-//       const data = await response.json();
-//       console.log('response from warming ', data);
-//       return data;
-//     } catch (error) {
-//       console.log('Warming Func Error: ', error);
-//     }
-//   };
-
-
+  //       const data = await response.json();
+  //       console.log('response from warming ', data);
+  //       return data;
+  //     } catch (error) {
+  //       console.log('Warming Func Error: ', error);
+  //     }
+  //   };
 
   // const handleEndButton = () => {
   //   //make fetch request
@@ -106,7 +103,11 @@ const Warming = ({}: Props) => {
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <img src={serene} alt='Serene image' className='h-full py-1'/>
+        <button        onClick={() => {
+              navigate('/home');
+            }} className="w-1/6">
+          <img src={serene} alt="Serene image" className="py-1" />
+        </button>
         <RightSideBar />
       </div>
 

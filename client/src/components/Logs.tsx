@@ -13,7 +13,7 @@ import {
   JellyfishSpinner,
   GridSpinner,
 } from 'react-spinners-kit';
-import { FunctionContext } from '@/App';
+import { FunctionContext, RegionContext } from '@/App';
 import { useNavigate } from 'react-router-dom';
 import serene from '../assets/serene.png';
 
@@ -27,20 +27,18 @@ const Logs = ({}: Props) => {
   // const [data, setData, clickedFunction, setClickedFunction] =
   //   useContext(UserContext);
   // const [funcName, setFuncName] = useContext(FuncNameContext)
-  const [isLoading, setIsLoading] = useState(false);
+
   const { funcName, setFuncName } = useContext(FunctionContext);
+  // const { region, setRegion} = useContext(RegionContext);
 
   const navigate = useNavigate();
   // console.log('logging data in Logs ' + JSON.stringify(data))
   // const funcLogName = funcName;
-  const region = 'us-east-1';
+
 
   const FetchLogs = async () => {
-
-
     const body = {
       funcName,
-      region,
     };
     try {
       const response = await fetch('/api/cloudwatch/getLogs', {
@@ -58,13 +56,12 @@ const Logs = ({}: Props) => {
   };
 
   useEffect(() => {
-    // console.log('beginning to fetch')
     if (funcName !== 'SELECT A FUNCTION') {
       FetchLogs().then((funcLogs) => {
-        // console.log('setting data now')
+        // console.log('setting data now', funcLogs)
         setAllLogs(funcLogs);
         // setLogStream(funcLogs[1])
-        console.log('logs are: ', funcLogs);
+        // console.log('logs are: ', funcLogs);
       });
     }
     //data logic here
@@ -84,15 +81,13 @@ const Logs = ({}: Props) => {
   // console.log('Current Logname is ', clickedFunction)
 
   const handleLogClick = (e) => {
-    console.log('starting load state is ', isLoading);
-    setIsLoading(true);
     setLogStream(e.target.value);
   };
-  console.log('updated load state is ', isLoading);
+ 
 
-  // useEffect(() => {
-  //   console.log('this is logstream', logStream);
-  // }, [logStream]);
+  useEffect(() => {
+    console.log('this is logstream', logStream);
+  }, [logStream]);
 
   const FetchLogStreams = async () => {
     //need logName, streamName, region
@@ -111,7 +106,7 @@ const Logs = ({}: Props) => {
 
       const data = await response.json();
       setLogArray(data);
-      console.log('return data ', data);
+      console.log('return data from fetchlogstreams', data);
       return data;
     } catch (error) {
       console.log('fetch log stream Error: ', error);
@@ -123,8 +118,6 @@ const Logs = ({}: Props) => {
       await FetchLogStreams();
     };
     fetchData();
-    setIsLoading(false);
-    console.log('after loading state is ', isLoading);
   }, [logStream]);
 
   console.log('LOG ARRAY IS HERE', logArray);
@@ -134,8 +127,11 @@ const Logs = ({}: Props) => {
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <img src={serene} alt='Serene image' className='h-full py-1'/>
-        <RightSideBar />
+        <button        onClick={() => {
+              navigate('/home');
+            }} className="w-1/6">
+          <img src={serene} alt="Serene image" className="py-1" />
+        </button>        <RightSideBar />
       </div>
 
       <div className="flex justify-center">
@@ -207,13 +203,9 @@ const Logs = ({}: Props) => {
         </div>
 
         <div className="ml-10 mr-5 my-6 flex flex-col items-center w-full border-2 border-black p-2 bg-black rounded-md text-gray-400">
-          {isLoading ? (
-            <div className="flex justify-center h-full">
-              <JellyfishSpinner size={120} color="white" />
-            </div>
-          ) : (
-            <LogStream logStreamArr={logArray} isLoading={isLoading} />
-          )}
+   
+            <LogStream logStreamArr={logArray} />
+          
         </div>
       </div>
       <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">&copy; SERENE 2023 </div>

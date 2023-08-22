@@ -144,7 +144,7 @@ export const FetchFunctions = async () => {
         const response = await fetch('/api/lambda/functions')
         // console.log('we get to fetch now, and response is ', response)
         const data = response.json();
-        console.log('data looks  like ', data)
+        // console.log('data looks  like ', data)
         return data;
       } catch (error) {
         console.log('Error is: ', error)

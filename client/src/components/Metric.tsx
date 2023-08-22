@@ -54,8 +54,6 @@ const Metric = ({}: Props) => {
       });
 
       const data = await response.json();
-      console.log('fetched Logs: ', data);
-      console.log('fetch Logs successful');
       return data;
     } catch (error) {
       console.log('NOW Error: ', error);
@@ -68,17 +66,17 @@ const Metric = ({}: Props) => {
     });
   }, [funcName, sortBy, period, startDate]);
 
-  console.log(
-    'this is our fetched metrics in metric' + JSON.stringify(metricsData)
-  );
 
   return (
     <div>
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <img src={serene} alt='Serene image' className='h-full py-1'/>
-        <RightSideBar />
+        <button        onClick={() => {
+              navigate('/home');
+            }} className="w-1/6">
+          <img src={serene} alt="Serene image" className="py-1" />
+        </button>        <RightSideBar />
       </div>
 
       {/* <div>CURRENT FUNC NAME STATE IS {funcName}</div> */}

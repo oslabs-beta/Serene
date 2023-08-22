@@ -22,6 +22,7 @@ const LandingPage = (props: Props) => {
       <div className="flex justify-end items-center bg-gray-300 h-24  ">
         {/* left side element -- TBD */}
         <a href='https://github.com/oslabs-beta/Serene'
+        target="_blank"
           type="button"
           className="border-none bg-transparent p-0 hover:scale-110  mx-1"
         >
@@ -30,6 +31,7 @@ const LandingPage = (props: Props) => {
 
         <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
           type="button"
+          target="_blank"
           className="border-4 border-black bg-transparent p-2 rounded-full hover:scale-110 mx-1 mr-3"
         >
           <FaLinkedinIn size={40} className=''/>
