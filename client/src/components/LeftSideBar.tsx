@@ -7,8 +7,8 @@ import { FetchFunctions } from '../shared'
 import waves3 from '../assets/waves3.png';
 import { FunctionContext, FunctionDataContext, FunctionArnContext } from '@/App';
 
-type Props = {
-};
+interface Props {}
+
 
 const LeftSideBar = (props: Props) => {
   const [showSidebar, setShowSidebar] = useState(false);

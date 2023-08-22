@@ -8,7 +8,7 @@ import { FunctionContext } from '../App';
 
 type Props = {
   detailID?: number;
-  name: string;
+  name?: string;
   description?: string;
   versHist?: string;
   metric?: string;
