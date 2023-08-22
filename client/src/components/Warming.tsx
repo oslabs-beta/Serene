@@ -60,9 +60,9 @@ const Warming = ({}: Props) => {
   };
 
 
-  useEffect(() => {
-    if (funcName !== 'SELECT A FUNCTION') handleStartButton();
-  }, []);
+  // useEffect(() => {
+  //   if (funcName !== 'SELECT A FUNCTION') handleStartButton();
+  // }, []);
 
   const navigate = useNavigate();
 
@@ -178,6 +178,18 @@ const Warming = ({}: Props) => {
             
             {' '}
             Start Warming
+          </button>
+          <button
+            className="items-center justify-center z-20 overflow-y-auto h-[40%]  my-5 
+            border-2 shadow-md bg-neutral-100 bg-opacity-40 p-2 rounded-md border-black hover:bg-black hover:text-white transition duration-200 ease-in-out
+            mt-6
+            "
+            onClick={() => {
+              //end warming
+            }}
+          >
+            {' '}
+            End Warming
           </button>
           <div></div>
           <div>

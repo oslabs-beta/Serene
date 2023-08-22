@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import waves2 from '../assets/waves2.png';
-
+import { RegionContext } from '@/App';
 
 type Props = {};
 
@@ -10,7 +10,7 @@ const Signup = (props: Props) => {
   const [password, setPassword] = useState('');
   const [arnInput, setArnInput] = useState('');
   const [response, setResponse] = useState('');
-  const [region, setRegion] = useState('us-east-1')
+  const { region, setRegion } = useContext(RegionContext)
 
   const navigate = useNavigate();
 

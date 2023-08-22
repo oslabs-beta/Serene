@@ -208,6 +208,21 @@ export const FetchFunctions = async () => {
 }
 
 
+export const FetchUser = async () => {
+  try{
+    const response = await fetch('/api/user/edit')
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.log('Error is: ', error)
+  }
+}
+
+
+
+
+
+
 const funcName = 'testingfunc'
 const sortBy = 'TimestampDescending'
 const period = '5 minutes'
