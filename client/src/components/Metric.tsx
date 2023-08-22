@@ -10,7 +10,6 @@ import { FetchMetrics } from '@/shared';
 import { FunctionContext } from '@/App';
 import serene from '../assets/serene.png';
 
-
 type Props = {};
 
 const Metric = ({}: Props) => {
@@ -66,17 +65,20 @@ const Metric = ({}: Props) => {
     });
   }, [funcName, sortBy, period, startDate]);
 
-
   return (
     <div>
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <button        onClick={() => {
-              navigate('/home');
-            }} className="w-1/6">
+        <button
+          onClick={() => {
+            navigate('/home');
+          }}
+          className="w-1/6"
+        >
           <img src={serene} alt="Serene image" className="py-1" />
-        </button>        <RightSideBar />
+        </button>{' '}
+        <RightSideBar />
       </div>
 
       {/* <div>CURRENT FUNC NAME STATE IS {funcName}</div> */}
@@ -267,16 +269,11 @@ const Metric = ({}: Props) => {
               eachMetric !== 'concurrentExecutions' && (
                 <div
                   key={eachMetric}
-                  className="border-4 border-gray-300 h-full w-1/2"
+                  className="border-4 border-gray-300 h-full w-1/2 flex justify-center"
                 >
                   {/* <p>{eachMetric}</p> */}
                   {metricsData[eachMetric].map((each) => (
-                    <div className="mx-10" key={each.Id}>
-                      {/* <p>ID: {each.Id}</p>
-                      <p>Label: {each.Label}</p>
-                      <p>Timestamps: {`${each.Timestamps}, `}</p>
-                      <p className="">Values: {`${each.Values}, `}</p>
-                      <p>Status Code: {each.StatusCode}</p> */}
+                    <div className="py-5 w-9/12" key={each.Id}>
 
                       <LineGraph
                         TimeStamps={each.Timestamps}
@@ -290,8 +287,9 @@ const Metric = ({}: Props) => {
           )}
         </div>
       </div>
-      <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">&copy; SERENE 2023 </div>
-
+      <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
+        &copy; SERENE 2023{' '}
+      </div>
     </div>
   );
 };

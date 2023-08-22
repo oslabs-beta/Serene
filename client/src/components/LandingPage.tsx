@@ -144,7 +144,7 @@ const LandingPage = (props: Props) => {
             {/* ARI */}
             
             <div className="relative w-1/4 h-1/2 group  rounded-md mx-1 transition duration-100 ease-in-out bg-white">
-            <div className="group-hover:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] group:hover:z-40 z-10 rounded-md mx-1 transition duration-100 ease-in-out bg-white group-hover:scale-110  ">
+            <div className="group-hover:shadow-[0_20px_50px_rgba(0,0,0,_0.7)] group:hover:z-40 z-0 rounded-md mx-1 transition duration-100 ease-in-out bg-white group-hover:scale-110  ">
               <div>
                 <img
                   src={ari}
@@ -163,7 +163,7 @@ const LandingPage = (props: Props) => {
             </div>
             {/* KYLE */}
             <div className="group-hover:scale-110 relative w-1/4 h-1/2 group group-hover:animate-bounce rounded-md mx-1 transition duration-100 ease-in-out bg-white">
-            <div className=" rounded-md mx-1 transition duration-100 ease-in-out bg-white group-hover:scale-110">
+            <div className="group-hover:shadow-[0_20px_50px_rgba(0,0,0,_0.7)] z-0 rounded-md mx-1 transition duration-100 ease-in-out bg-white group-hover:scale-110">
               <div>
                 <img
                   src={kyle}
@@ -182,7 +182,7 @@ const LandingPage = (props: Props) => {
 
             {/* WADE */}
             <div className="group-hover:scale-110 relative w-1/4 h-1/2 group group-hover:animate-bounce rounded-md mx-1 transition duration-100 ease-in-out bg-white">
-            <div className="rounded-md mx-1 transition duration-100 ease-in-out bg-white group-hover:scale-110">
+            <div className="group-hover:shadow-[0_20px_50px_rgba(0,0,0,_0.7)] rounded-md mx-1 transition duration-100 ease-in-out bg-white group-hover:scale-110">
               <div>
                 <img
                     src={wade}
@@ -200,7 +200,7 @@ const LandingPage = (props: Props) => {
             </div>
             {/* KENNY */}
             <div className="group-hover:scale-110 relative w-1/4 h-1/2 group group-hover:animate-bounce rounded-md mx-1 transition duration-100 ease-in-out bg-white">
-            <div className="rounded-md mx-1 transition duration-100 ease-in-out bg-white group-hover:scale-110">
+            <div className="group-hover:shadow-[0_20px_50px_rgba(0,0,0,_0.7)] rounded-md mx-1 transition duration-100 ease-in-out bg-white group-hover:scale-110">
               <div>
                 <img
                   src={kenny}

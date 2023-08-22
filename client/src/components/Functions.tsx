@@ -1,31 +1,17 @@
 // import { FunctionContext } from '@/App';
 import { FunctionContext } from '@/App';
-import React, { useState, useContext, useEffect } from 'react';
-import FunctionDetails from './FunctionDetails';
-// import FunctionContext from '../App'
+import { useContext } from 'react';
 
 type Props = {
   name: string;
 };
 
 const Functions = ({ name }: Props) => {
-  // const [funcName, setFuncName] = useState(FunctionContext); //already prop drilliing
-  // console.log('funcName at start of functions', funcName)
-
-  // const useContextReturnValue = useContext(FunctionContext);
   const { funcName, setFuncName } = useContext(FunctionContext);
 
-  const handleNameButtonClick = (e) => {
-    console.log('target is ', e.target.value);
+  const handleNameButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setFuncName(e.target.value);
-    // console.log('name is ' + name);
   };
-  // console.log('funcName after handlebutton in functions component', funcName);
-
-
-
-
-
 
   return (
     <button
@@ -36,10 +22,8 @@ const Functions = ({ name }: Props) => {
       onClick={(e) => handleNameButtonClick(e)}
       value={name}
     >
-      {/* <Link to="/logs"> */}
       FUNCTION NAME <br />
       IS {name.toUpperCase()}
-      {/* </Link> */}
     </button>
   );
 };

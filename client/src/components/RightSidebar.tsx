@@ -1,9 +1,8 @@
 import React, { useState, useContext } from 'react';
-import Functions from './Functions';
-import FunctionDetails from './FunctionDetails';
 import { profile } from '../shared';
 import waves5 from '../assets/waves5.png';
-import { Link, useNavigate } from 'react-router-dom';
+import waves9 from '../assets/waves9.png'
+import {  useNavigate } from 'react-router-dom';
 import { UserContext, FunctionArnContext, RegionContext } from '@/App';
 import Popup from 'reactjs-popup';
 
@@ -19,37 +18,15 @@ const RightSideBar = (props: Props) => {
   const [regionField, setRegionField] = useState('');
   const { region, setRegion } = useContext(RegionContext);
 
-  // const handleUsernameChange = (e) => {
-  //   setUsernameField(e.target.value);
-  // };
-  // const handleUsernameSubmit = (e) => {
-  //   e.preventDefault();
-  //   setCurrentUser(usernameField)
-  //   console.log('New username:', usernameField);
-  //   setUsernameField('');
-  // };
 
-  const handleRegionChange = (e) => {
+  const handleRegionChange = (e :React.ChangeEvent<HTMLSelectElement>) => {
     setRegionField(e.target.value);
   };
 
-  // const handleRegionSubmit = (e) => {
-  //   e.preventDefault();
-  //   setRegion(regionField);
-  //   console.log('New region:', regionField);
-  //   setRegionField('');
-  // };
 
-  const handleArnChange = (e) => {
+  const handleArnChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     setArnField(e.target.value);
   };
-
-  // const handleArnSubmit = (e) => {
-  //   e.preventDefault();
-  //   setFuncArn(arnField);
-  //   console.log('New ARN:', arnField);
-  //   setArnField('');
-  // };
 
   const handleSignOut = () => {
     fetch('/api/user/logout', {
@@ -84,22 +61,16 @@ const RightSideBar = (props: Props) => {
   };
 
 
-  // useEffect(() => {
-  //   FetchUser().then((returnedUserData) => {
-  // setCurrentUser(returnedUserData);
-  //     // console.log('data is reset: ', funcData);
-  //   //data logic here
-  // })}, [funcName]);
 
   const handleUpdate = async () => {
     try {
       const body = {};
-      if (regionField !== ''){
-        body.newRegion = regionField
-      } else if (arnField !== ''){
-        body.newARN= arnField
+      if (regionField !== '') {
+        body.newRegion = regionField;
+      } else if (arnField !== '') {
+        body.newARN = arnField;
       }
-      
+
       const res = await fetch('/api/user/edit', {
         method: 'PATCH',
         headers: {
@@ -110,8 +81,8 @@ const RightSideBar = (props: Props) => {
       console.log('fetch (patch) successful');
       const parsedRes = await res.json();
       console.log('updateUser response: ', parsedRes);
-      setRegionField('')
-      setArnField('')
+      setRegionField('');
+      setArnField('');
     } catch (error) {
       console.log('ERROR sending update patch: ', error);
     }
@@ -119,10 +90,7 @@ const RightSideBar = (props: Props) => {
 
   return (
     <div>
-      {/* <div className="mr-40">
-        CURRENT USERNAME IS <br />
-        {currentUser}
-      </div> */}
+
       {showSidebar ? (
         <button
           className="flex text-5xl text-black items-center cursor-pointer fixed right-8 top-6 z-50 transition duration-400 ease-in-out hover:rotate-90"
@@ -155,14 +123,18 @@ const RightSideBar = (props: Props) => {
           showSidebar ? 'translate-x-0 ' : 'translate-x-full'
         }`}
       >
-        <img
+        {/* <img
           src={waves5}
           className={`fixed h-screen -ml-[9vw] top-0  z-10 ${
             showSidebar ? 'block' : 'hidden'
           }`}
+        /> */}
+        <img
+        src={waves9}
+        className="fixed h-screen z-10 ease-in-out duration-300 top-0 right-0 w-[25vw]"
         />
         <div className="flex flex-col items-center justify-center">
-          <h3 className="mt-10 ml-20 text-2xl font-semibold text-white">
+          <h3 className="mt-10 ml-20 text-2xl font-semibold text-white z-50">
             {profile}
           </h3>
           <div className="flex flex-col items-center my-4 ml-20 w-full z-40 ">
@@ -170,16 +142,19 @@ const RightSideBar = (props: Props) => {
             <div className="w-full">
               <Popup
                 trigger={
-                  <button className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out">
+                  <button className="z-40 cursor-pointer border-2 bg-black w-full p-2 mb-2 rounded-md border-black hover:scale-110 hover:text-white transition duration-100 ease-in-out">
                     Update Arn
                   </button>
                 }
                 position="left center"
               >
-                <div className=" h-1/3 border-2 border-white w-full bg-neutral-800 text-gray-300 p-4 flex flex-col items-center rounded-md shadow-lg">
-                <h1 className='font-semibold -mb-2'> UPDATE YOUR ARN HERE </h1>
+                <div className=" h-1/3 border-2 border-white w-full px-24 bg-black text-gray-300 p-4 flex flex-col items-center rounded-md shadow-[0_20px_50px_rgba(0,0,0,_0.7)]">
+                  <h1 className="font-semibold -mb-2">
+                    {' '}
+                    UPDATE YOUR ARN HERE{' '}
+                  </h1>
                   <br />
-                  <form onSubmit={handleUpdate} className='flex flex-col '>
+                  <form onSubmit={handleUpdate} className="flex flex-col ">
                     <label htmlFor="arnInput" className="block mb-2">
                       ARN:
                     </label>
@@ -192,7 +167,7 @@ const RightSideBar = (props: Props) => {
                     />
                     <button
                       type="submit"
-                      className="border-2 border-white mt-2 rounded-sm"
+                      className="border-2 border-white mt-2 rounded-md py-1 transition duration-100 ease-in-out hover:scale-110"
                     >
                       Submit Arn
                     </button>
@@ -204,16 +179,19 @@ const RightSideBar = (props: Props) => {
             <div className="w-full">
               <Popup
                 trigger={
-                  <button className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md  border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out">
+                  <button className="z-40 cursor-pointer border-2 bg-black w-full p-2 mb-2 rounded-md  border-black hover:scale-110 hover:text-white transition duration-100 ease-in-out">
                     Update Region
                   </button>
                 }
                 position="left center"
               >
-                <div className=" h-1/3 border-2 border-white w-full bg-neutral-800 text-gray-300 p-4 flex flex-col items-center rounded-md shadow-lg ">
-                  <h1 className='font-semibold -mb-2'> UPDATE YOUR REGION HERE </h1>
+                <div className=" px-20 h-1/3 border-2 border-white w-full bg-black text-gray-300 p-4 flex flex-col items-center rounded-md shadow-[0_20px_50px_rgba(0,0,0,_0.7)] ">
+                  <h1 className="font-semibold -mb-2">
+                    {' '}
+                    UPDATE YOUR REGION HERE{' '}
+                  </h1>
                   <br />
-                  <form onSubmit={handleUpdate} className='flex flex-col '>
+                  <form onSubmit={handleUpdate} className="flex flex-col ">
                     <label htmlFor="regionInput" className="block mb-2">
                       New region:
                     </label>
@@ -263,7 +241,7 @@ const RightSideBar = (props: Props) => {
 
                     <button
                       type="submit"
-                      className="border-2 border-white mt-2 rounded-sm"
+                      className="border-2 border-white mt-2 rounded-md py-1 transition duration-100 ease-in-out hover:scale-110"
                     >
                       Submit Region
                     </button>
@@ -272,58 +250,28 @@ const RightSideBar = (props: Props) => {
               </Popup>
             </div>
 
-            {/* <div className="">
-              <Popup
-                trigger={<button className='z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md  border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out' >Update Profile</button>}
-                position="left center"
-              >
-                <div className=" h-1/3 border-2 border-white w-2/3 bg-white">
-                  Update your Username here
-                  <br />
-                  <form onSubmit={handleUsernameSubmit}>
-                    <label htmlFor="userInput" className="block mb-2">
-                      New Username:
-                    </label>
-                    <input
-                      type="text"
-                      id="userInput"
-                      className="border border-gray-300 p-1 rounded-lg w-full"
-                      placeholder="Enter new username"
-                      value={usernameField}
-                      onChange={handleUsernameChange}
-                    />
-                    <button
-                      type="submit"
-                      className="border-2 border-black mt-2"
-                    >
-                      Submit Username
-                    </button>
-                  </form>
-                </div>
-              </Popup>
-            </div> */}
 
             <div className="w-full">
               <Popup
                 trigger={
-                  <button className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out">
+                  <button className="z-40 cursor-pointer border-2 bg-black w-full p-2 mb-2 rounded-md border-black hover:scale-110 hover:text-white transition duration-100 ease-in-out">
                     Delete Account
                   </button>
                 }
                 position="left center"
               >
-                <div className="h-1/3 border-2 border-white w-full bg-neutral-800 text-gray-300 p-4 flex flex-col items-center rounded-md shadow-lg">
+                <div className="h-1/3 border-2 border-white w-full bg-black text-gray-300 p-4 flex flex-col items-center rounded-md shadow-[0_20px_50px_rgba(0,0,0,_0.7)]">
                   Are you sure you want to delete your account?
                   <br />
                   <button
                     onClick={handleDelete}
-                    className="border-2 border-white mt-2 rounded-sm px-3 w-1/3 hover:bg-red-500 hover:animate-pulse"
+                    className="border-2 border-white mt-2 rounded-md py-1 transition duration-100 ease-in-out hover:scale-110 w-1/3 hover:bg-red-500 hover:animate-pulse"
                   >
                     Yes, Delete
                   </button>
                   <button
                     onClick={close}
-                    className="border-2 border-white mt-2 rounded-sm px-3 w-1/3 hover:bg-white hover:text-black hover:animate-pulse"
+                    className="border-2 border-white mt-2 rounded-md py-1 transition duration-100 ease-in-out hover:scale-110 w-1/3 hover:bg-white hover:text-black hover:animate-pulse"
                   >
                     Cancel
                   </button>
@@ -331,14 +279,8 @@ const RightSideBar = (props: Props) => {
               </Popup>
             </div>
 
-            {/* <button className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out">
-              Add Arn
-            </button>
-            <button className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out">
-              Edit Profile
-            </button> */}
             <button
-              className="z-40 cursor-pointer border-2 bg-neutral-800 w-full p-2 mb-2 rounded-md border-black hover:bg-neutral-600 hover:text-white transition duration-100 ease-in-out"
+              className="z-40 cursor-pointer border-2 bg-black w-full p-2 mb-2 rounded-md border-black hover:scale-110 hover:text-white transition duration-100 ease-in-out"
               onClick={() => handleSignOut()}
             >
               Sign Out

@@ -1,23 +1,20 @@
-import React from 'react'
-import {Chart, ArcElement, Legend, Tooltip, CategoryScale, Title} from 'chart.js';
-  
-import { Pie } from 'react-chartjs-2';
-
-
-type Props = {
-
-};
-
-Chart.register(
+import React from 'react';
+import {
+  Chart,
   ArcElement,
   Legend,
   Tooltip,
   CategoryScale,
-  Title
-)
+  Title,
+} from 'chart.js';
 
-const PieChart = ( {}: Props)=> {
-  
+import { Pie } from 'react-chartjs-2';
+
+type Props = {};
+
+Chart.register(ArcElement, Legend, Tooltip, CategoryScale, Title);
+
+const PieChart = ({}: Props) => {
   const data = [
     { year: 2010, count: 10 },
     { year: 2011, count: 20 },
@@ -28,7 +25,6 @@ const PieChart = ( {}: Props)=> {
     { year: 2016, count: 28 },
   ];
 
-
   return (
     <div>
       <Pie
@@ -38,27 +34,27 @@ const PieChart = ( {}: Props)=> {
             {
               label: 'Acquisitions by year',
               data: data.map((row) => row.count),
-              backgroundColor: ['gray','darkgray','lightpink'],
+              backgroundColor: ['gray', 'darkgray', 'lightpink'],
               borderColor: 'rgba(75, 192, 192, 1)',
               borderWidth: 1,
             },
           ],
         }}
         options={{
-            responsive: true,
-            scales: {
-              x: {
-                grid: {
-                  display: true,
-                },
-              },
-              y: {
-                beginAtZero: true,
+          responsive: true,
+          scales: {
+            x: {
+              grid: {
+                display: true,
               },
             },
+            y: {
+              beginAtZero: true,
+            },
+          },
         }}
       />
-    </div> 
+    </div>
   );
 };
 

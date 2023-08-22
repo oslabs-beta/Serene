@@ -103,9 +103,12 @@ const Warming = ({}: Props) => {
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <button        onClick={() => {
-              navigate('/home');
-            }} className="w-1/6">
+        <button
+          onClick={() => {
+            navigate('/home');
+          }}
+          className="w-1/6"
+        >
           <img src={serene} alt="Serene image" className="py-1" />
         </button>
         <RightSideBar />

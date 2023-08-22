@@ -4,23 +4,23 @@ import waves from '../assets/waves.png';
 import { FunctionContext } from '../App';
 import { UserContext } from '../App';
 
-type Props = {};
 
-const Login = (props: Props) => {
+
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
-  const handleUsernameChange = (e: any) => {
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
-  const handlePasswordChange = (e: any) => {
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const body = {
       username,
@@ -34,16 +34,12 @@ const Login = (props: Props) => {
         },
         body: JSON.stringify(body),
       });
-      // console.log('data: ', response);
-      // console.log('fetch successful');
-      //probably need an error case to catch
-      if(response.status === 200){
-        setCurrentUser(username)
+      if (response.status === 200) {
+        setCurrentUser(username);
         navigate('/home');
       } else {
-        alert('Invalid username or password')
+        alert('Invalid username or password');
       }
-      
     } catch (error) {
       console.log('NOW Error: ', error);
     }
@@ -58,20 +54,17 @@ const Login = (props: Props) => {
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col  border-black w-full">
-            {/* <label className="border-grey-500 border-4 my-2" > */}
-            {/* Username */}
+
             <input
               className="bg-transparent border-2 border-black p-1 rounded-md placeholder-black"
-              // className = 'border-white p-1 peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
+
               type="text"
               value={username}
               name="username"
               placeholder="Username"
               onChange={handleUsernameChange}
             />
-            {/* </label> */}
-            {/* <label className="border-grey-500 border-4 my-2">
-              Password */}
+          
             <input
               className="bg-transparent border-2 border-black mt-2 mb-6 p-1 rounded-md placeholder-black"
               type="password"
@@ -80,7 +73,7 @@ const Login = (props: Props) => {
               value={password}
               onChange={handlePasswordChange}
             />
-            {/* </label> */}
+            
           </div>
           <button
             type="submit"
@@ -88,7 +81,7 @@ const Login = (props: Props) => {
           >
             LOGIN
           </button>
-          {/* <p >Don't have an account? <a href="#signup">Sign up</a> here</p> */}
+         
         </form>
         <p className="flex flex-col items-center justify-center mt-5 text-black">
           Don't have an account?{' '}

@@ -35,7 +35,6 @@ const Logs = ({}: Props) => {
   // console.log('logging data in Logs ' + JSON.stringify(data))
   // const funcLogName = funcName;
 
-
   const FetchLogs = async () => {
     const body = {
       funcName,
@@ -83,7 +82,6 @@ const Logs = ({}: Props) => {
   const handleLogClick = (e) => {
     setLogStream(e.target.value);
   };
- 
 
   useEffect(() => {
     console.log('this is logstream', logStream);
@@ -127,11 +125,15 @@ const Logs = ({}: Props) => {
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <button        onClick={() => {
-              navigate('/home');
-            }} className="w-1/6">
+        <button
+          onClick={() => {
+            navigate('/home');
+          }}
+          className="w-1/6"
+        >
           <img src={serene} alt="Serene image" className="py-1" />
-        </button>        <RightSideBar />
+        </button>{' '}
+        <RightSideBar />
       </div>
 
       <div className="flex justify-center">
@@ -203,13 +205,12 @@ const Logs = ({}: Props) => {
         </div>
 
         <div className="ml-10 mr-5 my-6 flex flex-col items-center w-full border-2 border-black p-2 bg-black rounded-md text-gray-400">
-   
-            <LogStream logStreamArr={logArray} />
-          
+          <LogStream logStreamArr={logArray} />
         </div>
       </div>
-      <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">&copy; SERENE 2023 </div>
-
+      <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
+        &copy; SERENE 2023{' '}
+      </div>
     </div>
   );
 };

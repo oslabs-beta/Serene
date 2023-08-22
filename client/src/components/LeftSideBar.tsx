@@ -1,42 +1,32 @@
-import React, { useState, useEffect, useContext} from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Functions from './Functions';
-import FunctionDetails from './FunctionDetails';
-// import {mockFunctions} from '../shared'
-import { FetchFunctions } from '../shared'
-// import { FunctionContext } from '../App'
+import { FetchFunctions } from '../shared';
 import waves3 from '../assets/waves3.png';
-import { FunctionContext, FunctionDataContext, FunctionArnContext } from '@/App';
+import {
+  FunctionContext,
+  FunctionDataContext,
+  FunctionArnContext,
+} from '@/App';
 
 interface Props {}
 
-
 const LeftSideBar = (props: Props) => {
-  const [showSidebar, setShowSidebar] = useState(false);
-  const [data, setData] = useState([]);
+  const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const { funcName, setFuncName } = useContext(FunctionContext);
   const { funcData, setFuncData } = useContext(FunctionDataContext);
   const { funcArn, setFuncArn } = useContext(FunctionArnContext);
-//   // const  = useContext(FunctionContext)
-//   // const [ data, setData, clickedFunction, setClickedFunction ] = useContext(UserContext)
-// console.log('current sidebar data is ', funcData)
-    
+
   useEffect(() => {
-      FetchFunctions().then((returnedFuncData) => {
-        setFuncData(returnedFuncData);
-        // console.log('data is  reset: ', returnedFuncData);
-        returnedFuncData.forEach( (item, index) => {
-          if( item.name === funcName ){
-        setFuncArn(item.arn)  
+    FetchFunctions().then((returnedFuncData) => {
+      setFuncData(returnedFuncData);
+      returnedFuncData.forEach((item, index) => {
+        if (item.name === funcName) {
+          setFuncArn(item.arn);
         }
       });
-      //data logic here
-    })}, [funcName]);
+    });
+  }, [funcName]);
 
-  // console.log('funcname in leftsidebar', funcName)
-// const handleFunctionClick = (e) => {
-//   setClickedFunction(e.target.value)
-// }
-  
   return (
     <div className="">
       {showSidebar ? (
@@ -71,7 +61,10 @@ const LeftSideBar = (props: Props) => {
           showSidebar ? 'translate-x-0 ' : '-translate-x-full'
         }`}
       >
-        <img src={waves3} className='fixed h-screen z-10 ease-in-out duration-300'/>
+        <img
+          src={waves3}
+          className="fixed h-screen z-10 ease-in-out duration-300"
+        />
         <h3 className="mt-20 text-2xl min-w-min font-semibold text-white mb-5">
           F U N C T I O N S
         </h3>
@@ -79,23 +72,9 @@ const LeftSideBar = (props: Props) => {
           className="z-20 overflow-y-auto h-[75%] w-full "
         >
           <div>
-          {funcData.map((item) => (
-            // <div><button onClick={(e) => handleArnButtonClick(e)}
-            // >
-            //   <FunctionDetails 
-            //   name={item.name} 
-            //   arn={item.arn}
-            //   />
-              
-            // </button></div>
-              <Functions 
-              key={item.name}  
-              name={item.name} 
-              // arn={item.arn}
-              />
-              
-          ))}
-
+            {funcData.map((item) => (
+              <Functions key={item.name} name={item.name} />
+            ))}
           </div>
         </div>
       </div>

@@ -1,22 +1,18 @@
-import React from 'react'
-import {Chart, BarElement,
-  CategoryScale,
-  LinearScale,
-  Tooltip} from 'chart.js';
-  
-import { Bar } from 'react-chartjs-2';
-type Props = {
-};
-
-Chart.register(
+import React from 'react';
+import {
+  Chart,
   BarElement,
   CategoryScale,
   LinearScale,
-  Tooltip
-)
+  Tooltip,
+} from 'chart.js';
 
-const BarGraph = ( props : Props)=> {
-  
+import { Bar } from 'react-chartjs-2';
+type Props = {};
+
+Chart.register(BarElement, CategoryScale, LinearScale, Tooltip);
+
+const BarGraph = (props: Props) => {
   const data = [
     { year: 2010, count: 10 },
     { year: 2011, count: 20 },
@@ -27,10 +23,9 @@ const BarGraph = ( props : Props)=> {
     { year: 2016, count: 28 },
   ];
 
-
   return (
     <div>
-      <Bar 
+      <Bar
         data={{
           labels: data.map((row) => row.year),
           datasets: [
@@ -44,20 +39,20 @@ const BarGraph = ( props : Props)=> {
           ],
         }}
         options={{
-            responsive: true,
-            scales: {
-              x: {
-                grid: {
-                  display: true,
-                },
-              },
-              y: {
-                beginAtZero: true,
+          responsive: true,
+          scales: {
+            x: {
+              grid: {
+                display: true,
               },
             },
+            y: {
+              beginAtZero: true,
+            },
+          },
         }}
       />
-    </div> 
+    </div>
   );
 };
 

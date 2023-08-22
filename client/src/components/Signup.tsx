@@ -14,24 +14,22 @@ const Signup = (props: Props) => {
 
   const navigate = useNavigate();
 
-  const handleUsernameChange = (e: any) => {
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
-  const handlePasswordChange = (e: any) => {
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
-  const handleArnChange = (e: any) => {
+  const handleArnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setArnInput(e.target.value);
   };
-  const handleRegionChange = (e: any) => {
+  const handleRegionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRegion(e.target.value);
   };
 
-  // 
-  // const awsConsoleURL = `https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/quickcreate?templateURL=https://serenetemplate.s3.amazonaws.com/SereneTemplate.json&stackName=SereneStack`;
   const awsConsoleURL = `https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://serenetemplate.s3.amazonaws.com/SereneTemplate.json&stackName=SereneStack`;
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const body = {
       username,
@@ -41,20 +39,15 @@ const Signup = (props: Props) => {
     };
     console.log(body);
     try {
-      // console.log('SENDING USER OVER NOW')
-      const response = await fetch('/api/user/signup', {
+      await fetch('/api/user/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
       });
-      // console.log('Error after fetch')
-      // console.log('res: ',response)
-      // const data = await response.json();
-      // console.log('data: ', data)
       console.log('fetch successful');
-      // setResponse(data);
+
       navigate('/home');
     } catch (error) {
       console.log('NOW Error: ', error);
@@ -70,20 +63,16 @@ const Signup = (props: Props) => {
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col  border-black w-full">
-            {/* <label className="border-grey-500 border-4 my-2" > */}
-            {/* Username */}
+
             <input
               className="bg-transparent border-2 border-black p-1 rounded-md placeholder-black"
-              // className = 'border-white p-1 peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
+              
               type="text"
               value={username}
               name="username"
               placeholder="Username"
               onChange={handleUsernameChange}
             />
-            {/* </label> */}
-            {/* <label className="border-grey-500 border-4 my-2">
-              Password */}
             <input
               className="bg-transparent border-2 border-black mt-2 p-1 rounded-md placeholder-black"
               type="password"
@@ -140,12 +129,12 @@ const Signup = (props: Props) => {
           >
             Signup
           </button>
-          {/* <p >Don't have an account? <a href="#signup">Sign up</a> here</p> */}
+
         </form>
         <p className="flex flex-col items-center justify-center mt-5 text-black">
           Already have an account?{' '}
           <span>
-            <Link to="/" className="hover:underline hover:text-white">
+            <Link to="/login" className="hover:underline hover:text-white">
               Login
             </Link>{' '}
             here
@@ -155,8 +144,6 @@ const Signup = (props: Props) => {
           switch (response) {
             case 'username taken':
               return 'username is already taken';
-            // case 'user created':
-            //   return <Link to="/home"/>
             default:
               return <Link to="/home" />;
           }
