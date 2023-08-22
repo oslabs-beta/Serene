@@ -150,8 +150,8 @@ const LandingPage = (props: Props) => {
                   className="p-4 rounded-md grayscale group-hover:grayscale-0 transition duration-300 z-0"
                 />
               </div>
-              <p className=" font-semibold mt-4 "> ARIANNA</p>
-              <p className="mb-2">Software Engineer</p>
+              <p className=" font-semibold mt-4 group-hover:text-white "> ARIANNA</p>
+              <p className="mb-2 group-hover:text-white">Software Engineer</p>
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-100 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
                 <button className='hover:scale-110'><FaGithubSquare size={60} /></button>
@@ -166,17 +166,18 @@ const LandingPage = (props: Props) => {
                 <img
                   src={kyle}
                   alt="kyle image"
-                  className="p-4 rounded-md grayscale group-hover:grayscale-0 transition duration-300 z-0"
+                  className="w-full p-4 rounded-md grayscale group-hover:grayscale-0 transition duration-300 z-0"
                 />
               </div>
-              <p className=" font-semibold mt-4 "> KYLE</p>
-              <p className="mb-2">Software Engineer</p>
+              <p className=" font-semibold mt-4 group-hover:text-white"> KYLE</p>
+              <p className="mb-2 group-hover:text-white">Software Engineer</p>
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
                 <button className='hover:scale-110'><FaGithubSquare size={60} /></button>
                 <button className='hover:scale-110'> <FaLinkedin size={60} /></button>
               </div>
             </div>
+
             {/* WADE */}
             <div className="group-hover:scale-110 relative w-1/4 h-1/2 group group-hover:animate-bounce rounded-md mx-1 transition duration-100 ease-in-out bg-white">
             <div className="rounded-md mx-1 transition duration-100 ease-in-out bg-white group-hover:scale-110">
@@ -187,8 +188,8 @@ const LandingPage = (props: Props) => {
                   className="p-4 rounded-md grayscale group-hover:grayscale-0 transition duration-300 z-0"
                 />
               </div>
-              <p className=" font-semibold mt-4 "> WADE</p>
-              <p className="mb-2">Software Engineer</p>
+              <p className=" font-semibold mt-4 group-hover:text-white "> WADE</p>
+              <p className="mb-2 group-hover:text-white">Software Engineer</p>
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
                 <button className='hover:scale-110'><FaGithubSquare size={60} /></button>
