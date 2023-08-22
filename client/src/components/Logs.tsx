@@ -57,27 +57,15 @@ const Logs = ({}: Props) => {
   useEffect(() => {
     if (funcName !== 'SELECT A FUNCTION') {
       FetchLogs().then((funcLogs) => {
-        // console.log('setting data now', funcLogs)
+
         setAllLogs(funcLogs);
-        // setLogStream(funcLogs[1])
-        // console.log('logs are: ', funcLogs);
+
       });
     }
     //data logic here
   }, [funcName]);
 
-  // funcName !== 'FUNCTIONNAME' ? (useEffect(() => {
-  //   // console.log('beginning to fetch')
-  //   FetchLogs().then((funcLogs) => {
-  //     // console.log('setting data now')
-  //     setAllLogs(funcLogs);
-  //     // setLogStream(funcLogs[1])
-  //     console.log('logs are: ', funcLogs);
-  //   });
-  //   //data logic here
-  // }, [funcName])) : null
-
-  // console.log('Current Logname is ', clickedFunction)
+ 
 
   const handleLogClick = (e) => {
     setLogStream(e.target.value);

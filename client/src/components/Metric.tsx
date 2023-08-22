@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PieChart from './PieChart';
 import LineGraph from './LineGraph';
-import BarGraph from './BarGraph';
-import DoughnutChart from './DoughnutChart';
 import LeftSideBar from './LeftSideBar';
 import RightSideBar from './RightSideBar';
 import { FetchMetrics } from '@/shared';
@@ -22,13 +19,13 @@ const Metric = ({}: Props) => {
 
   const navigate = useNavigate();
 
-  const handleSortBy = (e: any) => {
+  const handleSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(e.target.value);
   };
-  const handlePeriod = (e: any) => {
+  const handlePeriod = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPeriod(e.target.value);
   };
-  const handleStartDate = (e: any) => {
+  const handleStartDate = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setStartDate(e.target.value);
   };
 
@@ -131,28 +128,9 @@ const Metric = ({}: Props) => {
           </span>
         </a>
       </div>
-      {/* body div */}
-      {/* <div>CURRENT FUNC IS {funcName}</div> */}
 
       <div className="flex flex-col items-center justify-center">
-        <div className="w-1/4 hidden">
-          {
-            (() => {
-              switch (currentChart) {
-                case 'pie':
-                  return <PieChart />;
-                case 'bar':
-                  return <BarGraph />;
-                case 'doughnut':
-                  return <DoughnutChart />;
-                case 'line':
-                  return <LineGraph />;
-                default:
-                  return null;
-              }
-            })() // immediately invokes the currentChart
-          }
-        </div>
+
         {/* button div */}
         {/* <div className="mt-20 fixed bottom-20">
           <button
@@ -249,7 +227,7 @@ const Metric = ({}: Props) => {
             className="mx-1 w-full p-1 text-black bg-white border-2 rounded-md shadow-sm outline-none appearance-none transition duration-100 ease-in-out hover:bg-black hover:border-2 border-black hover:text-white"
             onChange={handleStartDate}
           >
-            {/* 1h, 3h, 12h, 1d, 3d, 1w */}
+         
             <option value="1w" className="text-center">
               {' '}
               -- Start Date --

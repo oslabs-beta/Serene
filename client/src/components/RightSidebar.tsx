@@ -148,7 +148,7 @@ const RightSideBar = (props: Props) => {
                 }
                 position="left center"
               >
-                <div className=" h-1/3 border-2 border-white w-full px-24 bg-black text-gray-300 p-4 flex flex-col items-center rounded-md shadow-[0_20px_50px_rgba(0,0,0,_0.7)]">
+                <div className=" h-1/3  w-full px-24 bg-black text-gray-300 p-4 flex flex-col items-center rounded-md shadow-[0_20px_50px_rgba(0,0,0,_0.7)]">
                   <h1 className="font-semibold -mb-2">
                     {' '}
                     UPDATE YOUR ARN HERE{' '}
@@ -185,7 +185,7 @@ const RightSideBar = (props: Props) => {
                 }
                 position="left center"
               >
-                <div className=" px-20 h-1/3 border-2 border-white w-full bg-black text-gray-300 p-4 flex flex-col items-center rounded-md shadow-[0_20px_50px_rgba(0,0,0,_0.7)] ">
+                <div className=" px-20 h-1/3 w-full bg-black text-gray-300 p-4 flex flex-col items-center rounded-md shadow-[0_20px_50px_rgba(0,0,0,_0.7)] ">
                   <h1 className="font-semibold -mb-2">
                     {' '}
                     UPDATE YOUR REGION HERE{' '}
@@ -260,7 +260,7 @@ const RightSideBar = (props: Props) => {
                 }
                 position="left center"
               >
-                <div className="h-1/3 border-2 border-white w-full bg-black text-gray-300 p-4 flex flex-col items-center rounded-md shadow-[0_20px_50px_rgba(0,0,0,_0.7)]">
+                <div className="h-1/3  w-full bg-black text-gray-300 p-4 flex flex-col items-center rounded-md shadow-[0_20px_50px_rgba(0,0,0,_0.7)]">
                   Are you sure you want to delete your account?
                   <br />
                   <button

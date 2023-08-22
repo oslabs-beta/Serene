@@ -70,8 +70,8 @@ const VersionHistory = () => {
     }
   }, [funcName]);
 
-  const handleAliasArn = (el) => {
-    setAliasArn(el);
+  const handleAliasArn = (e:React.ChangeEvent<HTMLInputElement>) => {
+    setAliasArn(e);
   };
 
   console.log(`line 77 version arn ${aliasArn}`);
@@ -160,26 +160,9 @@ const VersionHistory = () => {
         <RightSideBar />
       </div>
       <div className="flex justify-center">
-        {/* <div>CURRENT FUNC NAME STATE IS {funcName}</div> */}
 
-        {/* <div>
-      <JellyfishSpinner />
 
-      </div> */}
 
-        {/* {isLoading ? (
-         <div
-  className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-  role="status">
-  <span
-    className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-    >Loading...</span >
-</div> 
-
-        ) : ( 
-          
-        )}
-         */}
 
         <a
           onClick={() => {
@@ -311,57 +294,19 @@ const VersionHistory = () => {
                     </div>
                   ) : null}
                 </div>
-                {/**
-             * 
-             if ( el.RoutingConfig ) {
-              element will be el.RoutingConfig.AdditionalVersionWeights
-             }
-              weight of main version = el.weight
-             * 
-             */}
-                {/* {
-              "AliasArn": "arn:aws:lambda:us-east-1:097265058099:function:secondFunction:secondAlias",
-              "Description": "This is the second alias for secondFunction (version 2)",
-              "FunctionVersion": "2",
-              "Name": "secondAlias",
-              "RevisionId": "e90afe10-5891-4102-a4aa-3bfe002fe84c",
-              "weight": 1
-              } */}
-
-                {/* <span className="group-hover:bg-black group-hover:text-white bg-white rounded-md p-2 transition duration-100 ease-in-out group-hover:scale-110 text-center flex items-center ml-auto">
-                        VERSION
-                    </span> */}
               </div>
               // EACH VERSION DIV ENDS
             ))
           )}
 
-          {/* 
-            Object.keys(versions).length !== 0 ? (
-            Object.keys(versions)
-              // {/*  versions !== null ? Object.keys(versions) 
-              .reverse()
-              .map((item) => (
-                <div className="border-4 border-pink-200 group flex w-1/2 ml-auto">
-    
-                  {/* <div></div> HERE for SPACING ONLY */}
 
-          {/*                     
-                  </div>
-                
-              ))
-              )} */}
         </div>
       </div>
 
-      {/* <div>{Object.keys(versions).length}</div> */}
-      {/* <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
-        &copy; SERENE 2023{' '}
-      </div> */}
+
     </div>
   );
 };
 
 export default VersionHistory;
 
-// fetched aliases:  [{"AliasArn":"arn:aws:lambda:us-east-1:449206294758:function:testingfunc:first-run","Description":"","FunctionVersion":"$LATEST","Name":"first-run","RevisionId":"3f57b57d-e58f-4ea3-8498-5645416c08e6","weight":1},{"AliasArn":"arn:aws:lambda:us-east-1:449206294758:function:testingfunc:second-run","Description":"","FunctionVersion":"1","Name":"second-run","RevisionId":"59454881-fa6d-42d3-b8aa-def3f3d88d55","RoutingConfig":{"AdditionalVersionWeights":{"2":0.75}},"weight":0.25}]
