@@ -76,3 +76,4 @@ This Readme provides insutrctions on how to set up your AWS environment so that 
   b. https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/quickcreate?templateURL=${templateURL}&stackName=${stackName}
     - eg: https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://serenetemplate.s3.amazonaws.com/SereneTemplate.json&stackName=SereneStack
   c. The above URL is in the sign up component and is prompted to the user during sign up. This will allow them to create a quick stack based on the SereneTemplate. 
+  https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://serene-admin-bucket.s3.amazonaws.com/SereneTemplate.json&stackName=SereneStack

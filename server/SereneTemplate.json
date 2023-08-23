@@ -12,7 +12,7 @@
               "Sid": "Statement1",
               "Effect": "Allow",
               "Principal": {
-                "AWS": "arn:aws:iam::287836476382:user/SereneUserParent"
+                "AWS": "arn:aws:iam::097265058099:user/SereneAdmin"
               },
               "Action": "sts:AssumeRole"
             }
