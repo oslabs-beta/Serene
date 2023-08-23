@@ -1,0 +1,112 @@
+import { EndpointParameterInstructions } from "@smithy/middleware-endpoint";
+import { Command as $Command } from "@smithy/smithy-client";
+import { Handler, HttpHandlerOptions as __HttpHandlerOptions, MetadataBearer as __MetadataBearer, MiddlewareStack } from "@smithy/types";
+import { CloudWatchLogsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchLogsClient";
+import { DescribeLogGroupsRequest, DescribeLogGroupsResponse } from "../models/models_0";
+/**
+ * @public
+ */
+export { __MetadataBearer, $Command };
+/**
+ * @public
+ *
+ * The input for {@link DescribeLogGroupsCommand}.
+ */
+export interface DescribeLogGroupsCommandInput extends DescribeLogGroupsRequest {
+}
+/**
+ * @public
+ *
+ * The output of {@link DescribeLogGroupsCommand}.
+ */
+export interface DescribeLogGroupsCommandOutput extends DescribeLogGroupsResponse, __MetadataBearer {
+}
+/**
+ * @public
+ * <p>Lists the specified log groups. You can list all your log groups or filter the results by prefix.
+ *       The results are ASCII-sorted by log group name.</p>
+ *          <p>CloudWatch Logs doesn’t support IAM policies that control access to the <code>DescribeLogGroups</code> action by using the
+ *       <code>aws:ResourceTag/<i>key-name</i>
+ *             </code> condition key. Other CloudWatch Logs actions
+ *       do support the use of the <code>aws:ResourceTag/<i>key-name</i>
+ *             </code> condition key to control access.
+ *       For more information about using tags to control access, see
+ *       <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">Controlling access to Amazon Web Services resources using tags</a>.</p>
+ *          <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and
+ *     view data from the linked source accounts. For more information, see
+ *       <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html">CloudWatch cross-account observability</a>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { CloudWatchLogsClient, DescribeLogGroupsCommand } from "@aws-sdk/client-cloudwatch-logs"; // ES Modules import
+ * // const { CloudWatchLogsClient, DescribeLogGroupsCommand } = require("@aws-sdk/client-cloudwatch-logs"); // CommonJS import
+ * const client = new CloudWatchLogsClient(config);
+ * const input = { // DescribeLogGroupsRequest
+ *   accountIdentifiers: [ // AccountIds
+ *     "STRING_VALUE",
+ *   ],
+ *   logGroupNamePrefix: "STRING_VALUE",
+ *   logGroupNamePattern: "STRING_VALUE",
+ *   nextToken: "STRING_VALUE",
+ *   limit: Number("int"),
+ *   includeLinkedAccounts: true || false,
+ * };
+ * const command = new DescribeLogGroupsCommand(input);
+ * const response = await client.send(command);
+ * // { // DescribeLogGroupsResponse
+ * //   logGroups: [ // LogGroups
+ * //     { // LogGroup
+ * //       logGroupName: "STRING_VALUE",
+ * //       creationTime: Number("long"),
+ * //       retentionInDays: Number("int"),
+ * //       metricFilterCount: Number("int"),
+ * //       arn: "STRING_VALUE",
+ * //       storedBytes: Number("long"),
+ * //       kmsKeyId: "STRING_VALUE",
+ * //       dataProtectionStatus: "ACTIVATED" || "DELETED" || "ARCHIVED" || "DISABLED",
+ * //       inheritedProperties: [ // InheritedProperties
+ * //         "ACCOUNT_DATA_PROTECTION",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param DescribeLogGroupsCommandInput - {@link DescribeLogGroupsCommandInput}
+ * @returns {@link DescribeLogGroupsCommandOutput}
+ * @see {@link DescribeLogGroupsCommandInput} for command's `input` shape.
+ * @see {@link DescribeLogGroupsCommandOutput} for command's `response` shape.
+ * @see {@link CloudWatchLogsClientResolvedConfig | config} for CloudWatchLogsClient's `config` shape.
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>A parameter is specified incorrectly.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service cannot complete the request.</p>
+ *
+ * @throws {@link CloudWatchLogsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchLogs service.</p>
+ *
+ */
+export declare class DescribeLogGroupsCommand extends $Command<DescribeLogGroupsCommandInput, DescribeLogGroupsCommandOutput, CloudWatchLogsClientResolvedConfig> {
+    readonly input: DescribeLogGroupsCommandInput;
+    static getEndpointParameterInstructions(): EndpointParameterInstructions;
+    /**
+     * @public
+     */
+    constructor(input: DescribeLogGroupsCommandInput);
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>, configuration: CloudWatchLogsClientResolvedConfig, options?: __HttpHandlerOptions): Handler<DescribeLogGroupsCommandInput, DescribeLogGroupsCommandOutput>;
+    /**
+     * @internal
+     */
+    private serialize;
+    /**
+     * @internal
+     */
+    private deserialize;
+}

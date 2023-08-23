@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+tslib_1.__exportStar(require("./DescribeDestinationsPaginator"), exports);
+tslib_1.__exportStar(require("./DescribeLogGroupsPaginator"), exports);
+tslib_1.__exportStar(require("./DescribeLogStreamsPaginator"), exports);
+tslib_1.__exportStar(require("./DescribeMetricFiltersPaginator"), exports);
+tslib_1.__exportStar(require("./DescribeSubscriptionFiltersPaginator"), exports);
+tslib_1.__exportStar(require("./FilterLogEventsPaginator"), exports);
+tslib_1.__exportStar(require("./GetLogEventsPaginator"), exports);
+tslib_1.__exportStar(require("./Interfaces"), exports);
