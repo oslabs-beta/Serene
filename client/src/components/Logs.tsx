@@ -1,19 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
-import LeftSideBar from "./LeftSideBar";
-import RightSideBar from "./RightSidebar";
-import LogStream from "./LogStream";
-import {
-  JellyfishSpinner,
-  GridSpinner,
-} from "react-spinners-kit";
-import { FunctionContext, RegionContext } from "@/App";
-import { useNavigate } from "react-router-dom";
-import serene from "../assets/serene.png";
+import React, { useState, useEffect, useContext } from 'react';
+import LeftSideBar from './LeftSideBar';
+import RightSideBar from './RightSidebar';
+import LogStream from './LogStream';
+import { JellyfishSpinner, GridSpinner } from 'react-spinners-kit';
+import { FunctionContext, RegionContext } from '@/App';
+import { useNavigate } from 'react-router-dom';
+import serene from '../assets/serene.png';
 
 const Logs = () => {
   const [allLogs, setAllLogs] = useState([]);
-  const [logStream, setLogStream] = useState("");
-  const [logArray, setLogArray] = useState([""]);
+  const [logStream, setLogStream] = useState('');
+  const [logArray, setLogArray] = useState(['']);
 
   const { funcName, setFuncName } = useContext(FunctionContext);
   // const { region, setRegion} = useContext(RegionContext);
@@ -25,22 +22,22 @@ const Logs = () => {
       funcName,
     };
     try {
-      const response = await fetch("/api/cloudwatch/getLogs", {
-        method: "POST",
+      const response = await fetch('/api/cloudwatch/getLogs', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
       });
       const data = response.json();
       return data;
     } catch (error) {
-      console.log("Error is: ", error);
+      console.log('Error is: ', error);
     }
   };
 
   useEffect(() => {
-    if (funcName !== "SELECT A FUNCTION") {
+    if (funcName !== 'SELECT A FUNCTION') {
       FetchLogs().then((funcLogs) => {
         setAllLogs(funcLogs);
       });
@@ -52,7 +49,7 @@ const Logs = () => {
   };
 
   useEffect(() => {
-    console.log("this is logstream", logStream);
+    console.log('this is logstream', logStream);
   }, [logStream]);
 
   const FetchLogStreams = async () => {
@@ -62,20 +59,20 @@ const Logs = () => {
       streamName: logStream,
     };
     try {
-      const response = await fetch("/api/cloudwatch/getStreamDetails", {
-        method: "POST",
+      const response = await fetch('/api/cloudwatch/getStreamDetails', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
       setLogArray(data);
-      console.log("return data from fetchlogstreams", data);
+      console.log('return data from fetchlogstreams', data);
       return data;
     } catch (error) {
-      console.log("fetch log stream Error: ", error);
+      console.log('fetch log stream Error: ', error);
     }
   };
 
@@ -86,7 +83,7 @@ const Logs = () => {
     fetchData();
   }, [logStream]);
 
-  console.log("LOG ARRAY IS HERE", logArray);
+  console.log('LOG ARRAY IS HERE', logArray);
 
   return (
     <div>
@@ -95,19 +92,19 @@ const Logs = () => {
         <LeftSideBar />
         <button
           onClick={() => {
-            navigate("/home");
+            navigate('/home');
           }}
           className="w-1/6"
         >
           <img src={serene} alt="Serene image" className="py-1" />
-        </button>{" "}
+        </button>{' '}
         <RightSideBar />
       </div>
 
       <div className="flex justify-center">
         <a
           onClick={() => {
-            navigate("/home");
+            navigate('/home');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -118,7 +115,7 @@ const Logs = () => {
         </a>
         <a
           onClick={() => {
-            navigate("/versions");
+            navigate('/versions');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -130,7 +127,7 @@ const Logs = () => {
 
         <a
           onClick={() => {
-            navigate("/metrics");
+            navigate('/metrics');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -142,7 +139,7 @@ const Logs = () => {
 
         <a
           onClick={() => {
-            navigate("/warming");
+            navigate('/warming');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >

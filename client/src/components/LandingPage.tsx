@@ -1,22 +1,22 @@
-import React from "react";
-import { useNavigate, Link } from "react-router-dom";
-import lambdaFuncs from "../assets/lambdaFuncs.jpeg";
-import serene from "../assets/serene.png";
-import kenny from "../assets/kenny.jpeg";
-import ari from "../assets/ari.jpeg";
-import kyle from "../assets/kyle.jpeg";
-import wade from "../assets/wade.jpeg";
-import signupdemo from "../assets/signupdemo.gif";
-import aws from "../assets/aws.jpeg";
-import demo1 from "../assets/demo1.gif";
-import warmingdemo from "../assets/warmingdemo.gif";
-import versionsdemo from "../assets/versionsdemo.gif";
-import logsdemo from "../assets/logsdemo.gif";
-import metricsdemo from "../assets/metricsdemo.gif";
-import linkedinlogo from "../assets/linkedinlogo.png";
-import githubcat from "../assets/githubcat.png";
-import { FaLinkedin, FaLinkedinIn, FaGithubSquare } from "react-icons/fa";
-import { FaMedium } from "react-icons/fa6";
+import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import lambdaFuncs from '../assets/lambdaFuncs.jpeg';
+import serene from '../assets/serene.png';
+import kenny from '../assets/kenny.jpeg';
+import ari from '../assets/ari.jpeg';
+import kyle from '../assets/kyle.jpeg';
+import wade from '../assets/wade.jpeg';
+import signupdemo from '../assets/signupdemo.gif';
+import aws from '../assets/aws.jpeg';
+import demo1 from '../assets/demo1.gif';
+import warmingdemo from '../assets/warmingdemo.gif';
+import versionsdemo from '../assets/versionsdemo.gif';
+import logsdemo from '../assets/logsdemo.gif';
+import metricsdemo from '../assets/metricsdemo.gif';
+import linkedinlogo from '../assets/linkedinlogo.png';
+import githubcat from '../assets/githubcat.png';
+import { FaLinkedin, FaLinkedinIn, FaGithubSquare } from 'react-icons/fa';
+import { FaMedium } from 'react-icons/fa6';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const LandingPage = () => {
 
         <button
           onClick={() => {
-            navigate("/login");
+            navigate('/login');
           }}
           type="button"
           className=" mx-1 hover:scale-110 inline-block rounded bg-neutral-800 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] transition duration-150 ease-in-out hover:bg-neutral-800 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-neutral-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:outline-none focus:ring-0 active:bg-neutral-900 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] dark:bg-neutral-900 dark:shadow-[0_4px_9px_-4px_#030202] dark:hover:bg-neutral-900 dark:hover:shadow-[0_8px_9px_-4px_rgba(3,2,2,0.3),0_4px_18px_0_rgba(3,2,2,0.2)] dark:focus:bg-neutral-900 dark:focus:shadow-[0_8px_9px_-4px_rgba(3,2,2,0.3),0_4px_18px_0_rgba(3,2,2,0.2)] dark:active:bg-neutral-900 dark:active:shadow-[0_8px_9px_-4px_rgba(3,2,2,0.3),0_4px_18px_0_rgba(3,2,2,0.2)]"
@@ -63,7 +63,7 @@ const LandingPage = () => {
         </button>
         <button
           onClick={() => {
-            navigate("/user/signup");
+            navigate('/user/signup');
           }}
           type="button"
           className=" mx-1 hover:scale-110 inline-block rounded bg-neutral-800 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] transition duration-150 ease-in-out hover:bg-neutral-800 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-neutral-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:outline-none focus:ring-0 active:bg-neutral-900 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] dark:bg-neutral-900 dark:shadow-[0_4px_9px_-4px_#030202] dark:hover:bg-neutral-900 dark:hover:shadow-[0_8px_9px_-4px_rgba(3,2,2,0.3),0_4px_18px_0_rgba(3,2,2,0.2)] dark:focus:bg-neutral-900 dark:focus:shadow-[0_8px_9px_-4px_rgba(3,2,2,0.3),0_4px_18px_0_rgba(3,2,2,0.2)] dark:active:bg-neutral-900 dark:active:shadow-[0_8px_9px_-4px_rgba(3,2,2,0.3),0_4px_18px_0_rgba(3,2,2,0.2)]"
@@ -107,7 +107,7 @@ const LandingPage = () => {
 
         <div className="bg-gray-200">
           <h1 className="bg-gray-200 text-center font-semibold text-6xl py-20 ">
-            {" "}
+            {' '}
             HOW TO GET STARTED
           </h1>
           <div className="flex text-center justify-center items-center p-2">
@@ -177,7 +177,7 @@ const LandingPage = () => {
                   />
                 </div>
                 <p className=" font-semibold mt-4 group-hover:text-white ">
-                  {" "}
+                  {' '}
                   ARIANNA
                 </p>
                 <p className="mb-2 group-hover:text-white flex justify-center items-center">
@@ -190,7 +190,7 @@ const LandingPage = () => {
                   <FaGithubSquare size={60} />
                 </button>
                 <button className="hover:scale-110">
-                  {" "}
+                  {' '}
                   <FaLinkedin size={60} />
                 </button>
               </div>
@@ -206,7 +206,7 @@ const LandingPage = () => {
                   />
                 </div>
                 <p className=" font-semibold mt-4 group-hover:text-white">
-                  {" "}
+                  {' '}
                   KYLE
                 </p>
                 <p className="mb-2 group-hover:text-white flex justify-center items-center">
@@ -219,7 +219,7 @@ const LandingPage = () => {
                   <FaGithubSquare size={60} />
                 </button>
                 <button className="hover:scale-110">
-                  {" "}
+                  {' '}
                   <FaLinkedin size={60} />
                 </button>
               </div>
@@ -236,7 +236,7 @@ const LandingPage = () => {
                   />
                 </div>
                 <p className=" font-semibold mt-4 group-hover:text-white ">
-                  {" "}
+                  {' '}
                   WADE
                 </p>
                 <p className="mb-2 group-hover:text-white flex justify-center items-center">
@@ -249,7 +249,7 @@ const LandingPage = () => {
                   <FaGithubSquare size={60} />
                 </button>
                 <button className="hover:scale-110">
-                  {" "}
+                  {' '}
                   <FaLinkedin size={60} />
                 </button>
               </div>
@@ -265,7 +265,7 @@ const LandingPage = () => {
                   />
                 </div>
                 <p className=" font-semibold mt-4 group-hover:text-white  ">
-                  {" "}
+                  {' '}
                   KENNY
                 </p>
                 <p className="mb-2 group-hover:text-white flex justify-center items-center">
@@ -278,7 +278,7 @@ const LandingPage = () => {
                   <FaGithubSquare size={60} />
                 </button>
                 <button className="hover:scale-110">
-                  {" "}
+                  {' '}
                   <FaLinkedin size={60} />
                 </button>
               </div>

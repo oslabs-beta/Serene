@@ -1,5 +1,9 @@
 // import necessary AWS commands
-import { LambdaClient, ListFunctionsCommand, ListFunctionsCommandOutput } from '@aws-sdk/client-lambda';
+import {
+  LambdaClient,
+  ListFunctionsCommand,
+  ListFunctionsCommandOutput,
+} from '@aws-sdk/client-lambda';
 // import types
 import { LambdaController, ArrayFiller } from '../../types';
 
@@ -9,12 +13,10 @@ const lambdaController = {} as LambdaController;
 // from there we are able to return an array of all their functions in the given region
 lambdaController.getFunctions = async (req, res, next) => {
   try {
-    console.log('in lambdacontroller first thing')
     const client: LambdaClient = new LambdaClient({
       credentials: res.locals.creds.roleCreds,
-      region: res.locals.creds.region,  //this should come from front end - req.query
+      region: res.locals.creds.region, //this should come from front end - req.query
     });
-    console.log('in lambdacontroller')
     // create and send the command from the client
     const listFunctions: ListFunctionsCommand = new ListFunctionsCommand({});
     const data: ListFunctionsCommandOutput = await client.send(listFunctions);
@@ -22,9 +24,8 @@ lambdaController.getFunctions = async (req, res, next) => {
     const funcList = data.Functions;
 
     const functions: ArrayFiller[] = [];
-    console.log('functionList: ', funcList)
     // iterate through the returned function list and push the desired info into our new array
-    funcList.forEach(el => {
+    funcList.forEach((el) => {
       functions.push({
         name: el.FunctionName,
         description: el.Description,

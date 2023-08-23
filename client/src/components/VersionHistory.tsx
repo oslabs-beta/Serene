@@ -1,25 +1,25 @@
-import React, { useContext, useState, useEffect } from "react";
-import LeftSideBar from "./LeftSideBar";
-import RightSideBar from "./RightSidebar";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from 'react';
+import LeftSideBar from './LeftSideBar';
+import RightSideBar from './RightSidebar';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Popover,
   PopoverHandler,
   PopoverContent,
   Button,
-} from "@material-tailwind/react";
-import Typography from "@mui/material/Typography";
+} from '@material-tailwind/react';
+import Typography from '@mui/material/Typography';
 
-import { FunctionContext } from "@/App";
-import serene from "../assets/serene.png";
+import { FunctionContext } from '@/App';
+import serene from '../assets/serene.png';
 
 const VersionHistory = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { funcName, setFuncName } = useContext(FunctionContext);
   const [versions, setVersions] = useState({});
   const [aliases, setAliases] = useState([]);
-  const [aliasArn, setAliasArn] = useState("");
-  const [codeLink, setCodeLink] = useState("");
+  const [aliasArn, setAliasArn] = useState('');
+  const [codeLink, setCodeLink] = useState('');
 
   const navigate = useNavigate();
 
@@ -28,25 +28,25 @@ const VersionHistory = () => {
       funcName,
     };
     try {
-      const response = await fetch("api/versions/versionList", {
-        method: "POST",
+      const response = await fetch('api/versions/versionList', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
-      console.log("fetched versions: ", JSON.stringify(data));
+      console.log('fetched versions: ', JSON.stringify(data));
       setVersions(data);
       return data;
     } catch (error) {
-      console.log("Error in versions: ", error);
+      console.log('Error in versions: ', error);
     }
   };
 
   useEffect(() => {
-    if (funcName !== "SELECT A FUNCTION") {
+    if (funcName !== 'SELECT A FUNCTION') {
       const fetchVersions = async () => {
         await FetchVersions();
       };
@@ -63,20 +63,20 @@ const VersionHistory = () => {
       functionArn: aliasArn,
     };
     try {
-      const response = await fetch("api/versions/functionVersion", {
-        method: "POST",
+      const response = await fetch('api/versions/functionVersion', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
       });
       const data = await response.json();
-      console.log("fetched version details: ", JSON.stringify(data));
-      console.log("fetch versions successful");
+      console.log('fetched version details: ', JSON.stringify(data));
+      console.log('fetch versions successful');
       setCodeLink(data.linkToFunc);
       return data;
     } catch (error) {
-      console.log("Error in versions: ", error);
+      console.log('Error in versions: ', error);
     }
   };
 
@@ -92,25 +92,25 @@ const VersionHistory = () => {
       funcName,
     };
     try {
-      const response = await fetch("api/versions/getAlias", {
-        method: "POST",
+      const response = await fetch('api/versions/getAlias', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
-      console.log("fetched aliases: ", JSON.stringify(data));
+      console.log('fetched aliases: ', JSON.stringify(data));
       setAliases(data);
       return data;
     } catch (error) {
-      console.log("Error in versions/alias: ", error);
+      console.log('Error in versions/alias: ', error);
     }
   };
 
   useEffect(() => {
-    if (funcName !== "SELECT A FUNCTION") {
+    if (funcName !== 'SELECT A FUNCTION') {
       const fetchAlias = async () => {
         await FetchAliases();
       };
@@ -125,18 +125,18 @@ const VersionHistory = () => {
         <LeftSideBar />
         <button
           onClick={() => {
-            navigate("/home");
+            navigate('/home');
           }}
           className="w-1/6"
         >
           <img src={serene} alt="Serene image" className="py-1" />
-        </button>{" "}
+        </button>{' '}
         <RightSideBar />
       </div>
       <div className="flex justify-center">
         <a
           onClick={() => {
-            navigate("/home");
+            navigate('/home');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -147,7 +147,7 @@ const VersionHistory = () => {
         </a>
         <a
           onClick={() => {
-            navigate("/metrics");
+            navigate('/metrics');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -158,7 +158,7 @@ const VersionHistory = () => {
         </a>
         <a
           onClick={() => {
-            navigate("/warming");
+            navigate('/warming');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -170,7 +170,7 @@ const VersionHistory = () => {
 
         <a
           onClick={() => {
-            navigate("/logs");
+            navigate('/logs');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -203,14 +203,14 @@ const VersionHistory = () => {
                           handleAliasArn(el.AliasArn);
                         }}
                       >
-                        {" "}
+                        {' '}
                         Alias {el.Name}
                       </button>
                     </Button>
                   </PopoverHandler>
                   <PopoverContent className="border-black border-2 w-1/3">
                     <span>
-                      Download code for Alias{" "}
+                      Download code for Alias{' '}
                       <span className="font-bold">{el.Name}</span>
                       <button>
                         <a
@@ -252,31 +252,31 @@ const VersionHistory = () => {
                 </div>
 
                 <div className="w-1/3 h-full ml-auto  mt-2 mr-2 flex justify-around rounded-md bg-white border-2 border-black group-hover:bg-black group-hover:text-white flex-wrap text-center">
-                  version :{" "}
+                  version :{' '}
                   <span className="font-bold inline-block">
-                    {el.FunctionVersion}{" "}
+                    {el.FunctionVersion}{' '}
                   </span>
-                  weight :{" "}
+                  weight :{' '}
                   <span className="font-bold inline-block">
                     {el.weight * 100}%
                   </span>
                   {el.RoutingConfig ? (
                     <div className="border-t-2 border-black">
-                      version :{" "}
+                      version :{' '}
                       <span className="font-bold">
                         {
                           Object.keys(
                             el.RoutingConfig.AdditionalVersionWeights
                           )[0]
-                        }{" "}
-                      </span>{" "}
+                        }{' '}
+                      </span>{' '}
                       <br />
-                      weight :{" "}
+                      weight :{' '}
                       <span className="font-bold">
                         {Object.values(
                           el.RoutingConfig.AdditionalVersionWeights
                         )[0] * 100}
-                        %{" "}
+                        %{' '}
                       </span>
                     </div>
                   ) : null}

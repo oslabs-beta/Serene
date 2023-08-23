@@ -27,9 +27,8 @@ const Signup = (props: Props) => {
     setRegion(e.target.value);
   };
 
+  const awsConsoleURL = `https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/quickcreate?templateURL=https://serene-admin-bucket.s3.amazonaws.com/SereneTemplate.json&stackName=SereneStack`;
 
-
-  const awsConsoleURL = `https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/quickcreate?templateURL=https://serene-admin-bucket.s3.amazonaws.com/SereneTemplate.json&stackName=SereneStack`
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // if (!region){}
@@ -65,10 +64,8 @@ const Signup = (props: Props) => {
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col  border-black w-full">
-
             <input
               className="bg-transparent border-2 border-black p-1 rounded-md placeholder-black"
-              
               type="text"
               value={username}
               name="username"
@@ -135,7 +132,6 @@ const Signup = (props: Props) => {
           >
             Signup
           </button>
-
         </form>
         <p className="flex flex-col items-center justify-center mt-5 text-black">
           Already have an account?{' '}

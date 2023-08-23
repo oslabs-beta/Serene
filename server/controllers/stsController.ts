@@ -15,8 +15,6 @@ const stsController = {} as STSController;
 // with user info from DB and .env credentials, generate credentials to be used in other middleware
 stsController.getCredentials = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log('in stsController')
-    console.log('req.dookies.SSID (stsController): ', req.cookies.SSID)
     const foundUser: UserInfo = await User.findOne({ _id: req.cookies.SSID })
     const { ARN, region } = foundUser;
     const accessKeyId: string = process.env.accessKeyId;
@@ -39,20 +37,16 @@ stsController.getCredentials = async (req: Request, res: Response, next: NextFun
     
     // create and send the command from the client
     const command: AssumeRoleCommand = new AssumeRoleCommand(params);
-    console.log('command: ', command);
 
     const data: AssumeRoleCommandOutput = await stsClient.send(command);
-    console.log('data: ', data)
     
     const roleCreds = {
       accessKeyId: data.Credentials.AccessKeyId,
       secretAccessKey: data.Credentials.SecretAccessKey,
       sessionToken: data.Credentials.SessionToken,
     } as RoleCreds;
-    console.log('DONE GETTING CREDENTIALS')
     // roleCreds/region will be passed into every AWS-centric middleware as necessary credentials
     res.locals.creds = {roleCreds, region};
-    console.log(res.locals.creds)
     return next();
   } catch (err) {
     return next({

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { profile } from '../shared';
 import waves5 from '../assets/waves5.png';
-import waves9 from '../assets/waves9.png'
-import {  useNavigate } from 'react-router-dom';
+import waves9 from '../assets/waves9.png';
+import { useNavigate } from 'react-router-dom';
 import { UserContext, FunctionArnContext, RegionContext } from '@/App';
 import Popup from 'reactjs-popup';
 
@@ -18,13 +18,11 @@ const RightSideBar = (props: Props) => {
   const [regionField, setRegionField] = useState('');
   const { region, setRegion } = useContext(RegionContext);
 
-
-  const handleRegionChange = (e :React.ChangeEvent<HTMLSelectElement>) => {
+  const handleRegionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRegionField(e.target.value);
   };
 
-
-  const handleArnChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+  const handleArnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setArnField(e.target.value);
   };
 
@@ -60,8 +58,6 @@ const RightSideBar = (props: Props) => {
       });
   };
 
-
-
   const handleUpdate = async () => {
     try {
       const body = {};
@@ -90,7 +86,6 @@ const RightSideBar = (props: Props) => {
 
   return (
     <div>
-
       {showSidebar ? (
         <button
           className="flex text-5xl text-black items-center cursor-pointer fixed right-8 top-6 z-50 transition duration-400 ease-in-out hover:rotate-90"
@@ -130,8 +125,8 @@ const RightSideBar = (props: Props) => {
           }`}
         /> */}
         <img
-        src={waves9}
-        className="fixed h-screen z-10 ease-in-out duration-300 top-0 right-0 w-[25vw]"
+          src={waves9}
+          className="fixed h-screen z-10 ease-in-out duration-300 top-0 right-0 w-[25vw]"
         />
         <div className="flex flex-col items-center justify-center">
           <h3 className="mt-10 ml-20 text-2xl font-semibold text-white z-50">
@@ -249,7 +244,6 @@ const RightSideBar = (props: Props) => {
                 </div>
               </Popup>
             </div>
-
 
             <div className="w-full">
               <Popup

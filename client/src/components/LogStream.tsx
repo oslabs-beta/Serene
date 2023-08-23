@@ -1,9 +1,6 @@
 import React from 'react';
 import { testArray } from '../shared';
-import {
-  JellyfishSpinner,
-  GridSpinner,
-} from 'react-spinners-kit';
+import { JellyfishSpinner, GridSpinner } from 'react-spinners-kit';
 type Props = {
   logStreamArr: [];
   isLoading: boolean;

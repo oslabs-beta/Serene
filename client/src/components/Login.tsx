@@ -4,8 +4,6 @@ import waves from '../assets/waves.png';
 import { FunctionContext } from '../App';
 import { UserContext } from '../App';
 
-
-
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -54,10 +52,8 @@ const Login = () => {
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col  border-black w-full">
-
             <input
               className="bg-transparent border-2 border-black p-1 rounded-md placeholder-black"
-
               type="text"
               value={username}
               name="username"
@@ -65,7 +61,7 @@ const Login = () => {
               onChange={handleUsernameChange}
               required
             />
-          
+
             <input
               className="bg-transparent border-2 border-black mt-2 mb-6 p-1 rounded-md placeholder-black"
               type="password"
@@ -75,7 +71,6 @@ const Login = () => {
               onChange={handlePasswordChange}
               required
             />
-            
           </div>
           <button
             type="submit"
@@ -83,7 +78,6 @@ const Login = () => {
           >
             LOGIN
           </button>
-         
         </form>
         <p className="flex flex-col items-center justify-center mt-5 text-black">
           Don't have an account?{' '}

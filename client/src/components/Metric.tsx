@@ -1,22 +1,20 @@
-
-import React, { useState, useEffect, useRef, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import LineGraph from "./LineGraph";
-import LeftSideBar from "./LeftSideBar";
-import RightSideBar from "./RightSidebar";
-import { FetchMetrics } from "@/shared";
-import { FunctionContext } from "@/App";
-import serene from "../assets/serene.png";
-
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import LineGraph from './LineGraph';
+import LeftSideBar from './LeftSideBar';
+import RightSideBar from './RightSidebar';
+import { FetchMetrics } from '@/shared';
+import { FunctionContext } from '@/App';
+import serene from '../assets/serene.png';
 
 type Props = {};
 
 const Metric = ({}: Props) => {
-  const [currentChart, setCurrentChart] = useState("pie");
+  const [currentChart, setCurrentChart] = useState('pie');
   const [metricsData, setMetricsData] = useState({});
-  const [sortBy, setSortBy] = useState("TimestampAscending");
-  const [period, setPeriod] = useState("5 minutes");
-  const [startDate, setStartDate] = useState("1w");
+  const [sortBy, setSortBy] = useState('TimestampAscending');
+  const [period, setPeriod] = useState('5 minutes');
+  const [startDate, setStartDate] = useState('1w');
   const { funcName, setFuncName } = useContext(FunctionContext);
 
   const navigate = useNavigate();
@@ -43,10 +41,10 @@ const Metric = ({}: Props) => {
       startDate,
     };
     try {
-      const response = await fetch("/api/cloudwatch/getMetrics", {
-        method: "POST",
+      const response = await fetch('/api/cloudwatch/getMetrics', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
       });
@@ -54,7 +52,7 @@ const Metric = ({}: Props) => {
       const data = await response.json();
       return data;
     } catch (error) {
-      console.log("NOW Error: ", error);
+      console.log('NOW Error: ', error);
     }
   };
 
@@ -71,19 +69,19 @@ const Metric = ({}: Props) => {
         <LeftSideBar />
         <button
           onClick={() => {
-            navigate("/home");
+            navigate('/home');
           }}
           className="w-1/6"
         >
           <img src={serene} alt="Serene image" className="py-1" />
-        </button>{" "}
+        </button>{' '}
         <RightSideBar />
       </div>
 
       <div className="flex justify-center">
         <a
           onClick={() => {
-            navigate("/home");
+            navigate('/home');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -94,7 +92,7 @@ const Metric = ({}: Props) => {
         </a>
         <a
           onClick={() => {
-            navigate("/versions");
+            navigate('/versions');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -106,7 +104,7 @@ const Metric = ({}: Props) => {
 
         <a
           onClick={() => {
-            navigate("/warming");
+            navigate('/warming');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -118,7 +116,7 @@ const Metric = ({}: Props) => {
 
         <a
           onClick={() => {
-            navigate("/logs");
+            navigate('/logs');
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -137,8 +135,8 @@ const Metric = ({}: Props) => {
             onChange={handleSortBy}
           >
             <option value="TimestampAscending" className="text-center">
-              {" "}
-              -- SortBy --{" "}
+              {' '}
+              -- SortBy --{' '}
             </option>
             <option value="TimestampDescending"> TimestampDescending </option>
             <option value="TimestampAscending">TimestampAscending</option>
@@ -148,8 +146,8 @@ const Metric = ({}: Props) => {
             onChange={handlePeriod}
           >
             <option value="5 minutes" className="text-center">
-              {" "}
-              -- Period --{" "}
+              {' '}
+              -- Period --{' '}
             </option>
             <option value="5 seconds">5 seconds </option>
             <option value="1 minute">1 minute</option>
@@ -165,7 +163,7 @@ const Metric = ({}: Props) => {
             onChange={handleStartDate}
           >
             <option value="1w" className="text-center">
-              {" "}
+              {' '}
               -- Start Date --
             </option>
             <option value="1h">1h</option>
@@ -180,7 +178,7 @@ const Metric = ({}: Props) => {
         <div className=" flex w-full flex-wrap mx-5">
           {Object.keys(metricsData).map(
             (eachMetric) =>
-              eachMetric !== "concurrentExecutions" && (
+              eachMetric !== 'concurrentExecutions' && (
                 <div
                   key={eachMetric}
                   className="border-4 border-gray-300 h-full w-1/2 flex justify-center"

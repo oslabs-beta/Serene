@@ -26,9 +26,6 @@ Chart.register(
 );
 
 const LineGraph = ({ TimeStamps, Values, metric }: Props) => {
-  
-
-
   const newTimeArr = TimeStamps.map((ts, index) => ({
     x: new Date(ts), // Parse date strings into Date objects
     y: Values[index],

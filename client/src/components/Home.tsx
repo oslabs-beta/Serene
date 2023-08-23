@@ -1,10 +1,10 @@
-import { useState, useContext } from "react";
-import LeftSideBar from "./LeftSideBar";
-import RightSideBar from "./RightSidebar";
-import FunctionDetails from "./FunctionDetails";
-import serene from "../assets/serene.png";
+import { useState, useContext } from 'react';
+import LeftSideBar from './LeftSideBar';
+import RightSideBar from './RightSidebar';
+import FunctionDetails from './FunctionDetails';
+import serene from '../assets/serene.png';
 
-import { FunctionContext } from "../App";
+import { FunctionContext } from '../App';
 
 type Props = {};
 
@@ -31,7 +31,7 @@ const Home = ({}: Props) => {
       </div>
 
       <div className="mt-10">
-        <FunctionDetails />{" "}
+        <FunctionDetails />{' '}
       </div>
 
       <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
