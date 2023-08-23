@@ -1,0 +1,52 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Creation of Role for Serene",
+  "Resources": {
+    "SereneRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "Statement1",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::097265058099:user/SereneAdmin"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "SerenePolicy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "VisualEditor0",
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:DescribeLogGroups",
+                    "logs:DescribeLogStreams",
+                    "logs:GetLogEvents",
+                    "logs:FilterLogEvents",
+                    "cloudwatch:GetMetricData",
+                    "lambda:listFunctions",
+                    "lambda:ListVersionsByFunction",
+                    "lambda:InvokeFunction",
+                    "lambda:ListAliases",
+                    "lambda:GetAlias",
+                    "lambda:*"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
