@@ -45,7 +45,7 @@ describe('test user signup', () => {
   });
 });
 
-describe('test signup with improper input', () => {
+describe('test user signup', () => {
   it('should reject the user signup', async () => {
     const requestBody = {
       password: 'testPassword',
@@ -68,7 +68,7 @@ describe('test user login', () => {
   });
 });
 
-describe('test login with false credentials', () => {
+describe('test user login', () => {
   it('should reject the user login', async () => {
     const requestBody = {
       username: 'thisUsernameDoesNotExist',
@@ -79,7 +79,7 @@ describe('test login with false credentials', () => {
   });
 });
 
-describe('test updating a user', () => {
+describe('test user update', () => {
   it('should successfully update a user', async () => {
     const newStuff = {
       newRegion: 'newRegion',
@@ -98,3 +98,13 @@ describe('test updating a user', () => {
     expect(res.body.region).toBe('newRegion');
   });
 });
+
+
+describe('test user deletion', () => {
+  it('should delete the user and return status 200', async () => {
+    const res = await request(app)
+      .delete('/api/user/delete')
+      .set('Cooke', 'SSID=64d4d95291905a7b6650a125')
+  })
+  expect(res.status).toEqual(200);
+})

@@ -23,7 +23,7 @@ const app: Express = express();
 const PORT: number = 3000;
 
 // grab our access key from .env and connect to MongoDB
-const ACCESS_KEY: any = process.env.ACCESS_KEY
+const ACCESS_KEY: string = process.env.ACCESS_KEY!
 
 mongoose.connect(ACCESS_KEY, { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions);
 
@@ -45,7 +45,7 @@ app.use('/api/versions', versionRouter);
 app.use('/api/warming', warmingRouter);
 
 // serve static files
-app.use(express.static('../client'));
+app.use(express.static('../client')); // ../client/dist
 
 // 404 catch-all route handler
 app.use('*', (req: Request, res: Response) => {

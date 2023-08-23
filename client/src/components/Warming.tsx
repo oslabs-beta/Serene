@@ -50,7 +50,7 @@ const Warming = ({}: Props) => {
     }
   };
 
-  const handleStartButton = () => {
+  const handleStartButton = async () => {
     //make fetch request
     if (!warmArray.includes(funcName)) {
       console.log("warm array is, ", warmArray);
@@ -59,6 +59,7 @@ const Warming = ({}: Props) => {
     }
     console.log("warm array NOW is, ", warmArray);
   };
+
 
   const navigate = useNavigate();
 
@@ -172,7 +173,7 @@ const Warming = ({}: Props) => {
             "
             onClick={handleStartButton}
           >
-            {" "}
+
             Start Warming
           </button>
 

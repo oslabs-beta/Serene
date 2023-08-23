@@ -37,8 +37,8 @@ export type Login = {
 }
 
 export type UpdatedUserInfo = {
-  newRegion: string,
-  newARN: string
+  newRegion?: string,
+  newARN?: string
 }
 
 
@@ -77,7 +77,7 @@ export type ArrayFiller = {
 
 // warmingController.ts
 export type WarmingController = {
-  warmFunction: (req: Request, res: Response, next: NextFunction) => Promise <void>
+  warmFunction: (req: Request, res: Response, next: NextFunction) => Promise <void>,
 }
 
 export type WarmingReqBody = {

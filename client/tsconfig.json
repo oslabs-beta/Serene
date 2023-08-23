@@ -11,6 +11,7 @@
     "types": [
       "node"
     ],
+    "noImplicitAny": false,
 
     /* Bundler mode */
     "moduleResolution": "Node",
@@ -22,8 +23,8 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],

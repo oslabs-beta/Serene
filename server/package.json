@@ -16,6 +16,7 @@
     "@aws-sdk/client-sts": "^3.391.0",
     "@babel/plugin-transform-async-to-generator": "^7.22.5",
     "@babel/runtime": "^7.1.2",
+    "@jest/globals": "^29.6.3",
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",

@@ -6,7 +6,7 @@ import warmingController from '../controllers/warming/warmingController';
 import stsController from '../controllers/stsController';
 
 // initialize router
-const warmingRouter = express.Router();
+const warmingRouter: Router = express.Router();
 
 // invokes the function at the user specified frequency and duration (req.body)
 warmingRouter.post('/functions', stsController.getCredentials, warmingController.warmFunction, (req: Request, res: Response) => {
