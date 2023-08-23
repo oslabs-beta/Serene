@@ -152,7 +152,7 @@ const LandingPage = (props: Props) => {
               Prevent cold start latency with our warming feature
             </div>
             <div className="ml-20 ">
-              <img src={warmingdemo} className="border-8 border-black pl-4 -ml-[-5rem]" />  
+              <img src={warmingdemo} className="border-8 border-black  " />  
             </div>
           </div>
         </div>
@@ -178,7 +178,9 @@ const LandingPage = (props: Props) => {
                   {" "}
                   ARIANNA
                 </p>
-                <p className="mb-2 group-hover:text-white flex justify-center items-center"><img src={aws} className="w-2/12 group-hover:opacity-0" />Software Engineer</p>
+                <p className="mb-2 group-hover:text-white flex justify-center items-center">
+                  {/* <img src={aws} className="w-2/12 group-hover:opacity-0" /> */}
+                  Software Engineer</p>
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-100 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
                 <button className="hover:scale-110">
@@ -204,7 +206,9 @@ const LandingPage = (props: Props) => {
                   {" "}
                   KYLE
                 </p>
-                <p className="mb-2 group-hover:text-white flex justify-center items-center"><img src={aws} className="w-2/12 group-hover:opacity-0" />Software Engineer</p>
+                <p className="mb-2 group-hover:text-white flex justify-center items-center">
+                  {/* <img src={aws} className="w-2/12 group-hover:opacity-0" /> */}
+                  Software Engineer</p>
               
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
@@ -232,7 +236,9 @@ const LandingPage = (props: Props) => {
                   {" "}
                   WADE
                 </p>
-                <p className="mb-2 group-hover:text-white flex justify-center items-center"><img src={aws} className="w-2/12 group-hover:opacity-0" />Software Engineer</p>
+                <p className="mb-2 group-hover:text-white flex justify-center items-center">
+                  {/* <img src={aws} className="w-2/12 group-hover:opacity-0" /> */}
+                  Software Engineer</p>
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
                 <button className="hover:scale-110">
@@ -258,7 +264,9 @@ const LandingPage = (props: Props) => {
                   {" "}
                   KENNY
                 </p>
-                <p className="mb-2 group-hover:text-white flex justify-center items-center"><img src={aws} className="w-2/12 group-hover:opacity-0" />Software Engineer</p>
+                <p className="mb-2 group-hover:text-white flex justify-center items-center">
+                  {/* <img src={aws} className="w-2/12 group-hover:opacity-0" /> */}
+                  Software Engineer</p>
            
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
