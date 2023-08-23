@@ -35,7 +35,7 @@ const LandingPage = () => {
         </a>
 
         <a
-          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          href="https://www.linkedin.com/company/serene-open-source-app/about/"
           type="button"
           target="_blank"
           className="border-4 border-black bg-transparent p-2 rounded-full hover:scale-110 mx-1 mr-2"
