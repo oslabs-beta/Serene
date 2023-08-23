@@ -70,20 +70,24 @@ The final problem Serene tackles is that of cold start latency. When they go unu
 3. Improved TypeScript on backend -- there are 3 'any' types left in the backend (in order of file/method/variable):
 
    a. versionHistoryController.ts:
-       i. viewVersionList: versions
+
+   	- viewVersionList: versions
 
    b. cloudWatchLogsController.ts:
-       i. viewStreamInfo: eventList
+
+   	- viewStreamInfo: eventList
 
    c. cloudWatchMetricsController.ts:
-       i. getMetrics: metricObj
+
+      - getMetrics: metricObj
 5. Create a desktop app
 6. Incorperate Oauth
 7. Backend testing reads 91% but it says 4/5 testing suites fail -- fixing this would be great and would bump the testing coverage even higher
+   
     a. Also fixing the testing so that it will work with TypeScript (we tested before converting JS to TS)
-8. Persisting state on the frontend is sometimes buggy (potential solution could be converting frontend to Redux)
-9. Price estimation calculator/graphics
-10. Be able to display code for each version of the functions
+9. Persisting state on the frontend is sometimes buggy (potential solution could be converting frontend to Redux)
+10. Price estimation calculator/graphics
+11. Be able to display code for each version of the functions
     a. We were only able to grab a download link to the code form AWS that could open in notepad or some other text editor but we could         not display the actual code from there
 
 ## Meet the Team
