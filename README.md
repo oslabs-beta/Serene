@@ -28,7 +28,7 @@ Visit our website at **COMING SOON**.
 
 Serene is building an exciting developer tool to help monitor AWS lambda resources and prevent cold start latency delays. 
 
-If you are looking to contribute to Serene, please visit READMEDEV.md to learn how to get started! Feel free to check out our 'Potential Iteration Ideas' near the bottom of the page for some ideas on what can still be done.
+If you are looking to contribute to Serene, please visit <a href="google.com">READMEDEV.md</a> to learn how to get started! Feel free to check out our 'Potential Iteration Ideas' near the bottom of the page for some ideas on what can still be done.
 
 ## How to Use Serene
 
@@ -93,6 +93,7 @@ The final problem Serene tackles is that of cold start latency. When they go unu
     a. We were only able to grab a download link to the code form AWS that could open in notepad or some other text editor but we could         not display the actual code from there
 
 ## Meet the Team
+#### Whether you have questions about contributing, using Serene, or just want to chat, feel free to connect with us on LinkedIn and GitHub!
 <table align="center">
   <tr>
     <td align="center">
