@@ -15,7 +15,7 @@ import serene from '../assets/serene.png';
 
 const VersionHistory = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { funcName, setFuncName } = useContext(FunctionContext);
+  const { funcName, setFuncName }: any = useContext(FunctionContext);
   const [versions, setVersions] = useState({});
   const [aliases, setAliases] = useState([]);
   const [aliasArn, setAliasArn] = useState('');
@@ -54,7 +54,7 @@ const VersionHistory = () => {
     }
   }, [funcName]);
 
-  const handleAliasArn = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAliasArn = (e: any) => {
     setAliasArn(e);
   };
 
@@ -192,7 +192,7 @@ const VersionHistory = () => {
               </h3>
             </div>
           ) : (
-            aliases.map((el) => (
+            aliases.map((el: any) => (
               <div className="group flex items-center my-2 ml-auto w-7/12">
                 <Popover placement="left">
                   <PopoverHandler className="border-2 border-white bg-black w-3/12 h-full p-1 mt-2 mb-1 transition duration-100 ease-in-out group-hover:scale-125 ml-0">
@@ -275,7 +275,7 @@ const VersionHistory = () => {
                       <span className="font-bold">
                         {Object.values(
                           el.RoutingConfig.AdditionalVersionWeights
-                        )[0] * 100}
+                        )[0] as any * 100}
                         %{' '}
                       </span>
                     </div>

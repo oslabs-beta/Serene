@@ -1,18 +1,17 @@
 import React from 'react';
-import { testArray } from '../shared';
 import { JellyfishSpinner, GridSpinner } from 'react-spinners-kit';
 type Props = {
   logStreamArr: [];
-  isLoading: boolean;
+  isLoading?: boolean;
 };
+
+type Log = {
+  message: string,
+  timestamp: string
+}
 
 const LogStream = ({ logStreamArr, isLoading }: Props) => {
   return (
-    // first IF is has anything been clicked? if not, no data showing
-    // else do the below
-
-    // if the current state is loading, show the loader jellyfish
-    // else show the actual data
 
     <div>
       {logStreamArr.length ? (
@@ -21,7 +20,7 @@ const LogStream = ({ logStreamArr, isLoading }: Props) => {
             <JellyfishSpinner size={120} color="white" />
           </div>
         ) : (
-          logStreamArr.map((log) => (
+          logStreamArr.map((log: Log) => (
             <div className="my-5">
               <p>Message: {log.message}</p>
               <p>Time Stamp: {log.timestamp}</p>

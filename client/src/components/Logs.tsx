@@ -12,7 +12,7 @@ const Logs = () => {
   const [logStream, setLogStream] = useState('');
   const [logArray, setLogArray] = useState(['']);
 
-  const { funcName, setFuncName } = useContext(FunctionContext);
+  const { funcName, setFuncName }: any = useContext(FunctionContext);
   // const { region, setRegion} = useContext(RegionContext);
 
   const navigate = useNavigate();
@@ -168,7 +168,7 @@ const Logs = () => {
         </div>
 
         <div className="ml-10 mr-5 my-6 flex flex-col items-center w-full border-2 border-black p-2 bg-black rounded-md text-gray-400">
-          <LogStream logStreamArr={logArray} />
+          <LogStream logStreamArr={logArray as any} />
         </div>
       </div>
       <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">

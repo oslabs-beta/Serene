@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FunctionContext } from '../App';
 
 const FunctionDetails = () => {
-  const { funcName, setFuncName } = useContext(FunctionContext);
+  const { funcName, setFuncName }: any = useContext(FunctionContext);
   const navigate = useNavigate();
 
   return (

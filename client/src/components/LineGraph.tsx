@@ -67,7 +67,7 @@ const LineGraph = ({ TimeStamps, Values, metric }: Props) => {
               beginAtZero: true,
             },
           },
-        }}
+        } as any}
       />
     </div>
   );

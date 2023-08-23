@@ -11,7 +11,7 @@ type Props = {};
 const Home = ({}: Props) => {
   const [isRightMenuToggled, setIsRightMenuToggled] = useState<boolean>(false);
   const [data, setData] = useState([]);
-  const { funcName, setFuncName } = useContext(FunctionContext);
+  const { funcName, setFuncName }: any = useContext(FunctionContext);
 
   return (
     <div className="bg-gray-100 h-screen">

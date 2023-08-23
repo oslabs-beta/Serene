@@ -12,9 +12,9 @@ interface Props {}
 
 const LeftSideBar = (props: Props) => {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
-  const { funcName, setFuncName } = useContext(FunctionContext);
-  const { funcData, setFuncData } = useContext(FunctionDataContext);
-  const { funcArn, setFuncArn } = useContext(FunctionArnContext);
+  const { funcName, setFuncName }: any = useContext(FunctionContext);
+  const { funcData, setFuncData }: any = useContext(FunctionDataContext);
+  const { funcArn, setFuncArn }: any = useContext(FunctionArnContext);
 
   useEffect(() => {
     FetchFunctions().then((returnedFuncData) => {

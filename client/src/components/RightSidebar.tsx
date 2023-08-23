@@ -11,12 +11,12 @@ type Props = {};
 const RightSideBar = (props: Props) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-  const { funcArn, setFuncArn } = useContext(FunctionArnContext);
+  const { currentUser, setCurrentUser }: any = useContext(UserContext);
+  const { funcArn, setFuncArn }: any = useContext(FunctionArnContext);
   const [usernameField, setUsernameField] = useState('');
   const [arnField, setArnField] = useState('');
   const [regionField, setRegionField] = useState('');
-  const { region, setRegion } = useContext(RegionContext);
+  const { region, setRegion }: any = useContext(RegionContext);
 
   const handleRegionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRegionField(e.target.value);
@@ -60,7 +60,7 @@ const RightSideBar = (props: Props) => {
 
   const handleUpdate = async () => {
     try {
-      const body = {};
+      const body = {} as any;
       if (regionField !== '') {
         body.newRegion = regionField;
       } else if (arnField !== '') {

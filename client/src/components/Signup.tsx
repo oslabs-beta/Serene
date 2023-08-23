@@ -10,7 +10,7 @@ const Signup = (props: Props) => {
   const [password, setPassword] = useState('');
   const [arnInput, setArnInput] = useState('');
   const [response, setResponse] = useState('');
-  const { region, setRegion } = useContext(RegionContext);
+  const { region, setRegion }: any = useContext(RegionContext);
 
   const navigate = useNavigate();
 

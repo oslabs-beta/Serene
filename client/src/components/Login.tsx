@@ -7,7 +7,7 @@ import { UserContext } from '../App';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser }: any = useContext(UserContext);
 
   const navigate = useNavigate();
 
