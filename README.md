@@ -26,13 +26,47 @@ Visit our website at **COMING SOON**.
 
 Serene is building an exciting developer tool to help monitor AWS lambda resources and prevent cold start latency delays. 
 
+## Features
+
+### Metric Visualization
+For AWS users and web developers, it is incredibly important to be able to monitor the health of their Lambda functions. Unfortunately, the current state of the AWS UI/UX makes it tedious for the user to access these metrics. With Serene, the user is able to view these metrics in neat displays with ease. Simply select the function you want to view from the sidebar and navigate to the 'Metrics' tab. The user is then able to toggle the sorting data based on start date, period, and data in ascending or descending order. Our goal was to make this experience much cleaner for the user without sacrificing any of the important data they may seek.
+
+### CloudWatch Logs
+CloudWatch log data is another tool for analyzing Lambda functions (though a user can view logs on many other AWS entities as well). Once again, Serene has taken out any requirement for over-navigation. By selecting a Lambda function to view and navigating to the 'View Logs' tab, Serene will display any log streams associated with that function. By clicking into one of the streams, a display of all the events in that stream will render. These events will provide insight into the Lambda function's performance and can assist in any troubleshooting the user may have to do.
+
+### Version History and Aliases
+Often times, developers will edit the code on their Lambda functions, creating different versions. They will also assign aliases (which point at Lambda function versions) with the option of pointing it at multiple versions and weighing the traffic to them differently (ex. v1: 70%, v2: 30%). This entire process can be hard to follow at times, but not with Serene. Serene includes a display of all the versions of a given Lambda function as well as any aliases pointing to those versions, with the proper weight included. Finally, the user is able to click a link to download their alias' code and view their Lambda function without having to deal with the cumbersome AWS console.
+
+### Lambda Function Warming
+The final problem Serene tackles is that of cold start latency. When they go unused for enough time, Lambda functions will go 'cold' and take longer to begin running again as desired. With Serene, a user is able to schedule invocations for their Lambda functions to help prevent this latency and optimize their performance.
+
+
+## Potential Iteration Ideas
+1. Add functionality to kill warming functionality early if the user wants
+2. Improved modularity in cloudWatchMetricsController.ts
+3. Improved TypeScript on backend -- there are 3 'any' types left in the backend (in order of file/method/variable):
+    a. versionHistoryController.ts:
+         i. viewVersionList: versions
+    b. cloudWatchLogsController.ts:
+         i. viewStreamInfo: eventList
+    c. cloudWatchMetricsController.ts:
+         i. getMetrics: metricObj
+4. Create a desktop app
+5. Incorperate Oauth
+6. Backend testing reads 91% but it says 4/5 testing suites fail -- fixing this would be great and would bump the testing coverage even higher
+    a. Also fixing the testing so that it will work with TypeScript (we tested before converting JS to TS)
+7. Persisting state on the frontend is sometimes buggy (potential solution could be converting frontend to Redux)
+8. Price estimation calculator/graphics
+9. Be able to display code for each version of the functions
+    a. We were only able to grab a download link to the code form AWS that could open in notepad or some other text editor but we could         not display the actual code from there
+
 ## Meet the Team
 <table align="center">
   <tr>
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/135382120?v=4" width="100"/>
       <br />
-      <sub><b>Arianna Newynn</b></sub>
+      <sub><b>Arianna Nguyen</b></sub>
       <br />
       <a href="https://www.linkedin.com/in/ariannanguyen/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="20"/></a>
       <a href="https://github.com/dahliarianna" target="_blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20"/></a>
@@ -40,7 +74,7 @@ Serene is building an exciting developer tool to help monitor AWS lambda resourc
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/110702444?v=4" width="100"/>
       <br />
-      <sub><b>Kyle Newynn</b></sub>
+      <sub><b>Kyle Nguyen</b></sub>
       <br />
       <a href="https://www.linkedin.com/in/kylehng/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="20"/></a>
       <a href="https://github.com/khnguyen07" target="_blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20"/></a>
