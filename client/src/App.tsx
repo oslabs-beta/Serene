@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react'; // div element does not exist on jsx.intrinsic element or something
+import React, { useState, createContext } from 'react'; // div element does not exist on jsx.intrinsic element or something
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Home from './components/Home';
@@ -8,30 +8,25 @@ import Warming from './components/Warming';
 import Logs from './components/Logs';
 import LandingPage from './components/LandingPage'
 import NotFound from './components/NotFound'
-import TestToggle from './components/TestToggle'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { FetchFunctions } from './shared'
 
 
+export const FunctionContext = createContext<{ funcName: string; setFuncName: React.Dispatch<React.SetStateAction<string>> } | undefined>(undefined);
+export const FunctionArnContext = createContext<{ funcArn: string; setFuncArn: React.Dispatch<React.SetStateAction<string>> } | undefined>(undefined);
+export const FunctionDataContext = createContext<{ funcData: any[]; setFuncData: React.Dispatch<React.SetStateAction<any[]>> } | undefined>(undefined);
+export const WarmingContext = createContext<{ warmArray: any[]; setWarmArray: React.Dispatch<React.SetStateAction<any[]>> } | undefined>(undefined);
+export const RegionContext = createContext<{ region: string; setRegion: React.Dispatch<React.SetStateAction<string>> } | undefined>(undefined);
+export const UserContext = createContext<{ currentUser: string; setCurrentUser: React.Dispatch<React.SetStateAction<string>> } | undefined>(undefined);
 
 
-export const FunctionContext = createContext();
-export const UserContext = createContext();
-export const FunctionArnContext = createContext();
-export const FunctionDataContext = createContext();
-export const WarmingContext = createContext();
-export const RegionContext = createContext();
+function App(): JSX.Element {
 
-function App() {
-  // const [data, setData] = useState([]);
-  // const [clickedFunction, setClickedFunction] = useState([]);
-
-  const [funcName, setFuncName] = useState('SELECT A FUNCTION');
-  const [currentUser, setCurrentUser] = useState('');
-  const [funcArn, setFuncArn] = useState('SELECT FUNC ARN')
-  const [region, setRegion] = useState('us-east-1')
-  const [funcData, setFuncData] = useState([])
-  const [warmArray, setWarmArray] = useState([]);
+  const [funcName, setFuncName] = useState<string>('SELECT A FUNCTION');
+  const [currentUser, setCurrentUser] = useState<string>('');
+  const [funcArn, setFuncArn] = useState<string>('SELECT FUNC ARN');
+  const [region, setRegion] = useState<string>('us-east-1');
+  const [funcData, setFuncData] = useState<any[]>([]);
+  const [warmArray, setWarmArray] = useState<any[]>([]);
 
 
   return (
@@ -52,7 +47,6 @@ function App() {
             <Route path="/warming" element={<Warming />} />
             <Route path="/logs" element={<Logs />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/testing" element={<TestToggle /> } />
           </Routes>
         </UserContext.Provider>
       </WarmingContext.Provider>

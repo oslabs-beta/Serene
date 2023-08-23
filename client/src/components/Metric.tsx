@@ -1,33 +1,33 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import PieChart from './PieChart';
-import LineGraph from './LineGraph';
-import BarGraph from './BarGraph';
-import DoughnutChart from './DoughnutChart';
-import LeftSideBar from './LeftSideBar';
-import RightSideBar from './RightSidebar';
-import { FetchMetrics } from '@/shared';
-import { FunctionContext } from '@/App';
+
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import LineGraph from "./LineGraph";
+import LeftSideBar from "./LeftSideBar";
+import RightSideBar from "./RightSidebar";
+import { FetchMetrics } from "@/shared";
+import { FunctionContext } from "@/App";
+import serene from "../assets/serene.png";
+
 
 type Props = {};
 
 const Metric = ({}: Props) => {
-  const [currentChart, setCurrentChart] = useState('pie');
+  const [currentChart, setCurrentChart] = useState("pie");
   const [metricsData, setMetricsData] = useState({});
-  const [sortBy, setSortBy] = useState('TimestampAscending');
-  const [period, setPeriod] = useState('5 minutes');
-  const [startDate, setStartDate] = useState('1w');
+  const [sortBy, setSortBy] = useState("TimestampAscending");
+  const [period, setPeriod] = useState("5 minutes");
+  const [startDate, setStartDate] = useState("1w");
   const { funcName, setFuncName } = useContext(FunctionContext);
 
   const navigate = useNavigate();
 
-  const handleSortBy = (e: any) => {
+  const handleSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(e.target.value);
   };
-  const handlePeriod = (e: any) => {
+  const handlePeriod = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPeriod(e.target.value);
   };
-  const handleStartDate = (e: any) => {
+  const handleStartDate = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setStartDate(e.target.value);
   };
 
@@ -43,20 +43,18 @@ const Metric = ({}: Props) => {
       startDate,
     };
     try {
-      const response = await fetch('/api/cloudwatch/getMetrics', {
-        method: 'POST',
+      const response = await fetch("/api/cloudwatch/getMetrics", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
-      console.log('fetched Logs: ', data);
-      console.log('fetch Logs successful');
       return data;
     } catch (error) {
-      console.log('NOW Error: ', error);
+      console.log("NOW Error: ", error);
     }
   };
 
@@ -66,25 +64,26 @@ const Metric = ({}: Props) => {
     });
   }, [funcName, sortBy, period, startDate]);
 
-  console.log(
-    'this is our fetched metrics in metric' + JSON.stringify(metricsData)
-  );
-
   return (
     <div>
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <h1 className="font-extrabold text-4xl font-mono"> SERENE </h1>
+        <button
+          onClick={() => {
+            navigate("/home");
+          }}
+          className="w-1/6"
+        >
+          <img src={serene} alt="Serene image" className="py-1" />
+        </button>{" "}
         <RightSideBar />
       </div>
-
-      <div>CURRENT FUNC NAME STATE IS {funcName}</div>
 
       <div className="flex justify-center">
         <a
           onClick={() => {
-            navigate('/home');
+            navigate("/home");
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -95,7 +94,7 @@ const Metric = ({}: Props) => {
         </a>
         <a
           onClick={() => {
-            navigate('/versions');
+            navigate("/versions");
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -107,7 +106,7 @@ const Metric = ({}: Props) => {
 
         <a
           onClick={() => {
-            navigate('/warming');
+            navigate("/warming");
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -119,7 +118,7 @@ const Metric = ({}: Props) => {
 
         <a
           onClick={() => {
-            navigate('/logs');
+            navigate("/logs");
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -129,90 +128,8 @@ const Metric = ({}: Props) => {
           </span>
         </a>
       </div>
-      {/* body div */}
-      {/* <div>CURRENT FUNC IS {funcName}</div> */}
 
       <div className="flex flex-col items-center justify-center">
-        <div className="w-1/4 hidden">
-          {
-            (() => {
-              switch (currentChart) {
-                case 'pie':
-                  return <PieChart />;
-                case 'bar':
-                  return <BarGraph />;
-                case 'doughnut':
-                  return <DoughnutChart />;
-                case 'line':
-                  return <LineGraph />;
-                default:
-                  return null;
-              }
-            })() // immediately invokes the currentChart
-          }
-        </div>
-        {/* button div */}
-        {/* <div className="mt-20 fixed bottom-20">
-          <button
-            onClick={() => handleClick('pie')}
-            className="relative inline-block text-lg group mx-3"
-          >
-            <span className="relative  z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-              <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-              <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
-              <span className="relative">Pie Chart</span>
-            </span>
-            <span
-              className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
-              data-rounded="rounded-lg"
-            ></span>
-          </button>
-          <button
-            onClick={() => handleClick('bar')}
-            className="relative inline-block text-lg group mx-3"
-          >
-            <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-              <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-              <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
-              <span className="relative">Bar Graph</span>
-            </span>
-            <span
-              className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
-              data-rounded="rounded-lg"
-            ></span>
-          </button>
-          <button
-            onClick={() => handleClick('doughnut')}
-            className="relative inline-block text-lg group mx-3"
-          >
-            <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-              <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-              <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
-              <span className="relative">Doughnut Chart</span>
-            </span>
-            <span
-              className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
-              data-rounded="rounded-lg"
-            ></span>
-          </button>
-          <button
-            onClick={() => handleClick('line')}
-            className="relative inline-block text-lg group mx-3"
-          >
-            <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-              <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-              <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
-              <span className="relative">Line Graph</span>
-            </span>
-            <span
-              className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
-              data-rounded="rounded-lg"
-            ></span>
-          </button>
-        </div> */}
-        {/* END OF BUTTON DIV */}
-
-        {/* METRICS DISPLAY */}
         {/* START OF DROPDOWN MENUS */}
         <div className="flex mt-5 mb-2 ">
           <select
@@ -220,8 +137,8 @@ const Metric = ({}: Props) => {
             onChange={handleSortBy}
           >
             <option value="TimestampAscending" className="text-center">
-              {' '}
-              -- SortBy --{' '}
+              {" "}
+              -- SortBy --{" "}
             </option>
             <option value="TimestampDescending"> TimestampDescending </option>
             <option value="TimestampAscending">TimestampAscending</option>
@@ -231,8 +148,8 @@ const Metric = ({}: Props) => {
             onChange={handlePeriod}
           >
             <option value="5 minutes" className="text-center">
-              {' '}
-              -- Period --{' '}
+              {" "}
+              -- Period --{" "}
             </option>
             <option value="5 seconds">5 seconds </option>
             <option value="1 minute">1 minute</option>
@@ -247,9 +164,8 @@ const Metric = ({}: Props) => {
             className="mx-1 w-full p-1 text-black bg-white border-2 rounded-md shadow-sm outline-none appearance-none transition duration-100 ease-in-out hover:bg-black hover:border-2 border-black hover:text-white"
             onChange={handleStartDate}
           >
-            {/* 1h, 3h, 12h, 1d, 3d, 1w */}
             <option value="1w" className="text-center">
-              {' '}
+              {" "}
               -- Start Date --
             </option>
             <option value="1h">1h</option>
@@ -261,23 +177,16 @@ const Metric = ({}: Props) => {
           </select>
         </div>
         {/* END OF DROPDOWN MENUS */}
-        <div className="border-4 border-black flex w-full flex-wrap mx-5">
+        <div className=" flex w-full flex-wrap mx-5">
           {Object.keys(metricsData).map(
             (eachMetric) =>
-              eachMetric !== 'concurrentExecutions' && (
+              eachMetric !== "concurrentExecutions" && (
                 <div
                   key={eachMetric}
-                  className="border-4 border-gray-300 h-full w-1/2"
+                  className="border-4 border-gray-300 h-full w-1/2 flex justify-center"
                 >
-                  {/* <p>{eachMetric}</p> */}
                   {metricsData[eachMetric].map((each) => (
-                    <div className="mx-10" key={each.Id}>
-                      {/* <p>ID: {each.Id}</p>
-                      <p>Label: {each.Label}</p>
-                      <p>Timestamps: {`${each.Timestamps}, `}</p>
-                      <p className="">Values: {`${each.Values}, `}</p>
-                      <p>Status Code: {each.StatusCode}</p> */}
-
+                    <div className="py-5 w-9/12" key={each.Id}>
                       <LineGraph
                         TimeStamps={each.Timestamps}
                         Values={each.Values}
@@ -290,8 +199,9 @@ const Metric = ({}: Props) => {
           )}
         </div>
       </div>
-      <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">&copy; SERENE 2023 </div>
-
+      <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
+        <div className="ml-3">&copy; SERENE 2023 </div>
+      </div>
     </div>
   );
 };

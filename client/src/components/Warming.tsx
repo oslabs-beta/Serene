@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
-import LeftSideBar from './LeftSideBar';
-import RightSideBar from './RightSidebar';
-import { FetchLogs } from '../shared';
+import React, { useState, useEffect, useContext } from "react";
+import LeftSideBar from "./LeftSideBar";
+import RightSideBar from "./RightSidebar";
+import { FetchLogs } from "../shared";
 // import {FuncNameContext} from './FunctionDetails'
-import { FunctionContext, FunctionArnContext, WarmingContext } from '@/App';
-import { Link, useNavigate } from 'react-router-dom';
-import { Slider } from '@mui/material/';
-import { MuiThemeProvider } from 'material-ui';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import AnimatedBackground from './AnimatedBackground';
+import { FunctionContext, FunctionArnContext, WarmingContext } from "@/App";
+import { Link, useNavigate } from "react-router-dom";
+import { Slider } from "@mui/material/";
+import { MuiThemeProvider } from "material-ui";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import serene from "../assets/serene.png";
 
 type Props = {};
 
@@ -28,41 +28,38 @@ const Warming = ({}: Props) => {
   };
 
   const FetchWarmFunction = async () => {
-    //need logName, streamName, region
     const body = {
       functionArn: funcArn,
       intervalVar: intervalValue,
       maxDuration: durationValue,
     };
     try {
-      const response = await fetch('/api/warming/functions', {
-        method: 'POST',
+      const response = await fetch("/api/warming/functions", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
-      console.log('response from warming ', data);
+      console.log("response from warming ", data);
       return data;
     } catch (error) {
-      console.log('Warming Func Error: ', error);
+      console.log("Warming Func Error: ", error);
     }
   };
 
   const handleStartButton = async () => {
     //make fetch request
     if (!warmArray.includes(funcName)) {
-      // warmArray.push(funcName);
+      console.log("warm array is, ", warmArray);
       setWarmArray([...warmArray, funcName]);
+      console.log("warm array NOW is, ", warmArray);
     }
+    console.log("warm array NOW is, ", warmArray);
   };
 
-
-  // useEffect(() => {
-  //   if (funcName !== 'SELECT A FUNCTION') handleStartButton();
-  // }, []);
 
   const navigate = useNavigate();
 
@@ -71,18 +68,23 @@ const Warming = ({}: Props) => {
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <h1 className="font-extrabold text-4xl font-mono"> SERENE </h1>
+        <button
+          onClick={() => {
+            navigate("/home");
+          }}
+          className="w-1/6"
+        >
+          <img src={serene} alt="Serene image" className="py-1" />
+        </button>
         <RightSideBar />
       </div>
-
-      {/* <div>CURRENT FUNC NAME STATE IS {funcName}</div> */}
 
       {/* ENTIRE BODY DIV */}
       <div className="flex flex-col items-center">
         <div className="flex justify-center">
           <a
             onClick={() => {
-              navigate('/home');
+              navigate("/home");
             }}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
@@ -93,7 +95,7 @@ const Warming = ({}: Props) => {
           </a>
           <a
             onClick={() => {
-              navigate('/versions');
+              navigate("/versions");
             }}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
@@ -105,7 +107,7 @@ const Warming = ({}: Props) => {
 
           <a
             onClick={() => {
-              navigate('/metrics');
+              navigate("/metrics");
             }}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
@@ -117,7 +119,7 @@ const Warming = ({}: Props) => {
 
           <a
             onClick={() => {
-              navigate('/logs');
+              navigate("/logs");
             }}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
@@ -131,21 +133,20 @@ const Warming = ({}: Props) => {
         {/* CURRENT ARN IS {funcArn} */}
         <div className="border-2 border-black w-3/4 mt-10 rounded-md text-center">
           <h1 className="font-semibold text-2xl mt-10">
-            WARMING FUNCTION: {funcName.toUpperCase()}{' '}
+            WARMING FUNCTION: {funcName.toUpperCase()}{" "}
           </h1>
-          <p className='mb-10'>
+          <p className="mb-10">
             EVERY {intervalValue} MINUTE(S) FOR {durationValue} HOUR(S)
           </p>
           <div className="flex mx-2">
             <div className="flex flex-col  w-1/2 mr-5 bg-black rounded-md ">
               <div className="flex w-1/3 font-semibold text-gray-200 pl-3">
-                Interval: {intervalValue}{' '}
+                Interval: {intervalValue}{" "}
               </div>
               <Slider
                 aria-label="Custom marks"
-                // getAriaValueText={valuetext}
                 min={0}
-                max={50}
+                max={60}
                 value={intervalValue}
                 onChange={changeIntervalValue}
                 valueLabelDisplay="auto"
@@ -157,7 +158,6 @@ const Warming = ({}: Props) => {
               </div>
               <Slider
                 aria-label="Custom marks"
-                // getAriaValueText={valuetext}
                 min={0}
                 max={50}
                 value={durationValue}
@@ -169,31 +169,16 @@ const Warming = ({}: Props) => {
           <button
             className="items-center justify-center z-20 overflow-y-auto h-[40%]  my-5 
             border-2 shadow-md bg-neutral-100 bg-opacity-40 p-2 rounded-md border-black hover:bg-black hover:text-white transition duration-200 ease-in-out
-            mt-6
+            mt-6 
             "
-            onClick={() => {
-              handleStartButton();
-            }}
+            onClick={handleStartButton}
           >
-            
-            {' '}
+
             Start Warming
           </button>
-          <button
-            className="items-center justify-center z-20 overflow-y-auto h-[40%]  my-5 
-            border-2 shadow-md bg-neutral-100 bg-opacity-40 p-2 rounded-md border-black hover:bg-black hover:text-white transition duration-200 ease-in-out
-            mt-6
-            "
-            onClick={() => {
-              //end warming
-            }}
-          >
-            {' '}
-            End Warming
-          </button>
-          <div></div>
+
           <div>
-            <h1 className='font-semibold'>Currently Warming</h1>
+            <h1 className="font-semibold">Currently Warming</h1>
             <div>
               {warmArray.length !== 0
                 ? warmArray.map((el) => <div>{el}</div>)
@@ -201,17 +186,11 @@ const Warming = ({}: Props) => {
             </div>
           </div>
         </div>
-        {/* END OF BOTTOM BODY DIV */}
       </div>
       {/* END OF ENTIRE BODY DIV */}
-      {/* <div>
-  <img
-    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Forig00.deviantart.net%2F9273%2Ff%2F2017%2F033%2F4%2Fc%2Fkeeping_warm_by_uradoodlelover2-daxms1b.gif&f=1&nofb=1&ipt=e67139040496533bfaa51a492b4a43800ca0e49dcb328d46986ba905def36c02&ipo=images"
-    alt="warming"
-  />
-</div> */}
+
       <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
-        &copy; SERENE 2023{' '}
+        <div className="ml-3">&copy; SERENE 2023 </div>
       </div>
     </div>
   );

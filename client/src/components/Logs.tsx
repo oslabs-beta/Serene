@@ -1,97 +1,59 @@
-import React, { useState, useEffect, useContext } from 'react';
-import LeftSideBar from './LeftSideBar';
-import RightSideBar from './RightSidebar';
-import LogStream from './LogStream';
+import React, { useState, useEffect, useContext } from "react";
+import LeftSideBar from "./LeftSideBar";
+import RightSideBar from "./RightSidebar";
+import LogStream from "./LogStream";
 import {
-  PushSpinner,
-  TraceSpinner,
-  RainbowSpinner,
-  RingSpinner,
-  SwishSpinner,
-  PongSpinner,
-  MetroSpinner,
   JellyfishSpinner,
   GridSpinner,
-} from 'react-spinners-kit';
-import { FunctionContext } from '@/App';
-import { useNavigate } from 'react-router-dom';
+} from "react-spinners-kit";
+import { FunctionContext, RegionContext } from "@/App";
+import { useNavigate } from "react-router-dom";
+import serene from "../assets/serene.png";
 
-type Props = {};
-
-const Logs = ({}: Props) => {
+const Logs = () => {
   const [allLogs, setAllLogs] = useState([]);
-  const [logStream, setLogStream] = useState('');
-  const [logArray, setLogArray] = useState(['']);
-  // const [logData, setLogData] = useState([])
-  // const [data, setData, clickedFunction, setClickedFunction] =
-  //   useContext(UserContext);
-  // const [funcName, setFuncName] = useContext(FuncNameContext)
-  const [isLoading, setIsLoading] = useState(false);
+  const [logStream, setLogStream] = useState("");
+  const [logArray, setLogArray] = useState([""]);
+
   const { funcName, setFuncName } = useContext(FunctionContext);
+  // const { region, setRegion} = useContext(RegionContext);
 
   const navigate = useNavigate();
-  // console.log('logging data in Logs ' + JSON.stringify(data))
-  // const funcLogName = funcName;
-  const region = 'us-east-1';
 
   const FetchLogs = async () => {
-
-
     const body = {
       funcName,
-      region,
     };
     try {
-      const response = await fetch('/api/cloudwatch/getLogs', {
-        method: 'POST',
+      const response = await fetch("/api/cloudwatch/getLogs", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
       const data = response.json();
       return data;
     } catch (error) {
-      console.log('Error is: ', error);
+      console.log("Error is: ", error);
     }
   };
 
   useEffect(() => {
-    // console.log('beginning to fetch')
-    if (funcName !== 'SELECT A FUNCTION') {
+    if (funcName !== "SELECT A FUNCTION") {
       FetchLogs().then((funcLogs) => {
-        // console.log('setting data now')
         setAllLogs(funcLogs);
-        // setLogStream(funcLogs[1])
-        console.log('logs are: ', funcLogs);
       });
     }
-    //data logic here
   }, [funcName]);
 
-  // funcName !== 'FUNCTIONNAME' ? (useEffect(() => {
-  //   // console.log('beginning to fetch')
-  //   FetchLogs().then((funcLogs) => {
-  //     // console.log('setting data now')
-  //     setAllLogs(funcLogs);
-  //     // setLogStream(funcLogs[1])
-  //     console.log('logs are: ', funcLogs);
-  //   });
-  //   //data logic here
-  // }, [funcName])) : null
-
-  // console.log('Current Logname is ', clickedFunction)
-
   const handleLogClick = (e) => {
-    console.log('starting load state is ', isLoading);
-    setIsLoading(true);
     setLogStream(e.target.value);
   };
-  console.log('updated load state is ', isLoading);
 
-  // useEffect(() => {
-  //   console.log('this is logstream', logStream);
-  // }, [logStream]);
+  useEffect(() => {
+    console.log("this is logstream", logStream);
+  }, [logStream]);
 
   const FetchLogStreams = async () => {
     //need logName, streamName, region
@@ -100,20 +62,20 @@ const Logs = ({}: Props) => {
       streamName: logStream,
     };
     try {
-      const response = await fetch('/api/cloudwatch/getStreamDetails', {
-        method: 'POST',
+      const response = await fetch("/api/cloudwatch/getStreamDetails", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
       setLogArray(data);
-      console.log('return data ', data);
+      console.log("return data from fetchlogstreams", data);
       return data;
     } catch (error) {
-      console.log('fetch log stream Error: ', error);
+      console.log("fetch log stream Error: ", error);
     }
   };
 
@@ -122,25 +84,30 @@ const Logs = ({}: Props) => {
       await FetchLogStreams();
     };
     fetchData();
-    setIsLoading(false);
-    console.log('after loading state is ', isLoading);
   }, [logStream]);
 
-  console.log('LOG ARRAY IS HERE', logArray);
+  console.log("LOG ARRAY IS HERE", logArray);
 
   return (
     <div>
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
-        <h1 className="font-extrabold text-4xl font-mono"> SERENE </h1>
+        <button
+          onClick={() => {
+            navigate("/home");
+          }}
+          className="w-1/6"
+        >
+          <img src={serene} alt="Serene image" className="py-1" />
+        </button>{" "}
         <RightSideBar />
       </div>
 
       <div className="flex justify-center">
         <a
           onClick={() => {
-            navigate('/home');
+            navigate("/home");
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -151,7 +118,7 @@ const Logs = ({}: Props) => {
         </a>
         <a
           onClick={() => {
-            navigate('/versions');
+            navigate("/versions");
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -163,7 +130,7 @@ const Logs = ({}: Props) => {
 
         <a
           onClick={() => {
-            navigate('/metrics');
+            navigate("/metrics");
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -175,7 +142,7 @@ const Logs = ({}: Props) => {
 
         <a
           onClick={() => {
-            navigate('/warming');
+            navigate("/warming");
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -185,8 +152,6 @@ const Logs = ({}: Props) => {
           </span>
         </a>
       </div>
-
-      <div>THIS IS current {funcName} </div>
 
       <div className="flex">
         {/* this is where all the streamlogs are */}
@@ -206,17 +171,12 @@ const Logs = ({}: Props) => {
         </div>
 
         <div className="ml-10 mr-5 my-6 flex flex-col items-center w-full border-2 border-black p-2 bg-black rounded-md text-gray-400">
-          {isLoading ? (
-            <div className="flex justify-center h-full">
-              <JellyfishSpinner size={120} color="white" />
-            </div>
-          ) : (
-            <LogStream logStreamArr={logArray} isLoading={isLoading} />
-          )}
+          <LogStream logStreamArr={logArray} />
         </div>
       </div>
-      <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">&copy; SERENE 2023 </div>
-
+      <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
+        <div className="ml-3">&copy; SERENE 2023 </div>
+      </div>
     </div>
   );
 };
