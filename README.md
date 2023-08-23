@@ -43,6 +43,9 @@ If you are looking to contribute to Serene, please visit <a href="google.com">RE
 8. You will be directed to the Serene homepage and you're ready to use Serene!
 9. Enjoy ;)
 
+![Animated GIF](https://github.com/yourusername/yourrepository/raw/main/images/your-gif.gif)
+
+
 ### On Your Local Machine
 1. Fork and clone this repository on GitHub
 2. From here, you will need to run a few commands to install the proper dependencies
