@@ -54,9 +54,13 @@ const Warming = ({}: Props) => {
   const handleStartButton = () => {
     //make fetch request
     if (!warmArray.includes(funcName)) {
-      FetchWarmFunction();
+      console.log('warm array is, ', warmArray)
+      // FetchWarmFunction();
       setWarmArray([...warmArray, funcName]);
+      console.log('warm array NOW is, ', warmArray)
     }
+    console.log('warm array NOW is, ', warmArray)
+
   };
 
   // const EndWarmFunction = async () => {
@@ -209,9 +213,7 @@ const Warming = ({}: Props) => {
             border-2 shadow-md bg-neutral-100 bg-opacity-40 p-2 rounded-md border-black hover:bg-black hover:text-white transition duration-200 ease-in-out
             mt-6 
             "
-            onClick={() => {
-              handleStartButton;
-            }}
+            onClick={handleStartButton            }
           >
             {" "}
             Start Warming

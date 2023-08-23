@@ -32,6 +32,7 @@ const Signup = (props: Props) => {
   const awsConsoleURL = `https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/quickcreate?templateURL=https://serene-admin-bucket.s3.amazonaws.com/SereneTemplate.json&stackName=SereneStack`
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!region){}
     const body = {
       username,
       password,
@@ -73,6 +74,7 @@ const Signup = (props: Props) => {
               name="username"
               placeholder="Username"
               onChange={handleUsernameChange}
+              required
             />
             <input
               className="bg-transparent border-2 border-black mt-2 p-1 rounded-md placeholder-black"
@@ -81,6 +83,7 @@ const Signup = (props: Props) => {
               placeholder="Password"
               value={password}
               onChange={handlePasswordChange}
+              required
             />
             <input
               className="bg-transparent border-2 border-black mt-2 mb-6 p-1 rounded-md placeholder-black"
@@ -89,14 +92,16 @@ const Signup = (props: Props) => {
               placeholder="ARN"
               value={arnInput}
               onChange={handleArnChange}
+              required
             />
             {/* </label> */}
           </div>
           <select
             className="w-full p-1 text-black bg-white border-2 rounded-md shadow-sm outline-none appearance-none transition duration-300 ease-in-out hover:bg-black hover:border-2 border-white hover:text-white"
             onChange={handleRegionChange}
+            required
           >
-            <option value="us-east-1" className="text-center">
+            <option value="" className="text-center">
               {' '}
               ---- Select Region ----{' '}
             </option>

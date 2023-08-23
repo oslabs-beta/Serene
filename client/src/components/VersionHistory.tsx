@@ -1,68 +1,54 @@
-import React, { useContext, useState, useEffect } from 'react';
-import LeftSideBar from './LeftSideBar';
-import RightSideBar from './RightSidebar';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from "react";
+import LeftSideBar from "./LeftSideBar";
+import RightSideBar from "./RightSidebar";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Popover,
   PopoverHandler,
   PopoverContent,
   Button,
-} from '@material-tailwind/react';
-import { FunctionContext } from '@/App';
-import serene from '../assets/serene.png';
+} from "@material-tailwind/react";
+import Typography from "@mui/material/Typography";
 
-import {
-  PushSpinner,
-  TraceSpinner,
-  RainbowSpinner,
-  RingSpinner,
-  SwishSpinner,
-  PongSpinner,
-  MetroSpinner,
-  JellyfishSpinner,
-} from 'react-spinners-kit';
-
-type Props = {
-  // name: string;
-  // funcName: string;
-  // setFuncName: Function;
-};
+import { FunctionContext } from "@/App";
+import serene from "../assets/serene.png";
 
 const VersionHistory = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { funcName, setFuncName } = useContext(FunctionContext);
   const [versions, setVersions] = useState({});
   const [aliases, setAliases] = useState([]);
-  const [aliasArn, setAliasArn] = useState('');
+  const [aliasArn, setAliasArn] = useState("");
+  const [codeLink, setCodeLink] = useState("");
+
 
   const navigate = useNavigate();
 
-  console.log(`this is version before fetching ${versions}`);
 
   const FetchVersions = async () => {
     const body = {
       funcName,
     };
     try {
-      const response = await fetch('api/versions/versionList', {
-        method: 'POST',
+      const response = await fetch("api/versions/versionList", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
-      console.log('fetched versions: ', JSON.stringify(data));
+      console.log("fetched versions: ", JSON.stringify(data));
       setVersions(data);
       return data;
     } catch (error) {
-      console.log('Error in versions: ', error);
+      console.log("Error in versions: ", error);
     }
   };
 
   useEffect(() => {
-    if (funcName !== 'SELECT A FUNCTION') {
+    if (funcName !== "SELECT A FUNCTION") {
       const fetchVersions = async () => {
         await FetchVersions();
       };
@@ -70,37 +56,30 @@ const VersionHistory = () => {
     }
   }, [funcName]);
 
-  const handleAliasArn = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleAliasArn = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAliasArn(e);
   };
 
-  console.log(`line 77 version arn ${aliasArn}`);
-
-  const testAliasArn = 'arn:aws:lambda:us-east-1:560069382472:function:EventHandler:EventHandlerControl'
-  // arn:aws:lambda:us-east-1:560069382472:function:EventHandler:EventHandlerControl
-  // console.log(`${aliasArn}`)
-
-  // [Log] fetched version details:  (VersionHistory.tsx, line 82)
-  // "{\"description\":\"\",\"memory\":\"128 MB\",\"timeout\":\"3 sec\",\"ephemeralStorage\":\"512 MB\",\"linkToFunc\":\"https://prod-iad-c1-djusa-tasks.s3.us-east-1.amazonaws.com/snapshots/560069382472/EventHandler-fa888e9c-afbf-4170-a4b8-f775d1fb4c8c?versionId=6VwQy_7mXxyvNpDnPYYWGrkWaKDpKX9j&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDkaCXVzLWVhc3QtMSJHMEUCIQC3Zp4jAPmdzWBCFrlo3srE84zD91Rlvz5RPFLrZEP%2BQQIgLq1jMnaT18tWQ29M3CGBVcxKDu2xzpJAYde7K6VH%2FJAqwwUI8v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAEGgw0NzkyMzMwMjUzNzkiDKtf7zgGsbnt7%2FnniiqXBZ6LCoPOLzI4lS46Bg9YGpihDeVHdBRzLBCmRmsHkDm3IohC3ShN4Gi5z0VjBN2sdQ3UIDpJ1RyeYc3zYee%2F4m%2BHSwxwZz%2BVBFER79gkyysnVgWKO2q%2FWGg%2FW7SdzAMupaRxhvODWoT0RWby6PWOstNDJpXDOf66CZKLF0IrBnAMLJdtaP%2B4H8ptgXG9X1HbI45ODHSID5dnmNp7ATT7jKaxiqidqnHVjDdw%2Bs3E6Mnm%2BZYjrg%2B563Gi9iN9QMUx6wPEJzHzwi5X2Ozb37z8eShHJ6tmUOy6713SSFg1V6hWJzNaXGk8ntMZHmYe6UlSsbfLx3XfMgnurfZ3MficI472AgyB4pNA%2FToNNGhmQWuiusAUVTsZiTrY9UNGl43rVQSmQjSkiy0HWViQkkCkUP6ZY2oynGZo51YfqGmzDCp9CPwIrNGhxMCIUnvSzC6x9tCuNPwwtIkjWsHkZHR14EmXfsy5bnKy4hEMK%2BHX0Tyz2BjuWWoMu1Gmp5sdYhfeoG6JMb9PGEEeZsIZen8FISzVIfiRXRS4295XSIppxy3d4Xe2hpn3aT3xK1oVEl1BxeipOM9MMywTnFJjg2AZ37pAYHvfF8OeLC4gphE%2BFE90F8AdZba4IgMtmsioN88Uif2tpOrCOel2sXSCXRHtiXYUOqkt%2BO%2BArZi%2BGnCw6FcBhqYluDQk5VjucXz47q92LPVZm%2BEJWpQqvq4pt6ty%2B9qBeLeVsDr%2BwZxJSLj5oI3PPtjpwLE%2FyZFY3OVa2m5qzCCGs4z4OhhPPYo1fAw%2FeEzDT80NIXKn6iktqtC5u7A9HY9QPoHWUjAQsZISwJxlJurGOlqMAImESZkuNj2BaM9OyU1F7OC8NsVRlliW54zeSEnPjozAmzDg0pOnBjqxAY7foL0GeuG1fTWgaVY%2Ba2J%2FrgutCzE%2ByZjtr6BIBURpS2%2FiE3%2BDUMZn%2B09yVLqBl6JtoIvjfAFsO82lEZiRKjgXsS86BfYF3Dw8w62%2B04qaDCOApNX%2FFP4NxX35iHkY2io0MgQ3zhZVPTxq67NFtBZmxTJ86Kf5yKDKhWpYLtvfjAlsL1c3oQFSsVrelmRcRkTzDx7Lht8%2B2jSMTNQ0B67ljnA7Yqu7PTjy0Wi41A0vXw%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230822T175157Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAW7FEDUVRT2ULNZBX%2F20230822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=e1ee0eab6167a3908419ad14ef45428d02f47390d77cda610b7fc7911ec401e7\"}"
 
   const FetchVersionDetails = async () => {
     const body = {
-      functionArn: testAliasArn,
+      functionArn: aliasArn,
     };
     try {
-      const response = await fetch('api/versions/functionVersion', {
-        method: 'POST',
+      const response = await fetch("api/versions/functionVersion", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
       const data = await response.json();
-      console.log('fetched version details: ', JSON.stringify(data));
-      console.log('fetch versions successful');
+      console.log("fetched version details: ", JSON.stringify(data));
+      console.log("fetch versions successful");
+      setCodeLink(data.linkToFunc);
       return data;
     } catch (error) {
-      console.log('Error in versions: ', error);
+      console.log("Error in versions: ", error);
     }
   };
 
@@ -109,33 +88,32 @@ const VersionHistory = () => {
       await FetchVersionDetails();
     };
     fetchVersionDetails();
-  }, []);
+  }, [aliasArn]);
 
   const FetchAliases = async () => {
     const body = {
       funcName,
     };
     try {
-      const response = await fetch('api/versions/getAlias', {
-        method: 'POST',
+      const response = await fetch("api/versions/getAlias", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
-      console.log('fetched aliases: ', JSON.stringify(data));
-      // console.log('fetch versions successful');
+      console.log("fetched aliases: ", JSON.stringify(data));
       setAliases(data);
       return data;
     } catch (error) {
-      console.log('Error in versions/alias: ', error);
+      console.log("Error in versions/alias: ", error);
     }
   };
 
   useEffect(() => {
-    if (funcName !== 'SELECT A FUNCTION') {
+    if (funcName !== "SELECT A FUNCTION") {
       const fetchAlias = async () => {
         await FetchAliases();
       };
@@ -147,26 +125,21 @@ const VersionHistory = () => {
     <div>
       {/* TOP SECTION OF EVERY PAGE */}
       <div className="flex justify-between items-center bg-gray-300 h-24">
-        {/* <LeftSideBar funcName={funcName} setFuncName={setFuncName} />     */}
         <LeftSideBar />
         <button
           onClick={() => {
-            navigate('/home');
+            navigate("/home");
           }}
           className="w-1/6"
         >
           <img src={serene} alt="Serene image" className="py-1" />
-        </button>{' '}
+        </button>{" "}
         <RightSideBar />
       </div>
       <div className="flex justify-center">
-
-
-
-
         <a
           onClick={() => {
-            navigate('/home');
+            navigate("/home");
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -177,7 +150,7 @@ const VersionHistory = () => {
         </a>
         <a
           onClick={() => {
-            navigate('/metrics');
+            navigate("/metrics");
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -188,7 +161,7 @@ const VersionHistory = () => {
         </a>
         <a
           onClick={() => {
-            navigate('/warming');
+            navigate("/warming");
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -200,7 +173,7 @@ const VersionHistory = () => {
 
         <a
           onClick={() => {
-            navigate('/logs');
+            navigate("/logs");
           }}
           className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
         >
@@ -224,16 +197,59 @@ const VersionHistory = () => {
           ) : (
             aliases.map((el) => (
               <div className="group flex items-center my-2 ml-auto w-7/12">
-                {/* <button onClick={()=> {handleAliasArn(el.AliasArn)}}>HELLO</button> */}
+                {/* <button
+                  onClick={() => {
+                    c;
+                  }}
+                >
+                  HELLO
+                </button> */}
 
+                {/* 
+<Button aria-describedby={id} variant="contained"onClick={() => {
+                   console.log('ARN WILL BE RESET STATE')
+                      }} >
+        Open Popover
+      </Button>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+      </Popover> */}
                 <Popover placement="left">
                   <PopoverHandler className="border-2 border-white w-3/12 h-full p-1 mt-2 mb-1 transition duration-100 ease-in-out group-hover:scale-125 ml-0">
-                    <Button className="whitespace-normal max-w-lg mb-2 ">
-                      Alias {el.Name}
+                    <Button className="whitespace-normal max-w-lg mb-2 relative ">
+                      <button
+                        className=""
+                        onClick={() => {
+                          handleAliasArn(el.AliasArn);
+                        }}
+                      >
+                        {" "}
+                        Alias {el.Name}
+                      </button>
                     </Button>
                   </PopoverHandler>
                   <PopoverContent className="border-black border-2 w-1/3">
-                    <span>more version {el.FunctionVersion} details heresdfsfdssdfsdfdsfdsfdsfsdfsdfsdfsddfsdfdsf</span>
+                    <span>
+                      Download code for Alias{" "}
+                      <span className="font-bold">{el.Name}</span>
+                      <button>
+                        <a
+                          href={codeLink}
+                          className="text-white bg-black hover:bg-white hover:border-black hover:border-2 hover:text-black rounded-md ml-2 p-2"
+                        >
+                          HERE
+                        </a>
+                      </button>
+                    </span>
                   </PopoverContent>
                 </Popover>
 
@@ -264,32 +280,32 @@ const VersionHistory = () => {
                   </svg>
                 </div>
 
-                <div className="w-1/3 h-full ml-auto  mt-2 mr-2 flex justify-around rounded-md bg-white group-hover:bg-black group-hover:text-white flex-wrap text-center">
-                  version :{' '}
+                <div className="w-1/3 h-full ml-auto  mt-2 mr-2 flex justify-around rounded-md bg-white border-2 border-black group-hover:bg-black group-hover:text-white flex-wrap text-center">
+                  version :{" "}
                   <span className="font-bold inline-block">
-                    {el.FunctionVersion}{' '}
+                    {el.FunctionVersion}{" "}
                   </span>
-                  weight :{' '}
+                  weight :{" "}
                   <span className="font-bold inline-block">
                     {el.weight * 100}%
                   </span>
                   {el.RoutingConfig ? (
                     <div className="border-t-2 border-black">
-                      version :{' '}
+                      version :{" "}
                       <span className="font-bold">
                         {
                           Object.keys(
                             el.RoutingConfig.AdditionalVersionWeights
                           )[0]
-                        }{' '}
-                      </span>{' '}
+                        }{" "}
+                      </span>{" "}
                       <br />
-                      weight :{' '}
+                      weight :{" "}
                       <span className="font-bold">
                         {Object.values(
                           el.RoutingConfig.AdditionalVersionWeights
                         )[0] * 100}
-                        %{' '}
+                        %{" "}
                       </span>
                     </div>
                   ) : null}
@@ -298,17 +314,14 @@ const VersionHistory = () => {
               // EACH VERSION DIV ENDS
             ))
           )}
-
-
         </div>
       </div>
 
       <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
         <div className="ml-3">&copy; SERENE 2023 </div>
-      </div>                  
+      </div>
     </div>
   );
 };
 
 export default VersionHistory;
-
