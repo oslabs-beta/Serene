@@ -11,7 +11,6 @@ import signup from "../assets/signup.jpeg";
 import signupdemo from "../assets/signupdemo.gif";
 import aws from "../assets/aws.jpeg";
 import demo1 from "../assets/demo1.gif";
-import demo2 from "../assets/demo2.gif";
 import warmingdemo from "../assets/warmingdemo.gif";
 import versionsdemo from "../assets/versionsdemo.gif";
 import logsdemo from "../assets/logsdemo.gif";

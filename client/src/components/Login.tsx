@@ -63,6 +63,7 @@ const Login = () => {
               name="username"
               placeholder="Username"
               onChange={handleUsernameChange}
+              required
             />
           
             <input
@@ -72,6 +73,7 @@ const Login = () => {
               placeholder="Password"
               value={password}
               onChange={handlePasswordChange}
+              required
             />
             
           </div>
