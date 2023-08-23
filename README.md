@@ -31,7 +31,7 @@ If you are looking to contribute to Serene, please visit READMEDEV.md to learn h
 ## How to Use Serene
 
 ### On the Website
-1. Navigate to <link>[website].web</link> and select 'Sign Up'
+1. Navigate to <link>website.web</link> and select 'Sign Up'
 2. Create a username and password and the select 'Connect Your AWS Account'
 3. This will open a window in AWS prompting you to create a pre-made CloudFormation stack titled 'SereneStack'
 4. Click to create the stack and wait a moment for AWS to build it
