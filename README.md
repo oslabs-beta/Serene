@@ -20,6 +20,7 @@
 ![image](https://img.shields.io/badge/Tailwind-%231DA1F2.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Bcrypt](https://img.shields.io/badge/BCRYPT-grey?style=for-the-badge&logo=letsencrypt)
 ![chartJS](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)
+![MUI](https://github-production-user-asset-6210df.s3.amazonaws.com/112911565/260816206-93a8a824-92b6-44c0-b2b7-ef47e6a9ba98.png)
 
 ⭐️ Star us on GitHub! ⭐️
 
