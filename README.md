@@ -26,7 +26,28 @@ Visit our website at **COMING SOON**.
 
 Serene is building an exciting developer tool to help monitor AWS lambda resources and prevent cold start latency delays. 
 
-If you are looking to contribute to Serene, please visit READMEDEV.md to learn how to get started!
+If you are looking to contribute to Serene, please visit READMEDEV.md to learn how to get started! Feel free to check out our 'Potential Iteration Ideas' near the bottom of the page for some ideas on what can still be done.
+
+## How to Use Serene
+
+### On the Website
+1. Navigate to <link>[website].web</link> and select 'Sign Up'
+2. Create a username and password and the select 'Connect Your AWS Account'
+3. This will open a window in AWS prompting you to create a pre-made CloudFormation stack titled 'SereneStack'
+4. Click to create the stack and wait a moment for AWS to build it
+5. Once created, select the 'Resources' tab on your SereneStack and you should see a link to something named SereneStack-SereneRole-[uniqueNumsAndCharacters]. This is the IAM Role the Stack has created for you
+6. Click into that Role, copy the ARN for it, and paste that into the Serene signup page
+7. All that's left is selecting the corresponding region to your Lambda functions and creating your account
+8. You will be directed to the Serene homepage and you're ready to use Serene!
+9. Enjoy ;)
+
+### On Your Local Machine
+1. Fork and clone this repository on GitHub
+2. From here, you will need to run a few commands to install the proper dependencies
+3. Open a terminal and type <code>cd server</code>
+4. Next, you will need to run <code>npm install</code>
+5. Finally, you can run <code>npm start</code> to start the server (which is serving the bundled frontend)
+6. In your browser, navigate to <link>http://localhost:3000</link> and you will be able to use Serene just like you would on the website!
 
 ## Features
 
