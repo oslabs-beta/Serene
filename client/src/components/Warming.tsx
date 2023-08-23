@@ -53,11 +53,9 @@ const Warming = ({}: Props) => {
   const handleStartButton = async () => {
     //make fetch request
     if (!warmArray.includes(funcName)) {
-      console.log('warm array is, ', warmArray);
+      FetchWarmFunction();
       setWarmArray([...warmArray, funcName]);
-      console.log('warm array NOW is, ', warmArray);
     }
-    console.log('warm array NOW is, ', warmArray);
   };
 
   const navigate = useNavigate();

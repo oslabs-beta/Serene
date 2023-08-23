@@ -18,12 +18,7 @@ const Home = ({}: Props) => {
       <div className="flex justify-between items-center bg-gray-300 h-24">
         <LeftSideBar />
 
-        <a
-          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-          type="button"
-          target="_blank"
-          className="w-1/6"
-        >
+        <a type="button" target="_blank" className="w-1/6">
           <img src={serene} alt="Serene image" className="py-1" />
         </a>
 
