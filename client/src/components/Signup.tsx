@@ -28,6 +28,7 @@ const Signup = (props: Props) => {
   };
 
   const awsConsoleURL = `https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://serenetemplate.s3.amazonaws.com/SereneTemplate.json&stackName=SereneStack`;
+  // const awsConsoleURL = `https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/quickcreate?templateURL=https://serenetemplate.s3.amazonaws.com/SereneTemplate.json&stackName=SereneStack`;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,9 +56,9 @@ const Signup = (props: Props) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-full bg-neutral-200">
+    <div className="flex flex-col items-center justify-center h-screen w-full bg-gray-300">
       <img src={waves2} className="w-full fixed z-20 opacity-90" />
-      <div className="flex flex-col justify-center border-black bg-neutral-100 bg-opacity-40 p-14 border-2  sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 h-3/5 min-w-1/4 max-w-1/2 z-30">
+      <div className="flex flex-col justify-center border-black bg-gray-200 rounded-md bg-opacity-40 p-14 border-2  sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 h-3/5 min-w-1/4 max-w-1/2 z-30">
         <form
           className="w-full max-w-sm  flex flex-col items-center"
           onSubmit={handleSubmit}

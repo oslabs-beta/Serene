@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
-import LeftSideBar from './LeftSideBar';
-import RightSideBar from './RightSidebar';
-import { FetchLogs } from '../shared';
+import React, { useState, useEffect, useContext } from "react";
+import LeftSideBar from "./LeftSideBar";
+import RightSideBar from "./RightSidebar";
+import { FetchLogs } from "../shared";
 // import {FuncNameContext} from './FunctionDetails'
-import { FunctionContext, FunctionArnContext, WarmingContext } from '@/App';
-import { Link, useNavigate } from 'react-router-dom';
-import { Slider } from '@mui/material/';
-import { MuiThemeProvider } from 'material-ui';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import AnimatedBackground from './AnimatedBackground';
-import serene from '../assets/serene.png';
+import { FunctionContext, FunctionArnContext, WarmingContext } from "@/App";
+import { Link, useNavigate } from "react-router-dom";
+import { Slider } from "@mui/material/";
+import { MuiThemeProvider } from "material-ui";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import AnimatedBackground from "./AnimatedBackground";
+import serene from "../assets/serene.png";
 
 type Props = {};
 
@@ -29,26 +29,25 @@ const Warming = ({}: Props) => {
   };
 
   const FetchWarmFunction = async () => {
-    //need logName, streamName, region
     const body = {
       functionArn: funcArn,
       intervalVar: intervalValue,
       maxDuration: durationValue,
     };
     try {
-      const response = await fetch('/api/warming/functions', {
-        method: 'POST',
+      const response = await fetch("/api/warming/functions", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
 
       const data = await response.json();
-      console.log('response from warming ', data);
+      console.log("response from warming ", data);
       return data;
     } catch (error) {
-      console.log('Warming Func Error: ', error);
+      console.log("Warming Func Error: ", error);
     }
   };
 
@@ -105,7 +104,7 @@ const Warming = ({}: Props) => {
         <LeftSideBar />
         <button
           onClick={() => {
-            navigate('/home');
+            navigate("/home");
           }}
           className="w-1/6"
         >
@@ -121,7 +120,7 @@ const Warming = ({}: Props) => {
         <div className="flex justify-center">
           <a
             onClick={() => {
-              navigate('/home');
+              navigate("/home");
             }}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
@@ -132,7 +131,7 @@ const Warming = ({}: Props) => {
           </a>
           <a
             onClick={() => {
-              navigate('/versions');
+              navigate("/versions");
             }}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
@@ -144,7 +143,7 @@ const Warming = ({}: Props) => {
 
           <a
             onClick={() => {
-              navigate('/metrics');
+              navigate("/metrics");
             }}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
@@ -156,7 +155,7 @@ const Warming = ({}: Props) => {
 
           <a
             onClick={() => {
-              navigate('/logs');
+              navigate("/logs");
             }}
             className="w-64 rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-black text-black text-white text-center"
           >
@@ -170,7 +169,7 @@ const Warming = ({}: Props) => {
         {/* CURRENT ARN IS {funcArn} */}
         <div className="border-2 border-black w-3/4 mt-10 rounded-md text-center">
           <h1 className="font-semibold text-2xl mt-10">
-            WARMING FUNCTION: {funcName.toUpperCase()}{' '}
+            WARMING FUNCTION: {funcName.toUpperCase()}{" "}
           </h1>
           <p className="mb-10">
             EVERY {intervalValue} MINUTE(S) FOR {durationValue} HOUR(S)
@@ -178,7 +177,7 @@ const Warming = ({}: Props) => {
           <div className="flex mx-2">
             <div className="flex flex-col  w-1/2 mr-5 bg-black rounded-md ">
               <div className="flex w-1/3 font-semibold text-gray-200 pl-3">
-                Interval: {intervalValue}{' '}
+                Interval: {intervalValue}{" "}
               </div>
               <Slider
                 aria-label="Custom marks"
@@ -208,16 +207,16 @@ const Warming = ({}: Props) => {
           <button
             className="items-center justify-center z-20 overflow-y-auto h-[40%]  my-5 
             border-2 shadow-md bg-neutral-100 bg-opacity-40 p-2 rounded-md border-black hover:bg-black hover:text-white transition duration-200 ease-in-out
-            mt-6 mr-2
+            mt-6 
             "
             onClick={() => {
               handleStartButton;
             }}
           >
-            {' '}
+            {" "}
             Start Warming
           </button>
-          <button
+          {/* <button
             className="items-center justify-center z-20 overflow-y-auto h-[40%]  my-5 
             border-2 shadow-md bg-neutral-100 bg-opacity-40 p-2 rounded-md border-black hover:bg-black hover:text-white transition duration-200 ease-in-out
             mt-6 ml-2
@@ -228,7 +227,7 @@ const Warming = ({}: Props) => {
           >
             {' '}
             End Warming
-          </button>
+          </button> */}
 
           <div>
             <h1 className="font-semibold">Currently Warming</h1>
@@ -249,7 +248,7 @@ const Warming = ({}: Props) => {
   />
 </div> */}
       <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
-        &copy; SERENE 2023{' '}
+        <div className="ml-3">&copy; SERENE 2023 </div>
       </div>
     </div>
   );

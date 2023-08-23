@@ -6,7 +6,7 @@ export const profile = "P R O F I L E"
 export const FetchFunctions = async () => {
       try{
         const response = await fetch('/api/lambda/functions')
-        const data = response.json();
+        const data = await response.json();
         return data;
       } catch (error) {
         console.log('Error is: ', error)
@@ -24,10 +24,6 @@ export const FetchUser = async () => {
     console.log('Error is: ', error)
   }
 }
-
-
-
-
 
 
 const funcName = 'testingfunc'

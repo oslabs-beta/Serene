@@ -1,28 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=Inconsolata:wght@200;300;400;500;600;800;900&family=Oswald&family=Roboto:wght@400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* 
+
 html,
 body,
 #root,
 .app {
   height: 100%;
   width: 100%;
-  font-family: "DM Sans", sans-serif;
-  @apply text-gray-500;
-} */
-
-
-@keyframes bounceSlow {
-  0%, 100% {
-    transform: none;
-    animation-timing-function: cubic-bezier(0,0,0.2,1);
-  }
-  
-  50% {
-    transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8,0,1,1);
-  }
+  font-family: "Cabin";
 }
 
-.hover\:bounceSlow:hover { animation: bounceNew 1s infinite; }

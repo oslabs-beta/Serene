@@ -46,7 +46,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-full bg-neutral-200">
+    <div className="flex flex-col items-center justify-center h-screen w-full bg-gray-300">
       <img src={waves} className="w-full h-screen fixed z-20 bottom-0 left-0" />
       <div className="flex flex-col justify-center border-black p-14 border-2 rounded-lg sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 h-3/5 min-w-1/4 max-w-1/2 z-30">
         <form
@@ -77,7 +77,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full px-4 py-1 bg-white rounded-lg transition duration-300 ease-in-out hover:scale-110 hover:bg-transparent hover:border-2 border-white hover:text-white"
+            className="w-full px-4 py-1 border-2 border-black bg-white rounded-lg transition duration-300 ease-in-out hover:scale-110 hover:bg-black hover:border-2 hover:text-white"
           >
             LOGIN
           </button>

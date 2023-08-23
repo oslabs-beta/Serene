@@ -76,7 +76,7 @@ const VersionHistory = () => {
 
   console.log(`line 77 version arn ${aliasArn}`);
 
-  // const testAliasArn = 'arn:aws:lambda:us-east-1:560069382472:function:EventHandler:EventHandlerControl'
+  const testAliasArn = 'arn:aws:lambda:us-east-1:560069382472:function:EventHandler:EventHandlerControl'
   // arn:aws:lambda:us-east-1:560069382472:function:EventHandler:EventHandlerControl
   // console.log(`${aliasArn}`)
 
@@ -85,7 +85,7 @@ const VersionHistory = () => {
 
   const FetchVersionDetails = async () => {
     const body = {
-      functionArn: `${aliasArn}`,
+      functionArn: testAliasArn,
     };
     try {
       const response = await fetch('api/versions/functionVersion', {
@@ -233,7 +233,7 @@ const VersionHistory = () => {
                     </Button>
                   </PopoverHandler>
                   <PopoverContent className="border-black border-2 w-1/3">
-                    <span>more version {el.FunctionVersion} details here</span>
+                    <span>more version {el.FunctionVersion} details heresdfsfdssdfsdfdsfdsfdsfsdfsdfsdfsddfsdfdsf</span>
                   </PopoverContent>
                 </Popover>
 
@@ -303,7 +303,9 @@ const VersionHistory = () => {
         </div>
       </div>
 
-
+      <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
+        <div className="ml-3">&copy; SERENE 2023 </div>
+      </div>                  
     </div>
   );
 };

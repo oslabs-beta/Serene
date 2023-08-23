@@ -1,16 +1,23 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import FUNCS from '../assets/FUNCS.jpeg';
+import lambdaFuncs from '../assets/lambdaFuncs.jpeg';
 import waves7 from '../assets/waves7.png';
 import serene from '../assets/serene.png';
 import kenny from '../assets/kenny.jpeg';
 import ari from '../assets/ari.jpeg';
 import kyle from '../assets/kyle.jpeg';
 import wade from '../assets/wade.jpeg';
-import login from '../assets/login.jpeg';
+import signup from '../assets/signup.jpeg';
+import signupdemo from '../assets/signupdemo.gif';
+// import aws from '../assets/aws.jpg'; 
+import demo1 from '../assets/demo1.gif';
+import demo2 from '../assets/demo2.gif';
+import demo3 from '../assets/demo3.gif';
 import linkedinlogo from '../assets/linkedinlogo.png';
 import githubcat from '../assets/githubcat.png';
 import { FaLinkedin, FaLinkedinIn, FaGithubSquare } from 'react-icons/fa';
+import { FaMedium } from "react-icons/fa6"
+
 
 type Props = {};
 
@@ -32,11 +39,19 @@ const LandingPage = (props: Props) => {
         <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
           type="button"
           target="_blank"
-          className="border-4 border-black bg-transparent p-2 rounded-full hover:scale-110 mx-1 mr-3"
+          className="border-4 border-black bg-transparent p-2 rounded-full hover:scale-110 mx-1 mr-2"
         >
           <FaLinkedinIn size={40} className=''/>
         </a>
 
+        <a href='https://medium.com/@kennykim0824/serene-88d6a9685133'
+          type="button"
+          target="_blank"
+          className="border-4 border-black bg-transparent p-2 rounded-full hover:scale-110 mx-1 mr-3"
+        >
+          <FaMedium size={40} className=''/>
+        </a>
+        
         <button
           onClick={() => {
             navigate('/login');
@@ -64,75 +79,61 @@ const LandingPage = (props: Props) => {
         <div className="h-1/4 flex bg-gray-200  justify-around items-center py-20">
           {/* <div className="font-extrabold font-sans text-9xl">SERENE</div> */}
           <img src={serene} alt="Serene image" className="w-1/2" />
-          <div className="text-l w-1/3 text-gray-800 text-xl text-center">
-            Unveiling the art of simplicity through technology, our app, Serene,
-            stands as a testament to transforming complexity into serenity. With
-            intuitive features designed to untangle intricacies, Serene
-            harmonizes the chaotic threads of management, offering a tranquil
-            haven where efficiency and ease converge.{' '}
-          </div>
+          <div className="text-l w-1/3 text-gray-800 text-xl text-center font-Inconsolata">
+          AN OPEN-SOURCE APPLICATION FOR METRICS VISUALIZATION AND LAMBDA COLD START PREVENTION
+                   </div>
         </div>
         <div className="bg-gray-200  flex justify-center py-10 h-1/3">
-          <div className="w-2/5 text-gray-300 bg-black p-5 -ml-10">
-            <img src={FUNCS}></img>
+          <div className="w-1/3 text-gray-300 bg-black p-5 -ml-10">
+            <img src={lambdaFuncs}/>
           </div>
-          <div className="w-2/5 ml-10 text-xl flex items-center">
-            Manage all Lambda functions in one place by providing a centralized
+          <div className="w-2/5 ml-10 text-lg items-center justify-center flex flex-col">
+            <p className='mb-5'>
+            Manage all your Lambda functions in one place by utilizing a centralized
             platform for overseeing logs, versions, and aliases. Experience the
             ease of accessing all key information in one place, streamlining
             your monitoring and enhancing overall efficiency in managing your
             serverless architecture.
+            </p>
+            <p>
+            At Serene, we are committed to providing you with a seamless and enriched AWS journey. 
+          Let Serene be your guide as you navigate the complexities of AWS, 
+          leveraging our array of features to enhance your development and monitoring processes.
+            </p>
           </div>
         </div>
-        <div className="bg-gray-200 border-2 border-black flex justify-center py-10">
-          <div className="flex items-center">
-            Le Lorem Ipsum est simplement du faux texte employé dans la
-            composition et la mise en page avant impression. Le Lorem Ipsum est
-            le faux texte standard de l'imprimerie depuis les années 1500, quand
-            un imprimeur anonyme assembla ensemble des morceaux de texte pour
-            réaliser un livre spécimen de polices de texte. Il n'a pas fait que
-            survivre cinq siècles, mais s'est aussi adapté à la bureautique
-            informatique, sans que son contenu n'en soit modifié. Il a été
-            popularisé dans les années 1960 grâce à la vente de feuilles
-            Letraset contenant des passages du Lorem Ipsum, et, plus récemment,
-            par son inclusion dans des applications de mise en page de texte,
-            comme Aldus PageMaker.
-          </div>
-          <div className="text-center ml-10">
-            Le Lorem Ipsum est simplement du faux texte employé dans la
-            composition et la mise en page avant impression. Le Lorem Ipsum est
-            le faux texte standard de l'imprimerie depuis les années 1500, quand
-            un imprimeur anonyme assembla ensemble des morceaux de texte pour
-            réaliser un livre spécimen de polices de texte. Il n'a pas fait que
-            survivre cinq siècles, mais s'est aussi adapté à la bureautique
-            informatique, sans que son contenu n'en soit modifié. Il a été
-            popularisé dans les années 1960 grâce à la vente de feuilles
-            Letraset contenant des passages du Lorem Ipsum, et, plus récemment,
-            par son inclusion dans des applications de mise en page de texte,
-            comme Aldus PageMaker.
-          </div>
-        </div>
+
         <div className="bg-gray-200">
-          <h1 className="bg-gray-200 text-center font-semibold text-5xl py-10 ">
+          <h1 className="bg-gray-200 text-center font-semibold text-6xl py-20 ">
             {' '}
             HOW TO GET STARTED
           </h1>
-          <div className="flex text-center border-2 border-black justify-center items-center p-2">
+          <div className="flex text-center justify-center items-center p-2">
             <div className="w-1/3 mr-10">
               Create an account, select your preferred region, and connect your
               AWS account via our Serene stack on CloudFormation
             </div>
-            <div className="w-1/4">
-              <img src={login} className="border-8 border-black grayscale" />
+            <div className="w-1/2">
+              <img src={signupdemo} className="border-8 border-black" />
             </div>
           </div>
-          <div className="flex text-center border-2 border-black">
-            <div className="w-2/3">IMAGE HERE</div>
-            <div className="w-1/3">INSTRUCTIONS HERE</div>
+          <div className="flex text-center justify-center items-center my-20">
+            <div className="mr-20">
+              <img src={demo1} className="border-8 border-black"/>
+            </div>
+            <div className="">Select a Lambda function to begin</div>
           </div>
-          <div className="flex text-center border-2 border-black">
-            <div className="w-1/3">INSTRUCTIONS HERE</div>
-            <div className="w-2/3">IMAGE HERE</div>
+          <div className="flex text-center justify-center items-center my-20">
+            <div className="">View your version history and metrics<br/> with a click of a button</div>
+            <div className="ml-20">
+            <img src={demo2} className="border-8 border-black"/>
+            </div>
+          </div>
+          <div className="flex text-center justify-center items-center my-20 ">
+            <div className="mr-20">
+              <img src={demo3} className="border-8 border-black"/>
+            </div>
+            <div className="">Check out your log stream and <br/>warm up those cold lambda functions</div>
           </div>
         </div>
         <div></div>
@@ -173,6 +174,7 @@ const LandingPage = (props: Props) => {
               </div>
               <p className=" font-semibold mt-4 group-hover:text-white"> KYLE</p>
               <p className="mb-2 group-hover:text-white">Software Engineer</p>
+              {/* <img src={aws}/> */}
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
                 <button className='hover:scale-110'><FaGithubSquare size={60} /></button>
@@ -208,8 +210,8 @@ const LandingPage = (props: Props) => {
                   className="p-4 rounded-md grayscale group-hover:grayscale-0 transition duration-300 z-0"
                 />
               </div>
-              <p className=" font-semibold mt-4 "> KENNY</p>
-              <p className="mb-2">Software Engineer</p>
+              <p className=" font-semibold mt-4 group-hover:text-white  "> KENNY</p>
+              <p className="mb-2 group-hover:text-white ">Software Engineer</p>
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
                 <button className='hover:scale-110'><FaGithubSquare size={60} /></button>
@@ -255,7 +257,13 @@ const LandingPage = (props: Props) => {
       {/* FOOTER */}
       <div className="bg-gray-200 text-black py-4 px-5 flex justify-between">
         <span>&copy; SERENE 2023</span>
-        {/* <button className=' w-20 bg-black'><img src={waves7}/></button> */} 
+        {/* <a href='https://www.baridakmil.com/'
+          type="button"
+          target="_blank"
+          className=" w-20 bg-black"
+        >
+          <img src={waves7}/>
+        </a> */}
       </div>
     </div>
   );

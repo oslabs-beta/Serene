@@ -1,13 +1,6 @@
 import React from 'react';
 import { testArray } from '../shared';
 import {
-  PushSpinner,
-  TraceSpinner,
-  RainbowSpinner,
-  RingSpinner,
-  SwishSpinner,
-  PongSpinner,
-  MetroSpinner,
   JellyfishSpinner,
   GridSpinner,
 } from 'react-spinners-kit';

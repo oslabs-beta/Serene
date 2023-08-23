@@ -17,9 +17,9 @@ import { FunctionContext, RegionContext } from '@/App';
 import { useNavigate } from 'react-router-dom';
 import serene from '../assets/serene.png';
 
-type Props = {};
 
-const Logs = ({}: Props) => {
+
+const Logs = () => {
   const [allLogs, setAllLogs] = useState([]);
   const [logStream, setLogStream] = useState('');
   const [logArray, setLogArray] = useState(['']);
@@ -197,7 +197,10 @@ const Logs = ({}: Props) => {
         </div>
       </div>
       <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
+        <div className='ml-3'>
+
         &copy; SERENE 2023{' '}
+        </div>
       </div>
     </div>
   );

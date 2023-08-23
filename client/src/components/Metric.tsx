@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LineGraph from './LineGraph';
 import LeftSideBar from './LeftSideBar';
-import RightSideBar from './RightSideBar';
+import RightSideBar from './RightSidebar';
 import { FetchMetrics } from '@/shared';
 import { FunctionContext } from '@/App';
 import serene from '../assets/serene.png';
