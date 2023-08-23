@@ -40,10 +40,7 @@ stsController.getCredentials = async (req: Request, res: Response, next: NextFun
     
     // create and send the command from the client
     const command: AssumeRoleCommand = new AssumeRoleCommand(params);
-    console.log('command: ', command)
     const data: AssumeRoleCommandOutput = await stsClient.send(command);
-
-    console.log('command sent!')
 
     const roleCreds = {
       accessKeyId: data.Credentials.AccessKeyId,
