@@ -9,7 +9,7 @@ import kyle from '../assets/kyle.jpeg';
 import wade from '../assets/wade.jpeg';
 import signup from '../assets/signup.jpeg';
 import signupdemo from '../assets/signupdemo.gif';
-// import aws from '../assets/aws.jpg'; 
+import aws from '../assets/aws.jpeg'; 
 import demo1 from '../assets/demo1.gif';
 import demo2 from '../assets/demo2.gif';
 import demo3 from '../assets/demo3.gif';
@@ -173,8 +173,8 @@ const LandingPage = (props: Props) => {
                 />
               </div>
               <p className=" font-semibold mt-4 group-hover:text-white"> KYLE</p>
-              <p className="mb-2 group-hover:text-white">Software Engineer</p>
-              {/* <img src={aws}/> */}
+              <p className="mb-2 group-hover:text-white">Software Engineer</p> 
+              <img src={aws}/> 
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
                 <button className='hover:scale-110'><FaGithubSquare size={60} /></button>

@@ -27,9 +27,9 @@ const Signup = (props: Props) => {
     setRegion(e.target.value);
   };
 
-  const awsConsoleURL = `https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://serenetemplate.s3.amazonaws.com/SereneTemplate.json&stackName=SereneStack`;
-  // const awsConsoleURL = `https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/quickcreate?templateURL=https://serenetemplate.s3.amazonaws.com/SereneTemplate.json&stackName=SereneStack`;
 
+  // const awsConsoleURL = `https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/quickcreate?templateURL=https://serenetemplate.s3.amazonaws.com/SereneTemplate.json&stackName=SereneStack`;
+  const awsConsoleURL = `https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/quickcreate?templateURL=https://serene-admin-bucket.s3.amazonaws.com/SereneTemplate.json&stackName=SereneStack`
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const body = {

@@ -16,16 +16,16 @@ const LeftSideBar = (props: Props) => {
   const { funcData, setFuncData } = useContext(FunctionDataContext);
   const { funcArn, setFuncArn } = useContext(FunctionArnContext);
 
-  // useEffect(() => {
-  //   FetchFunctions().then((returnedFuncData) => {
-  //     setFuncData(returnedFuncData);
-  //     returnedFuncData.forEach((item, index) => {
-  //       if (item.name === funcName) {
-  //         setFuncArn(item.arn);
-  //       }
-  //     });
-  //   });
-  // }, [funcName]);
+  useEffect(() => {
+    FetchFunctions().then((returnedFuncData) => {
+      setFuncData(returnedFuncData);
+      returnedFuncData.forEach((item, index) => {
+        if (item.name === funcName) {
+          setFuncArn(item.arn);
+        }
+      });
+    });
+  }, [funcName]);
 
   return (
     <div className="">
