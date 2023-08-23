@@ -1,13 +1,11 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import lambdaFuncs from "../assets/lambdaFuncs.jpeg";
-import waves7 from "../assets/waves7.png";
 import serene from "../assets/serene.png";
 import kenny from "../assets/kenny.jpeg";
 import ari from "../assets/ari.jpeg";
 import kyle from "../assets/kyle.jpeg";
 import wade from "../assets/wade.jpeg";
-import signup from "../assets/signup.jpeg";
 import signupdemo from "../assets/signupdemo.gif";
 import aws from "../assets/aws.jpeg";
 import demo1 from "../assets/demo1.gif";
@@ -20,9 +18,7 @@ import githubcat from "../assets/githubcat.png";
 import { FaLinkedin, FaLinkedinIn, FaGithubSquare } from "react-icons/fa";
 import { FaMedium } from "react-icons/fa6";
 
-type Props = {};
-
-const LandingPage = (props: Props) => {
+const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
@@ -138,21 +134,28 @@ const LandingPage = (props: Props) => {
               <img src={versionsdemo} className="border-8 border-black" />
             </div>
           </div>
+
           <div className="flex text-center justify-center items-center my-20">
-          <div className="mr-20">
-            <img src={logsdemo} className="border-8 border-black" />
+            <div className="mr-20">
+              <img src={logsdemo} className="border-8 border-black" />
+            </div>
+            <div className="">
+              Access all your log streams and timestamps in one place
+            </div>
           </div>
-          <div className="">
-            Access all your log streams and timestamps in one place
-          </div>
-        </div>
           <div className="flex text-center justify-center items-center my-20 ">
             <div className="">
               Prevent cold start latency with our warming feature
             </div>
             <div className="ml-20 ">
-              <img src={warmingdemo} className="border-8 border-black  " />  
+              <img src={warmingdemo} className="border-8 border-black  " />
             </div>
+          </div>
+          <div className="flex text-center justify-center items-center my-20 ">
+            <div className="mr-20 ">
+              <img src={metricsdemo} className="border-8 border-black  " />
+            </div>
+            <div className="">Monitor the health of each Lambda function</div>
           </div>
         </div>
 
@@ -179,7 +182,8 @@ const LandingPage = (props: Props) => {
                 </p>
                 <p className="mb-2 group-hover:text-white flex justify-center items-center">
                   {/* <img src={aws} className="w-2/12 group-hover:opacity-0" /> */}
-                  Software Engineer</p>
+                  Software Engineer
+                </p>
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-100 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
                 <button className="hover:scale-110">
@@ -207,8 +211,8 @@ const LandingPage = (props: Props) => {
                 </p>
                 <p className="mb-2 group-hover:text-white flex justify-center items-center">
                   {/* <img src={aws} className="w-2/12 group-hover:opacity-0" /> */}
-                  Software Engineer</p>
-              
+                  Software Engineer
+                </p>
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
                 <button className="hover:scale-110">
@@ -237,7 +241,8 @@ const LandingPage = (props: Props) => {
                 </p>
                 <p className="mb-2 group-hover:text-white flex justify-center items-center">
                   {/* <img src={aws} className="w-2/12 group-hover:opacity-0" /> */}
-                  Software Engineer</p>
+                  Software Engineer
+                </p>
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
                 <button className="hover:scale-110">
@@ -265,8 +270,8 @@ const LandingPage = (props: Props) => {
                 </p>
                 <p className="mb-2 group-hover:text-white flex justify-center items-center">
                   {/* <img src={aws} className="w-2/12 group-hover:opacity-0" /> */}
-                  Software Engineer</p>
-           
+                  Software Engineer
+                </p>
               </div>
               <div className="rounded-md mx-1 group-hover:scale-110 flex items-center justify-center h-20 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out bottom-0 -mb-1 absolute inset-x-0 bg-white z-10">
                 <button className="hover:scale-110">
@@ -279,19 +284,11 @@ const LandingPage = (props: Props) => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
       {/* FOOTER */}
       <div className="bg-gray-200 text-black py-4 px-5 flex justify-between">
         <span>&copy; SERENE 2023</span>
-        {/* <a href='https://www.baridakmil.com/'
-          type="button"
-          target="_blank"
-          className=" w-20 bg-black"
-        >
-          <img src={waves7}/>
-        </a> */}
       </div>
     </div>
   );

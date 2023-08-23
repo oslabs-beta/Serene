@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Slider } from "@mui/material/";
 import { MuiThemeProvider } from "material-ui";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import AnimatedBackground from "./AnimatedBackground";
 import serene from "../assets/serene.png";
 
 type Props = {};
@@ -54,50 +53,12 @@ const Warming = ({}: Props) => {
   const handleStartButton = () => {
     //make fetch request
     if (!warmArray.includes(funcName)) {
-      console.log('warm array is, ', warmArray)
-      // FetchWarmFunction();
+      console.log("warm array is, ", warmArray);
       setWarmArray([...warmArray, funcName]);
-      console.log('warm array NOW is, ', warmArray)
+      console.log("warm array NOW is, ", warmArray);
     }
-    console.log('warm array NOW is, ', warmArray)
-
+    console.log("warm array NOW is, ", warmArray);
   };
-
-  // const EndWarmFunction = async () => {
-  //     //need logName, streamName, region
-  //     const body = {
-  //       functionArn: funcArn,
-  //       intervalVar: intervalValue,
-  //       maxDuration: durationValue,
-  //     };
-  //     try {
-  //       const response = await fetch('/api/warming/functions', {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify(body),
-  //       });
-
-  //       const data = await response.json();
-  //       console.log('response from warming ', data);
-  //       return data;
-  //     } catch (error) {
-  //       console.log('Warming Func Error: ', error);
-  //     }
-  //   };
-
-  // const handleEndButton = () => {
-  //   //make fetch request
-  //   if (!warmArray.includes(funcName)) {
-  //     FetchWarmFunction();
-  //     setWarmArray([...warmArray, funcName]);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (funcName !== 'SELECT A FUNCTION') handleStartButton();
-  // }, []);
 
   const navigate = useNavigate();
 
@@ -116,8 +77,6 @@ const Warming = ({}: Props) => {
         </button>
         <RightSideBar />
       </div>
-
-      {/* <div>CURRENT FUNC NAME STATE IS {funcName}</div> */}
 
       {/* ENTIRE BODY DIV */}
       <div className="flex flex-col items-center">
@@ -185,7 +144,6 @@ const Warming = ({}: Props) => {
               </div>
               <Slider
                 aria-label="Custom marks"
-                // getAriaValueText={valuetext}
                 min={0}
                 max={60}
                 value={intervalValue}
@@ -199,7 +157,6 @@ const Warming = ({}: Props) => {
               </div>
               <Slider
                 aria-label="Custom marks"
-                // getAriaValueText={valuetext}
                 min={0}
                 max={50}
                 value={durationValue}
@@ -213,23 +170,11 @@ const Warming = ({}: Props) => {
             border-2 shadow-md bg-neutral-100 bg-opacity-40 p-2 rounded-md border-black hover:bg-black hover:text-white transition duration-200 ease-in-out
             mt-6 
             "
-            onClick={handleStartButton            }
+            onClick={handleStartButton}
           >
             {" "}
             Start Warming
           </button>
-          {/* <button
-            className="items-center justify-center z-20 overflow-y-auto h-[40%]  my-5 
-            border-2 shadow-md bg-neutral-100 bg-opacity-40 p-2 rounded-md border-black hover:bg-black hover:text-white transition duration-200 ease-in-out
-            mt-6 ml-2
-            "
-            onClick={() => {
-              handleEndButton;
-            }}
-          >
-            {' '}
-            End Warming
-          </button> */}
 
           <div>
             <h1 className="font-semibold">Currently Warming</h1>
@@ -240,15 +185,9 @@ const Warming = ({}: Props) => {
             </div>
           </div>
         </div>
-        {/* END OF BOTTOM BODY DIV */}
       </div>
       {/* END OF ENTIRE BODY DIV */}
-      {/* <div>
-  <img
-    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Forig00.deviantart.net%2F9273%2Ff%2F2017%2F033%2F4%2Fc%2Fkeeping_warm_by_uradoodlelover2-daxms1b.gif&f=1&nofb=1&ipt=e67139040496533bfaa51a492b4a43800ca0e49dcb328d46986ba905def36c02&ipo=images"
-    alt="warming"
-  />
-</div> */}
+
       <div className="bg-gray-200 text-black fixed bottom-0 py-4 left-0 w-full">
         <div className="ml-3">&copy; SERENE 2023 </div>
       </div>

@@ -78,8 +78,6 @@ const Metric = ({}: Props) => {
         <RightSideBar />
       </div>
 
-      {/* <div>CURRENT FUNC NAME STATE IS {funcName}</div> */}
-
       <div className="flex justify-center">
         <a
           onClick={() => {
@@ -130,68 +128,6 @@ const Metric = ({}: Props) => {
       </div>
 
       <div className="flex flex-col items-center justify-center">
-        {/* button div */}
-        {/* <div className="mt-20 fixed bottom-20">
-          <button
-            onClick={() => handleClick('pie')}
-            className="relative inline-block text-lg group mx-3"
-          >
-            <span className="relative  z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-              <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-              <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
-              <span className="relative">Pie Chart</span>
-            </span>
-            <span
-              className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
-              data-rounded="rounded-lg"
-            ></span>
-          </button>
-          <button
-            onClick={() => handleClick('bar')}
-            className="relative inline-block text-lg group mx-3"
-          >
-            <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-              <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-              <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
-              <span className="relative">Bar Graph</span>
-            </span>
-            <span
-              className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
-              data-rounded="rounded-lg"
-            ></span>
-          </button>
-          <button
-            onClick={() => handleClick('doughnut')}
-            className="relative inline-block text-lg group mx-3"
-          >
-            <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-              <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-              <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
-              <span className="relative">Doughnut Chart</span>
-            </span>
-            <span
-              className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
-              data-rounded="rounded-lg"
-            ></span>
-          </button>
-          <button
-            onClick={() => handleClick('line')}
-            className="relative inline-block text-lg group mx-3"
-          >
-            <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-              <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-              <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
-              <span className="relative">Line Graph</span>
-            </span>
-            <span
-              className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
-              data-rounded="rounded-lg"
-            ></span>
-          </button>
-        </div> */}
-        {/* END OF BUTTON DIV */}
-
-        {/* METRICS DISPLAY */}
         {/* START OF DROPDOWN MENUS */}
         <div className="flex mt-5 mb-2 ">
           <select
@@ -247,7 +183,6 @@ const Metric = ({}: Props) => {
                   key={eachMetric}
                   className="border-4 border-gray-300 h-full w-1/2 flex justify-center"
                 >
-                  {/* <p>{eachMetric}</p> */}
                   {metricsData[eachMetric].map((each) => (
                     <div className="py-5 w-9/12" key={each.Id}>
                       <LineGraph

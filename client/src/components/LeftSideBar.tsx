@@ -1,12 +1,12 @@
-import { useState, useEffect, useContext } from 'react';
-import Functions from './Functions';
-import { FetchFunctions } from '../shared';
-import waves3 from '../assets/waves3.png';
+import { useState, useEffect, useContext } from "react";
+import Functions from "./Functions";
+import { FetchFunctions } from "../shared";
+import waves3 from "../assets/waves3.png";
 import {
   FunctionContext,
   FunctionDataContext,
   FunctionArnContext,
-} from '@/App';
+} from "@/App";
 
 interface Props {}
 
@@ -56,9 +56,9 @@ const LeftSideBar = (props: Props) => {
         </svg>
       )}
 
-      <div 
+      <div
         className={`flex flex-col items-center -left-2 top-0  -mb-4  bg-gray-300  pl-10 pr-10 text-black fixed h-screen w-1/3 z-40  ease-in-out duration-300  ${
-          showSidebar ? 'translate-x-0 ' : '-translate-x-full'
+          showSidebar ? "translate-x-0 " : "-translate-x-full"
         }`}
       >
         <img

@@ -21,9 +21,7 @@ const VersionHistory = () => {
   const [aliasArn, setAliasArn] = useState("");
   const [codeLink, setCodeLink] = useState("");
 
-
   const navigate = useNavigate();
-
 
   const FetchVersions = async () => {
     const body = {
@@ -33,7 +31,7 @@ const VersionHistory = () => {
       const response = await fetch("api/versions/versionList", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(body),
       });
@@ -59,7 +57,6 @@ const VersionHistory = () => {
   const handleAliasArn = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAliasArn(e);
   };
-
 
   const FetchVersionDetails = async () => {
     const body = {
@@ -197,35 +194,9 @@ const VersionHistory = () => {
           ) : (
             aliases.map((el) => (
               <div className="group flex items-center my-2 ml-auto w-7/12">
-                {/* <button
-                  onClick={() => {
-                    c;
-                  }}
-                >
-                  HELLO
-                </button> */}
-
-                {/* 
-<Button aria-describedby={id} variant="contained"onClick={() => {
-                   console.log('ARN WILL BE RESET STATE')
-                      }} >
-        Open Popover
-      </Button>
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      >
-        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
-      </Popover> */}
                 <Popover placement="left">
-                  <PopoverHandler className="border-2 border-white w-3/12 h-full p-1 mt-2 mb-1 transition duration-100 ease-in-out group-hover:scale-125 ml-0">
-                    <Button className="whitespace-normal max-w-lg mb-2 relative ">
+                  <PopoverHandler className="border-2 border-white bg-black w-3/12 h-full p-1 mt-2 mb-1 transition duration-100 ease-in-out group-hover:scale-125 ml-0">
+                    <Button className="whitespace-normal max-w-lg mb-2 ">
                       <button
                         className=""
                         onClick={() => {
@@ -244,7 +215,7 @@ const VersionHistory = () => {
                       <button>
                         <a
                           href={codeLink}
-                          className="text-white bg-black hover:bg-white hover:border-black hover:border-2 hover:text-black rounded-md ml-2 p-2"
+                          className="text-white bg-black hover:bg-gray-800 hover:border-black hover:border-2 hover:text-gray-100 rounded-md ml-2 p-2"
                         >
                           HERE
                         </a>
