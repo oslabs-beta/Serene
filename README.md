@@ -28,12 +28,12 @@ Visit our website at **COMING SOON**.
 
 Serene is building an exciting developer tool to help monitor AWS lambda resources and prevent cold start latency delays. 
 
-If you are looking to contribute to Serene, please visit <a href="google.com">READMEDEV.md</a> to learn how to get started! Feel free to check out our 'Potential Iteration Ideas' near the bottom of the page for some ideas on what can still be done.
+If you are looking to contribute to Serene, please visit <a target="_blank" href="https://github.com/oslabs-beta/Serene/blob/main/READMEDEV.md">READMEDEV.md</a> to learn how to get started! Feel free to check out our 'Potential Iteration Ideas' near the bottom of the page for some ideas on what can still be done.
 
 ## How to Use Serene
 
 ### On the Website
-1. Navigate to <link>website.web</link> and select 'Sign Up'
+1. Navigate to <a target="_blank" href="http://serene-prod.eba-gk55uvf7.us-east-1.elasticbeanstalk.com/">serenelambda.com</a> and select 'Sign Up'
 2. Create a username and password and the select 'Connect Your AWS Account'
 3. This will open a window in AWS prompting you to create a pre-made CloudFormation stack titled 'SereneStack'
 4. Click to create the stack and wait a moment for AWS to build it
