@@ -1,4 +1,3 @@
-
 # Production Build
 # Build stage for the client
 FROM node:18.0-alpine AS client-build
