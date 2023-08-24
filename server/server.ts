@@ -45,7 +45,7 @@ app.use('/api/versions', versionRouter);
 app.use('/api/warming', warmingRouter);
 
 // serve static files
-app.use(express.static('../client/dist')); // ../client/dist
+app.use(express.static('./dist')); // ../client/dist
 
 // 404 catch-all route handler
 app.use('*', (req: Request, res: Response) => {

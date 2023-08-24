@@ -1,28 +1,27 @@
-# Build stage
-FROM node:18.14
+
+# Production Build
+# Build stage for the client
+FROM node:18.0-alpine AS client-build
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY ./client/package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY ./client ./
 
 RUN npm run build
 
-
-
-# Production stage
-FROM node:18.14
-
 WORKDIR /app
 
-COPY /app/server/package*.json ./
+COPY ./server/package*.json ./
 
-RUN npm install --only=production
+RUN npm install
 
-COPY --from=build /app/dist/ ./dist
+COPY ./server ./
+
+RUN npm install
 
 EXPOSE 3000
 

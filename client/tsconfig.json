@@ -8,9 +8,9 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "CommonJS",
     "skipLibCheck": true,
-    "types": [
-      "node"
-    ],
+    // "types": [
+    //   "node"
+    // ],
     "noImplicitAny": false,
 
     /* Bundler mode */
