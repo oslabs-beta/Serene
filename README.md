@@ -43,7 +43,7 @@ If you are looking to contribute to Serene, please visit <a target="_blank" href
 8. You will be directed to the Serene homepage and you're ready to use Serene!
 9. Enjoy ;)
 
-![Animated GIF](https://github.com/yourusername/yourrepository/raw/main/images/your-gif.gif)
+![Animated GIF](https://github.com/oslabs-beta/Serene/blob/main/client/src/assets/signupdemo.gif)
 
 
 ### On Your Local Machine
@@ -62,14 +62,22 @@ If you are looking to contribute to Serene, please visit <a target="_blank" href
 ### Metric Visualization
 For AWS users and web developers, it is incredibly important to be able to monitor the health of their Lambda functions. Unfortunately, the current state of the AWS UI/UX makes it tedious for the user to access these metrics. With Serene, the user is able to view these metrics in neat displays with ease. Simply select the function you want to view from the sidebar and navigate to the 'Metrics' tab. The user is then able to toggle the sorting data based on start date, period, and data in ascending or descending order. Our goal was to make this experience much cleaner for the user without sacrificing any of the important data they may seek.
 
+![Animated GIF](https://github.com/oslabs-beta/Serene/blob/main/client/src/assets/metricsdemo.gif)
+
 ### CloudWatch Logs
 CloudWatch log data is another tool for analyzing Lambda functions (though a user can view logs on many other AWS entities as well). Once again, Serene has taken out any requirement for over-navigation. By selecting a Lambda function to view and navigating to the 'View Logs' tab, Serene will display any log streams associated with that function. By clicking into one of the streams, a display of all the events in that stream will render. These events will provide insight into the Lambda function's performance and can assist in any troubleshooting the user may have to do.
+
+![Animated GIF](https://github.com/oslabs-beta/Serene/blob/main/client/src/assets/logsdemo.gif)
 
 ### Version History and Aliases
 Often times, developers will edit the code on their Lambda functions, creating different versions. They will also assign aliases (which point at Lambda function versions) with the option of pointing it at multiple versions and weighing the traffic to them differently (ex. v1: 70%, v2: 30%). This entire process can be hard to follow at times, but not with Serene. Serene includes a display of all the versions of a given Lambda function as well as any aliases pointing to those versions, with the proper weight included. Finally, the user is able to click a link to download their alias' code and view their Lambda function without having to deal with the cumbersome AWS console.
 
+![Animated GIF](https://github.com/oslabs-beta/Serene/blob/main/client/src/assets/versionsdemo.gif)
+
 ### Lambda Function Warming
 The final problem Serene tackles is that of cold start latency. When they go unused for enough time, Lambda functions will go 'cold' and take longer to begin running again as desired. With Serene, a user is able to schedule invocations for their Lambda functions to help prevent this latency and optimize their performance.
+
+![Animated GIF](https://github.com/oslabs-beta/Serene/blob/main/client/src/assets/warmingdemo.gif)
 
 
 ## Potential Iteration Ideas
