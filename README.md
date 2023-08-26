@@ -51,11 +51,10 @@ If you are looking to contribute to Serene, please visit <a target="_blank" href
 2. From here, you will need to run a few commands to install the proper dependencies
 3. Open a terminal and type <code>cd client</code>, then <code>npm install</code>, and finally <code>npm run build</code>
 4. This will create a <code>dist</code> folder in the <code>client</code> directory
-5. In <code>server.ts</code> change line 48 to <code>app.use(express.static('../client/dist'));</code> and line 51 to <code>res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));</code>
-4. Next, type <code>cd ..</code> to get back to the root directory, then <code>cd server</code> to enter the <code>server</code> directory
-5. Next, you will need to run <code>npm install</code>
-6. Finally, you can run <code>npm start</code> to start the server (which is serving the bundled frontend)
-7. In your browser, navigate to <link>http://localhost:3000</link> and you will be able to use Serene just like you would on the website!
+5. Move the <code>dist</code> folder to the <code>server</code> folder and type <code>cd ..</code>, then <code>cd server</code> to enter the server directory
+6. Next, you will need to run <code>npm install</code>
+7. Finally, you can run <code>npm start</code> to start the server (which is serving the bundled frontend)
+8. In your browser, navigate to <link>http://localhost:3000</link> and you will be able to use Serene just like you would on the website!
 
 ## Features
 
