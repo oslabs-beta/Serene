@@ -4,7 +4,7 @@ import mongoose, { ConnectOptions } from 'mongoose'
 const dotenv = require('dotenv').config();
 // import dotenv from 'dotenv';
 // dotenv.configDotenv()
-
+import path from 'path'
 // require in routers
 import lambdaRouter from './routes/lambdaRouter'
 import userRouter from './routes/userRouter';
@@ -36,7 +36,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 // route handlers go here
 app.use('/api/lambda', lambdaRouter);
 app.use('/api/user', userRouter);
@@ -45,11 +44,10 @@ app.use('/api/versions', versionRouter);
 app.use('/api/warming', warmingRouter);
 
 // serve static files
-app.use(express.static('./dist')); // ../client/dist
+app.use(express.static('./dist')); // ../client/dist 
 
-// 404 catch-all route handler
 app.use('*', (req: Request, res: Response) => {
-  res.status(404).send('Not Found');
+  res.sendFile(path.resolve(__dirname, './dist/index.html')); 
 });
 
 // global error handler
