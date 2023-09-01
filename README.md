@@ -32,7 +32,7 @@ If you are looking to contribute to Serene, please visit <a target="_blank" href
 
 ## How to Use Serene
 
-### On the Website
+### On the Website 
 1. Navigate to <a target="_blank" href="http://serene-prod.eba-gk55uvf7.us-east-1.elasticbeanstalk.com/">serenelambda.com</a> and select 'Sign Up'
 2. Create a username and password and the select 'Connect Your AWS Account'
 3. This will open a window in AWS prompting you to create a pre-made CloudFormation stack titled 'SereneStack'
@@ -48,7 +48,7 @@ If you are looking to contribute to Serene, please visit <a target="_blank" href
 
 ### On Your Local Machine
 1. Fork and clone this repository on GitHub
-2. From here, you will need to run a few commands to install the proper dependencies
+2. From there, you will need to run a few commands to install the proper dependencies
 3. Open a terminal and type <code>cd client</code>, then <code>npm install</code>, and finally <code>npm run build</code>
 4. This will create a <code>dist</code> folder in the <code>client</code> directory
 5. Move the <code>dist</code> folder to the <code>server</code> folder and type <code>cd ..</code>, then <code>cd server</code> to enter the server directory
@@ -59,12 +59,12 @@ If you are looking to contribute to Serene, please visit <a target="_blank" href
 ## Features
 
 ### Metric Visualization
-For AWS users and web developers, it is incredibly important to be able to monitor the health of their Lambda functions. Unfortunately, the current state of the AWS UI/UX makes it tedious for the user to access these metrics. With Serene, the user is able to view these metrics in neat displays with ease. Simply select the function you want to view from the sidebar and navigate to the 'Metrics' tab. The user is then able to toggle the sorting data based on start date, period, and data in ascending or descending order. Our goal was to make this experience much cleaner for the user without sacrificing any of the important data they may seek.
+It is extremly important for AWS Lambda developers to monitor the health of their Lambda functions. However, AWS Cloudwatch can be tedious and cumbersome for developers to navigate. Serene allows developers to view their AWS Lambda metrics with ease. Simply select the function you want to view from the sidebar and navigate to the 'Metrics' tab. The user is then able to sort the data based on start date, period, and data in ascending or descending order. 
 
 ![Animated GIF](https://github.com/oslabs-beta/Serene/blob/main/client/src/assets/metricsdemo.gif)
 
 ### CloudWatch Logs
-CloudWatch log data is another tool for analyzing Lambda functions (though a user can view logs on many other AWS entities as well). Once again, Serene has taken out any requirement for over-navigation. By selecting a Lambda function to view and navigating to the 'View Logs' tab, Serene will display any log streams associated with that function. By clicking into one of the streams, a display of all the events in that stream will render. These events will provide insight into the Lambda function's performance and can assist in any troubleshooting the user may have to do.
+CloudWatch Logs is another tool for analyzing Lambda functions (though developers can view logs on many other AWS entities as well). Serene removes any over complication in this process as well. Simply select a Lambda function to view and navigate to the 'View Logs' tab. Serene will then display log streams associated with that function. By clicking into one of the streams, a display of all the events in that stream will render. These events will provide insight into the Lambda function's performance and can assist in troubleshooting.
 
 ![Animated GIF](https://github.com/oslabs-beta/Serene/blob/main/client/src/assets/logsdemo.gif)
 
