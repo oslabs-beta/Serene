@@ -33,7 +33,7 @@ If you are looking to contribute to Serene, please visit <a target="_blank" href
 ## How to Use Serene
 
 ### On the Website 
-1. Navigate to <a target="_blank" href="http://serene-prod.eba-gk55uvf7.us-east-1.elasticbeanstalk.com/">serenelambda.com</a> and select 'Sign Up'
+1. Navigate to <a target="_blank" href="http://sereneapp-env.eba-apknajw6.us-east-1.elasticbeanstalk.com/">serenelambda.com</a> and select 'Sign Up'
 2. Create a username and password and the select 'Connect Your AWS Account'
 3. This will open a window in AWS prompting you to create a pre-made CloudFormation stack titled 'SereneStack'
 4. Click to create the stack and wait a moment for AWS to build it
