@@ -24,7 +24,7 @@
 
 ⭐️ Star us on GitHub! ⭐️
 
-Visit our website at **COMING SOON**.
+Visit our website at <a target="_blank" href="http://sereneapp-env.eba-apknajw6.us-east-1.elasticbeanstalk.com/">serenelambda.com</a>.
 
 Serene is building an exciting developer tool to help monitor AWS lambda resources and prevent cold start latency delays. 
 
