@@ -1,10 +1,11 @@
 // import necessary AWS commands
 import { GetMetricDataCommand, CloudWatchClient } from '@aws-sdk/client-cloudwatch';
 
+// import types
 import { CloudWatchMetricsController, MetricBody } from '../../types';
 
-const cloudWatchMetricsController = {} as CloudWatchMetricsController;
 
+const cloudWatchMetricsController = {} as CloudWatchMetricsController;
 
 // takes in funcName, sortBy, period, and startDate as a way for user to format their metrics
 // sends back a nested object with all the proper metrics for the user's desired function
@@ -15,17 +16,17 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
   const formattedStartDate: Date = dateConverter(startDate);
   const newPeriod: number = timePeriodConverter(period);
   try{
-    const client: CloudWatchClient = new CloudWatchClient({region: res.locals.creds.region, credentials: res.locals.creds.roleCreds })
+    const client: CloudWatchClient = new CloudWatchClient({region: res.locals.creds.region, credentials: res.locals.creds.roleCreds });
 
     // createQuery is a pretty brute force way to send the proper data but it does work
-    const metricObj: any = createQuery(funcName, sortBy, newPeriod, formattedStartDate)
+    const metricObj: any = createQuery(funcName, sortBy, newPeriod, formattedStartDate);
     
     // create and send the commands for each metric from the client
-    const getDurationMetrics = new GetMetricDataCommand(metricObj.duration)
-    const getInvocationsMetrics = new GetMetricDataCommand(metricObj.invocations)
-    const getThrottlesMetrics = new GetMetricDataCommand(metricObj.throttles)
-    const getErrorsMetrics = new GetMetricDataCommand(metricObj.errors)
-    const getConcurrentExeMetrics = new GetMetricDataCommand(metricObj.concurrentExecutions)
+    const getDurationMetrics = new GetMetricDataCommand(metricObj.duration);
+    const getInvocationsMetrics = new GetMetricDataCommand(metricObj.invocations);
+    const getThrottlesMetrics = new GetMetricDataCommand(metricObj.throttles);
+    const getErrorsMetrics = new GetMetricDataCommand(metricObj.errors);
+    const getConcurrentExeMetrics = new GetMetricDataCommand(metricObj.concurrentExecutions);
     
     const getDurationMetricsResponse = await client.send(getDurationMetrics);
     const getInvocationsMetricsResponse = await client.send(getInvocationsMetrics);
@@ -39,9 +40,9 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
       throttles: getThrottlesMetricsResponse.MetricDataResults,
       errors: getErrorsMetricsResponse.MetricDataResults,
       concurrentExecutions: getConcurrentExeMetricsResponse.MetricDataResults
-    }
+    };
     
-    console.log('res.locals.metrics: ', res.locals.metrics)
+    // console.log('res.locals.metrics: ', res.locals.metrics);
     return next();
   } catch(err){
     return next({
@@ -49,8 +50,8 @@ cloudWatchMetricsController.getMetrics = async (req, res, next) => {
       status: 400,
       message: { err: 'An error occured while trying to view the user\'s lambda function metrics' }
     });
-  }
-}
+  };
+};
 
 // converts startDate to a usable format
 const dateConverter = (date: string) => {
@@ -67,12 +68,8 @@ const dateConverter = (date: string) => {
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - Number(date[0]));
     return startDate;
-  }
-  // const startDate = new Date();
-  // startDate.setDate(startDate.getDate() - 3);
-  // console.log(startDate);
-  // return startDate;
-}
+  };
+};
 
 // converts period to a usable format
 const timePeriodConverter = (period: string) => {
@@ -82,14 +79,14 @@ const timePeriodConverter = (period: string) => {
       finalPeriod = Number(period[0]);
     } else {
       finalPeriod = (Number(period[0].concat(period[1])));
-    }
-  } 
+    };
+  };
   if(period === '1 minute' || period === '5 minutes' || period === '15 minutes') {
     if(period.length === 8 || period.length === 9) {
       finalPeriod = Number(period[0]) * 60;
     } else {
       finalPeriod = (Number(period[0].concat(period[1]))) * 60;
-    }
+    };
   };
   if(period === '1 hour' || period === '6 hours') {
       finalPeriod = Number(period[0]) * 3600;
@@ -99,7 +96,7 @@ const timePeriodConverter = (period: string) => {
       finalPeriod = Number(period[0]) * 86400;
     } else {
       finalPeriod = (Number(period[0].concat(period[1]))) * 86400;
-    }
+    };
 };
   return finalPeriod;
 };
@@ -117,7 +114,7 @@ const createQuery = (funcName: string, sortBy: string, period: number, startDate
 
   console.log(funcName, sortBy, period, startDate)
 
-  //METRICS
+  // METRICS
   metricDataQueries.duration = {
     // GetMetricDataInput
     MetricDataQueries: [

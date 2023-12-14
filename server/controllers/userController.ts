@@ -1,13 +1,14 @@
 // boilerplate
 import bcrypt from 'bcrypt';
 import { Request, Response, NextFunction } from 'express';
+
 // import Schema
 import User from '../models/userModel';
 // import types
 import { UserController, ServerError, CreateUserInfo, UserInfo, Login, UpdatedUserInfo } from '../types';
 
 
-const userController = {} as UserController
+const userController = {} as UserController;
 
 // takes in a username, password, ARN, and region from the user
 // creates a user in MongoDB
@@ -30,9 +31,9 @@ userController.createUser = async (req: Request, res: Response, next: NextFuncti
       log: `The following error occured: ${err}`,
       status: 400,
       message: { err: 'An error occured while trying to create a new user' }
-    })
-  }
-}
+    });
+  };
+};
 
 userController.getAllUsers = async (req: Request,res: Response,next: NextFunction) => {
   try {
@@ -46,9 +47,9 @@ userController.getAllUsers = async (req: Request,res: Response,next: NextFunctio
       log: `The following error occured: ${err} in getAllUsers`,
       status: 400,
       message: { err: 'An error occured while trying to get all users' }
-    })
-  }
-}
+    });
+  };
+};
 
 // takes in the username and password from user
 // verifies if the account exists or not
@@ -65,8 +66,8 @@ userController.login = async (req: Request, res: Response, next: NextFunction) =
         log: `The following error occured: input fields not filled properly`,
         status: 400,
         message: 'invalid username or password'
-      })
-    }
+      });
+    };
     // if userResult has a value, move on to below comparisons
     // pull pw from mongo and use bcrypt.compare to compare hashed pw with inputted pw
     const hashedPassword = userResult.password;
@@ -76,19 +77,19 @@ userController.login = async (req: Request, res: Response, next: NextFunction) =
         log: `The following error occured: invalid username or password`,
         status: 400,
         message: 'invalid username or password'
-      })
-    }
+      });
+    };
     // console.log('passwords match!')
     res.locals.loginUsername = userResult.username;
-    return next()
+    return next();
   } catch (err) {
     return next({
       log: `The following error occured in login: ${err}`,
       status: 400,
       message: { err: `An error occured while trying to login` }
-    })
-  }
-}
+    });
+  };
+};
 
 
 // takes in the fields to update from the user
@@ -107,7 +108,7 @@ userController.updateUser = async (req, res, next) => {
       );
       res.locals.updatedUser = updated;
       return next();
-    }
+    };
 
     if(newARN && !newRegion){
       const updated: UserInfo = await User.findOneAndUpdate(
@@ -117,7 +118,7 @@ userController.updateUser = async (req, res, next) => {
       );
       res.locals.updatedUser = updated;
       return next();
-    }
+    };
 
     if(!newARN && newRegion){
       const updated: UserInfo = await User.findOneAndUpdate(
@@ -133,9 +134,9 @@ userController.updateUser = async (req, res, next) => {
       log: `The following error occured: ${err}`,
       status: 400,
       message: { err: `An error occured while trying to update a user` }
-    })
-  }
-}
+    });
+  };
+};
 
 // deletes the current user from MongoDB based on cookie
 userController.deleteUser = async(req, res, next) => {
@@ -143,14 +144,14 @@ userController.deleteUser = async(req, res, next) => {
     const deletedUser = await User.findOneAndDelete({ _id: req.cookies.SSID });
   
     res.locals.deletedUser = deletedUser;
-    return next()
+    return next();
   } catch (err) {
     return next({
       log: `The following error occured: ${err}`,
       status: 400,
       message: { err: `An error occured while trying to delete a user` }
-    })
-  }
-}
+    });
+  };
+};
 
 export default userController;
