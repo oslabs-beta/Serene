@@ -1,6 +1,7 @@
 // boilerplate
 import express from 'express';
 import { Request, Response, Router } from 'express';
+
 // import middleware
 import userController from '../controllers/userController';
 import cookieController from '../controllers/authentication/cookieController';
@@ -25,7 +26,7 @@ userRouter.post('/signup', userController.createUser, cookieController.setSSIDCo
 userRouter.get('/', userController.getAllUsers, (req: Request, res: Response) => {
   // send 200 status and list of all users (array of objects)
   return res.status(200).json(res.locals.allUsers);
-})
+});
 
 
 // authenticates user login -- takes username and password in req.body

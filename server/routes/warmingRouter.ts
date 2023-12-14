@@ -1,6 +1,7 @@
 // boilerplate
 import express from 'express';
 import { Request, Response, Router } from 'express';
+
 // import middleware
 import warmingController from '../controllers/warming/warmingController';
 import stsController from '../controllers/stsController';
@@ -12,7 +13,7 @@ const warmingRouter: Router = express.Router();
 warmingRouter.post('/functions', stsController.getCredentials, warmingController.warmFunction, (req: Request, res: Response) => {
   // send a 200 status
   res.status(200)
-})
+});
 
 
 

@@ -1,18 +1,17 @@
 // boilerplate
 import express, { ErrorRequestHandler, Express, Request, Response, NextFunction, RequestHandler, Router } from 'express';
-import mongoose, { ConnectOptions } from 'mongoose'
+import mongoose, { ConnectOptions } from 'mongoose';
 const dotenv = require('dotenv').config();
-// import dotenv from 'dotenv';
-// dotenv.configDotenv()
-import path from 'path'
+import path from 'path';
+
 // require in routers
-import lambdaRouter from './routes/lambdaRouter'
+import lambdaRouter from './routes/lambdaRouter';
 import userRouter from './routes/userRouter';
 import cloudWatchRouter from './routes/cloudWatchRouter';
 import versionRouter from './routes/versionRouter';
-import warmingRouter from './routes/warmingRouter'
+import warmingRouter from './routes/warmingRouter';
 
-// import types
+// import necessary types
 import { ServerError } from './types.js';
 
 // require cookies

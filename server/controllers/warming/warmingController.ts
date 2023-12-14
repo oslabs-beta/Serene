@@ -37,18 +37,19 @@ warmingController.warmFunction = async (req: Request, res: Response, next: NextF
     let counter: number = 0;
     const warming = setInterval(async () => {
       // invoke the function once every interval
-      const response: InvokeCommandOutput = await client.send(command)
+      const response: InvokeCommandOutput = await client.send(command);
       // increment the counter by the interval every invocation
       counter += newInterval;
       
-      let percent: number = counter / newDuration
+      let percent: number = counter / newDuration;
+
       console.log(`${percent * 100}% complete`)
       
       // once the counter is greater than or equal to the maxDuration, kill the interval
       if(counter >= newDuration){
         clearInterval(warming);
-        console.log('finished')
-      }
+        console.log('finished');
+      };
     }, newInterval); // frequency of invocation
 
     // tested methodology with console.logs
@@ -70,7 +71,7 @@ warmingController.warmFunction = async (req: Request, res: Response, next: NextF
       status: 400,
       message: 'An error occured when trying to warm the function',
     });
-  }
+  };
 };
 
 export default warmingController;

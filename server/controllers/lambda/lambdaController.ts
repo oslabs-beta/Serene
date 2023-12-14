@@ -4,6 +4,7 @@ import {
   ListFunctionsCommand,
   ListFunctionsCommandOutput,
 } from '@aws-sdk/client-lambda';
+
 // import types
 import { LambdaController, ArrayFiller } from '../../types';
 
@@ -42,7 +43,7 @@ lambdaController.getFunctions = async (req, res, next) => {
         err: "An error occured while trying to get the user's lambda functions",
       },
     });
-  }
+  };
 };
 
 export default lambdaController;
