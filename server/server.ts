@@ -5,7 +5,7 @@ const dotenv = require('dotenv').config();
 import path from 'path'
 // import dotenv from 'dotenv';
 // dotenv.configDotenv()
-
+import path from 'path'
 // require in routers
 import lambdaRouter from './routes/lambdaRouter'
 import userRouter from './routes/userRouter';
@@ -37,7 +37,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 // route handlers go here
 app.use('/api/lambda', lambdaRouter);
 app.use('/api/user', userRouter);
@@ -46,10 +45,10 @@ app.use('/api/versions', versionRouter);
 app.use('/api/warming', warmingRouter);
 
 // serve static files
-app.use(express.static('./dist')); // ../client/dist
+app.use(express.static('./dist')); // ../client/dist 
 
 app.use('*', (req: Request, res: Response) => {
-  res.sendFile('./dist/index.html')
+  res.sendFile(path.resolve(__dirname, './dist/index.html')); 
 });
 
 // global error handler
