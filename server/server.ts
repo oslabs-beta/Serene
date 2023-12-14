@@ -2,6 +2,7 @@
 import express, { ErrorRequestHandler, Express, Request, Response, NextFunction, RequestHandler, Router } from 'express';
 import mongoose, { ConnectOptions } from 'mongoose'
 const dotenv = require('dotenv').config();
+import path from 'path'
 // import dotenv from 'dotenv';
 // dotenv.configDotenv()
 
@@ -47,9 +48,8 @@ app.use('/api/warming', warmingRouter);
 // serve static files
 app.use(express.static('./dist')); // ../client/dist
 
-// 404 catch-all route handler
 app.use('*', (req: Request, res: Response) => {
-  res.status(404).send('Not Found');
+  res.sendFile('./dist/index.html')
 });
 
 // global error handler
