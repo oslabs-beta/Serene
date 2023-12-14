@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CubeSpinner } from 'react-spinners-kit';
-import AnimatedBackground from './AnimatedBackground';
 
 const NotFound = () => {
   return (

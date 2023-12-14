@@ -3,6 +3,7 @@
 import { STSClient, AssumeRoleCommand, AssumeRoleCommandOutput, AssumeRoleCommandInput } from '@aws-sdk/client-sts';
 const dotenv = require('dotenv').config();
 import { Request, Response, NextFunction } from 'express';
+
 // import model
 import User from '../models/userModel';
 // import types
@@ -54,7 +55,7 @@ stsController.getCredentials = async (req: Request, res: Response, next: NextFun
       status: 400,
       message: { err: 'An error occured while trying to get user credentials' }
     });
-  }
+  };
 };
 
 export default stsController;

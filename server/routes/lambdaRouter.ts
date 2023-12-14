@@ -1,9 +1,10 @@
 // boilerplate
 import express from 'express';
 import { Request, Response, Router } from 'express';
+
 // import middlware
-import stsController from '../controllers/stsController'
-import lambdaController from '../controllers/lambda/lambdaController'
+import stsController from '../controllers/stsController';
+import lambdaController from '../controllers/lambda/lambdaController';
 
 // initialize router
 const lambdaRouter: Router = express.Router();

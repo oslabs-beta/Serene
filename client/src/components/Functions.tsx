@@ -7,10 +7,11 @@ type Props = {
 };
 
 const Functions = ({ name }: Props) => {
-  const { funcName, setFuncName } = useContext(FunctionContext);
+  const { funcName, setFuncName }: any = useContext(FunctionContext);
 
   const handleNameButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setFuncName(e.target.value);
+    
+    setFuncName((e.target as HTMLInputElement).value);
   };
 
   return (

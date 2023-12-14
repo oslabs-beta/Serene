@@ -1,23 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
 import LeftSideBar from './LeftSideBar';
 import RightSideBar from './RightSidebar';
-import { FetchLogs } from '../shared';
-// import {FuncNameContext} from './FunctionDetails'
 import { FunctionContext, FunctionArnContext, WarmingContext } from '@/App';
 import { Link, useNavigate } from 'react-router-dom';
 import { Slider } from '@mui/material/';
-import { MuiThemeProvider } from 'material-ui';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import serene from '../assets/serene.png';
 
-type Props = {};
 
-const Warming = ({}: Props) => {
-  const { funcName, setFuncName } = useContext(FunctionContext);
+
+const Warming = () => {
+  const { funcName, setFuncName }: any = useContext(FunctionContext);
   const [intervalValue, setIntervalValue] = useState(0);
   const [durationValue, setDurationlValue] = useState(0);
-  const { funcArn, setFuncArn } = useContext(FunctionArnContext);
-  const { warmArray, setWarmArray } = useContext(WarmingContext);
+  const { funcArn, setFuncArn }: any = useContext(FunctionArnContext);
+  const { warmArray, setWarmArray }: any = useContext(WarmingContext);
 
   const changeIntervalValue = (e, val) => {
     setIntervalValue(val);

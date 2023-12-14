@@ -6,7 +6,7 @@ const User = new Schema({
   password: { type: String, required: true },
   ARN: { type: String, required: true },
   region: { type: String, required: true, default: 'us-west-1' }
-})
+});
 
 
 export default mongoose.model('User', User);

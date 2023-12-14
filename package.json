@@ -4,5 +4,8 @@
     "body-parser": "^1.20.2",
     "jest": "^29.6.2",
     "supertest": "^6.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.4"
   }
 }

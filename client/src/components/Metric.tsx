@@ -3,19 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import LineGraph from './LineGraph';
 import LeftSideBar from './LeftSideBar';
 import RightSideBar from './RightSidebar';
-import { FetchMetrics } from '@/shared';
 import { FunctionContext } from '@/App';
 import serene from '../assets/serene.png';
 
-type Props = {};
-
-const Metric = ({}: Props) => {
-  const [currentChart, setCurrentChart] = useState('pie');
+const Metric = () => {
   const [metricsData, setMetricsData] = useState({});
   const [sortBy, setSortBy] = useState('TimestampAscending');
   const [period, setPeriod] = useState('5 minutes');
   const [startDate, setStartDate] = useState('1w');
-  const { funcName, setFuncName } = useContext(FunctionContext);
+  const { funcName, setFuncName }: any = useContext(FunctionContext);
 
   const navigate = useNavigate();
 
@@ -29,9 +25,6 @@ const Metric = ({}: Props) => {
     setStartDate(e.target.value);
   };
 
-  const handleClick = (chart: string) => {
-    setCurrentChart(chart);
-  };
 
   const FetchMetrics = async () => {
     const body = {
