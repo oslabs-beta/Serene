@@ -24,6 +24,8 @@ const PORT: number = 3000;
 // grab our access key from .env and connect to MongoDB
 const ACCESS_KEY: string = process.env.ACCESS_KEY!
 
+console.log("testing");
+
 mongoose.connect(ACCESS_KEY, { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions);
 
 mongoose.connection.once('open', () => {
@@ -32,8 +34,9 @@ mongoose.connection.once('open', () => {
 
 // parse cookies and incoming requests
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
+// test
 
 // route handlers go here
 app.use('/api/lambda', lambdaRouter);
